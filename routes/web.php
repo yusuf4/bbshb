@@ -16,7 +16,7 @@ use Inertia\Inertia;
 
 Route::get('/', function () {
     //sleep(2);
-    return Inertia::render('Welcome');
+    return Inertia::render('LoginPage');
 });
 Route::get('/dash', function (){
     return Inertia::render('Dashboard',[
