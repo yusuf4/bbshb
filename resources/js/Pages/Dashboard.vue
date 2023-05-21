@@ -1,7 +1,7 @@
 <template>
   <div class="flex w-screen h-screen no-scrollbar ">
       <!-- Side bar menu-->
-      <div class="w-[400px] h-full bg-gray-200 text-white text-center relative" v-if="showSide">
+      <div class="w-[380px] h-full bg-gray-200 text-white text-center relative" v-if="showSide">
           <!-- LOGO -->
         <div class="logo-nane h-[50px] bg-gray-900 flex justify-center items-center">
             <div class="px-[20px] cursor-default">
@@ -29,7 +29,7 @@
                         </Link>
                     </div>
 
-                    <details class="group [&_summary::-webkit-details-marker]:hidden" :open="$page.component==='InputForm'">
+                    <details class="group [&_summary::-webkit-details-marker]:hidden" :open="$page.component==='Dujoniba/Add'">
                         <summary
                             class="flex cursor-pointer hover:text-gray-800 items-center justify-between rounded-lg px-2 py-2 text-white hover:bg-gray-100 hover:text-gray-700"
                         >
@@ -70,7 +70,6 @@
                             <Link
                                 href="/input"
                                 class="flex items-center gap-2 rounded-lg px-4 py-2 text-white hover:bg-gray-100 hover:text-blue-700"
-                                :class="{'text-green-300': $page.component==='InputForm'}"
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -85,7 +84,7 @@
                                 </svg>
 
 
-                                <span class="text-sm font-medium"> Иловаи Шартнома </span>
+                                <span class="text-sm font-medium" :class="$page.component==='Dujoniba/Add' && 'text-green-400'"> Иловаи Шартнома </span>
                             </Link>
 
                             <a
@@ -111,7 +110,7 @@
                         </nav>
                     </details>
 
-                    <details class="group [&_summary::-webkit-details-marker]:hidden" :open="$page.component==='InputFormBisyor'">
+                    <details class="group [&_summary::-webkit-details-marker]:hidden" :open="$page.component==='Bisyorjoniba/Add'">
                         <summary
                             class="flex cursor-pointer hover:text-gray-800 items-center justify-between rounded-lg px-2 py-2 text-white hover:bg-gray-100 hover:text-gray-700"
                         >
@@ -154,7 +153,6 @@
                             <Link
                                 href="/inputb"
                                 class="flex items-center gap-2 rounded-lg px-4 py-2 text-white hover:bg-gray-100 hover:text-blue-700"
-                                :class="{'text-green-300': $page.component==='InputFormBisyor'}"
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -169,7 +167,7 @@
                                 </svg>
 
 
-                                <span class="text-sm font-medium"> Иловаи Шартнома </span>
+                                <span class="text-sm font-medium" :class="$page.component==='Bisyorjoniba/Add' && 'text-green-400'"> Иловаи Шартнома </span>
                             </Link>
 
                             <a
@@ -307,7 +305,8 @@ export default {
     data(){
         return{
             showDropDown: false,
-            showSide: true
+            showSide: true,
+            openMenu: true,
         };
     },
     props:{

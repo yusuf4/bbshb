@@ -1189,6 +1189,9 @@ input:checked + .toggle-bg {
 .w-\[30px\] {
   width: 30px;
 }
+.w-\[380px\] {
+  width: 380px;
+}
 .w-\[400px\] {
   width: 400px;
 }
@@ -1679,9 +1682,9 @@ input:checked + .toggle-bg {
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity));
 }
-.text-green-300 {
+.text-green-400 {
   --tw-text-opacity: 1;
-  color: rgb(132 225 188 / var(--tw-text-opacity));
+  color: rgb(49 196 141 / var(--tw-text-opacity));
 }
 .text-green-600 {
   --tw-text-opacity: 1;

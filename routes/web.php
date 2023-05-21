@@ -27,11 +27,11 @@ Route::get('/dash', function (){
     ]);
 });
 Route::get('/input', function (){
-    return Inertia::render('InputForm');
+    return Inertia::render('Dujoniba/Add');
 });
 Route::get('/inputb', function (){
-    return Inertia::render('InputFormBisyor');
+    return Inertia::render('Bisyorjoniba/Add');
 });
 Route::get('/test', function (){
-    return Inertia::render('TestCom');
+    return Inertia::render('Dujoniba/Test');
 });
