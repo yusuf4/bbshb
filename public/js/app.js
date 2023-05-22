@@ -22858,6 +22858,28 @@ __webpack_require__.r(__webpack_exports__);
       disabled: false
     };
   },
+  setup: function setup() {
+    var formValues = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.useForm)({
+      name: null,
+      shartnoma_file: null,
+      jonibi_tj: null,
+      jonibi_digar: null,
+      sanai_etibor: null,
+      files_scan: null,
+      etibor_digar: null,
+      namud: null,
+      tartib: '',
+      muhlatnok: null,
+      muhlatEnd: null,
+      imzo_tj: null,
+      imzo_digar: null,
+      vakolat: null,
+      ezoh: null
+    });
+    return {
+      formValues: formValues
+    };
+  },
   methods: {
     PartSix: function PartSix(event) {
       this.selected = event.target.value;
@@ -22871,6 +22893,13 @@ __webpack_require__.r(__webpack_exports__);
         this.showPartSix = false;
         this.PartSixDigar = false;
       }
+    },
+    disableInput: function disableInput() {
+      this.disabled = true;
+      this.formValues.muhlatEnd = "";
+    },
+    formatDate: function formatDate() {
+      return this.sanai_etibor = new Date().toISOString().substr(0, 10);
     }
   }
 });
@@ -23577,7 +23606,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "group [&_summary::-webkit-details-marker]:hidden",
     open: _ctx.$page.component === 'Dujoniba/Add'
   }, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("nav", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
-    href: "/input",
+    href: _ctx.route('duinput.create'),
     "class": "flex items-center gap-2 rounded-lg px-4 py-2 text-white hover:bg-gray-100 hover:text-blue-700"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -23587,7 +23616,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
 
     _: 1 /* STABLE */
-  }), _hoisted_14])], 8 /* PROPS */, _hoisted_10), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("details", {
+  }, 8 /* PROPS */, ["href"]), _hoisted_14])], 8 /* PROPS */, _hoisted_10), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("details", {
     "class": "group [&_summary::-webkit-details-marker]:hidden",
     open: _ctx.$page.component === 'Bisyorjoniba/Add'
   }, [_hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("nav", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
@@ -23645,119 +23674,198 @@ var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
   "class": "font-bold text-2xl text-blue-400 text-blue-700 text-center pb-4 pt-1"
 }, "Иловаи шартномаи дуҷониба", -1 /* HOISTED */);
 var _hoisted_4 = {
-  "class": "p-4"
-};
-var _hoisted_5 = {
   "class": "grid gap-6 mb-6 md:grid-cols-2 items-center"
 };
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"nomi-shartnoma\"><label for=\"first_name\" class=\"block mb-2 text-sm font-medium text-gray-900 dark:text-white\">Номи пурраи шартнома</label><input type=\"text\" id=\"first_name\" class=\"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500\" placeholder=\"Шартнома дар самти...\" required></div><div class=\"shartnomfa-file\"><label for=\"formFile\" class=\"mb-2 inline-block text-sm font-medium text-gray-900 dark:text-neutral-200\">Файли сканшудаи шартнома PDF</label><input class=\"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500\" type=\"file\" id=\"formFile\" required></div><div class=\"jonibho\"><div class=\"jonibi-tj\"><label for=\"jonibi-tj\" class=\"block mb-2 text-sm font-medium text-gray-900 dark:text-white\">Аз ҷониби ҶТ</label><input type=\"text\" id=\"jonibi-tj\" class=\"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500\" placeholder=\"Тарафҳои шартнома...\" required></div><div class=\"jonibi-digar mt-4\"><label for=\"jonibi-digar\" class=\"block mb-2 text-sm font-medium text-gray-900 dark:text-white\">Аз ҷониби дигар</label><input type=\"text\" id=\"jonibi-digar\" class=\"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500\" placeholder=\"Тарафҳои шартнома...\" required></div></div>", 3);
+var _hoisted_5 = {
+  "class": "nomi-shartnoma"
+};
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "name",
+  "class": "block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+}, "Номи пурраи шартнома", -1 /* HOISTED */);
+var _hoisted_7 = {
+  "class": "shartnomfa-file"
+};
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "formFile",
+  "class": "mb-2 inline-block text-sm font-medium text-gray-900 dark:text-neutral-200"
+}, "Файли сканшудаи шартнома PDF", -1 /* HOISTED */);
 var _hoisted_9 = {
+  "class": "jonibho"
+};
+var _hoisted_10 = {
+  "class": "jonibi-tj"
+};
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "jonibi-tj",
+  "class": "block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+}, "Аз ҷониби ҶТ", -1 /* HOISTED */);
+var _hoisted_12 = {
+  "class": "jonibi-digar mt-4"
+};
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "jonibi_digar",
+  "class": "block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+}, "Аз ҷониби дигар", -1 /* HOISTED */);
+var _hoisted_14 = {
   "class": "namud-tartib"
 };
-var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"namudi-shartnoma\"><h3 class=\"mb-2 text-sm font-medium text-gray-900 dark:text-white\">Намуди шартнома</h3><ul class=\"items-center w-full text-sm font-medium text-gray-900 border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white\"><li class=\"w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600\"><div class=\"flex items-center pl-3\"><input id=\"horizontal-list-radio-davlati\" type=\"radio\" value=\"\" name=\"list-radio\" class=\"w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500\"><label for=\"horizontal-list-radio-davlati\" class=\"w-full py-2 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300\">Байнидавлатӣ </label></div></li><li class=\"w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600\"><div class=\"flex items-center pl-3\"><input id=\"horizontal-list-radio-hukumati\" type=\"radio\" value=\"\" name=\"list-radio\" class=\"w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500\"><label for=\"horizontal-list-radio-hukumati\" class=\"w-full py-2 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300\">Байниҳукуматӣ</label></div></li><li class=\"w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600\"><div class=\"flex items-center pl-3\"><input id=\"horizontal-list-radio-idoravi\" type=\"radio\" value=\"\" name=\"list-radio\" class=\"w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500\"><label for=\"horizontal-list-radio-idoravi\" class=\"w-full py-2 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300\">Байниидоравӣ</label></div></li></ul></div>", 1);
-var _hoisted_11 = {
+var _hoisted_15 = {
+  "class": "namudi-shartnoma"
+};
+var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", {
+  "class": "mb-2 text-sm font-medium text-gray-900 dark:text-white"
+}, "Намуди шартнома", -1 /* HOISTED */);
+var _hoisted_17 = {
+  "class": "items-center w-full text-sm font-medium text-gray-900 border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+};
+var _hoisted_18 = {
+  "class": "w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600"
+};
+var _hoisted_19 = {
+  "class": "flex items-center pl-3"
+};
+var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "horizontal-list-radio-davlati",
+  "class": "w-full py-2 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+}, "Байнидавлатӣ ", -1 /* HOISTED */);
+var _hoisted_21 = {
+  "class": "w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600"
+};
+var _hoisted_22 = {
+  "class": "flex items-center pl-3"
+};
+var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "horizontal-list-radio-hukumati",
+  "class": "w-full py-2 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+}, "Байниҳукуматӣ", -1 /* HOISTED */);
+var _hoisted_24 = {
+  "class": "w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600"
+};
+var _hoisted_25 = {
+  "class": "flex items-center pl-3"
+};
+var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "horizontal-list-radio-idoravi",
+  "class": "w-full py-2 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+}, "Байниидоравӣ", -1 /* HOISTED */);
+var _hoisted_27 = {
   "class": "tartibi-etibor mt-4"
 };
-var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   "for": "qarorho",
   "class": "block mb-2 text-sm font-medium text-gray-900 dark:text-white"
 }, "Тартиби пайдо намудани эътибор", -1 /* HOISTED */);
-var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<option value=\"14\" selected>Интихоб</option><option value=\"1\">Қарори Ҳукумати ҶТ</option><option value=\"2\">Фармони Президенти ҶТ</option><option value=\"3\">Қарори Маҷлиси намояндагони Маҷлиси Олии ҶТ</option><option value=\"5\">Аз лаҳзаи имзо</option><option value=\"6\">Дигар</option>", 6);
-var _hoisted_19 = [_hoisted_13];
-var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_29 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<option value=\"\">Интихоб</option><option value=\"1\">Қарори Ҳукумати ҶТ</option><option value=\"2\">Фармони Президенти ҶТ</option><option value=\"3\">Қарори Маҷлиси намояндагони Маҷлиси Олии ҶТ</option><option value=\"5\">Аз лаҳзаи имзо</option><option value=\"6\">Дигар</option>", 6);
+var _hoisted_35 = [_hoisted_29];
+var _hoisted_36 = {
   "class": ""
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-  "for": "sanai-qabul",
+};
+var _hoisted_37 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "sanai_qabul",
   "class": "block mb-2 text-sm font-medium text-gray-900 dark:text-white truncate"
-}, "Санаи пайдо кардани эътибор"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-  type: "date",
-  id: "sanai-qabul",
-  "class": "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
-  placeholder: "",
-  required: ""
-})], -1 /* HOISTED */);
-var _hoisted_21 = {
-  "class": "ml-4 w-full truncate"
-};
-var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-  "class": "block mb-2 text-sm font-medium text-gray-900 dark:text-white truncate",
-  "for": "small_size"
-}, "Файли сканшудаи марбут ба расмиёти дохилидавлатӣ", -1 /* HOISTED */);
-var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-  "class": "block w-full text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400",
-  id: "small_size",
-  type: "file",
-  multiple: ""
-}, null, -1 /* HOISTED */);
-var _hoisted_24 = [_hoisted_22, _hoisted_23];
-var _hoisted_25 = {
-  "class": "ml-4 w-full"
-};
-var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-  "for": "bandi-shash",
-  "class": "block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-}, "Дигар", -1 /* HOISTED */);
-var _hoisted_27 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-  type: "text",
-  id: "bandi-shash",
-  "class": "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
-  placeholder: "Вориди матн"
-}, null, -1 /* HOISTED */);
-var _hoisted_28 = [_hoisted_26, _hoisted_27];
-var _hoisted_29 = {
-  "class": "mb-4 border-t-4 border-blue-300 border-b-4 pb-6"
-};
-var _hoisted_30 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", {
-  "class": "text-base text-blue-600 text-sm font-medium text-start mt-4"
-}, "Муҳлати эътибор", -1 /* HOISTED */);
-var _hoisted_31 = {
-  "class": "flex justify-between justify-items-center items-center space-x-4"
-};
-var _hoisted_32 = {
-  "class": "w-full mt-7"
-};
-var _hoisted_33 = {
-  "class": "items-center w-full text-sm font-medium text-gray-900 border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-};
-var _hoisted_34 = {
-  "class": "w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600"
-};
-var _hoisted_35 = {
-  "class": "flex items-center pl-3"
-};
-var _hoisted_36 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-  "for": "horizontal-list-radio-muhlat",
-  "class": "w-full py-2 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-}, "Муҳлатнок", -1 /* HOISTED */);
-var _hoisted_37 = {
-  "class": "w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600"
-};
+}, "Санаи пайдо кардани эътибор", -1 /* HOISTED */);
 var _hoisted_38 = {
-  "class": "flex items-center pl-3"
+  "class": "w-full truncate"
 };
 var _hoisted_39 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-  "for": "horizontal-list-radio-bemuhlat",
-  "class": "w-full py-2 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-}, "Бемуҳлат", -1 /* HOISTED */);
+  "class": "block mb-2 text-sm font-medium text-gray-900 dark:text-white truncate",
+  "for": "files_scan"
+}, "Файли сканшудаи марбут ба расмиёти дохилидавлатӣ", -1 /* HOISTED */);
 var _hoisted_40 = {
   "class": "w-full"
 };
 var _hoisted_41 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "bandi-shash",
+  "class": "block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+}, "Дигар", -1 /* HOISTED */);
+var _hoisted_42 = {
+  "class": "mb-4 border-t-4 border-blue-300 border-b-4 pb-6"
+};
+var _hoisted_43 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", {
+  "class": "text-base text-blue-600 text-sm font-medium text-start mt-4"
+}, "Муҳлати эътибор", -1 /* HOISTED */);
+var _hoisted_44 = {
+  "class": "flex justify-between justify-items-center items-center space-x-4"
+};
+var _hoisted_45 = {
+  "class": "w-full mt-7"
+};
+var _hoisted_46 = {
+  "class": "items-center w-full text-sm font-medium text-gray-900 border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+};
+var _hoisted_47 = {
+  "class": "w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600"
+};
+var _hoisted_48 = {
+  "class": "flex items-center pl-3"
+};
+var _hoisted_49 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "horizontal-list-radio-muhlat",
+  "class": "w-full py-2 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+}, "Муҳлатнок", -1 /* HOISTED */);
+var _hoisted_50 = {
+  "class": "w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600"
+};
+var _hoisted_51 = {
+  "class": "flex items-center pl-3"
+};
+var _hoisted_52 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "horizontal-list-radio-bemuhlat",
+  "class": "w-full py-2 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+}, "Бемуҳлат", -1 /* HOISTED */);
+var _hoisted_53 = {
+  "class": "w-full"
+};
+var _hoisted_54 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   "for": "etibor",
   "class": "block mb-2 text-sm font-medium text-gray-900 dark:text-white"
 }, "Санаи қатъи эътибор", -1 /* HOISTED */);
-var _hoisted_42 = ["disabled"];
-var _hoisted_43 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<h1 class=\"text-base text-blue-600 font-medium text-start mt-2\">Имзокунандагон</h1><div class=\"flex justify-between flex-wrap md:flex-nowrap items-center mt-2 space-x-4 py-4\"><div class=\"w-full\"><label for=\"tj-imzo\" class=\"block mb-2 text-sm font-medium text-gray-900 dark:text-white\">Ҷониби ҶТ</label><input type=\"text\" id=\"tj-imzo\" class=\"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500\" placeholder=\"Номи ва вазифаи имзокунанда\"></div><div class=\"w-full\"><label for=\"digar-imzo\" class=\"block mb-2 text-sm font-medium text-gray-900 dark:text-white\">Ҷониби дигар</label><input type=\"text\" id=\"digar-imzo\" class=\"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500\" placeholder=\"Номи ва вазифаи имзокунанда\"></div><div class=\"w-full\"><label class=\"block mb-2 text-sm font-medium text-gray-900 dark:text-white truncate\" for=\"vakolad_file\">Файли сканшудаи қарори Ҳукумати ҶТ ё Ваколатнома</label><input class=\"block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400\" id=\"vakolad_file\" type=\"file\" multiple></div><div class=\"w-full\"><label for=\"ezoh\" class=\"block mb-2 ml-2 text-sm font-medium text-gray-900 dark:text-white\">Эзоҳ</label><input type=\"text\" id=\"ezoh\" class=\"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500\" placeholder=\"Матн\"></div></div>", 2);
-var _hoisted_45 = {
+var _hoisted_55 = ["disabled"];
+var _hoisted_56 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", {
+  "class": "text-base text-blue-600 font-medium text-start mt-2"
+}, "Имзокунандагон", -1 /* HOISTED */);
+var _hoisted_57 = {
+  "class": "flex justify-between flex-wrap md:flex-nowrap items-center mt-2 space-x-4 py-4"
+};
+var _hoisted_58 = {
+  "class": "w-full"
+};
+var _hoisted_59 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "tj-imzo",
+  "class": "block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+}, "Ҷониби ҶТ", -1 /* HOISTED */);
+var _hoisted_60 = {
+  "class": "w-full"
+};
+var _hoisted_61 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "digar-imzo",
+  "class": "block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+}, "Ҷониби дигар", -1 /* HOISTED */);
+var _hoisted_62 = {
+  "class": "w-full"
+};
+var _hoisted_63 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "class": "block mb-2 text-sm font-medium text-gray-900 dark:text-white truncate",
+  "for": "vakolad_file"
+}, "Файли сканшудаи қарори Ҳукумати ҶТ ё Ваколатнома", -1 /* HOISTED */);
+var _hoisted_64 = {
+  "class": "w-full"
+};
+var _hoisted_65 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "ezoh",
+  "class": "block mb-2 ml-2 text-sm font-medium text-gray-900 dark:text-white"
+}, "Эзоҳ", -1 /* HOISTED */);
+var _hoisted_66 = {
   "class": "flex justify-end items-center text-center mt-[40px]"
 };
-var _hoisted_46 = {
+var _hoisted_67 = {
   "class": "back-buuton mt-1"
 };
-var _hoisted_47 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+var _hoisted_68 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "sr-only"
 }, "HOME", -1 /* HOISTED */);
-var _hoisted_48 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+var _hoisted_69 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
   xmlns: "http://www.w3.org/2000/svg",
   fill: "none",
   viewBox: "0 0 24 24",
@@ -23769,7 +23877,7 @@ var _hoisted_48 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
   "stroke-linejoin": "round",
   d: "M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
 })], -1 /* HOISTED */);
-var _hoisted_49 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+var _hoisted_70 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
   type: "submit",
   "class": "ml-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
 }, "Сабт", -1 /* HOISTED */);
@@ -23782,46 +23890,195 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return [_hoisted_1];
     }),
     _: 1 /* STABLE */
-  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Section One "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+    "class": "p-4",
+    method: "POST",
+    onSubmit: _cache[21] || (_cache[21] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+      return _ctx.submit && _ctx.submit.apply(_ctx, arguments);
+    }, ["prevent"]))
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Section One "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "text",
+    id: "name",
+    name: "name",
+    "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
+      return $setup.formValues.name = $event;
+    }),
+    "class": "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+    placeholder: "Шартнома дар самти...",
+    required: ""
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.formValues.name]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [_hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    "class": "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+    type: "file",
+    name: "shartnoma_file[]",
+    onInput: _cache[1] || (_cache[1] = function ($event) {
+      return $setup.formValues.shartnoma_file = $event.target.files[0];
+    }),
+    id: "formFile",
+    required: ""
+  }, null, 32 /* HYDRATE_EVENTS */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "text",
+    id: "jonibi-tj",
+    name: "jonibi_tj",
+    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+      return $setup.formValues.jonibi_tj = $event;
+    }),
+    "class": "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+    placeholder: "Тарафҳои шартнома...",
+    required: ""
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.formValues.jonibi_tj]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [_hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "text",
+    id: "jonibi_digar",
+    name: "jonibi_digar",
+    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+      return $setup.formValues.jonibi_digar = $event;
+    }),
+    "class": "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+    placeholder: "Тарафҳои шартнома...",
+    required: ""
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.formValues.jonibi_digar]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [_hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    id: "horizontal-list-radio-davlati",
+    type: "radio",
+    value: "1",
+    name: "list-radio",
+    "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+      return $setup.formValues.namud = $event;
+    }),
+    "class": "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $setup.formValues.namud]]), _hoisted_20])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    id: "horizontal-list-radio-hukumati",
+    type: "radio",
+    value: "2",
+    name: "list-radio",
+    "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
+      return $setup.formValues.namud = $event;
+    }),
+    "class": "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $setup.formValues.namud]]), _hoisted_23])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    id: "horizontal-list-radio-idoravi",
+    type: "radio",
+    value: "3",
+    name: "list-radio",
+    "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
+      return $setup.formValues.namud = $event;
+    }),
+    "class": "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $setup.formValues.namud]]), _hoisted_26])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_27, [_hoisted_28, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
     id: "qarorho",
-    onChange: _cache[0] || (_cache[0] = function ($event) {
+    onChange: _cache[7] || (_cache[7] = function ($event) {
       return $options.PartSix($event);
     }),
+    "onUpdate:modelValue": _cache[8] || (_cache[8] = function ($event) {
+      return $setup.formValues.tartib = $event;
+    }),
     "class": "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-  }, _hoisted_19, 32 /* HYDRATE_EVENTS */)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Bandi 6 Calendar default is hide "), _hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Banhoi 1 2 3 az bandi 6 default is hide "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, _hoisted_24, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.showPartSix]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Bandi 5 default is hide "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, _hoisted_28, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.PartSixDigar]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Muhlati Etibor "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_29, [_hoisted_30, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_31, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_32, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_33, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_34, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_35, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  }, _hoisted_35, 544 /* HYDRATE_EVENTS, NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $setup.formValues.tartib]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Bandi 6 Calendar default is hide "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_36, [_hoisted_37, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "date",
+    id: "sanai_qabul",
+    name: "sanai_etibor",
+    "onUpdate:modelValue": _cache[9] || (_cache[9] = function ($event) {
+      return $setup.formValues.sanai_etibor = $event;
+    }),
+    "class": "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+    placeholder: "",
+    required: ""
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.formValues.sanai_etibor]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Banhoi 1 2 3 az bandi 6 default is hide "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_38, [_hoisted_39, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    id: "files_scan",
+    type: "file",
+    multiple: "",
+    name: "files_scan",
+    onInput: _cache[10] || (_cache[10] = function ($event) {
+      return $setup.formValues.files_scan = $event.target.files[0];
+    }),
+    "class": "block w-full text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+  }, null, 32 /* HYDRATE_EVENTS */)], 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.showPartSix]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Bandi 5 default is hide "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_40, [_hoisted_41, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "text",
+    id: "bandi-shash",
+    name: "etibor_digar",
+    "onUpdate:modelValue": _cache[11] || (_cache[11] = function ($event) {
+      return $setup.formValues.etibor_digar = $event;
+    }),
+    "class": "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+    placeholder: "Вориди матн"
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.formValues.etibor_digar]])], 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.PartSixDigar]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Muhlati Etibor "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_42, [_hoisted_43, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_44, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_45, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_46, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_47, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_48, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     id: "horizontal-list-radio-muhlat",
-    onClick: _cache[1] || (_cache[1] = function ($event) {
+    onClick: _cache[12] || (_cache[12] = function ($event) {
       return $data.disabled = false;
     }),
     type: "radio",
-    value: "",
+    value: "1",
     name: "list-radio-muhlat",
+    "onUpdate:modelValue": _cache[13] || (_cache[13] = function ($event) {
+      return $setup.formValues.muhlat = $event;
+    }),
     "class": "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-  }), _hoisted_36])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_37, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_38, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $setup.formValues.muhlat]]), _hoisted_49])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_50, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_51, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     id: "horizontal-list-radio-bemuhlat",
-    onClick: _cache[2] || (_cache[2] = function ($event) {
-      return $data.disabled = true;
+    onClick: _cache[14] || (_cache[14] = function () {
+      return $options.disableInput && $options.disableInput.apply($options, arguments);
+    }),
+    "onUpdate:modelValue": _cache[15] || (_cache[15] = function ($event) {
+      return $setup.formValues.muhlat = $event;
     }),
     type: "radio",
-    value: "",
+    value: "2",
     name: "list-radio-muhlat",
     "class": "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-  }), _hoisted_39])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_40, [_hoisted_41, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $setup.formValues.muhlat]]), _hoisted_52])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_53, [_hoisted_54, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "date",
     disabled: $data.disabled,
     id: "etibor",
+    name: "qati_etibor",
+    "onUpdate:modelValue": _cache[16] || (_cache[16] = function ($event) {
+      return $setup.formValues.muhlatEnd = $event;
+    }),
     "class": "disabled:opacity-75 disabled:bg-gray-300 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
     placeholder: "",
     required: ""
-  }, null, 8 /* PROPS */, _hoisted_42)])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Imzokunandagon "), _hoisted_43, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Save buttons "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_45, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_46, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
+  }, null, 8 /* PROPS */, _hoisted_55), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.formValues.muhlatEnd]])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Imzokunandagon "), _hoisted_56, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_57, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_58, [_hoisted_59, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "text",
+    id: "tj-imzo",
+    name: "imzo_tj",
+    "onUpdate:modelValue": _cache[17] || (_cache[17] = function ($event) {
+      return $setup.formValues.imzo_tj = $event;
+    }),
+    "class": "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+    placeholder: "Номи ва вазифаи имзокунанда"
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.formValues.imzo_tj]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_60, [_hoisted_61, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "text",
+    id: "digar-imzo",
+    name: "imzo_digar",
+    "onUpdate:modelValue": _cache[18] || (_cache[18] = function ($event) {
+      return $setup.formValues.imzo_digar = $event;
+    }),
+    "class": "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+    placeholder: "Номи ва вазифаи имзокунанда"
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.formValues.imzo_digar]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_62, [_hoisted_63, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    id: "vakolad_file",
+    type: "file",
+    name: "vakolat",
+    onInput: _cache[19] || (_cache[19] = function ($event) {
+      return $setup.formValues.vakolat = $event.target.files[0];
+    }),
+    multiple: "",
+    "class": "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+  }, null, 32 /* HYDRATE_EVENTS */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_64, [_hoisted_65, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "text",
+    id: "ezoh",
+    name: "ezoh",
+    "onUpdate:modelValue": _cache[20] || (_cache[20] = function ($event) {
+      return $setup.formValues.ezoh = $event;
+    }),
+    "class": "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+    placeholder: "Матн"
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.formValues.ezoh]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Save buttons "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_66, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_67, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
     "class": "inline-block rounded-full border border-indigo-600 bg-indigo-600 p-3 text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500",
     href: "/dash"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_47, _hoisted_48];
+      return [_hoisted_68, _hoisted_69];
     }),
     _: 1 /* STABLE */
-  })]), _hoisted_49])])])], 64 /* STABLE_FRAGMENT */);
+  })]), _hoisted_70])], 32 /* HYDRATE_EVENTS */)])], 64 /* STABLE_FRAGMENT */);
 }
 
 /***/ }),
@@ -23923,7 +24180,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 /* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
 /* harmony import */ var _inertiajs_progress__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @inertiajs/progress */ "./node_modules/@inertiajs/progress/dist/index.js");
-/* harmony import */ var flowbite__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! flowbite */ "./node_modules/flowbite/lib/esm/index.js");
+/* harmony import */ var ziggy__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ziggy */ "./vendor/tightenco/ziggy/dist/vue.js");
+/* harmony import */ var ziggy__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(ziggy__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var flowbite__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! flowbite */ "./node_modules/flowbite/lib/esm/index.js");
+
 
 
 
@@ -23942,8 +24202,669 @@ _inertiajs_progress__WEBPACK_IMPORTED_MODULE_2__.InertiaProgress.init();
       render: function render() {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.h)(App, props);
       }
-    }).use(plugin).mount(el);
+    }).use(plugin).use(ziggy__WEBPACK_IMPORTED_MODULE_3__.ZiggyVue, ziggy__WEBPACK_IMPORTED_MODULE_3__.Ziggy).mount(el);
   }
+});
+
+/***/ }),
+
+/***/ "./vendor/tightenco/ziggy/dist/vue.js":
+/*!********************************************!*\
+  !*** ./vendor/tightenco/ziggy/dist/vue.js ***!
+  \********************************************/
+/***/ (function(module, exports) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+!function (t, r) {
+  "object" == ( false ? 0 : _typeof(exports)) && "undefined" != "object" ? r(exports) :  true ? !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports], __WEBPACK_AMD_DEFINE_FACTORY__ = (r),
+		__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+		(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : 0;
+}(this, function (t) {
+  function r(t, r) {
+    for (var e = 0; e < r.length; e++) {
+      var n = r[e];
+      n.enumerable = n.enumerable || !1, n.configurable = !0, "value" in n && (n.writable = !0), Object.defineProperty(t, "symbol" == _typeof(o = function (t, r) {
+        if ("object" != _typeof(t) || null === t) return t;
+        var e = t[Symbol.toPrimitive];
+        if (void 0 !== e) {
+          var n = e.call(t, "string");
+          if ("object" != _typeof(n)) return n;
+          throw new TypeError("@@toPrimitive must return a primitive value.");
+        }
+        return String(t);
+      }(n.key)) ? o : String(o), n);
+    }
+    var o;
+  }
+  function e(t, e, n) {
+    return e && r(t.prototype, e), n && r(t, n), Object.defineProperty(t, "prototype", {
+      writable: !1
+    }), t;
+  }
+  function n() {
+    return n = Object.assign ? Object.assign.bind() : function (t) {
+      for (var r = 1; r < arguments.length; r++) {
+        var e = arguments[r];
+        for (var n in e) Object.prototype.hasOwnProperty.call(e, n) && (t[n] = e[n]);
+      }
+      return t;
+    }, n.apply(this, arguments);
+  }
+  function o(t) {
+    return o = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) {
+      return t.__proto__ || Object.getPrototypeOf(t);
+    }, o(t);
+  }
+  function i(t, r) {
+    return i = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, r) {
+      return t.__proto__ = r, t;
+    }, i(t, r);
+  }
+  function u() {
+    if ("undefined" == typeof Reflect || !Reflect.construct) return !1;
+    if (Reflect.construct.sham) return !1;
+    if ("function" == typeof Proxy) return !0;
+    try {
+      return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})), !0;
+    } catch (t) {
+      return !1;
+    }
+  }
+  function f(t, r, e) {
+    return f = u() ? Reflect.construct.bind() : function (t, r, e) {
+      var n = [null];
+      n.push.apply(n, r);
+      var o = new (Function.bind.apply(t, n))();
+      return e && i(o, e.prototype), o;
+    }, f.apply(null, arguments);
+  }
+  function a(t) {
+    var r = "function" == typeof Map ? new Map() : void 0;
+    return a = function a(t) {
+      if (null === t || -1 === Function.toString.call(t).indexOf("[native code]")) return t;
+      if ("function" != typeof t) throw new TypeError("Super expression must either be null or a function");
+      if (void 0 !== r) {
+        if (r.has(t)) return r.get(t);
+        r.set(t, e);
+      }
+      function e() {
+        return f(t, arguments, o(this).constructor);
+      }
+      return e.prototype = Object.create(t.prototype, {
+        constructor: {
+          value: e,
+          enumerable: !1,
+          writable: !0,
+          configurable: !0
+        }
+      }), i(e, t);
+    }, a(t);
+  }
+  var c = String.prototype.replace,
+    l = /%20/g,
+    s = "RFC3986",
+    v = {
+      "default": s,
+      formatters: {
+        RFC1738: function RFC1738(t) {
+          return c.call(t, l, "+");
+        },
+        RFC3986: function RFC3986(t) {
+          return String(t);
+        }
+      },
+      RFC1738: "RFC1738",
+      RFC3986: s
+    },
+    p = Object.prototype.hasOwnProperty,
+    y = Array.isArray,
+    d = function () {
+      for (var t = [], r = 0; r < 256; ++r) t.push("%" + ((r < 16 ? "0" : "") + r.toString(16)).toUpperCase());
+      return t;
+    }(),
+    b = function b(t, r) {
+      for (var e = r && r.plainObjects ? Object.create(null) : {}, n = 0; n < t.length; ++n) void 0 !== t[n] && (e[n] = t[n]);
+      return e;
+    },
+    h = {
+      arrayToObject: b,
+      assign: function assign(t, r) {
+        return Object.keys(r).reduce(function (t, e) {
+          return t[e] = r[e], t;
+        }, t);
+      },
+      combine: function combine(t, r) {
+        return [].concat(t, r);
+      },
+      compact: function compact(t) {
+        for (var r = [{
+            obj: {
+              o: t
+            },
+            prop: "o"
+          }], e = [], n = 0; n < r.length; ++n) for (var o = r[n], i = o.obj[o.prop], u = Object.keys(i), f = 0; f < u.length; ++f) {
+          var a = u[f],
+            c = i[a];
+          "object" == _typeof(c) && null !== c && -1 === e.indexOf(c) && (r.push({
+            obj: i,
+            prop: a
+          }), e.push(c));
+        }
+        return function (t) {
+          for (; t.length > 1;) {
+            var r = t.pop(),
+              e = r.obj[r.prop];
+            if (y(e)) {
+              for (var n = [], o = 0; o < e.length; ++o) void 0 !== e[o] && n.push(e[o]);
+              r.obj[r.prop] = n;
+            }
+          }
+        }(r), t;
+      },
+      decode: function decode(t, r, e) {
+        var n = t.replace(/\+/g, " ");
+        if ("iso-8859-1" === e) return n.replace(/%[0-9a-f]{2}/gi, unescape);
+        try {
+          return decodeURIComponent(n);
+        } catch (t) {
+          return n;
+        }
+      },
+      encode: function encode(t, r, e, n, o) {
+        if (0 === t.length) return t;
+        var i = t;
+        if ("symbol" == _typeof(t) ? i = Symbol.prototype.toString.call(t) : "string" != typeof t && (i = String(t)), "iso-8859-1" === e) return escape(i).replace(/%u[0-9a-f]{4}/gi, function (t) {
+          return "%26%23" + parseInt(t.slice(2), 16) + "%3B";
+        });
+        for (var u = "", f = 0; f < i.length; ++f) {
+          var a = i.charCodeAt(f);
+          45 === a || 46 === a || 95 === a || 126 === a || a >= 48 && a <= 57 || a >= 65 && a <= 90 || a >= 97 && a <= 122 || o === v.RFC1738 && (40 === a || 41 === a) ? u += i.charAt(f) : a < 128 ? u += d[a] : a < 2048 ? u += d[192 | a >> 6] + d[128 | 63 & a] : a < 55296 || a >= 57344 ? u += d[224 | a >> 12] + d[128 | a >> 6 & 63] + d[128 | 63 & a] : (a = 65536 + ((1023 & a) << 10 | 1023 & i.charCodeAt(f += 1)), u += d[240 | a >> 18] + d[128 | a >> 12 & 63] + d[128 | a >> 6 & 63] + d[128 | 63 & a]);
+        }
+        return u;
+      },
+      isBuffer: function isBuffer(t) {
+        return !(!t || "object" != _typeof(t) || !(t.constructor && t.constructor.isBuffer && t.constructor.isBuffer(t)));
+      },
+      isRegExp: function isRegExp(t) {
+        return "[object RegExp]" === Object.prototype.toString.call(t);
+      },
+      maybeMap: function maybeMap(t, r) {
+        if (y(t)) {
+          for (var e = [], n = 0; n < t.length; n += 1) e.push(r(t[n]));
+          return e;
+        }
+        return r(t);
+      },
+      merge: function t(r, e, n) {
+        if (!e) return r;
+        if ("object" != _typeof(e)) {
+          if (y(r)) r.push(e);else {
+            if (!r || "object" != _typeof(r)) return [r, e];
+            (n && (n.plainObjects || n.allowPrototypes) || !p.call(Object.prototype, e)) && (r[e] = !0);
+          }
+          return r;
+        }
+        if (!r || "object" != _typeof(r)) return [r].concat(e);
+        var o = r;
+        return y(r) && !y(e) && (o = b(r, n)), y(r) && y(e) ? (e.forEach(function (e, o) {
+          if (p.call(r, o)) {
+            var i = r[o];
+            i && "object" == _typeof(i) && e && "object" == _typeof(e) ? r[o] = t(i, e, n) : r.push(e);
+          } else r[o] = e;
+        }), r) : Object.keys(e).reduce(function (r, o) {
+          var i = e[o];
+          return r[o] = p.call(r, o) ? t(r[o], i, n) : i, r;
+        }, o);
+      }
+    },
+    m = Object.prototype.hasOwnProperty,
+    g = {
+      brackets: function brackets(t) {
+        return t + "[]";
+      },
+      comma: "comma",
+      indices: function indices(t, r) {
+        return t + "[" + r + "]";
+      },
+      repeat: function repeat(t) {
+        return t;
+      }
+    },
+    j = Array.isArray,
+    w = String.prototype.split,
+    O = Array.prototype.push,
+    E = function E(t, r) {
+      O.apply(t, j(r) ? r : [r]);
+    },
+    R = Date.prototype.toISOString,
+    S = v["default"],
+    x = {
+      addQueryPrefix: !1,
+      allowDots: !1,
+      charset: "utf-8",
+      charsetSentinel: !1,
+      delimiter: "&",
+      encode: !0,
+      encoder: h.encode,
+      encodeValuesOnly: !1,
+      format: S,
+      formatter: v.formatters[S],
+      indices: !1,
+      serializeDate: function serializeDate(t) {
+        return R.call(t);
+      },
+      skipNulls: !1,
+      strictNullHandling: !1
+    },
+    T = function t(r, e, n, o, i, u, f, a, c, l, s, v, p, y) {
+      var d,
+        b = r;
+      if ("function" == typeof f ? b = f(e, b) : b instanceof Date ? b = l(b) : "comma" === n && j(b) && (b = h.maybeMap(b, function (t) {
+        return t instanceof Date ? l(t) : t;
+      })), null === b) {
+        if (o) return u && !p ? u(e, x.encoder, y, "key", s) : e;
+        b = "";
+      }
+      if ("string" == typeof (d = b) || "number" == typeof d || "boolean" == typeof d || "symbol" == _typeof(d) || "bigint" == typeof d || h.isBuffer(b)) {
+        if (u) {
+          var m = p ? e : u(e, x.encoder, y, "key", s);
+          if ("comma" === n && p) {
+            for (var g = w.call(String(b), ","), O = "", R = 0; R < g.length; ++R) O += (0 === R ? "" : ",") + v(u(g[R], x.encoder, y, "value", s));
+            return [v(m) + "=" + O];
+          }
+          return [v(m) + "=" + v(u(b, x.encoder, y, "value", s))];
+        }
+        return [v(e) + "=" + v(String(b))];
+      }
+      var S,
+        T = [];
+      if (void 0 === b) return T;
+      if ("comma" === n && j(b)) S = [{
+        value: b.length > 0 ? b.join(",") || null : void 0
+      }];else if (j(f)) S = f;else {
+        var k = Object.keys(b);
+        S = a ? k.sort(a) : k;
+      }
+      for (var C = 0; C < S.length; ++C) {
+        var N = S[C],
+          D = "object" == _typeof(N) && void 0 !== N.value ? N.value : b[N];
+        if (!i || null !== D) {
+          var F = j(b) ? "function" == typeof n ? n(e, N) : e : e + (c ? "." + N : "[" + N + "]");
+          E(T, t(D, F, n, o, i, u, f, a, c, l, s, v, p, y));
+        }
+      }
+      return T;
+    },
+    k = Object.prototype.hasOwnProperty,
+    C = Array.isArray,
+    N = {
+      allowDots: !1,
+      allowPrototypes: !1,
+      arrayLimit: 20,
+      charset: "utf-8",
+      charsetSentinel: !1,
+      comma: !1,
+      decoder: h.decode,
+      delimiter: "&",
+      depth: 5,
+      ignoreQueryPrefix: !1,
+      interpretNumericEntities: !1,
+      parameterLimit: 1e3,
+      parseArrays: !0,
+      plainObjects: !1,
+      strictNullHandling: !1
+    },
+    D = function D(t) {
+      return t.replace(/&#(\d+);/g, function (t, r) {
+        return String.fromCharCode(parseInt(r, 10));
+      });
+    },
+    F = function F(t, r) {
+      return t && "string" == typeof t && r.comma && t.indexOf(",") > -1 ? t.split(",") : t;
+    },
+    I = function I(t, r, e, n) {
+      if (t) {
+        var o = e.allowDots ? t.replace(/\.([^.[]+)/g, "[$1]") : t,
+          i = /(\[[^[\]]*])/g,
+          u = e.depth > 0 && /(\[[^[\]]*])/.exec(o),
+          f = u ? o.slice(0, u.index) : o,
+          a = [];
+        if (f) {
+          if (!e.plainObjects && k.call(Object.prototype, f) && !e.allowPrototypes) return;
+          a.push(f);
+        }
+        for (var c = 0; e.depth > 0 && null !== (u = i.exec(o)) && c < e.depth;) {
+          if (c += 1, !e.plainObjects && k.call(Object.prototype, u[1].slice(1, -1)) && !e.allowPrototypes) return;
+          a.push(u[1]);
+        }
+        return u && a.push("[" + o.slice(u.index) + "]"), function (t, r, e, n) {
+          for (var o = n ? r : F(r, e), i = t.length - 1; i >= 0; --i) {
+            var u,
+              f = t[i];
+            if ("[]" === f && e.parseArrays) u = [].concat(o);else {
+              u = e.plainObjects ? Object.create(null) : {};
+              var a = "[" === f.charAt(0) && "]" === f.charAt(f.length - 1) ? f.slice(1, -1) : f,
+                c = parseInt(a, 10);
+              e.parseArrays || "" !== a ? !isNaN(c) && f !== a && String(c) === a && c >= 0 && e.parseArrays && c <= e.arrayLimit ? (u = [])[c] = o : "__proto__" !== a && (u[a] = o) : u = {
+                0: o
+              };
+            }
+            o = u;
+          }
+          return o;
+        }(a, r, e, n);
+      }
+    },
+    P = function P(t, r) {
+      var e = function (t) {
+        if (!t) return N;
+        if (null != t.decoder && "function" != typeof t.decoder) throw new TypeError("Decoder has to be a function.");
+        if (void 0 !== t.charset && "utf-8" !== t.charset && "iso-8859-1" !== t.charset) throw new TypeError("The charset option must be either utf-8, iso-8859-1, or undefined");
+        return {
+          allowDots: void 0 === t.allowDots ? N.allowDots : !!t.allowDots,
+          allowPrototypes: "boolean" == typeof t.allowPrototypes ? t.allowPrototypes : N.allowPrototypes,
+          arrayLimit: "number" == typeof t.arrayLimit ? t.arrayLimit : N.arrayLimit,
+          charset: void 0 === t.charset ? N.charset : t.charset,
+          charsetSentinel: "boolean" == typeof t.charsetSentinel ? t.charsetSentinel : N.charsetSentinel,
+          comma: "boolean" == typeof t.comma ? t.comma : N.comma,
+          decoder: "function" == typeof t.decoder ? t.decoder : N.decoder,
+          delimiter: "string" == typeof t.delimiter || h.isRegExp(t.delimiter) ? t.delimiter : N.delimiter,
+          depth: "number" == typeof t.depth || !1 === t.depth ? +t.depth : N.depth,
+          ignoreQueryPrefix: !0 === t.ignoreQueryPrefix,
+          interpretNumericEntities: "boolean" == typeof t.interpretNumericEntities ? t.interpretNumericEntities : N.interpretNumericEntities,
+          parameterLimit: "number" == typeof t.parameterLimit ? t.parameterLimit : N.parameterLimit,
+          parseArrays: !1 !== t.parseArrays,
+          plainObjects: "boolean" == typeof t.plainObjects ? t.plainObjects : N.plainObjects,
+          strictNullHandling: "boolean" == typeof t.strictNullHandling ? t.strictNullHandling : N.strictNullHandling
+        };
+      }(r);
+      if ("" === t || null == t) return e.plainObjects ? Object.create(null) : {};
+      for (var n = "string" == typeof t ? function (t, r) {
+          var e,
+            n = {},
+            o = (r.ignoreQueryPrefix ? t.replace(/^\?/, "") : t).split(r.delimiter, Infinity === r.parameterLimit ? void 0 : r.parameterLimit),
+            i = -1,
+            u = r.charset;
+          if (r.charsetSentinel) for (e = 0; e < o.length; ++e) 0 === o[e].indexOf("utf8=") && ("utf8=%E2%9C%93" === o[e] ? u = "utf-8" : "utf8=%26%2310003%3B" === o[e] && (u = "iso-8859-1"), i = e, e = o.length);
+          for (e = 0; e < o.length; ++e) if (e !== i) {
+            var f,
+              a,
+              c = o[e],
+              l = c.indexOf("]="),
+              s = -1 === l ? c.indexOf("=") : l + 1;
+            -1 === s ? (f = r.decoder(c, N.decoder, u, "key"), a = r.strictNullHandling ? null : "") : (f = r.decoder(c.slice(0, s), N.decoder, u, "key"), a = h.maybeMap(F(c.slice(s + 1), r), function (t) {
+              return r.decoder(t, N.decoder, u, "value");
+            })), a && r.interpretNumericEntities && "iso-8859-1" === u && (a = D(a)), c.indexOf("[]=") > -1 && (a = C(a) ? [a] : a), n[f] = k.call(n, f) ? h.combine(n[f], a) : a;
+          }
+          return n;
+        }(t, e) : t, o = e.plainObjects ? Object.create(null) : {}, i = Object.keys(n), u = 0; u < i.length; ++u) {
+        var f = i[u],
+          a = I(f, n[f], e, "string" == typeof t);
+        o = h.merge(o, a, e);
+      }
+      return h.compact(o);
+    },
+    $ = /*#__PURE__*/function () {
+      function t(t, r, e) {
+        var n, o;
+        this.name = t, this.definition = r, this.bindings = null != (n = r.bindings) ? n : {}, this.wheres = null != (o = r.wheres) ? o : {}, this.config = e;
+      }
+      var r = t.prototype;
+      return r.matchesUrl = function (t) {
+        var r = this;
+        if (!this.definition.methods.includes("GET")) return !1;
+        var e = this.template.replace(/(\/?){([^}?]*)(\??)}/g, function (t, e, n, o) {
+            var i,
+              u = "(?<" + n + ">" + ((null == (i = r.wheres[n]) ? void 0 : i.replace(/(^\^)|(\$$)/g, "")) || "[^/?]+") + ")";
+            return o ? "(" + e + u + ")?" : "" + e + u;
+          }).replace(/^\w+:\/\//, ""),
+          n = t.replace(/^\w+:\/\//, "").split("?"),
+          o = n[0],
+          i = n[1],
+          u = new RegExp("^" + e + "/?$").exec(o);
+        if (u) {
+          for (var f in u.groups) u.groups[f] = "string" == typeof u.groups[f] ? decodeURIComponent(u.groups[f]) : u.groups[f];
+          return {
+            params: u.groups,
+            query: P(i)
+          };
+        }
+        return !1;
+      }, r.compile = function (t) {
+        var r = this,
+          e = this.parameterSegments;
+        return e.length ? this.template.replace(/{([^}?]+)(\??)}/g, function (n, o, i) {
+          var u, f, a;
+          if (!i && [null, void 0].includes(t[o])) throw new Error("Ziggy error: '" + o + "' parameter is required for route '" + r.name + "'.");
+          if (e[e.length - 1].name === o && ".*" === r.wheres[o]) return encodeURIComponent(null != (a = t[o]) ? a : "").replace(/%2F/g, "/");
+          if (r.wheres[o] && !new RegExp("^" + (i ? "(" + r.wheres[o] + ")?" : r.wheres[o]) + "$").test(null != (u = t[o]) ? u : "")) throw new Error("Ziggy error: '" + o + "' parameter does not match required format '" + r.wheres[o] + "' for route '" + r.name + "'.");
+          return encodeURIComponent(null != (f = t[o]) ? f : "");
+        }).replace(this.origin + "//", this.origin + "/").replace(/\/+$/, "") : this.template;
+      }, e(t, [{
+        key: "template",
+        get: function get() {
+          return (this.origin + "/" + this.definition.uri).replace(/\/+$/, "");
+        }
+      }, {
+        key: "origin",
+        get: function get() {
+          return this.config.absolute ? this.definition.domain ? "" + this.config.url.match(/^\w+:\/\//)[0] + this.definition.domain + (this.config.port ? ":" + this.config.port : "") : this.config.url : "";
+        }
+      }, {
+        key: "parameterSegments",
+        get: function get() {
+          var t, r;
+          return null != (t = null == (r = this.template.match(/{[^}?]+\??}/g)) ? void 0 : r.map(function (t) {
+            return {
+              name: t.replace(/{|\??}/g, ""),
+              required: !/\?}$/.test(t)
+            };
+          })) ? t : [];
+        }
+      }]), t;
+    }(),
+    A = /*#__PURE__*/function (t) {
+      var r, o;
+      function u(r, e, o, i) {
+        var u;
+        if (void 0 === o && (o = !0), (u = t.call(this) || this).t = null != i ? i : "undefined" != typeof Ziggy ? Ziggy : null == globalThis ? void 0 : globalThis.Ziggy, u.t = n({}, u.t, {
+          absolute: o
+        }), r) {
+          if (!u.t.routes[r]) throw new Error("Ziggy error: route '" + r + "' is not in the route list.");
+          u.i = new $(r, u.t.routes[r], u.t), u.u = u.l(e);
+        }
+        return u;
+      }
+      o = t, (r = u).prototype = Object.create(o.prototype), r.prototype.constructor = r, i(r, o);
+      var f = u.prototype;
+      return f.toString = function () {
+        var t = this,
+          r = Object.keys(this.u).filter(function (r) {
+            return !t.i.parameterSegments.some(function (t) {
+              return t.name === r;
+            });
+          }).filter(function (t) {
+            return "_query" !== t;
+          }).reduce(function (r, e) {
+            var o;
+            return n({}, r, ((o = {})[e] = t.u[e], o));
+          }, {});
+        return this.i.compile(this.u) + function (t, r) {
+          var e,
+            n = t,
+            o = function (t) {
+              if (!t) return x;
+              if (null != t.encoder && "function" != typeof t.encoder) throw new TypeError("Encoder has to be a function.");
+              var r = t.charset || x.charset;
+              if (void 0 !== t.charset && "utf-8" !== t.charset && "iso-8859-1" !== t.charset) throw new TypeError("The charset option must be either utf-8, iso-8859-1, or undefined");
+              var e = v["default"];
+              if (void 0 !== t.format) {
+                if (!m.call(v.formatters, t.format)) throw new TypeError("Unknown format option provided.");
+                e = t.format;
+              }
+              var n = v.formatters[e],
+                o = x.filter;
+              return ("function" == typeof t.filter || j(t.filter)) && (o = t.filter), {
+                addQueryPrefix: "boolean" == typeof t.addQueryPrefix ? t.addQueryPrefix : x.addQueryPrefix,
+                allowDots: void 0 === t.allowDots ? x.allowDots : !!t.allowDots,
+                charset: r,
+                charsetSentinel: "boolean" == typeof t.charsetSentinel ? t.charsetSentinel : x.charsetSentinel,
+                delimiter: void 0 === t.delimiter ? x.delimiter : t.delimiter,
+                encode: "boolean" == typeof t.encode ? t.encode : x.encode,
+                encoder: "function" == typeof t.encoder ? t.encoder : x.encoder,
+                encodeValuesOnly: "boolean" == typeof t.encodeValuesOnly ? t.encodeValuesOnly : x.encodeValuesOnly,
+                filter: o,
+                format: e,
+                formatter: n,
+                serializeDate: "function" == typeof t.serializeDate ? t.serializeDate : x.serializeDate,
+                skipNulls: "boolean" == typeof t.skipNulls ? t.skipNulls : x.skipNulls,
+                sort: "function" == typeof t.sort ? t.sort : null,
+                strictNullHandling: "boolean" == typeof t.strictNullHandling ? t.strictNullHandling : x.strictNullHandling
+              };
+            }(r);
+          "function" == typeof o.filter ? n = (0, o.filter)("", n) : j(o.filter) && (e = o.filter);
+          var i = [];
+          if ("object" != _typeof(n) || null === n) return "";
+          var u = g[r && r.arrayFormat in g ? r.arrayFormat : r && "indices" in r ? r.indices ? "indices" : "repeat" : "indices"];
+          e || (e = Object.keys(n)), o.sort && e.sort(o.sort);
+          for (var f = 0; f < e.length; ++f) {
+            var a = e[f];
+            o.skipNulls && null === n[a] || E(i, T(n[a], a, u, o.strictNullHandling, o.skipNulls, o.encode ? o.encoder : null, o.filter, o.sort, o.allowDots, o.serializeDate, o.format, o.formatter, o.encodeValuesOnly, o.charset));
+          }
+          var c = i.join(o.delimiter),
+            l = !0 === o.addQueryPrefix ? "?" : "";
+          return o.charsetSentinel && (l += "iso-8859-1" === o.charset ? "utf8=%26%2310003%3B&" : "utf8=%E2%9C%93&"), c.length > 0 ? l + c : "";
+        }(n({}, r, this.u._query), {
+          addQueryPrefix: !0,
+          arrayFormat: "indices",
+          encodeValuesOnly: !0,
+          skipNulls: !0,
+          encoder: function encoder(t, r) {
+            return "boolean" == typeof t ? Number(t) : r(t);
+          }
+        });
+      }, f.v = function (t) {
+        var r = this;
+        t ? this.t.absolute && t.startsWith("/") && (t = this.p().host + t) : t = this.h();
+        var e = {},
+          o = Object.entries(this.t.routes).find(function (n) {
+            return e = new $(n[0], n[1], r.t).matchesUrl(t);
+          }) || [void 0, void 0];
+        return n({
+          name: o[0]
+        }, e, {
+          route: o[1]
+        });
+      }, f.h = function () {
+        var t = this.p(),
+          r = t.pathname,
+          e = t.search;
+        return (this.t.absolute ? t.host + r : r.replace(this.t.url.replace(/^\w*:\/\/[^/]+/, ""), "").replace(/^\/+/, "/")) + e;
+      }, f.current = function (t, r) {
+        var e = this.v(),
+          o = e.name,
+          i = e.params,
+          u = e.query,
+          f = e.route;
+        if (!t) return o;
+        var a = new RegExp("^" + t.replace(/\./g, "\\.").replace(/\*/g, ".*") + "$").test(o);
+        if ([null, void 0].includes(r) || !a) return a;
+        var c = new $(o, f, this.t);
+        r = this.l(r, c);
+        var l = n({}, i, u);
+        return !(!Object.values(r).every(function (t) {
+          return !t;
+        }) || Object.values(l).some(function (t) {
+          return void 0 !== t;
+        })) || Object.entries(r).every(function (t) {
+          return l[t[0]] == t[1];
+        });
+      }, f.p = function () {
+        var t,
+          r,
+          e,
+          n,
+          o,
+          i,
+          u = "undefined" != typeof window ? window.location : {},
+          f = u.host,
+          a = u.pathname,
+          c = u.search;
+        return {
+          host: null != (t = null == (r = this.t.location) ? void 0 : r.host) ? t : void 0 === f ? "" : f,
+          pathname: null != (e = null == (n = this.t.location) ? void 0 : n.pathname) ? e : void 0 === a ? "" : a,
+          search: null != (o = null == (i = this.t.location) ? void 0 : i.search) ? o : void 0 === c ? "" : c
+        };
+      }, f.has = function (t) {
+        return Object.keys(this.t.routes).includes(t);
+      }, f.l = function (t, r) {
+        var e = this;
+        void 0 === t && (t = {}), void 0 === r && (r = this.i), null != t || (t = {}), t = ["string", "number"].includes(_typeof(t)) ? [t] : t;
+        var o = r.parameterSegments.filter(function (t) {
+          return !e.t.defaults[t.name];
+        });
+        if (Array.isArray(t)) t = t.reduce(function (t, r, e) {
+          var i, u;
+          return n({}, t, o[e] ? ((i = {})[o[e].name] = r, i) : "object" == _typeof(r) ? r : ((u = {})[r] = "", u));
+        }, {});else if (1 === o.length && !t[o[0].name] && (t.hasOwnProperty(Object.values(r.bindings)[0]) || t.hasOwnProperty("id"))) {
+          var i;
+          (i = {})[o[0].name] = t, t = i;
+        }
+        return n({}, this.m(r), this.g(t, r));
+      }, f.m = function (t) {
+        var r = this;
+        return t.parameterSegments.filter(function (t) {
+          return r.t.defaults[t.name];
+        }).reduce(function (t, e, o) {
+          var i,
+            u = e.name;
+          return n({}, t, ((i = {})[u] = r.t.defaults[u], i));
+        }, {});
+      }, f.g = function (t, r) {
+        var e = r.bindings,
+          o = r.parameterSegments;
+        return Object.entries(t).reduce(function (t, r) {
+          var i,
+            u,
+            f = r[0],
+            a = r[1];
+          if (!a || "object" != _typeof(a) || Array.isArray(a) || !o.some(function (t) {
+            return t.name === f;
+          })) return n({}, t, ((u = {})[f] = a, u));
+          if (!a.hasOwnProperty(e[f])) {
+            if (!a.hasOwnProperty("id")) throw new Error("Ziggy error: object passed as '" + f + "' parameter is missing route model binding key '" + e[f] + "'.");
+            e[f] = "id";
+          }
+          return n({}, t, ((i = {})[f] = a[e[f]], i));
+        }, {});
+      }, f.valueOf = function () {
+        return this.toString();
+      }, f.check = function (t) {
+        return this.has(t);
+      }, e(u, [{
+        key: "params",
+        get: function get() {
+          var t = this.v();
+          return n({}, t.params, t.query);
+        }
+      }]), u;
+    }( /*#__PURE__*/a(String));
+  t.ZiggyVue = {
+    install: function install(t, r) {
+      var e = function e(t, _e, n, o) {
+        return void 0 === o && (o = r), function (t, r, e, n) {
+          var o = new A(t, r, e, n);
+          return t ? o.toString() : o;
+        }(t, _e, n, o);
+      };
+      t.mixin({
+        methods: {
+          route: e
+        }
+      }), parseInt(t.version) > 2 && t.provide("route", e);
+    }
+  };
 });
 
 /***/ }),
@@ -34233,6 +35154,18 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 				}
 /******/ 			}
 /******/ 			return result;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
 /******/ 		};
 /******/ 	})();
 /******/ 	

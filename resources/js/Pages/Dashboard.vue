@@ -68,7 +68,7 @@
 
                         <nav aria-label="Teams Nav" class="mt-2 flex flex-col px-4">
                             <Link
-                                href="/input"
+                                :href="route('duinput.create')"
                                 class="flex items-center gap-2 rounded-lg px-4 py-2 text-white hover:bg-gray-100 hover:text-blue-700"
                             >
                                 <svg

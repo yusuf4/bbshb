@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Dujoniba\DujonibaController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -26,9 +27,8 @@ Route::get('/dash', function (){
         ]
     ]);
 });
-Route::get('/input', function (){
-    return Inertia::render('Dujoniba/Add');
-});
+Route::get('/duinput',[DujonibaController::class,'create'])->name('duinput.create');
+Route::post('/dostore', [DujonibaController::class, 'store'])->name('du.store');
 Route::get('/inputb', function (){
     return Inertia::render('Bisyorjoniba/Add');
 });

@@ -37,6 +37,6 @@ class Bisyorjoniba extends Model
     }
 
     public function fileBisyor(){
-        return $this->belongsTo(File::class);
+        return $this->hasMany(File::class);
     }
 }

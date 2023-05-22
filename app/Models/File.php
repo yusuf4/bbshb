@@ -14,10 +14,10 @@ class File extends Model
     protected $fillable = ['name', 'path', 'dujoniba_id','bisyorjoniba_id'];
 
     public function dujonibafile(){
-        return $this->hasMany(Dujoniba::class);
+        return $this->belongsTo(Dujoniba::class);
     }
 
     public function bisyorjonibafile(){
-        return $this->hasMany(Bisyorjoniba::class);
+        return $this->belongsTo(Bisyorjoniba::class);
     }
 }

@@ -33,6 +33,6 @@ class Dujoniba extends Model
     }
 
     public function fileDujoniba(){
-        return $this->belongsTo(File::class);
+        return $this->hasMany(File::class);
     }
 }
