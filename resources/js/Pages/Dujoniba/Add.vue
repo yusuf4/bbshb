@@ -4,7 +4,7 @@
     </Head>
     <div class="flex-1 h-full">
         <h1 class="font-bold text-2xl text-blue-400 text-blue-700 text-center pb-4 pt-1">Иловаи шартномаи дуҷониба</h1>
-        <form class="p-4" method="POST" @submit.prevent="submit">
+        <form class="p-4" @submit.prevent="formValues.post(route('du.store'))">
             <!-- Section One -->
             <div class="grid gap-6 mb-6 md:grid-cols-2 items-center">
                 <div class="nomi-shartnoma">
@@ -98,8 +98,8 @@
                                 <option value="1" >Қарори Ҳукумати ҶТ</option>
                                 <option value="2" >Фармони Президенти ҶТ</option>
                                 <option value="3" >Қарори Маҷлиси намояндагони Маҷлиси Олии ҶТ</option>
-                                <option value="5">Аз лаҳзаи имзо</option>
-                                <option value="6">Дигар</option>
+                                <option value="4">Аз лаҳзаи имзо</option>
+                                <option value="5">Дигар</option>
                         </select>
                     </div>
                 </div>
@@ -119,7 +119,7 @@
                         id="files_scan"
                         type="file" multiple
                         name="files_scan"
-                        @input="formValues.files_scan = $event.target.files[0]"
+                        @input="formValues.files_scan = $event.target.files"
                         class="block w-full text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" >
                 </div>
                 <!-- Bandi 5 default is hide -->
@@ -143,7 +143,7 @@
                                     <input
                                         id="horizontal-list-radio-muhlat"
                                         @click="disabled = false"
-                                        type="radio" value= 1
+                                        type="radio" value="1"
                                         name="list-radio-muhlat"
                                         v-model="formValues.muhlat"
                                         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
@@ -157,7 +157,7 @@
                                         @click="disableInput"
                                         v-model="formValues.muhlat"
                                         type="radio"
-                                        value= 2
+                                        value="2"
                                         name="list-radio-muhlat"
                                         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                     <label for="horizontal-list-radio-bemuhlat" class="w-full py-2 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Бемуҳлат</label>
@@ -204,7 +204,7 @@
                         id="vakolad_file"
                         type="file"
                         name="vakolat"
-                        @input="formValues.vakolat = $event.target.files[0]"
+                        @input="formValues.vakolat = $event.target.files"
                         multiple
                         class="block w-full  text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
                 </div>
@@ -271,15 +271,15 @@ export default {
             jonibi_tj: null,
             jonibi_digar: null,
             sanai_etibor: null,
-            files_scan: null,
+            files_scan: [],
             etibor_digar:null,
             namud: null,
             tartib:'',
-            muhlatnok: null,
+            muhlat: null,
             muhlatEnd: null,
             imzo_tj: null,
             imzo_digar: null,
-            vakolat: null,
+            vakolat: [],
             ezoh: null
         });
         return {formValues};
@@ -290,7 +290,7 @@ export default {
             if(this.selected==="1" || this.selected==="2" || this.selected==="3" ){
                 this.showPartSix = true;
                 this.PartSixDigar=false;
-            }else if(this.selected==="6"){
+            }else if(this.selected==="5"){
                 this.PartSixDigar=true;
                 this.showPartSix=false;
             }else {
@@ -302,9 +302,6 @@ export default {
             this.disabled = true;
             this.formValues.muhlatEnd = "";
         },
-        formatDate(){
-            return this.sanai_etibor = new Date().toISOString().substr(0, 10);
-        }
     }
 }
 </script>

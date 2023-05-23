@@ -16,7 +16,6 @@ class CreateFileShartnomasTable extends Migration
         Schema::create('file_shartnomas', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('path');
             $table->timestamps();
         });
     }

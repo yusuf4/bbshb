@@ -17,7 +17,7 @@ class Dujoniba extends Model
         'imzo_tj','imzo_digar','ezoh','file_shartnoma_id','namudi_shartnoma_id','tartibi_etibor_id','muhlati_etibor_id'];
 
     public function fileShartnoma(){
-        return $this->hasOne(FileShartnoma::class);
+        return $this->belongsTo(FileShartnoma::class);
     }
 
     public function namudiShartnoma(){
@@ -33,6 +33,6 @@ class Dujoniba extends Model
     }
 
     public function fileDujoniba(){
-        return $this->hasMany(File::class);
+        return $this->hasMany(File::class, 'dujoniba_id', 'id');
     }
 }

@@ -2,19 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Dujoniba;
 use App\Models\Bisyorjoniba;
 
 class FileShartnoma extends Model
 {
-    use HasFactory;
+    protected $fillable = ['name'];
 
-    protected $fillable = ['name','path'];
-
-    public function dujoniba(){
-        return $this->belongsTo(Dujoniba::class);
+    public function dujonibaF(){
+        return $this->hasOne(Dujoniba::class, 'file_shartnoma_id', 'id');
     }
 
     public function bisyorjoniba(){

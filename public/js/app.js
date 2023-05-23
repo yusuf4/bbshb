@@ -22865,15 +22865,15 @@ __webpack_require__.r(__webpack_exports__);
       jonibi_tj: null,
       jonibi_digar: null,
       sanai_etibor: null,
-      files_scan: null,
+      files_scan: [],
       etibor_digar: null,
       namud: null,
       tartib: '',
-      muhlatnok: null,
+      muhlat: null,
       muhlatEnd: null,
       imzo_tj: null,
       imzo_digar: null,
-      vakolat: null,
+      vakolat: [],
       ezoh: null
     });
     return {
@@ -22886,7 +22886,7 @@ __webpack_require__.r(__webpack_exports__);
       if (this.selected === "1" || this.selected === "2" || this.selected === "3") {
         this.showPartSix = true;
         this.PartSixDigar = false;
-      } else if (this.selected === "6") {
+      } else if (this.selected === "5") {
         this.PartSixDigar = true;
         this.showPartSix = false;
       } else {
@@ -22897,9 +22897,6 @@ __webpack_require__.r(__webpack_exports__);
     disableInput: function disableInput() {
       this.disabled = true;
       this.formValues.muhlatEnd = "";
-    },
-    formatDate: function formatDate() {
-      return this.sanai_etibor = new Date().toISOString().substr(0, 10);
     }
   }
 });
@@ -23756,7 +23753,7 @@ var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
   "for": "qarorho",
   "class": "block mb-2 text-sm font-medium text-gray-900 dark:text-white"
 }, "Тартиби пайдо намудани эътибор", -1 /* HOISTED */);
-var _hoisted_29 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<option value=\"\">Интихоб</option><option value=\"1\">Қарори Ҳукумати ҶТ</option><option value=\"2\">Фармони Президенти ҶТ</option><option value=\"3\">Қарори Маҷлиси намояндагони Маҷлиси Олии ҶТ</option><option value=\"5\">Аз лаҳзаи имзо</option><option value=\"6\">Дигар</option>", 6);
+var _hoisted_29 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<option value=\"\">Интихоб</option><option value=\"1\">Қарори Ҳукумати ҶТ</option><option value=\"2\">Фармони Президенти ҶТ</option><option value=\"3\">Қарори Маҷлиси намояндагони Маҷлиси Олии ҶТ</option><option value=\"4\">Аз лаҳзаи имзо</option><option value=\"5\">Дигар</option>", 6);
 var _hoisted_35 = [_hoisted_29];
 var _hoisted_36 = {
   "class": ""
@@ -23892,9 +23889,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1 /* STABLE */
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
     "class": "p-4",
-    method: "POST",
-    onSubmit: _cache[21] || (_cache[21] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
-      return _ctx.submit && _ctx.submit.apply(_ctx, arguments);
+    onSubmit: _cache[21] || (_cache[21] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
+      return $setup.formValues.post(_ctx.route('du.store'));
     }, ["prevent"]))
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Section One "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
@@ -23987,7 +23983,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     multiple: "",
     name: "files_scan",
     onInput: _cache[10] || (_cache[10] = function ($event) {
-      return $setup.formValues.files_scan = $event.target.files[0];
+      return $setup.formValues.files_scan = $event.target.files;
     }),
     "class": "block w-full text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
   }, null, 32 /* HYDRATE_EVENTS */)], 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.showPartSix]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Bandi 5 default is hide "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_40, [_hoisted_41, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
@@ -24057,7 +24053,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     type: "file",
     name: "vakolat",
     onInput: _cache[19] || (_cache[19] = function ($event) {
-      return $setup.formValues.vakolat = $event.target.files[0];
+      return $setup.formValues.vakolat = $event.target.files;
     }),
     multiple: "",
     "class": "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"

@@ -26,7 +26,7 @@ Route::get('/dash', function (){
             'Ивази рамз', 'Баромад'
         ]
     ]);
-});
+})->name('index');
 Route::get('/duinput',[DujonibaController::class,'create'])->name('duinput.create');
 Route::post('/dostore', [DujonibaController::class, 'store'])->name('du.store');
 Route::get('/inputb', function (){
