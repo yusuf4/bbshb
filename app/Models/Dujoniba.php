@@ -21,11 +21,11 @@ class Dujoniba extends Model
     }
 
     public function namudiShartnoma(){
-        return $this->hasOne(NamudiShartnoma::class);
+        return $this->hasOne(NamudiShartnoma::class, 'id', 'namudi_shartnoma_id');
     }
 
     public function tartibiEtibor(){
-        return $this->hasOne(TartibiEtibor::class);
+        return $this->hasOne(TartibiEtibor::class, 'id', 'tartibi_etibor_id');
     }
 
     public function muhlatiEtibor(){

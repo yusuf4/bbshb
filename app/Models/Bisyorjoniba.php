@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 use Illuminate\Database\Eloquent\Model;
 use App\Models\FileShartnoma;
 use App\Models\NamudiShartnoma;
@@ -13,9 +13,6 @@ use App\Models\File;
 
 class Bisyorjoniba extends Model
 {
-    use HasFactory;
-
-
     public function fileShartnomaB(){
         return $this->hasOne(FileShartnoma::class);
     }

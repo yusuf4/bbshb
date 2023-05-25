@@ -7,6 +7,7 @@ use App\Models\Dujoniba;
 use App\Models\File;
 use App\Models\FileShartnoma;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules\In;
 use Inertia\Inertia;
 
 class DujonibaController extends Controller
@@ -14,11 +15,23 @@ class DujonibaController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
     public function index()
     {
-        //
+        $dujoniba = Dujoniba::with('namudiShartnoma', 'tartibiEtibor')->latest()->get();
+
+        //dd($dujoniba);
+
+        //dd($namud);
+        return Inertia::render('Dujoniba/Index',[
+            'dujoniba'=>$dujoniba
+
+        ]);
+    }
+
+    public function guestIndex(){
+        return Inertia::render('NavGuest');
     }
 
     /**
@@ -40,8 +53,6 @@ class DujonibaController extends Controller
     public function store(Request $request)
     {
          //dd($request->namud);
-
-         //dd($namud);
         $file = $request->file('shartnoma_file');
         $fileName =  time().'-'. $file->getClientOriginalName();
         $file->move(public_path('uploads/shartnoma'), $fileName);
@@ -63,6 +74,31 @@ class DujonibaController extends Controller
             'tartibi_etibor_id'=> intval($request->tartib),
             'muhlati_etibor_id' => intval($request->muhlat),
         ]);
+        //dd($dujoniba->dujonibaF->id);
+        if ($request->hasFile('files_scan')){
+            $files=$request->file('files_scan');
+            foreach ($files as $qarorfile){
+                $filename = time(). '_'.$qarorfile->getClientOriginalName();
+                $qarorfile->move(\public_path('uploads/files'), $filename);
+                File::create([
+                    'name'=>$filename,
+                    'dujoniba_id'=>$dujoniba->dujonibaF->id,
+                ]);
+            }
+        }
+        if ($request->hasFile('vakolat')){
+            $filev= $request->file('vakolat');
+            foreach ($filev as $vakolat) {
+                $filevName = time().'_'.$vakolat->getClientOriginalName();
+                $vakolat->move(\public_path('uploads/vakolat'),  $filevName);
+                File::create([
+                    'name'=>$filevName,
+                    'dujoniba_id'=>$dujoniba->dujonibaF->id,
+                ]);
+            }
+        }
+
+
         return redirect()->route('index');
     }
 

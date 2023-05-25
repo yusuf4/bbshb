@@ -9,7 +9,10 @@
             <div class="grid gap-6 mb-6 md:grid-cols-2 items-center">
                 <div class="nomi-shartnoma">
                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Номи пурраи шартнома</label>
-                    <input type="text" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Шартнома дар самти..." required>
+                    <input type="text"
+                           id="name"
+                           v-model="formValues.name"
+                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Шартнома дар самти..." required>
                 </div>
                 <div class="shartnomfa-file">
                     <label
@@ -20,6 +23,7 @@
                     <input
                         class="block mb-1 w-full text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                         type="file"
+                        @input="formValues.shartnoma_file = $event.target.files[0]"
                         id="formFile" required/>
                 </div>
                 <div class="namudi-shartnoma">
@@ -27,13 +31,27 @@
                     <ul class="items-center w-full text-sm font-medium text-gray-900  border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                         <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                             <div class="flex items-center pl-3">
-                                <input @click="MintaqaviOf" id="universali" type="radio" value="" name="list-radio-mintaqavi" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                <input
+                                    @click="MintaqaviOf"
+                                    id="universali"
+                                    type="radio"
+                                    value="4"
+                                    v-model="formValues.namud"
+                                    name="list-radio-mintaqavi"
+                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                 <label for="universali" class="w-full py-2 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Универсалӣ</label>
                             </div>
                         </li>
                         <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                             <div class="flex items-center pl-3">
-                                <input @click="MintaqaviOn" id="mintaqavi" type="radio" value="" name="list-radio-mintaqavi" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                <input
+                                    @click="MintaqaviOn"
+                                    id="mintaqavi"
+                                    type="radio"
+                                    value="5"
+                                    name="list-radio-mintaqavi"
+                                    v-model="formValues.namud"
+                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                 <label for="mintaqavi" class="w-full py-2 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Минтақавӣ</label>
                             </div>
                         </li>
@@ -41,15 +59,20 @@
                 </div>
                 <div class="tartibi-etibor ">
                     <label for="qarorho" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Тартиби пайдо намудани эътибор</label>
-                    <select id="qarorho" @change="PartSix($event)" class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        <option value="14" selected>Интихоб</option>
+                    <select
+                        id="qarorho"
+                        @change="PartSix($event)"
+                        v-model="formValues.tartib"
+                        class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option value="">Интихоб</option>
                         <option value="1" >Қарори Ҳукумати ҶТ</option>
                         <option value="2" >Фармони Президенти ҶТ</option>
                         <option value="3" >Қарори Маҷлиси намояндагони Маҷлиси Олии ҶТ</option>
-                        <option value="5">Аз лаҳзаи имзо</option>
-                        <option value="6">Дигар</option>
+                        <option value="4">Аз лаҳзаи имзо</option>
+                        <option value="5">Дигар</option>
                     </select>
                 </div>
+                <!-- Denamyc inputs -->
                 <div class="dynamic-input">
                     <div v-show="mintaqavi"
                          v-for="(country, index) in davlatho"
@@ -57,8 +80,14 @@
                          class="flex items-center">
                         <div class="input w-3/4 mr-8 mt-2">
                             <label for="mintaqaho" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Минтақаҳо</label>
-                            <input v-model="country.davlat" type="text" id="mintaqaho" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Номи давлаҳо..." required>
+                            <input
+                                v-model="country.davlat"
+
+                                type="text"
+                                id="mintaqaho"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Номи давлаҳо..." required>
                         </div>
+                        <!-- Add input field -->
                         <div @click="addField" class="add-button mt-6">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -72,6 +101,7 @@
                                       d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                         </div>
+                        <!-- Remove input field -->
                         <div @click="removeField" class="remove-button mt-6">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -89,16 +119,29 @@
                     <!-- Banhoi 1 2 3 az bandi 6 default is hide -->
                     <div class="sm:truncate " v-show="showPartSix">
                         <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white truncate" for="small_size">Файли сканшудаи марбут ба расмиёти дохилидавлатӣ</label>
-                        <input class="block w-full text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="small_size" type="file" multiple>
+                        <input
+                            id="small_size"
+                            type="file"
+                            multiple
+                            @input="formValues.files_scan = $event.target.files"
+                            class="block w-full text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
                     </div>
                     <!-- Bandi 5 default is hide -->
                     <div v-show="PartSixDigar">
                         <label for="bandi-shash" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Дигар</label>
-                        <input type="text" id="bandi-shash" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Вориди матн">
+                        <input
+                            type="text"
+                            id="bandi-shash"
+                            v-model="formValues.etibor_digar"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Вориди матн">
                     </div>
                     <div class="calendar mt-2">
                         <label for="sanai-qabul" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white truncate">Санаи пайдо кардани эътибор</label>
-                        <input type="date" id="sanai-qabul" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" required>
+                        <input
+                            type="date"
+                            id="sanai-qabul"
+                            v-model="formValues.sanai_etibor"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" required>
                     </div>
 
                 </div>
@@ -112,13 +155,26 @@
                         <ul class="items-center w-full text-sm font-medium text-gray-900  border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                             <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                                 <div class="flex items-center pl-3">
-                                    <input id="horizontal-list-radio-muhlat" @click="disabled = false" type="radio" value="" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                    <input
+                                        id="horizontal-list-radio-muhlat"
+                                        @click="disabled = false" type="radio"
+                                        value="1"
+                                        name="list-radio"
+                                        v-model="formValues.muhlat"
+                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                     <label for="horizontal-list-radio-muhlat" class="w-full py-2 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Муҳлатнок</label>
                                 </div>
                             </li>
                             <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                                 <div class="flex items-center pl-3">
-                                    <input id="horizontal-list-radio-bemuhlat" @click="disabled = true" type="radio" value="" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                    <input
+                                        id="horizontal-list-radio-bemuhlat"
+                                        @click="disableInput"
+                                        type="radio"
+                                        value="2"
+                                        name="list-radio"
+                                        v-model="formValues.muhlat"
+                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                     <label for="horizontal-list-radio-bemuhlat" class="w-full py-2 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Бемуҳлат</label>
                                 </div>
                             </li>
@@ -126,9 +182,12 @@
                     </div>
                     <div class="w-full">
                         <label for="etibor" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Санаи қатъи эътибор</label>
-                        <input type="date" :disabled="disabled"  id="etibor" class="disabled:opacity-75 disabled:bg-gray-300 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" required>
+                        <input type="date"
+                               :disabled="disabled"
+                               id="etibor"
+                               v-model="formValues.muhlatEnd"
+                               class="disabled:opacity-75 disabled:bg-gray-300 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                     </div>
-
                 </div>
             </div>
 
@@ -137,17 +196,25 @@
             <div class="flex justify-between items-center mt-2 space-x-4 ">
                 <div class="w-full mt-4">
                     <label for="nomi_maqomot" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Номи мақомот</label>
-                    <input type="text" id="nomi_maqomot" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="матн">
+                    <input
+                        type="text"
+                        id="nomi_maqomot"
+                        v-model="formValues.maqomot"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="матн">
                 </div>
                 <div class="w-full mt-4">
                     <label for="ezoh" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Эзоҳ</label>
-                    <input type="text" id="ezoh" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="матн эзоҳ">
+                    <input
+                        type="text"
+                        id="ezoh"
+                        v-model="formValues.ezoh"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="матн эзоҳ">
                 </div>
             </div>
 
             <!-- Save buttons -->
             <div class="flex justify-end items-center text-center mt-[60px]">
-                <div class="back-buuton  mt-1">
+                <div class="back-buuton mt-1">
                     <Link
                         class="inline-block rounded-full border border-indigo-600 bg-indigo-600 p-3 text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
                         href="/dash"
@@ -176,7 +243,7 @@
 
 <script>
 import Dashboard from "../Dashboard";
-import {Link, Head} from "@inertiajs/inertia-vue3";
+import {Link, Head, useForm} from "@inertiajs/inertia-vue3";
 export default {
     name: "Add",
     layout: Dashboard,
@@ -191,13 +258,30 @@ export default {
             davlatho:[{davlat:''},]
         };
     },
+    setup(){
+        const formValues= useForm({
+            name: null,
+            shartnoma_file: null,
+            namud: null,
+            sanai_etibor: null,
+            etibor_digar:null,
+            files_scan: [],
+            kishvarho:[],
+            tartib:'',
+            muhlat: null,
+            muhlatEnd: null,
+            maqomot: null,
+            ezoh: null
+        });
+        return {formValues};
+    },
     methods:{
         PartSix(event){
             this.selected = event.target.value;
             if(this.selected==="1" || this.selected==="2" || this.selected==="3" ){
                 this.showPartSix = true;
                 this.PartSixDigar=false;
-            }else if(this.selected==="6"){
+            }else if(this.selected==="5"){
                 this.PartSixDigar=true;
                 this.showPartSix=false;
             }else {
@@ -219,6 +303,10 @@ export default {
             if(this.davlatho.length>1){
                 this.davlatho.splice(index,1)
             }
+        },
+        disableInput(){
+            this.disabled = true;
+            this.formValues.muhlatEnd = "";
         },
 
     }

@@ -29,6 +29,11 @@ Route::get('/dash', function (){
 })->name('index');
 Route::get('/duinput',[DujonibaController::class,'create'])->name('duinput.create');
 Route::post('/dostore', [DujonibaController::class, 'store'])->name('du.store');
+Route::get('/doindex',[DujonibaController::class, 'index'])->name('do.index');
+
+    // For user who have permision only read and search
+Route::get('/guest',[DujonibaController::class, 'guestIndex'])->name('guest.index');
+
 Route::get('/inputb', function (){
     return Inertia::render('Bisyorjoniba/Add');
 });
