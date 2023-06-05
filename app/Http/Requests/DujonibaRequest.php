@@ -32,7 +32,7 @@ class DujonibaRequest extends FormRequest
             'tartib' => 'required',
             //'files_scan.*' => 'mimes:jpg,jpeg,csv,txt,xlx,xls,pdf,doc,docx',
             'muhlat' => 'required',
-            'vakolat.*' => 'mimes:jpg,jpeg,csv,txt,xlx,xls,pdf,doc,docx'
+            //'vakolat.*' => 'mimes:jpg,jpeg,csv,txt,xlx,xls,pdf,doc,docx'
         ];
     }
 
@@ -49,7 +49,7 @@ class DujonibaRequest extends FormRequest
             'tartib.required' => 'Тартиби пайдо намудани эътибор ҳатмист!',
             //'files_scan.*.mimes' => 'Файл :attribute бояд фармати зерин бошад: jpg,jpeg,csv,txt,xlx,xls,pdf,doc,docx',
             'muhlat.required' => 'Муҳлати эътибори шартнома ҳатмист!',
-            'vakolat.mimes' => 'Файл бояд фармати зерин бошад: jpg,jpeg,csv,txt,xlx,xls,pdf,doc,docx'
+            //'vakolat.mimes' => 'Файл бояд фармати зерин бошад: jpg,jpeg,csv,txt,xlx,xls,pdf,doc,docx'
         ];
     }
 }

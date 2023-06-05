@@ -11,6 +11,7 @@ use App\Models\NomeriShartnoma;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules\In;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\File as FileDel;
 
 class DujonibaController extends Controller
 {
@@ -55,10 +56,11 @@ class DujonibaController extends Controller
     public function store(DujonibaRequest $request)
     {
 
-       // $request->validated();
-        $request->validate([
-            'files_scan.*' => 'mimes:jpg,jpeg,csv,txt,xlx,xls,pdf,doc,docx',
-        ],['files_scan.*.mimes' => 'Файл :attribute бояд фармати зерин бошад: jpg,jpeg,csv,txt,xlx,xls,pdf,doc,docx',]);
+        $request->validated();
+
+        /*$request->validate([
+            'files_scan.*' => 'file|mimes:xlx,xls,pdf,doc,docx,mimes:jpg,jpeg,csv,txt',
+        ],['files_scan.mimes' => 'Файл :attribute бояд фармати зерин бошад: jpg,jpeg,csv,txt,xlx,xls,pdf,doc,docx']);*/
         $file = $request->file('shartnoma_file');
         $fileName =  time().'-'. $file->getClientOriginalName();
         $file->move(public_path('uploads/shartnoma'), $fileName);
@@ -82,8 +84,6 @@ class DujonibaController extends Controller
 
         ]);
 
-
-        //dd($dujoniba->dujonibaF->id);
         if ($request->hasFile('files_scan')){
             $files=$request->file('files_scan');
             foreach ($files as $qarorfile){
@@ -110,8 +110,8 @@ class DujonibaController extends Controller
            'dujoniba_id'=> $dujoniba->dujonibaF->id,
         ]);
 
-
-        return redirect()->route('do.index');
+        return redirect()->route('do.index')
+            ->with('message', 'Шартнома илова шуд!');
     }
 
     /**
@@ -129,11 +129,15 @@ class DujonibaController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
     public function edit($id)
     {
-        //
+        $dujoniba = Dujoniba::findOrFail($id);
+
+        return Inertia::render('Dujoniba/Edit', [
+            'dujoniba'=>$dujoniba
+        ]);
     }
 
     /**
@@ -141,21 +145,61 @@ class DujonibaController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $id)
     {
-        //
+        //dd($request);
+        $dujoniba = Dujoniba::findOrFail($id);
+        if ($request->hasFile("shartnoma_file")){
+            if (FileDel::exists('uploads/shartnoma/'.$dujoniba->fileShartnoma->name)){
+                FileDel::delete('uploads/shartnoma/'.$dujoniba->fileShartnoma->name);
+            }
+            $file = $request->file('shartnoma_file');
+            $fileName =  time().'-'. $file->getClientOriginalName();
+            $file->move(public_path('uploads/shartnoma'), $fileName);
+            $dujoniba->fileShartnoma->update([
+                'name' => $fileName,
+                ]);
+        }
+        $dujoniba->update([
+            'name' => $request->name,
+            'jonibi_tj' => $request->jonibi_tj,
+            'jonibi_digar' => $request->jonibi_digar,
+            'etibor_digar' => $request->etibor_digar,
+            'sanai_etibor' => $request->sanai_etibor,
+            'qati_etibor' => $request->muhlatEnd,
+            'imzo_tj' => $request->imzo_tj,
+            'imzo_digar' => $request->imzo_digar,
+            'ezoh' => $request->ezoh,
+            'namudi_shartnoma_id'=> intval($request->namud),
+            'tartibi_etibor_id'=> intval($request->tartib),
+            'muhlati_etibor_id' => intval($request->muhlat)
+        ]);
+        return redirect()->route('do.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {
-        //
+        $dujoniba = Dujoniba::findOrFail($id);
+        if (FileDel::exists('uploads/shartnoma/'.$dujoniba->fileShartnoma->name)){
+            FileDel::delete('uploads/shartnoma/'.$dujoniba->fileShartnoma->name);
+        }
+        $files = File::where("dujoniba_id", $dujoniba->id)->get();
+        //dd($files);
+        foreach ( $files as $item) {
+            if (FileDel::exists('uploads/files/'.$item->name)){
+                FileDel::delete('uploads/files/'.$item->name);
+            }
+        }
+        $dujoniba->fileShartnoma->delete();
+
+        return redirect()->back();
     }
 }

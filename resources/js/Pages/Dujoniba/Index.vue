@@ -3,6 +3,9 @@
         <title>Шартномаҳо</title>
     </Head>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <div v-if="$page.props.flash.message" class="text-blue-500 text-center bg-blue-50">
+            {{$page.props.flash.message}}
+        </div>
         <div class="flex items-center justify-between pb-1">
             <div>
                 <button type="button" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">
@@ -77,7 +80,8 @@
                         </svg>
 
                     </a>
-                    <a href="#"
+                    <Link
+                        :href="route('du.edit', item.id)"
                        class="mr-2 font-medium text-cyan-600 dark:text-blue-500 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">
                         <svg xmlns="http://www.w3.org/2000/svg"
                              fill="none" viewBox="0 0 24 24"
@@ -87,7 +91,7 @@
                             <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
                         </svg>
 
-                    </a>
+                    </Link>
                     <a href="#"
                        class="mr-2 font-medium text-green-800 dark:text-blue-500 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">
                         <svg xmlns="http://www.w3.org/2000/svg"
@@ -100,10 +104,12 @@
                         </svg>
                     </a>
                     <Link
-                        href="#"
                         onclick="return confirm('Шумо дар ҳақиқат мехоҳед шартномаро нест намоед?')"
+                        :href="`/delete/${item.id}`"
+                        method="delete"
+                        as="button"
+                        type="button"
                         class="font-medium text-red-600 dark:text-blue-500 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">
-
                         <svg xmlns="http://www.w3.org/2000/svg"
                              fill="none" viewBox="0 0 24 24"
                              stroke-width="2.5"

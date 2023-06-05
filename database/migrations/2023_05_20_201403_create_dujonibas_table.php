@@ -28,13 +28,10 @@ class CreateDujonibasTable extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
             $table->foreignId('namudi_shartnoma_id')->constrained('namudi_shartnomas')
-                ->onDelete('cascade')
                 ->onUpdate('cascade');
             $table->foreignId('tartibi_etibor_id')->constrained('tartibi_etibors')
-                ->onDelete('cascade')
                 ->onUpdate('cascade');
             $table->foreignId('muhlati_etibor_id')->constrained('muhlati_etibors')
-                ->onDelete('cascade')
                 ->onUpdate('cascade');
             $table->timestamps();
         });
