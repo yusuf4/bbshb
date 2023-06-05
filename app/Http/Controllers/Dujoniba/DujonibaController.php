@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Dujoniba;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\DujonibaRequest;
 use App\Models\Dujoniba;
 use App\Models\File;
 use App\Models\FileShartnoma;
+use App\Models\NomeriShartnoma;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules\In;
 use Inertia\Inertia;
@@ -50,9 +52,13 @@ class DujonibaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(DujonibaRequest $request)
     {
-         //dd($request->namud);
+
+       // $request->validated();
+        $request->validate([
+            'files_scan.*' => 'mimes:jpg,jpeg,csv,txt,xlx,xls,pdf,doc,docx',
+        ],['files_scan.*.mimes' => 'Файл :attribute бояд фармати зерин бошад: jpg,jpeg,csv,txt,xlx,xls,pdf,doc,docx',]);
         $file = $request->file('shartnoma_file');
         $fileName =  time().'-'. $file->getClientOriginalName();
         $file->move(public_path('uploads/shartnoma'), $fileName);
@@ -65,7 +71,7 @@ class DujonibaController extends Controller
             'jonibi_tj' => $request->jonibi_tj,
             'jonibi_digar' => $request->jonibi_digar,
             'etibor_digar' => $request->etibor_digar,
-            'sanai_etibor'	=> $request->sanai_etibor,
+            'sanai_etibor' => $request->sanai_etibor,
             'qati_etibor' => $request->muhlatEnd,
             'imzo_tj' => $request->imzo_tj,
             'imzo_digar' => $request->imzo_digar,
@@ -73,7 +79,10 @@ class DujonibaController extends Controller
             'namudi_shartnoma_id'=> intval($request->namud),
             'tartibi_etibor_id'=> intval($request->tartib),
             'muhlati_etibor_id' => intval($request->muhlat),
+
         ]);
+
+
         //dd($dujoniba->dujonibaF->id);
         if ($request->hasFile('files_scan')){
             $files=$request->file('files_scan');
@@ -97,9 +106,12 @@ class DujonibaController extends Controller
                 ]);
             }
         }
+        NomeriShartnoma::create([
+           'dujoniba_id'=> $dujoniba->dujonibaF->id,
+        ]);
 
 
-        return redirect()->route('index');
+        return redirect()->route('do.index');
     }
 
     /**

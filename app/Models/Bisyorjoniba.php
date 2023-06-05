@@ -10,6 +10,7 @@ use App\Models\TartibiEtibor;
 use App\Models\MuhlatiEtibor;
 use App\Models\Mintaqaho;
 use App\Models\File;
+use App\Models\NomeriShartnoma;
 
 class Bisyorjoniba extends Model
 {
@@ -23,6 +24,10 @@ class Bisyorjoniba extends Model
 
     public function tartibiEtiborB(){
         return $this->hasOne(TartibiEtibor::class);
+    }
+    public function nomerB()
+    {
+        return $this->belongsTo(NomeriShartnoma::class);
     }
 
     public function muhlatiEtiborB(){

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFilesTable extends Migration
+class CreateNomeriShartnomasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateFilesTable extends Migration
      */
     public function up()
     {
-        Schema::create('files', function (Blueprint $table) {
+        Schema::create('nomeri_shartnomas', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->foreignId('bisyorjoniba_id')->nullable()->constrained('bisyorjonibas')
+            $table->foreignId('dujoniba_id')->nullable()->constrained('dujonibas')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-            $table->foreignId('dujoniba_id')->nullable()->constrained('dujonibas')
+            $table->foreignId('bisyorjoniba_id')->nullable()->constrained('bisyorjonibas')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
             $table->timestamps();
@@ -33,6 +32,6 @@ class CreateFilesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('files');
+        Schema::dropIfExists('nomeri_shartnomas');
     }
 }

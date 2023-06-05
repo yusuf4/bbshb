@@ -202,7 +202,7 @@
                     <div class="inline-flex relative items-center px-2 py-2 w-full text-sm font-medium rounded-md border-gray-200 hover:bg-gray-200 hover:text-blue-800  transition duration-400 ease-in-out ">
                         <a :href="route('users.index')"
                            :class="$page.component==='Users/Index' && 'text-green-400'"
-                           class="flex cursor-default">
+                           class="flex cursor-pointer">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none" viewBox="0 0 24 24"

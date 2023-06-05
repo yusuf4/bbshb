@@ -52,7 +52,7 @@
                         </svg>
                     </Link>
                     <Link
-                        onclick="return confirm('Шумо дар ҳақиқат мехоҳед шартномаро нест намоед?')"
+                        onclick="return confirm('Шумо дар ҳақиқат мехоҳед истифодабарандаи зеринро нест намоед?')"
                         href="#"
                         method="delete"
                         as="button"

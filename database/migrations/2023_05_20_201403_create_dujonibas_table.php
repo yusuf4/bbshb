@@ -18,12 +18,12 @@ class CreateDujonibasTable extends Migration
             $table->string('name');
             $table->string('jonibi_tj');
             $table->string('jonibi_digar');
-            $table->string('etibor_digar');
-            $table->date('sanai_etibor');
-            $table->date('qati_etibor');
-            $table->string('imzo_tj');
-            $table->string('imzo_digar');
-            $table->string('ezoh');
+            $table->string('etibor_digar')->nullable();
+            $table->date('sanai_etibor')->nullable();
+            $table->date('qati_etibor')->nullable();
+            $table->string('imzo_tj')->nullable();
+            $table->string('imzo_digar')->nullable();
+            $table->string('ezoh')->nullable();
             $table->foreignId('file_shartnoma_id')->constrained('file_shartnomas')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');

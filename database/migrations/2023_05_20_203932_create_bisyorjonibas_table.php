@@ -16,11 +16,11 @@ class CreateBisyorjonibasTable extends Migration
         Schema::create('bisyorjonibas', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('etibor_digar');
-            $table->date('sanai_etibor');
-            $table->date('qati_etibor');
-            $table->string('maqomot');
-            $table->string('ezoh');
+            $table->string('etibor_digar')->nullable();
+            $table->date('sanai_etibor')->nullable();
+            $table->date('qati_etibor')->nullable();
+            $table->string('maqomot')->nullable();
+            $table->string('ezoh')->nullable();
             $table->foreignId('file_shartnoma_id')->constrained('file_shartnomas')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');

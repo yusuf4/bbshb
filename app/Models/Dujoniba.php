@@ -9,6 +9,7 @@ use App\Models\NamudiShartnoma;
 use App\Models\TartibiEtibor;
 use App\Models\MuhlatiEtibor;
 use App\Models\File;
+use App\Models\NomeriShartnoma;
 
 class Dujoniba extends Model
 {
@@ -22,6 +23,10 @@ class Dujoniba extends Model
 
     public function namudiShartnoma(){
         return $this->hasOne(NamudiShartnoma::class, 'id', 'namudi_shartnoma_id');
+    }
+    public function nomerD()
+    {
+        return $this->belongsTo(NomeriShartnoma::class);
     }
 
     public function tartibiEtibor(){
