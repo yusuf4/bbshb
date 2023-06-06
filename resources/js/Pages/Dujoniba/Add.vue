@@ -12,7 +12,7 @@
                     <input type="text"
                            id="name"
                            name="name"
-                           v-model="formValues.name"
+                           v-model.trim.lazy="formValues.name"
                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Шартнома дар самти...">
                     <div v-if="errors.name" class="text-red-600">{{errors.name}}</div>
                 </div>
@@ -36,7 +36,7 @@
                         <input type="text"
                                id="jonibi-tj"
                                name="jonibi_tj"
-                               v-model="formValues.jonibi_tj"
+                               v-model.trim.lazy="formValues.jonibi_tj"
                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Тарафҳои шартнома...">
                         <div v-if="errors.jonibi_tj" class="text-red-600">{{errors.jonibi_tj}}</div>
                     </div>
@@ -45,7 +45,7 @@
                         <input type="text"
                                id="jonibi_digar"
                                name="jonibi_digar"
-                               v-model="formValues.jonibi_digar"
+                               v-model.trim.lazy="formValues.jonibi_digar"
                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Тарафҳои шартнома...">
                         <div v-if="errors.jonibi_digar" class="text-red-600">{{errors.jonibi_digar}}</div>
                     </div>
@@ -135,7 +135,7 @@
                     <input type="text"
                            id="bandi-shash"
                            name="etibor_digar"
-                           v-model="formValues.etibor_digar"
+                           v-model.trim.lazy="formValues.etibor_digar"
                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Вориди матн">
                 </div>
             </div>
@@ -195,7 +195,7 @@
                         type="text"
                         id="tj-imzo"
                         name="imzo_tj"
-                        v-model="formValues.imzo_tj"
+                        v-model.trim.lazy="formValues.imzo_tj"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Номи ва вазифаи имзокунанда">
                 </div>
                 <div class="w-full">
@@ -203,7 +203,7 @@
                     <input type="text"
                            id="digar-imzo"
                            name="imzo_digar"
-                           v-model="formValues.imzo_digar"
+                           v-model.trim.lazy="formValues.imzo_digar"
                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Номи ва вазифаи имзокунанда">
                 </div>
                 <div class="w-full">
@@ -221,7 +221,7 @@
                     <input type="text"
                            id="ezoh"
                            name="ezoh"
-                           v-model="formValues.ezoh"
+                           v-model.trim.lazy="formValues.ezoh"
                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Матн">
                 </div>
 
