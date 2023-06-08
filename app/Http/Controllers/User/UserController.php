@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Models\User;
+use Dotenv\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
@@ -14,7 +15,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::all();
+        $users = User::select( 'id','name', 'nasab', 'email', 'is_admin')->get();
         return Inertia::render('Users/Index', [
             'users'=>$users
         ]);
@@ -47,23 +48,17 @@ class UserController extends Controller
         ]);
     }
 
-    public function update(UserUpdateRequest $request, $id)
+    public function update(Request $request, $id)
     {
-       // dd($request);
-        $user = User::findOrFail($id);
-
-        $user->update([
-            'name' => $request->name,
-            'nasab' => $request->nasab,
-            //'email' => $request->email,
-            'is_admin' => intval($request->is_admin),
-        ]);
-        if (!empty($request->password)){
-            $user->update([
-                'password' => Hash::make($request->password)
-            ]);
+        $updateUserData = $request->only(['name', 'nasab','email', 'is_admin']);
+        if ($request->filled('password')){
+            if ($request->filled('confirm_password')){
+                $updateUserData['password']=Hash::make($request->password);
+                //$updateUserData['confirm_password']=Hash::make$request->confirm_password;
             }
-
+        }
+        $user = User::findOrFail($id);
+        $user->update($updateUserData);
         return redirect()->route('users.index');
     }
 

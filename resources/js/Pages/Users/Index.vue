@@ -40,7 +40,7 @@
                     {{user.email}}
                 </td>
                 <td class="px-6 py-4">
-                    <p v-if="user.is_admin==0">Administrator</p>
+                    <p v-if="user.is_admin==1">Administrator</p>
                     <p v-else>Visitor</p>
                 </td>
                 <td class="text-right flex justify-end py-4 px-4">
@@ -92,7 +92,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-
-</style>

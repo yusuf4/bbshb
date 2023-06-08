@@ -15,6 +15,7 @@ class CreateNomeriShartnomasTable extends Migration
     {
         Schema::create('nomeri_shartnomas', function (Blueprint $table) {
             $table->id();
+           // $table->integer('nomer')->autoIncrement();
             $table->foreignId('dujoniba_id')->nullable()->constrained('dujonibas')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
