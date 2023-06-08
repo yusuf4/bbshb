@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Dujoniba\DujonibaController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -16,10 +17,9 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    //sleep(2);
-    return Inertia::render('Welcome');
-});
+Route::get('/', [LoginController::class, 'showLogin'])->name('login.page');
+Route::post('/login', [LoginController::class, 'login'])->name('login.auth');
+Route::post('logoute', [LoginController::class, 'logoute'])->name('logoute');
 Route::get('/dash', function (){
     return Inertia::render('Dashboard',[
         'name' => 'Yusuf',
