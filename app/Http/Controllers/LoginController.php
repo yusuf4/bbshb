@@ -7,7 +7,11 @@ use Inertia\Inertia;
 
 class LoginController extends Controller
 {
-    protected $redirectTo = '/dash';
+    //protected $redirectTo = '/dash';
+    public function __construct()
+    {
+        $this->middleware('guest')->except('logoute');
+    }
 
     public function showLogin(){
         return Inertia::render('LoginPage');
@@ -22,7 +26,7 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)){
             $request->session()->regenerate();
-            //dd(auth()->user()->is_admin==0);
+            //return redirect()->route('do.index');
             if (auth()->user()->is_admin==1){
                 return redirect()->route('do.index');
             }else{
@@ -30,7 +34,7 @@ class LoginController extends Controller
             }
 
         }
-        return redirect()->route('login.page')
+        return redirect()->route('login')
             ->with('message','Почтаи электрони ва пароли Шумо нодуруст аст!');
     }
 
@@ -38,6 +42,6 @@ class LoginController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->route('login.page');
+        return redirect()->route('login');
     }
 }

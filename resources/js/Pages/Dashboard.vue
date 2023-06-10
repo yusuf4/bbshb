@@ -255,7 +255,7 @@
                       <div class="flex items-center  justify-start space-x-4" @click="toggleDrop">
                           <img class="w-10 h-10 rounded-full border-2 border-gray-50" src="../img/25.jpg" alt="">
                           <div class="font-semibold dark:text-white text-left">
-                              <div class="text-black">{{name}}</div>
+                              <div class="text-black">{{$page.props.userName}}</div>
                               <div class="text-xs text-gray-500 dark:text-gray-400">Admin</div>
                           </div>
                       </div>
@@ -296,7 +296,7 @@ export default {
         };
     },
     props:{
-      name: String,
+      userName: String,
       userProfile: Array,
     },
     methods:{

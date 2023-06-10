@@ -14,7 +14,8 @@ class User extends Authenticatable
     /**
      * The attributes that are mass assignable.
      *
-     * @var array<int, string>
+     * @var array<int, string, boolean>
+     *     @property boolean $is_admin
      */
     protected $fillable = [
         'name',
@@ -22,7 +23,6 @@ class User extends Authenticatable
         'email',
         'is_admin',
         'password',
-        'usertype'
     ];
 
     /**
@@ -43,4 +43,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+
+    public function getIsAdminAttribute($value)
+    {
+       return $value;
+    }
 }

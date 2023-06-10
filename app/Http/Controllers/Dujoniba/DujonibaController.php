@@ -9,26 +9,28 @@ use App\Models\File;
 use App\Models\FileShartnoma;
 use App\Models\NomeriShartnoma;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules\In;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\File as FileDel;
 
 class DujonibaController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Inertia\Response
      */
+
     public function index()
     {
         $dujoniba = Dujoniba::with('namudiShartnoma', 'tartibiEtibor')->latest()->get();
-
         //dd($dujoniba);
-
-        //dd($namud);
+        $userName= Auth::user()->name;
         return Inertia::render('Dujoniba/Index',[
-            'dujoniba'=>$dujoniba
+            'dujoniba'=>$dujoniba,
+            'userName'=> $userName
 
         ]);
     }
@@ -135,6 +137,7 @@ class DujonibaController extends Controller
     {
         $dujoniba = Dujoniba::findOrFail($id);
 
+       // dd($dujoniba->created_at->format('d-m-Y'));
         return Inertia::render('Dujoniba/Edit', [
             'dujoniba'=>$dujoniba
         ]);

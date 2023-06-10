@@ -13,9 +13,15 @@ use App\Models\NomeriShartnoma;
 
 class Dujoniba extends Model
 {
-    use HasFactory;
+
     protected $fillable = ['name', 'jonibi_tj','jonibi_digar','etibor_digar','sanai_etibor','qati_etibor',
         'imzo_tj','imzo_digar','ezoh','file_shartnoma_id','namudi_shartnoma_id','tartibi_etibor_id','muhlati_etibor_id'];
+
+
+    public function getSanaiEtiborAttribute($value)
+    {
+        return \Carbon\Carbon::createFromFormat('Y-m-d', $value)->format('d-m-Y');
+    }
 
     public function fileShartnoma(){
         return $this->belongsTo(FileShartnoma::class);
@@ -40,4 +46,6 @@ class Dujoniba extends Model
     public function fileDujoniba(){
         return $this->hasMany(File::class, 'dujoniba_id', 'id');
     }
+
+
 }
