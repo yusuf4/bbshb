@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Dujoniba\DujonibaController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ShartnomaListController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -38,11 +39,7 @@ Route::middleware('auth')->group(function(){
 
         // Dashboard route
         Route::get('/dash', function (){
-            return Inertia::render('Dashboard',[
-                'userProfile' => [
-                    'Ивази рамз', 'Баромад'
-                ]
-            ]);
+            return Inertia::render('Dashboard');
         })->name('index');
     });
 
@@ -52,6 +49,10 @@ Route::middleware('auth')->group(function(){
         return Inertia::render('Bisyorjoniba/Add');
     });
 
+    // Shartnoma files list for downloading
+        Route::controller(ShartnomaListController::class)->group(function(){
+            Route::get('/files', 'index')->name('files.index');
+        });
 
     // For user who have permision only read and search
     Route::get('/guest',[DujonibaController::class, 'guestIndex'])->name('guest.index');

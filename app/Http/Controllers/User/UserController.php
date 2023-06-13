@@ -16,6 +16,8 @@ class UserController extends Controller
     public function index()
     {
         $users = User::select( 'id','name', 'nasab', 'email', 'is_admin')->get();
+        //$users = User::paginate(5,['id','name', 'nasab', 'email', 'is_admin']);
+        //dd($users);
         return Inertia::render('Users/Index', [
             'users'=>$users
         ]);

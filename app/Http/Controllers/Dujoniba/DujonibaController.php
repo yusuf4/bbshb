@@ -23,10 +23,16 @@ class DujonibaController extends Controller
      * @return \Inertia\Response
      */
 
-    public function index()
+    public function index(Request $request)
     {
-        $dujoniba = Dujoniba::with('namudiShartnoma', 'tartibiEtibor')->latest()->get();
-        //dd($dujoniba);
+        $dujoniba = Dujoniba::query()
+            ->when($request->search, function ($query, $search){
+                $query->where('name', 'LIKE', "%{$search}%");
+            })
+            ->with('namudiShartnoma', 'tartibiEtibor')
+            ->latest()
+           // ->get()
+            ->paginate(3);
         $userName= Auth::user()->name;
         return Inertia::render('Dujoniba/Index',[
             'dujoniba'=>$dujoniba,
