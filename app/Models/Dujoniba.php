@@ -10,6 +10,7 @@ use App\Models\TartibiEtibor;
 use App\Models\MuhlatiEtibor;
 use App\Models\File;
 use App\Models\NomeriShartnoma;
+use Illuminate\Support\Carbon;
 
 class Dujoniba extends Model
 {
@@ -21,6 +22,11 @@ class Dujoniba extends Model
     public function getSanaiEtiborAttribute($value)
     {
         return \Carbon\Carbon::createFromFormat('Y-m-d', $value)->format('d-m-Y');
+    }
+
+    public function getCreatedAtAttribute($date)
+    {
+        return Carbon::createFromFormat('Y-m-d H:i:s', $this->attributes['created_at'])->locale('is_IS')->format('d-m-Y');
     }
 
     public function fileShartnoma(){

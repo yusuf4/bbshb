@@ -52,6 +52,7 @@ Route::middleware('auth')->group(function(){
     // Shartnoma files list for downloading
         Route::controller(ShartnomaListController::class)->group(function(){
             Route::get('/files', 'index')->name('files.index');
+            Route::get('/files/{id}', 'downloadOne')->name('file.download');
         });
 
     // For user who have permision only read and search

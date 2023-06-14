@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Dujoniba;
 use App\Models\Bisyorjoniba;
+use Illuminate\Support\Carbon;
 
 class FileShartnoma extends Model
 {
