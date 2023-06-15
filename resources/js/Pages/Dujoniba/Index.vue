@@ -71,7 +71,7 @@
                     <span v-if="item.sanai_etibor==null" class="text-red-700 font-bold cursor-help">
                         қатъи дасти
                     </span>
-                    <span v-else>{{item.sanai_etibor}}</span>
+                    <span v-else>{{formated(item.sanai_etibor)}}</span>
                 </td>
                 <td class="px-5 py-4">
                     {{item.name}}
@@ -153,15 +153,13 @@
      </div>
 
  </template>
-
- <script>
+<script>
  import Dashboard from "../Dashboard";
-
  import { Link, Head } from '@inertiajs/inertia-vue3'
  import {ref} from "vue";
  import {Inertia} from "@inertiajs/inertia";
  import Pagination from "../Pagination";
-
+ import moment from "moment";
  export default {
      name: "Index",
      layout: Dashboard,
@@ -178,6 +176,9 @@
      methods: {
          swichMenu(){
              this.showMenu = !this.showMenu;
+         },
+         formated(value) {
+             return  moment(value).format('DD-MM-YYYY');
          }
      },
      watch:{
@@ -187,6 +188,9 @@
                  preserveState: true
              });
          }
+     },
+     computed:{
+
      }
  }
  </script>
