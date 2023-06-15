@@ -186,7 +186,7 @@
                         <Link
                             :href="route('files.index')"
                             :class="$page.component==='ShartnomaList' && 'text-green-400'"
-                            class="flex cursor-copy">
+                            class="flex cursor-default">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"

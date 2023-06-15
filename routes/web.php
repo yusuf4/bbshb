@@ -34,6 +34,7 @@ Route::middleware('auth')->group(function(){
             Route::put('/dujoniba/{item}','update')->name('du.update');
             Route::get('/dujoniba/{item}/edit', 'edit')->name('du.edit');
             Route::delete('/delete/{item}', 'destroy')->name('du.delete');
+            Route::get('/dujoniba/file/{id}', 'downloadD')->name('du.download');
         });
 
 

@@ -113,11 +113,12 @@
                 <!-- Bandi 6 Calendar default is hide -->
                 <div class="">
                     <label for="sanai_qabul" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white truncate">Санаи пайдо кардани эътибор</label>
-                    <input type="date"
-                           id="sanai_qabul"
-                           name="sanai_etibor"
-                           v-model="formValues.sanai_etibor"
-                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="">
+                    <input
+                        type="date"
+                        id="sanai_qabul"
+                        name="sanai_etibor"
+                        v-model="formValues.sanai_etibor"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="">
                 </div>
                 <!-- Banhoi 1 2 3 az bandi 6 default is hide -->
                 <div class="w-full truncate" v-show="sixShow && showPartSix">

@@ -29,7 +29,7 @@ class DujonibaController extends Controller
             ->when($request->search, function ($query, $search){
                 $query->where('name', 'LIKE', "%{$search}%");
             })
-            ->with('namudiShartnoma', 'tartibiEtibor')
+            ->with('namudiShartnoma:id,name', 'tartibiEtibor')
             ->latest()
            // ->get()
             ->paginate(3);
@@ -210,5 +210,12 @@ class DujonibaController extends Controller
         $dujoniba->fileShartnoma->delete();
 
         return redirect()->back();
+    }
+
+    public function downloadD($id)
+    {
+        $file = FileShartnoma::findOrFail($id);
+        $filePath = public_path("uploads/shartnoma/".$file->name);
+        return response()->download($filePath);
     }
 }
