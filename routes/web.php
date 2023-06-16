@@ -54,6 +54,7 @@ Route::middleware('auth')->group(function(){
         Route::controller(ShartnomaListController::class)->group(function(){
             Route::get('/files', 'index')->name('files.index');
             Route::get('/files/{id}', 'downloadOne')->name('file.download');
+            Route::post('/files/download', 'selectDownload')->name('file.zip');
         });
 
     // For user who have permision only read and search

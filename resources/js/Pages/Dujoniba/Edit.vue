@@ -121,7 +121,7 @@
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="">
                 </div>
                 <!-- Banhoi 1 2 3 az bandi 6 default is hide -->
-                <div class="w-full truncate" v-show="sixShow && showPartSix">
+                <div class="w-full truncate" v-show="showPartSix || sixShow">
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white truncate" for="files_scan">Файли сканшудаи марбут ба расмиёти дохилидавлатӣ</label>
                     <input
                         id="files_scan"
@@ -340,6 +340,8 @@ export default {
         sixShow(){
             if (this.dujoniba.tartibi_etibor_id==1 || this.dujoniba.tartibi_etibor_id==2 || this.dujoniba.tartibi_etibor_id==3){
                 return this.showPartSix=true;
+            }else{
+                return this.showPartSix=false;
             }
         }
     }

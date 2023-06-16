@@ -3,7 +3,7 @@
         <title>Файл</title>
     </Head>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-        <div class="ml-0.5 pb-4 bg-white dark:bg-gray-900">
+        <div class="flex justify-between ml-0.5 pb-4 bg-white">
             <label for="table-search" class="sr-only">Search</label>
             <div class="relative mt-1">
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -13,15 +13,19 @@
                     v-model="search"
                     type="text"
                     id="table-search"
-                    class="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ҷустуҷуи шартнома...">
+                    class="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500" placeholder="Ҷустуҷуи шартнома...">
             </div>
+            <Link
+                :href="route('file.zip', zip)" method="post" as="button" type="button"
+
+                class="mt-1 text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-2">Download selected</Link>
         </div>
-        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead class="text-sm text-gray-700  bg-blue-100 dark:bg-gray-700 dark:text-gray-400">
+        <table class="w-full text-sm text-left text-gray-500">
+            <thead class="text-sm text-gray-700  bg-blue-200">
             <tr>
                 <th scope="col" class="p-4">
                     <div class="flex items-center">
-                        <input id="checkbox-one-search" disabled type="checkbox" class="w-4 h-4 text-blue-600 bg-blue-50 border-gray-100 rounded focus:ring-blue-500  focus:ring-2">
+                        <input id="checkbox-one-search" disabled type="checkbox" class="w-4 h-4 text-blue-600 bg-blue-100 border-gray-100 rounded focus:ring-blue-500  focus:ring-2">
                         <label for="checkbox-one-search" class="sr-only">checkbox</label>
                     </div>
                 </th>
@@ -40,10 +44,12 @@
             <tr
                 v-for="file in files.data"
                 :key="file.id"
-                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                class="bg-white border-b hover:bg-gray-50">
                 <td class="w-4 p-4">
                     <div class="flex items-center">
                         <input
+                            v-model="zip"
+                            :value="file.id"
                             id="checkbox-table-search-1"
                             type="checkbox"
                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
@@ -98,6 +104,7 @@ import Dashboard from "./Dashboard";
 import {Link, Head} from "@inertiajs/inertia-vue3";
 import {ref} from "vue";
 import {Inertia} from "@inertiajs/inertia";
+import {useForm} from "@inertiajs/vue3";
 
 export default {
     name: "ShartnomaList",
@@ -106,11 +113,17 @@ export default {
     data(){
         return{
             search: ref(''),
-            zipfile: Array
+            zip: [],
         }
     },
     props:{
         files: Object,
+    },
+    setup(){
+        const formValues = useForm ({
+            zipfile: [],
+        });
+        return {formValues};
     },
     watch:{
         search(value){

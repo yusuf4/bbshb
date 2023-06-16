@@ -75,14 +75,13 @@
                 <!-- Denamyc inputs -->
                 <div class="dynamic-input">
                     <div v-show="mintaqavi"
-                         v-for="(country, index) in davlatho"
+                         v-for="(country, index) in formValues.davlatho"
                          :key="index"
                          class="flex items-center">
                         <div class="input w-3/4 mr-8 mt-2">
-                            <label for="mintaqaho" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Минтақаҳо</label>
+                            <label for="mintaqaho" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Минтақаҳо {{index+1}}</label>
                             <input
                                 v-model="country.davlat"
-
                                 type="text"
                                 id="mintaqaho"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Номи давлаҳо..." required>
@@ -248,16 +247,6 @@ export default {
     name: "Add",
     layout: Dashboard,
     components:{Link},
-    data(){
-        return{
-            showPartSix: false,
-            PartSixDigar: false,
-            selected: '',
-            disabled: false,
-            mintaqavi: false,
-            davlatho:[{davlat:''},]
-        };
-    },
     setup(){
         const formValues= useForm({
             name: null,
@@ -266,17 +255,20 @@ export default {
             sanai_etibor: null,
             etibor_digar:null,
             files_scan: [],
-            kishvarho:[],
+            davlatho:[{davlat: ''}],
             tartib:'',
             muhlat: null,
             muhlatEnd: null,
             maqomot: null,
             ezoh: null
         });
-        return {formValues};
-    },
-    methods:{
-        PartSix(event){
+        const showPartSix = false;
+        const PartSixDigar = false;
+        const selected = '';
+        const disabled = false;
+        const mintaqavi = false;
+        const davlatho = [{davlat:''},];
+        function PartSix(event){
             this.selected = event.target.value;
             if(this.selected==="1" || this.selected==="2" || this.selected==="3" ){
                 this.showPartSix = true;
@@ -288,31 +280,41 @@ export default {
                 this.showPartSix=false;
                 this.PartSixDigar=false;
             }
-        },
-        MintaqaviOn(){
+        };
+        function MintaqaviOn(){
             this.mintaqavi=true;
-        },
-        MintaqaviOf(){
+        };
+        function MintaqaviOf(){
             this.mintaqavi=false;
-            this.davlatho.splice(1);
-        },
-        addField(){
-            this.davlatho.push({});
-        },
-        removeField(index, davlatho){
-            if(this.davlatho.length>1){
-                this.davlatho.splice(index,1)
+            formValues.davlatho.splice(1);
+        };
+        function addField(){
+            formValues.davlatho.push({davlat: ''});
+        };
+        function removeField(index){
+            if(formValues.davlatho.length > 1){
+                formValues.davlatho.splice(index,1)
             }
-        },
-        disableInput(){
+        };
+        function disableInput(){
             this.disabled = true;
             this.formValues.muhlatEnd = "";
-        },
-
-    }
+        };
+        return {
+            formValues,
+            showPartSix,
+            PartSixDigar,
+            selected,
+            disabled,
+            mintaqavi,
+            davlatho,
+            PartSix,
+            MintaqaviOn,
+            MintaqaviOf,
+            addField,
+            removeField,
+            disableInput
+        };
+    },
 }
 </script>
-
-<style scoped>
-
-</style>

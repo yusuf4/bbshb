@@ -30,4 +30,14 @@ class ShartnomaListController extends Controller
        return response()->download($filePath);
 
     }
+
+    public function selectDownload(Request $request)
+    {
+       dd($request);
+        $ids = [];
+        $ids = $request->all();
+        //dd($ids);
+
+
+    }
 }
