@@ -54,6 +54,7 @@ Route::middleware('auth')->group(function(){
         Route::get('/editb/{id}', 'edit')->name('bi.edit');
         Route::put('/updateb/{id}', 'update')->name('bi.update');
         Route::delete('/deleteb/{id}', 'destroy')->name('bi.delete');
+        Route::get('/downloadb/file/{id}', 'downloadB')->name('bi.download');
     });
 
 

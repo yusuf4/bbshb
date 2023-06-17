@@ -107,7 +107,7 @@
 
                     </Link>
                     <a
-                        :href="route('du.download', item.file_shartnoma_id)"
+                        :href="route('bi.download', item.file_shartnoma_id)"
                         class="mr-2 font-medium text-green-800 dark:text-blue-500 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">
                         <svg xmlns="http://www.w3.org/2000/svg"
                              fill="none"
@@ -157,6 +157,7 @@ import Dashboard from "../Dashboard";
 import { Link, Head } from '@inertiajs/inertia-vue3'
 import {ref} from "vue";
 import moment from "moment";
+import {Inertia} from "@inertiajs/inertia";
 export default {
     name: "Index",
     layout: Dashboard,
@@ -173,6 +174,14 @@ export default {
     methods: {
         formated(value) {
             return  moment(value).format('DD-MM-YYYY');
+        }
+    },
+
+    watch:{
+        search(value){
+            Inertia.get('/indexb', {search: value}, {
+                preserveState: true
+            });
         }
     },
 }

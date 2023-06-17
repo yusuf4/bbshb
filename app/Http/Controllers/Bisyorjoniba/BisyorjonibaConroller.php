@@ -21,13 +21,15 @@ class BisyorjonibaConroller extends Controller
      *
      * @return \Inertia\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $bisyorjoniba = Bisyorjoniba::with('namudB:id,name', 'tartibiEtiborB:id,name', 'nomerB:id,bisyorjoniba_id')
+        $bisyorjoniba = Bisyorjoniba::query()
+            ->when($request->search, function ($query, $search){
+                $query->where('name', 'LIKE', "%{$search}%");
+            })
+            ->with('namudB:id,name', 'tartibiEtiborB:id,name', 'nomerB:id,bisyorjoniba_id')
             ->latest()
             ->paginate('3');
-            //->get();
-        //dd($bisyorjoniba);
         return Inertia::render('Bisyorjoniba/Index', [
             'bisyorjoniba' => $bisyorjoniba
         ]);
@@ -184,7 +186,7 @@ class BisyorjonibaConroller extends Controller
         return redirect()->back();
     }
 
-    public function downloadD($id)
+    public function downloadB($id)
     {
         $file = FileShartnoma::findOrFail($id);
         $filePath = public_path("uploads/shartnoma/".$file->name);

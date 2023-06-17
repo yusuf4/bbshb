@@ -22949,6 +22949,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
+
 
 
 
@@ -22972,6 +22974,15 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     formated: function formated(value) {
       return moment__WEBPACK_IMPORTED_MODULE_3___default()(value).format('DD-MM-YYYY');
+    }
+  },
+  watch: {
+    search: function search(value) {
+      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_4__.Inertia.get('/indexb', {
+        search: value
+      }, {
+        preserveState: true
+      });
     }
   }
 });
@@ -24563,7 +24574,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }),
       _: 2 /* DYNAMIC */
     }, 1032 /* PROPS, DYNAMIC_SLOTS */, ["href"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-      href: _ctx.route('du.download', item.file_shartnoma_id),
+      href: _ctx.route('bi.download', item.file_shartnoma_id),
       "class": "mr-2 font-medium text-green-800 dark:text-blue-500 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"
     }, _hoisted_25, 8 /* PROPS */, _hoisted_23), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
       onclick: "return confirm('Шумо дар ҳақиқат мехоҳед шартномаро нест намоед?')",
