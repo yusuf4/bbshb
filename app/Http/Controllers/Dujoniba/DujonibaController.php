@@ -10,7 +10,6 @@ use App\Models\FileShartnoma;
 use App\Models\NomeriShartnoma;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rules\In;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\File as FileDel;
 
@@ -29,7 +28,7 @@ class DujonibaController extends Controller
             ->when($request->search, function ($query, $search){
                 $query->where('name', 'LIKE', "%{$search}%");
             })
-            ->with('namudiShartnoma:id,name', 'tartibiEtibor')
+            ->with('namudiShartnoma:id,name', 'tartibiEtibor', 'nomerD:id,dujoniba_id')
             ->latest()
            // ->get()
             ->paginate(3);
@@ -201,7 +200,6 @@ class DujonibaController extends Controller
             FileDel::delete('uploads/shartnoma/'.$dujoniba->fileShartnoma->name);
         }
         $files = File::where("dujoniba_id", $dujoniba->id)->get();
-        //dd($files);
         foreach ( $files as $item) {
             if (FileDel::exists('uploads/files/'.$item->name)){
                 FileDel::delete('uploads/files/'.$item->name);

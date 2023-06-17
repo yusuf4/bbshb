@@ -15,6 +15,6 @@ class NomeriShartnoma extends Model
     }
     public function shartnomaB()
     {
-        return $this->hasOne(Bisyorjoniba::class, 'id', 'bisyorjoniba_id');
+        return $this->belongsTo(Bisyorjoniba::class, 'id', 'bisyorjoniba_id');
     }
 }

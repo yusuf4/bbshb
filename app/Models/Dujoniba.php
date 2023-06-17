@@ -50,7 +50,7 @@ class Dujoniba extends Model
     }
     public function nomerD()
     {
-        return $this->belongsTo(NomeriShartnoma::class);
+        return $this->hasOne(NomeriShartnoma::class, 'dujoniba_id', 'id');
     }
 
     public function tartibiEtibor(){

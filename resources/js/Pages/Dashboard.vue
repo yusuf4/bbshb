@@ -27,7 +27,7 @@
                         </Link>
                     </div>
 
-                    <details class="group [&_summary::-webkit-details-marker]:hidden" :open="$page.component==='Dujoniba/Add' || $page.component==='Dujoniba/Index'">
+                    <details class="group [&_summary::-webkit-details-marker]:hidden" :open="$page.component==='Dujoniba/Add' || $page.component==='Dujoniba/Index' || $page.component==='Dujoniba/Edit'">
                         <summary
                             class="flex cursor-pointer hover:text-gray-800 items-center justify-between rounded-lg px-2 py-2 text-white hover:bg-gray-100 hover:text-gray-700"
                         >
@@ -100,7 +100,7 @@
                         </nav>
                     </details>
 
-                    <details class="group [&_summary::-webkit-details-marker]:hidden" :open="$page.component==='Bisyorjoniba/Add'">
+                    <details class="group [&_summary::-webkit-details-marker]:hidden" :open="$page.component==='Bisyorjoniba/Add' || $page.component==='Bisyorjoniba/Index' || $page.component==='Bisyorjoniba/Edit'">
                         <summary
                             class="flex cursor-pointer hover:text-gray-800 items-center justify-between rounded-lg px-2 py-2 text-white hover:bg-gray-100 hover:text-gray-700"
                         >
@@ -132,7 +132,7 @@
                         </summary>
                         <nav aria-label="Teams Nav" class="mt-2 flex flex-col px-4">
                             <Link
-                                href="/inputb"
+                                :href="route('bi.create')"
                                 class="flex items-center gap-2 rounded-lg px-4 py-2 text-white hover:bg-gray-100 hover:text-blue-700"
                             >
                                 <svg
@@ -149,8 +149,8 @@
                                 <span class="text-sm font-medium" :class="$page.component==='Bisyorjoniba/Add' && 'text-green-400'"> Иловаи Шартнома </span>
                             </Link>
 
-                            <a
-                                href="#"
+                            <Link
+                                :href="route('bi.index')"
                                 class="flex items-center gap-2 rounded-lg px-4 py-2 text-white hover:bg-gray-100 hover:text-blue-700"
                             >
                                 <svg
@@ -160,8 +160,8 @@
                                     class="w-5 h-5">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" />
                                 </svg>
-                                <span class="text-sm font-medium"> Шартномаҳо </span>
-                            </a>
+                                <span class="text-sm font-medium" :class="$page.component==='Bisyorjoniba/Index' && 'text-green-400'"> Шартномаҳо </span>
+                            </Link>
                         </nav>
                     </details>
 

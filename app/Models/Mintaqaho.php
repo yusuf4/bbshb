@@ -13,6 +13,6 @@ class Mintaqaho extends Model
     protected $fillable = ['name','bisyorjoniba_id'];
 
     public function bisyorjonibaMintaqa(){
-        return $this->hasMany(Bisyorjoniba::class);
+        return $this->belongsTo(Bisyorjoniba::class);
     }
 }

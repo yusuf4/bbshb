@@ -15,7 +15,7 @@ class FileShartnoma extends Model
         return $this->hasOne(Dujoniba::class, 'file_shartnoma_id', 'id');
     }
 
-    public function bisyorjoniba(){
-        return $this->belongsTo(Bisyorjoniba::class);
+    public function bisyorjonibafile(){
+        return $this->hasOne(Bisyorjoniba::class, 'file_shartnoma_id', 'id');
     }
 }

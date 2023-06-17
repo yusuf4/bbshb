@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Bisyorjoniba\BisyorjonibaConroller;
 use App\Http\Controllers\Dujoniba\DujonibaController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ShartnomaListController;
@@ -46,9 +47,15 @@ Route::middleware('auth')->group(function(){
 
 
     // Bisyorjoniba CRUD
-    Route::get('/inputb', function (){
-        return Inertia::render('Bisyorjoniba/Add');
+    Route::controller(BisyorjonibaConroller::class)->group(function (){
+        Route::get('/indexb', 'index')->name('bi.index');
+        Route::get('/createb', 'create')->name('bi.create');
+        Route::post('/storeb', 'store')->name('bi.store');
+        Route::get('/editb/{id}', 'edit')->name('bi.edit');
+        Route::put('/updateb/{id}', 'update')->name('bi.update');
+        Route::delete('/deleteb/{id}', 'destroy')->name('bi.delete');
     });
+
 
     // Shartnoma files list for downloading
         Route::controller(ShartnomaListController::class)->group(function(){

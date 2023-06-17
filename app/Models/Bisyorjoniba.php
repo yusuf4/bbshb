@@ -14,20 +14,22 @@ use App\Models\NomeriShartnoma;
 
 class Bisyorjoniba extends Model
 {
-    public function fileShartnomaB(){
-        return $this->hasOne(FileShartnoma::class);
+    protected $fillable = ['name', 'etibor_digar', 'sanai_etibor', 'qati_etibor', 'maqomot', 'ezoh', 'file_shartnoma_id','namudi_shartnoma_id', 'tartibi_etibor_id', 'muhlati_etibor_id'];
+
+    public function fileshartnomaB(){
+        return $this->belongsTo(FileShartnoma::class, 'file_shartnoma_id', 'id');
     }
 
-    public function namudiShartnomaB(){
-        return $this->hasOne(NamudiShartnoma::class);
+    public function namudB(){
+        return $this->hasOne(NamudiShartnoma::class, 'id', 'namudi_shartnoma_id');
     }
 
     public function tartibiEtiborB(){
-        return $this->hasOne(TartibiEtibor::class);
+        return $this->hasOne(TartibiEtibor::class, 'id', 'tartibi_etibor_id');
     }
     public function nomerB()
     {
-        return $this->belongsTo(NomeriShartnoma::class);
+        return $this->hasOne(NomeriShartnoma::class, 'bisyorjoniba_id' , 'id');
     }
 
     public function muhlatiEtiborB(){
@@ -35,7 +37,7 @@ class Bisyorjoniba extends Model
     }
 
     public function mintaqaho(){
-        return $this->belongsTo(Mintaqaho::class);
+        return $this->hasMany(Mintaqaho::class);
     }
 
     public function fileBisyor(){
