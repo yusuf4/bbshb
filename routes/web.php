@@ -55,6 +55,8 @@ Route::middleware('auth')->group(function(){
         Route::put('/updateb/{id}', 'update')->name('bi.update');
         Route::delete('/deleteb/{id}', 'destroy')->name('bi.delete');
         Route::get('/downloadb/file/{id}', 'downloadB')->name('bi.download');
+        // =============Delete mintaqa in edit form=========================
+        Route::delete('/mintaqa/{id}', 'deleteMintaqa')->name('del.mintaqa');
     });
 
 

@@ -37,7 +37,7 @@ class Bisyorjoniba extends Model
     }
 
     public function mintaqaho(){
-        return $this->hasMany(Mintaqaho::class);
+        return $this->hasMany(Mintaqaho::class, 'bisyorjoniba_id', 'id');
     }
 
     public function fileBisyor(){

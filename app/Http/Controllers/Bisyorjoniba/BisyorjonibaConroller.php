@@ -9,6 +9,7 @@ use App\Models\Bisyorjoniba;
 use App\Models\Dujoniba;
 use App\Models\File;
 use App\Models\FileShartnoma;
+use App\Models\Mintaqaho;
 use App\Models\NomeriShartnoma;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -53,8 +54,7 @@ class BisyorjonibaConroller extends Controller
      */
     public function store(BisyorjonibaRequest $request)
     {
-         //dd($request);
-
+        //dd($request->davlatho);
         $file = $request->file('shartnoma_file');
         $fileName =  time().'-'. $file->getClientOriginalName();
         $file->move(public_path('uploads/shartnoma'), $fileName);
@@ -73,6 +73,7 @@ class BisyorjonibaConroller extends Controller
             'tartibi_etibor_id'=> intval($request->tartib),
             'muhlati_etibor_id' => intval($request->muhlat),
         ]);
+        // ==================Add files==============
         if ($request->hasFile('files_scan')){
             $files=$request->file('files_scan');
             foreach ($files as $qarorfile){
@@ -87,6 +88,19 @@ class BisyorjonibaConroller extends Controller
         NomeriShartnoma::create([
             'bisyorjoniba_id' =>$bisyorjoniba->bisyorjonibafile->id,
         ]);
+        // ======================Dynamyc inputs for Davlatho=======================
+        $mintaqaho = $request->davlatho;
+        foreach ($mintaqaho as $davlat) {
+            foreach ($davlat as $item){
+                if ($item!=null){
+                    Mintaqaho::create([
+                        'name'=>$item,
+                        'bisyorjoniba_id'=>$bisyorjoniba->bisyorjonibafile->id,
+                    ]);
+                }
+            }
+
+        }
 
         return redirect()->route('bi.index')
             ->with('message', 'Шартнома илова шуд!');
@@ -111,7 +125,7 @@ class BisyorjonibaConroller extends Controller
      */
     public function edit($id)
     {
-        $bisyorjoniba = Bisyorjoniba::findOrFail($id);
+        $bisyorjoniba = Bisyorjoniba::with('mintaqaho:bisyorjoniba_id,id,name')->findOrFail($id);
         //dd($bisyorjoniba);
         return Inertia::render('Bisyorjoniba/Edit',[
             'bisyorjoniba'=>$bisyorjoniba
@@ -127,10 +141,11 @@ class BisyorjonibaConroller extends Controller
      */
     public function update(BisyorjonibaUpdateRequest $request, $id)
     {
-        $bisyorjoniba = Bisyorjoniba::findOrFail($id);
+        $bisyorjoniba = Bisyorjoniba::with('mintaqaho')->findOrFail($id);
+        //dd($bisyorjoniba->mintaqaho);
         $request->validated();
 
-        // Delete old file if uploaded new file Shartnoma
+        // ====================Delete old file if uploaded new file Shartnoma===================
         if ($request->hasFile("shartnoma_file")){
             if (FileDel::exists('uploads/shartnoma/'.$bisyorjoniba->fileshartnomaB->name)){
                 FileDel::delete('uploads/shartnoma/'.$bisyorjoniba->fileshartnomaB->name);
@@ -143,7 +158,21 @@ class BisyorjonibaConroller extends Controller
             ]);
         }
 
-        // Update Shartnoma contents
+        // ====================Update dynamic input fields==================
+        $country = $request->davlatho;
+        foreach ($country as $davlat) {
+            foreach ($davlat as $key=>$item){
+                if ($item!=null){
+                    Mintaqaho::create([
+                        'name'=>$item,
+                        'bisyorjoniba_id'=>$bisyorjoniba->id,
+                    ]);
+                }
+            }
+
+        }
+
+        // ==========================Update Shartnoma contents===================
 
         $bisyorjoniba->update([
             'name' => $request->name,
@@ -183,6 +212,14 @@ class BisyorjonibaConroller extends Controller
         }
         $bisyorid->fileshartnomaB->delete();
 
+        return redirect()->back();
+    }
+    // =================Delete mintaqaho by id
+    public function deleteMintaqa($id)
+    {
+        $mintaqa = Mintaqaho::findOrFail($id);
+        //dd($mintaqa);
+        $mintaqa->delete();
         return redirect()->back();
     }
 

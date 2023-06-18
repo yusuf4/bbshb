@@ -6,7 +6,7 @@
         <h1 class="font-bold text-2xl text-blue-400 text-blue-700 text-center pb-4 pt-1">Тағйири шартномаи бисёрҷониба</h1>
         <form class="p-4"  @submit.prevent="submit">
             <!-- Section One -->
-            <div class="grid gap-6 mb-6 md:grid-cols-2 items-center">
+            <div class="grid gap-6 mb-2 md:grid-cols-2 items-center">
                 <div class="nomi-shartnoma">
                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Номи пурраи шартнома</label>
                     <input type="text"
@@ -47,7 +47,6 @@
                         <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r">
                             <div class="flex items-center pl-3">
                                 <input
-                                    @click="MintaqaviOn"
                                     id="mintaqavi"
                                     type="radio"
                                     value="5"
@@ -60,7 +59,7 @@
                     </ul>
                     <div v-if="errors.namud" class="ml-1 mt-0.5 text-red-600">{{errors.namud}}</div>
                 </div>
-                <div class="tartibi-etibor ">
+                <div class="tartibi-etibor">
                     <label for="qarorho" class="block mb-2 text-sm font-medium text-gray-900">Тартиби пайдо намудани эътибор</label>
                     <select
                         id="qarorho"
@@ -76,49 +75,90 @@
                     </select>
                     <div v-if="errors.tartib" class="ml-1 mt-0.5 text-red-600">{{errors.tartib}}</div>
                 </div>
-                <!-- Denamyc inputs -->
-                <div class="dynamic-input">
-                    <div v-show="mintaqavi"
-                         v-for="(country, index) in formValues.davlatho"
-                         :key="index"
-                         class="flex items-center">
-                        <div class="input w-3/4 mr-8 mt-2">
-                            <label for="mintaqaho" class="block mb-2 text-sm font-medium text-gray-900">Минтақаҳо {{index+1}}</label>
-                            <input
-                                v-model="country.davlat"
-                                type="text"
-                                id="mintaqaho"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full" placeholder="Номи давлаҳо...">
+            </div>
+            <!-- Add mintaqa checkbox button -->
+            <div class="flex items-center mb-4" v-if="bisyorjoniba.namudi_shartnoma_id==5">
+                <input
+                    id="default-checkbox"
+                    :disabled="formValues.namud==4"
+                    type="checkbox"
+                    v-model="checkbox"
+                    @click="mintaqaCheck"
+                    value=""
+                    class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                <label for="default-checkbox" class="ml-2 text-sm font-medium text-gray-900">Иловаи минтақа</label>
+            </div>
+
+            <div class="flex justify-between items-center w-full pb-4">
+                <!-- Denamyc inputs lists -->
+                <div class="dynamic-input w-2/4">
+                    <div v-if="bisyorjoniba.mintaqaho.length>0">
+                        <h2 class="mb-2 text-lg font-semibold text-gray-900">Минтақаҳо:</h2>
+                        <div
+                            v-for="(mintaqa, item) in bisyorjoniba.mintaqaho"
+                            :key="mintaqa.id"
+                            class="inline-flex items-center">
+                            <Link
+                                :href="route('del.mintaqa', mintaqa.id)"
+                                method="delete"
+                                as="button"
+                                type="button">
+                                <svg
+                                    class="w-5 h-5 mr-1.5 text-red-500"
+                                    fill="currentColor"
+                                    viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+                                </svg>
+                            </Link>
+                            <span class="mr-4 text-lg font-normal text-gray-900">{{ mintaqa.name }}</span>
                         </div>
-                        <!-- Add input field -->
-                        <div @click="addField" class="add-button mt-6">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                strokeWidth={1.5}
-                                stroke="currentColor"
-                                class="w-8 h-8 text-green-600">
-                                <path strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                      d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                        </div>
-                        <!-- Remove input field -->
-                        <div @click="removeField" class="remove-button mt-6">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none" viewBox="0 0 24 24"
-                                strokeWidth={1.5}
-                                stroke="currentColor"
-                                class="w-8 h-8 text-red-700">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
+                    </div>
+
+                    <!-- Denamyc inputs -->
+                    <div class="dynamic-input">
+                        <div v-show="mintaqavi"
+                             v-for="(country, index) in formValues.davlatho"
+                             :key="index"
+                             class="flex items-center">
+                            <div class="input w-3/4 mr-8 mt-2">
+                                <label for="mintaqaho" class="block mb-2 text-sm font-medium text-gray-900">Минтақаҳо {{index+1}}</label>
+                                <input
+                                    v-model.trim.lazy="country.davlat"
+                                    type="text"
+                                    id="mintaqaho"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full" placeholder="Номи давлаҳо...">
+                            </div>
+                            <!-- Add input field -->
+                            <div @click="addField" class="add-button mt-6">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    strokeWidth={1.5}
+                                    stroke="currentColor"
+                                    class="w-8 h-8 text-green-600">
+                                    <path strokeLinecap="round"
+                                          strokeLinejoin="round"
+                                          d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                            <!-- Remove input field -->
+                            <div @click="removeField" class="remove-button mt-6">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none" viewBox="0 0 24 24"
+                                    strokeWidth={1.5}
+                                    stroke="currentColor"
+                                    class="w-8 h-8 text-red-700">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
                         </div>
                     </div>
                 </div>
+
                 <!-- Bandi 6 Calendar default is hide -->
-                <div class="">
+                <div class="w-2/4">
                     <!-- Banhoi 1 2 3 az bandi 6 default is hide -->
                     <div class="sm:truncate " v-show="showPartSix">
                         <label class="block mb-2 text-sm font-medium text-gray-900 truncate" for="small_size">Файли сканшудаи марбут ба расмиёти дохилидавлатӣ</label>
@@ -297,7 +337,8 @@ export default {
         const showPartSix = ref(false);
         const PartSixDigar =ref (false);
         const selected = ref ('');
-        const mintaqavi = false;
+        const mintaqavi = ref(false);
+        const checkbox = ref(false);
         const davlatho = [{davlat:''},];
         function PartSix(event){
             this.selected = event.target.value;
@@ -312,9 +353,6 @@ export default {
                 this.PartSixDigar=false;
             }
         };
-        function MintaqaviOn(){
-            this.mintaqavi=true;
-        };
         function MintaqaviOf(){
             this.mintaqavi=false;
             formValues.davlatho.splice(1);
@@ -327,6 +365,14 @@ export default {
                 formValues.davlatho.splice(index,1)
             }
         };
+        function mintaqaCheck(){
+            if (this.checkbox===false){
+                this.mintaqavi=true;
+            }else{
+                formValues.davlatho.splice(1);
+                this.mintaqavi=false;
+            }
+        }
         function submit(){
             Inertia.post(route('bi.update', props.bisyorjoniba.id), formValues, {
                 forceFormData: true
@@ -337,18 +383,19 @@ export default {
         }
         return{
             formValues,
+            checkbox,
             showPartSix,
             PartSixDigar,
             selected,
             mintaqavi,
             davlatho,
             PartSix,
-            MintaqaviOn,
             MintaqaviOf,
             addField,
             removeField,
             submit,
             selectFile,
+            mintaqaCheck
         };
     },
 }

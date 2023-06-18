@@ -11,7 +11,7 @@
                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Номи пурраи шартнома</label>
                     <input type="text"
                            id="name"
-                           v-model="formValues.name"
+                           v-model.trim.lazy="formValues.name"
                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full" placeholder="Шартнома дар самти...">
                     <div v-if="errors.name" class="ml-1 mt-0.5 text-red-600">{{errors.name}}</div>
                 </div>
@@ -135,7 +135,7 @@
                         <input
                             type="text"
                             id="bandi-shash"
-                            v-model="formValues.etibor_digar"
+                            v-model.trim.lazy="formValues.etibor_digar"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full" placeholder="Вориди матн">
                     </div>
                     <div class="calendar mt-2">
@@ -203,7 +203,7 @@
                     <input
                         type="text"
                         id="nomi_maqomot"
-                        v-model="formValues.maqomot"
+                        v-model.trim.lazy="formValues.maqomot"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="матн">
                 </div>
                 <div class="w-full mt-4">
@@ -211,7 +211,7 @@
                     <input
                         type="text"
                         id="ezoh"
-                        v-model="formValues.ezoh"
+                        v-model.trim.lazy="formValues.ezoh"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="матн эзоҳ">
                 </div>
             </div>
@@ -277,7 +277,7 @@ export default {
         const selected = ref ('');
         const disabled = false;
         const mintaqavi = false;
-        const davlatho = [{davlat:''},];
+        const davlatho = ref([{davlat:''},]);
         function PartSix(event){
             this.selected = event.target.value;
             if(this.selected==="1" || this.selected==="2" || this.selected==="3" ){
@@ -296,7 +296,7 @@ export default {
         };
         function MintaqaviOf(){
             this.mintaqavi=false;
-            formValues.davlatho.splice(1);
+            formValues.davlatho=[{davlat:''},];
         };
         function addField(){
             formValues.davlatho.push({davlat: ''});
