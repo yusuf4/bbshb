@@ -140,7 +140,7 @@ class DujonibaController extends Controller
      */
     public function edit($id)
     {
-        $dujoniba = Dujoniba::findOrFail($id);
+        $dujoniba = Dujoniba::with('fileDujoniba:dujoniba_id,id,name', 'fileShartnoma:id,name')->findOrFail($id);
 
        // dd($dujoniba->created_at->format('d-m-Y'));
         return Inertia::render('Dujoniba/Edit', [
@@ -184,6 +184,32 @@ class DujonibaController extends Controller
             'tartibi_etibor_id'=> intval($request->tartib),
             'muhlati_etibor_id' => intval($request->muhlat)
         ]);
+
+        // ====================Upload new files for part six===================
+        if ($request->hasFile('files_scan')){
+            $files=$request->file('files_scan');
+            foreach ($files as $qarorfile){
+                $filename = time(). '_'.$qarorfile->getClientOriginalName();
+                $qarorfile->move(\public_path('uploads/files'), $filename);
+                File::create([
+                    'name'=>$filename,
+                    'bisyorjoniba_id'=>$dujoniba->id,
+                ]);
+            }
+        }
+
+        // ====================Upload new file for vakolat part ====================
+        if ($request->hasFile('vakolat')){
+            $files=$request->file('vakolat');
+            foreach ($files as $vakolat){
+                $filename = time(). '_'.$vakolat->getClientOriginalName();
+                $vakolat->move(\public_path('uploads/vakolat'), $filename);
+                File::create([
+                    'name'=>$filename,
+                    'bisyorjoniba_id'=>$dujoniba->id,
+                ]);
+            }
+        }
         return redirect()->route('do.index');
     }
 
@@ -207,6 +233,28 @@ class DujonibaController extends Controller
         }
         $dujoniba->fileShartnoma->delete();
 
+        return redirect()->back();
+    }
+
+    // ==================Delete files bandi 6=================
+    public function deleteqaror($id)
+    {
+        $fileqaror = File::findOrFail($id);
+        if (FileDel::exists('uploads/files/'.$fileqaror->name)){
+            FileDel::delete('uploads/files/'.$fileqaror->name);
+        }
+        $fileqaror->delete();
+        return redirect()->back();
+    }
+
+    // ==================Delete files qaror=======================
+    public function deletevakolat($id)
+    {
+        $filevakolat = File::findOrFail($id);
+        if (FileDel::exists('uploads/vakolat/'.$filevakolat->name)){
+            FileDel::delete('uploads/vakolat/'.$filevakolat->name);
+        }
+        $filevakolat->delete();
         return redirect()->back();
     }
 

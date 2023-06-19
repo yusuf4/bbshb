@@ -6,39 +6,46 @@
         <h1 class="font-bold text-2xl text-blue-400 text-blue-700 text-center pb-4 pt-1">Тағйири шартнома</h1>
         <form class="p-4" @submit.prevent="submit">
             <!-- Section One -->
-            <div class="grid gap-6 mb-6 md:grid-cols-2 items-center">
+            <div class="grid gap-6 mb-6 md:grid-cols-2 items-start">
                 <div class="nomi-shartnoma">
-                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Номи пурраи шартнома</label>
+                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Номи пурраи шартнома</label>
                     <input type="text"
                            id="name"
                            name="name"
                            v-model="formValues.name"
-                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Шартнома дар самти...">
+                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Шартнома дар самти...">
                     <div v-if="errors.name" class="text-red-600">{{errors.name}}</div>
                 </div>
                 <div class="shartnomfa-file">
                     <label
                         for="formFile"
-                        class="mb-2 inline-block text-sm font-medium text-gray-900 dark:text-neutral-200"
+                        class="mb-2 inline-block text-sm font-medium text-gray-900"
                     >Файли сканшудаи шартнома PDF</label
                     >
                     <input
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full"
                         type="file"
                         name="shartnoma_file[]"
                         @change="selectFile"
                         @input="formValues.shartnoma_file = $event.target.files[0]"
                         id="formFile"/>
+                    <div class="flex">
+                        <a
+                            class="hover:text-green-400 text-blue-500 text-sm"
+                            :href="'/uploads/shartnoma/'+dujoniba.file_shartnoma.name" target="_blank">
+                            {{dujoniba.file_shartnoma.name}}
+                        </a>
+                    </div>
                     <div v-if="errors.shartnoma_file" class="text-red-600">{{errors.shartnoma_file}}</div>
                 </div>
                 <div class="jonibho">
                     <div class="jonibi-tj">
-                        <label for="jonibi-tj" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Аз ҷониби ҶТ</label>
+                        <label for="jonibi-tj" class="block mb-2 text-sm font-medium text-gray-900">Аз ҷониби ҶТ</label>
                         <input type="text"
                                id="jonibi-tj"
                                name="jonibi_tj"
                                v-model="formValues.jonibi_tj"
-                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Тарафҳои шартнома...">
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full" placeholder="Тарафҳои шартнома...">
                         <div v-if="errors.jonibi_tj" class="text-red-600">{{errors.jonibi_tj}}</div>
                     </div>
                     <div class="jonibi-digar mt-4">
@@ -47,26 +54,26 @@
                                id="jonibi_digar"
                                name="jonibi_digar"
                                v-model="formValues.jonibi_digar"
-                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Тарафҳои шартнома...">
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full" placeholder="Тарафҳои шартнома...">
                         <div v-if="errors.jonibi_digar" class="text-red-600">{{errors.jonibi_digar}}</div>
                     </div>
                 </div>
                 <div class="namud-tartib">
                     <div class="namudi-shartnoma ">
-                        <h3 class="mb-2 text-sm font-medium text-gray-900 dark:text-white">Намуди шартнома</h3>
-                        <ul class="items-center w-full text-sm font-medium text-gray-900  border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                            <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
+                        <h3 class="mb-2 text-sm font-medium text-gray-900">Намуди шартнома</h3>
+                        <ul class="items-center w-full text-sm font-medium text-gray-900  border border-gray-200 rounded-lg sm:flex">
+                            <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r">
                                 <div class="flex items-center pl-3">
                                     <input id="horizontal-list-radio-davlati"
                                            type="radio"
                                            value= 1
                                            name="list-radio"
                                            v-model="formValues.namud"
-                                           class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                    <label for="horizontal-list-radio-davlati" class="w-full py-2 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Байнидавлатӣ </label>
+                                           class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                                    <label for="horizontal-list-radio-davlati" class="w-full py-2 ml-2 text-sm font-medium text-gray-900">Байнидавлатӣ </label>
                                 </div>
                             </li>
-                            <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
+                            <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r">
                                 <div class="flex items-center pl-3">
                                     <input
                                         id="horizontal-list-radio-hukumati"
@@ -74,11 +81,11 @@
                                         value= 2
                                         name="list-radio"
                                         v-model="formValues.namud"
-                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                    <label for="horizontal-list-radio-hukumati" class="w-full py-2 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Байниҳукуматӣ</label>
+                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                                    <label for="horizontal-list-radio-hukumati" class="w-full py-2 ml-2 text-sm font-medium text-gray-900">Байниҳукуматӣ</label>
                                 </div>
                             </li>
-                            <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
+                            <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r">
                                 <div class="flex items-center pl-3">
                                     <input
                                         id="horizontal-list-radio-idoravi"
@@ -86,20 +93,20 @@
                                         value= 3
                                         name="list-radio"
                                         v-model="formValues.namud"
-                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                    <label for="horizontal-list-radio-idoravi" class="w-full py-2 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Байниидоравӣ</label>
+                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                                    <label for="horizontal-list-radio-idoravi" class="w-full py-2 ml-2 text-sm font-medium text-gray-900">Байниидоравӣ</label>
                                 </div>
                             </li>
                         </ul>
                         <div v-if="errors.namud" class="text-red-600">{{errors.namud}}</div>
                     </div>
                     <div class="tartibi-etibor mt-4 ">
-                        <label for="qarorho" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Тартиби пайдо намудани эътибор</label>
+                        <label for="qarorho" class="block mb-2 text-sm font-medium text-gray-900">Тартиби пайдо намудани эътибор</label>
                         <select
                             id="qarorho"
                             @change="PartSix($event)"
                             v-model="formValues.tartib"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full">
                             <option  value="">Интихоб</option>
                             <option value="1" >Қарори Ҳукумати ҶТ</option>
                             <option value="2" >Фармони Президенти ҶТ</option>
@@ -112,16 +119,16 @@
                 </div>
                 <!-- Bandi 6 Calendar default is hide -->
                 <div class="">
-                    <label for="sanai_qabul" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white truncate">Санаи пайдо кардани эътибор</label>
+                    <label for="sanai_qabul" class="block mb-2 text-sm font-medium text-gray-900 truncate">Санаи пайдо кардани эътибор</label>
                     <input
                         type="date"
                         id="sanai_qabul"
                         name="sanai_etibor"
                         v-model="formValues.sanai_etibor"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="">
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full" placeholder="">
                 </div>
                 <!-- Banhoi 1 2 3 az bandi 6 default is hide -->
-                <div class="w-full truncate" v-show="showPartSix || sixShow">
+                <div class="w-full truncate" v-show="sixShow && showPartSix">
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white truncate" for="files_scan">Файли сканшудаи марбут ба расмиёти дохилидавлатӣ</label>
                     <input
                         id="files_scan"
@@ -129,17 +136,39 @@
                         multiple
                         @change="selectFile"
                         @input="formValues.files_scan = $event.target.files"
-                        class="block w-full text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
+                        class="block w-full text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none">
+                    <!-- Lists of files bandi 6 -->
+                    <div
+                        v-for="files in dujoniba.file_dujoniba"
+                        :key="files.id"
+                        class="flex">
+                        <Link
+                            method="delete" as="button" type="button"
+                            :href="route('del.qaror', files.id)">
+                            <svg
+                                class="w-5 h-5 mr-1.5 text-red-500"
+                                fill="currentColor"
+                                viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+                            </svg>
+                        </Link>
+                        <a
+                            class="hover:text-green-400 text-blue-500 text-sm"
+                            :href="'/uploads/files/'+files.name" target="_blank">
+                            {{files.name}}
+                        </a>
+
+                    </div>
                     <div v-if="errors.files_scan" class="text-red-600">{{errors.files_scan}}</div>
                 </div>
                 <!-- Bandi 5 default is hide -->
-                <div class="w-full" v-show="PartSixDigar">
-                    <label for="bandi-shash" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Дигар</label>
+                <div class="w-full" v-show="sixShow && PartSixDigar">
+                    <label for="bandi-shash" class="block mb-2 text-sm font-medium text-gray-900">Дигар</label>
                     <input type="text"
                            id="bandi-shash"
                            name="etibor_digar"
                            v-model="formValues.etibor_digar"
-                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Вориди матн">
+                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full" placeholder="Вориди матн">
                 </div>
             </div>
             <!-- Muhlati Etibor -->
@@ -190,7 +219,7 @@
             </div>
             <!-- Imzokunandagon -->
             <h1 class="text-base text-blue-600 font-medium text-start mt-2">Имзокунандагон</h1>
-            <div class="flex justify-between flex-wrap md:flex-nowrap items-center mt-2 space-x-4 py-4">
+            <div class="flex justify-between items-start flex-wrap md:flex-nowrap mt-2 space-x-4 py-4">
                 <div class="w-full">
                     <label for="tj-imzo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ҷониби ҶТ</label>
                     <input
@@ -218,6 +247,28 @@
                         @input="formValues.vakolat = $event.target.files"
                         multiple
                         class="block w-full  text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
+                    <!-- Lists of files vakolat -->
+                    <div
+                        v-for="files in dujoniba.file_dujoniba"
+                        :key="files.id"
+                        class="flex">
+                        <Link
+                            method="delete" as="button" type="button"
+                            :href="route('del.vakolat', files.id)">
+                            <svg
+                                class="w-5 h-5 mr-1.5 text-red-500"
+                                fill="currentColor"
+                                viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+                            </svg>
+                        </Link>
+                        <a
+                            class="hover:text-green-400 text-blue-500 text-sm"
+                            :href="'/uploads/vakolat/'+files.name" target="_blank">
+                            {{files.name}}
+                        </a>
+
+                    </div>
                 </div>
                 <div class="w-full">
                     <label for="ezoh" class="block mb-2 ml-2 text-sm font-medium text-gray-900 dark:text-white">Эзоҳ</label>
@@ -227,7 +278,6 @@
                            v-model="formValues.ezoh"
                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Матн">
                 </div>
-
             </div>
 
             <!-- Save buttons -->
@@ -254,7 +304,7 @@
                 <button
                     type="submit"
                     :disabled="formValues.processing"
-                    class=" ml-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Сабт</button>
+                    class=" ml-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Сабт</button>
             </div>
 
         </form>
@@ -340,8 +390,8 @@ export default {
         sixShow(){
             if (this.dujoniba.tartibi_etibor_id==1 || this.dujoniba.tartibi_etibor_id==2 || this.dujoniba.tartibi_etibor_id==3){
                 return this.showPartSix=true;
-            }else{
-                return this.showPartSix=false;
+            }else if(this.dujoniba.tartibi_etibor_id==5){
+                return this.PartSixDigar=true;
             }
         }
     }

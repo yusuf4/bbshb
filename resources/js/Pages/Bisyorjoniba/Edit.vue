@@ -6,7 +6,7 @@
         <h1 class="font-bold text-2xl text-blue-400 text-blue-700 text-center pb-4 pt-1">Тағйири шартномаи бисёрҷониба</h1>
         <form class="p-4"  @submit.prevent="submit">
             <!-- Section One -->
-            <div class="grid gap-6 mb-2 md:grid-cols-2 items-center">
+            <div class="grid gap-6 mb-2 md:grid-cols-2 items-start">
                 <div class="nomi-shartnoma">
                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Номи пурраи шартнома</label>
                     <input type="text"
@@ -18,14 +18,21 @@
                 <div class="shartnomfa-file">
                     <label
                         for="formFile"
-                        class="mb-2 inline-block text-neutral-700"
+                        class=" inline-block text-neutral-700"
                     >Файли сканшудаи шартнома PDF</label
                     >
                     <input
-                        class="block mb-1 w-full text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
+                        class="block w-full text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
                         type="file"
                         @input="formValues.shartnoma_file = $event.target.files[0]"
                         id="formFile"/>
+                    <div class="flex">
+                        <a
+                            class="hover:text-green-400 text-blue-500 text-sm"
+                            :href="'/uploads/shartnoma/'+bisyorjoniba.fileshartnoma_b.name" target="_blank">
+                            {{bisyorjoniba.fileshartnoma_b.name}}
+                        </a>
+                    </div>
                     <div v-if="errors.shartnoma_file" class="ml-1 mt-0.5 text-red-600">{{errors.shartnoma_file}}</div>
                 </div>
                 <div class="namudi-shartnoma">
@@ -76,25 +83,29 @@
                     <div v-if="errors.tartib" class="ml-1 mt-0.5 text-red-600">{{errors.tartib}}</div>
                 </div>
             </div>
-            <!-- Add mintaqa checkbox button -->
-            <div class="flex items-center mb-4" v-if="bisyorjoniba.namudi_shartnoma_id==5">
-                <input
-                    id="default-checkbox"
-                    :disabled="formValues.namud==4"
-                    type="checkbox"
-                    v-model="checkbox"
-                    @click="mintaqaCheck"
-                    value=""
-                    class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                <label for="default-checkbox" class="ml-2 text-sm font-medium text-gray-900">Иловаи минтақа</label>
-            </div>
-
-            <div class="flex justify-between items-center w-full pb-4">
+            <!-- Denamyc inputs and bahdhoi 6 -->
+            <div class="flex justify-between items-start w-full pb-4">
                 <!-- Denamyc inputs lists -->
                 <div class="dynamic-input w-2/4">
-                    <div v-if="bisyorjoniba.mintaqaho.length>0">
-                        <h2 class="mb-2 text-lg font-semibold text-gray-900">Минтақаҳо:</h2>
+                    <div>
+                        <div class="flex  items-center my-2">
+                            <h2 class="pr-6 text-lg font-semibold text-gray-900">Минтақаҳо:</h2>
+                            <!-- Add mintaqa checkbox button -->
+                            <div class="flex items-center pt-1" v-if="bisyorjoniba.namudi_shartnoma_id==5 && formValues.namud==5">
+                                <input
+                                    id="default-checkbox"
+                                    :disabled="formValues.namud==4"
+                                    type="checkbox"
+                                    v-model="checkbox"
+                                    @click="mintaqaCheck"
+                                    value=""
+                                    class="w-4 h-4 cursor-pointer text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <label for="default-checkbox" class="ml-1 text-sm font-medium text-gray-900">Иловаи минтақа</label>
+                            </div>
+                        </div>
+
                         <div
+                            v-if="bisyorjoniba.mintaqaho.length>0"
                             v-for="(mintaqa, item) in bisyorjoniba.mintaqaho"
                             :key="mintaqa.id"
                             class="inline-flex items-center">
@@ -157,10 +168,10 @@
                     </div>
                 </div>
 
-                <!-- Bandi 6 Calendar default is hide -->
+                <!-- Bandi 6 -->
                 <div class="w-2/4">
                     <!-- Banhoi 1 2 3 az bandi 6 default is hide -->
-                    <div class="sm:truncate " v-show="showPartSix">
+                    <div class="sm:truncate ml-2.5" v-show="bandSix && showPartSix">
                         <label class="block mb-2 text-sm font-medium text-gray-900 truncate" for="small_size">Файли сканшудаи марбут ба расмиёти дохилидавлатӣ</label>
                         <input
                             id="small_size"
@@ -168,9 +179,30 @@
                             multiple
                             @input="formValues.files_scan = $event.target.files"
                             class="block w-full text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none">
+                        <div
+                            v-for="files in bisyorjoniba.file_bisyor"
+                            :key="files.id"
+                            class="flex">
+                            <Link
+                                method="delete" as="button" type="button"
+                                :href="route('del.files', files.id)">
+                                <svg
+                                    class="w-5 h-5 mr-1.5 text-red-500"
+                                    fill="currentColor"
+                                    viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+                                </svg>
+                            </Link>
+                            <a
+                                class="hover:text-green-400 text-blue-500 text-sm"
+                                :href="'/uploads/files/'+files.name" target="_blank">
+                                {{files.name}}
+                            </a>
+
+                        </div>
                     </div>
                     <!-- Bandi 5 default is hide -->
-                    <div v-show="PartSixDigar">
+                    <div v-show="bandSix && PartSixDigar" class="ml-2.5">
                         <label for="bandi-shash" class="block mb-2 text-sm font-medium text-gray-900">Дигар</label>
                         <input
                             type="text"
@@ -178,7 +210,7 @@
                             v-model="formValues.etibor_digar"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full" placeholder="Вориди матн">
                     </div>
-                    <div class="calendar mt-2">
+                    <div class="calendar mt-2 ml-2.5">
                         <label for="sanai-qabul" class="block mb-2 text-sm font-medium text-gray-900 truncate">Санаи пайдо кардани эътибор</label>
                         <input
                             type="date"
@@ -297,7 +329,9 @@ export default {
     components:{Link,Head},
     data(){
         return{
-            disabled: false
+            disabled: false,
+            showPartSix: false,
+            PartSixDigar: false,
         }
     },
     props:{
@@ -308,6 +342,19 @@ export default {
         disableInput(){
             this.disabled = true;
             this.formValues.muhlatEnd = "";
+        },
+        PartSix(event){
+            this.selected = event.target.value;
+            if(this.selected==="1" || this.selected==="2" || this.selected==="3" ){
+                this.showPartSix = true;
+                this.PartSixDigar=false;
+            }else if(this.selected==="5"){
+                this.PartSixDigar=true;
+                this.showPartSix=false;
+            }else {
+                this.showPartSix=false;
+                this.PartSixDigar=false;
+            }
         }
     },
     computed:{
@@ -316,6 +363,14 @@ export default {
                 return this.disabled=true;
             }
         },
+        bandSix(){
+            if (this.bisyorjoniba.tartibi_etibor_id==1 || this.bisyorjoniba.tartibi_etibor_id==2 || this.bisyorjoniba.tartibi_etibor_id==3){
+                return this.showPartSix=true;
+            }else if(this.bisyorjoniba.tartibi_etibor_id==5){
+                return this.PartSixDigar=true;
+            }
+        }
+
     },
     setup(props){
         const formValues= useForm({
@@ -334,28 +389,17 @@ export default {
             ezoh: props.bisyorjoniba.ezoh,
             _method: "PUT"
         });
-        const showPartSix = ref(false);
-        const PartSixDigar =ref (false);
         const selected = ref ('');
         const mintaqavi = ref(false);
         const checkbox = ref(false);
         const davlatho = [{davlat:''},];
-        function PartSix(event){
-            this.selected = event.target.value;
-            if(this.selected==="1" || this.selected==="2" || this.selected==="3" ){
-                this.showPartSix = true;
-                this.PartSixDigar=false;
-            }else if(this.selected==="5"){
-                this.PartSixDigar=true;
-                this.showPartSix=false;
-            }else {
-                this.showPartSix=false;
-                this.PartSixDigar=false;
-            }
-        };
         function MintaqaviOf(){
             this.mintaqavi=false;
+            this.checkbox=false;
             formValues.davlatho.splice(1);
+        };
+        function MintaqaviOn(){
+            this.mintaqavi=true;
         };
         function addField(){
             formValues.davlatho.push({davlat: ''});
@@ -384,13 +428,11 @@ export default {
         return{
             formValues,
             checkbox,
-            showPartSix,
-            PartSixDigar,
             selected,
             mintaqavi,
             davlatho,
-            PartSix,
             MintaqaviOf,
+            MintaqaviOn,
             addField,
             removeField,
             submit,
@@ -400,7 +442,3 @@ export default {
     },
 }
 </script>
-
-<style scoped>
-
-</style>

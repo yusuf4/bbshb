@@ -125,7 +125,7 @@ class BisyorjonibaConroller extends Controller
      */
     public function edit($id)
     {
-        $bisyorjoniba = Bisyorjoniba::with('mintaqaho:bisyorjoniba_id,id,name')->findOrFail($id);
+        $bisyorjoniba = Bisyorjoniba::with('mintaqaho:bisyorjoniba_id,id,name', 'fileshartnomaB:id,name', 'fileBisyor:bisyorjoniba_id,id,name')->findOrFail($id);
         //dd($bisyorjoniba);
         return Inertia::render('Bisyorjoniba/Edit',[
             'bisyorjoniba'=>$bisyorjoniba
@@ -186,6 +186,20 @@ class BisyorjonibaConroller extends Controller
             'muhlati_etibor_id' => intval($request->muhlat),
         ]);
 
+        // ====================Upload new aditional files===================
+
+        if ($request->hasFile('files_scan')){
+            $files=$request->file('files_scan');
+            foreach ($files as $qarorfile){
+                $filename = time(). '_'.$qarorfile->getClientOriginalName();
+                $qarorfile->move(\public_path('uploads/files'), $filename);
+                File::create([
+                    'name'=>$filename,
+                    'bisyorjoniba_id'=>$bisyorjoniba->id,
+                ]);
+            }
+        }
+
         return redirect()->route('bi.index');
 
     }
@@ -222,7 +236,17 @@ class BisyorjonibaConroller extends Controller
         $mintaqa->delete();
         return redirect()->back();
     }
-
+    // ====================Delete aditional files ====================
+    public function deleteFiles($id)
+    {
+      $fileShartnoma = File::findOrFail($id);
+      //dd($fileShartnoma);
+        if (FileDel::exists('uploads/files/'.$fileShartnoma->name)){
+            FileDel::delete('uploads/files/'.$fileShartnoma->name);
+        }
+        $fileShartnoma->delete();
+      return redirect()->back();
+    }
     public function downloadB($id)
     {
         $file = FileShartnoma::findOrFail($id);

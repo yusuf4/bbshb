@@ -36,6 +36,10 @@ Route::middleware('auth')->group(function(){
             Route::get('/dujoniba/{item}/edit', 'edit')->name('du.edit');
             Route::delete('/delete/{item}', 'destroy')->name('du.delete');
             Route::get('/dujoniba/file/{id}', 'downloadD')->name('du.download');
+            // =============Delete files of part six inputs========================
+            Route::delete('/fileqaror/{id}', 'deleteqaror')->name('del.qaror');
+            // ==================Delete files of vakolat inputs=====================
+            Route::delete('/filevakolat/{id}', 'deletevakolat')->name('del.vakolat');
         });
 
 
@@ -57,6 +61,8 @@ Route::middleware('auth')->group(function(){
         Route::get('/downloadb/file/{id}', 'downloadB')->name('bi.download');
         // =============Delete mintaqa in edit form=========================
         Route::delete('/mintaqa/{id}', 'deleteMintaqa')->name('del.mintaqa');
+        // ================= File shartnoma delete on update======================
+        Route::delete('/delfile/{id}', 'deleteFiles')->name('del.files');
     });
 
 
