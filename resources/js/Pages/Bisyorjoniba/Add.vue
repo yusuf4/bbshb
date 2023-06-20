@@ -221,7 +221,7 @@
                 <div class="back-buuton mt-1">
                     <Link
                         class="inline-block rounded-full border border-indigo-600 bg-indigo-600 p-3 text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
-                        href="/dash"
+                        :href="route('bi.index')"
                     >
                         <span class="sr-only"> Download </span>
                         <svg

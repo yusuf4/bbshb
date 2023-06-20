@@ -91,7 +91,7 @@
                         <div class="flex  items-center my-2">
                             <h2 class="pr-6 text-lg font-semibold text-gray-900">Минтақаҳо:</h2>
                             <!-- Add mintaqa checkbox button -->
-                            <div class="flex items-center pt-1" v-if="bisyorjoniba.namudi_shartnoma_id==5 && formValues.namud==5">
+                            <div class="flex items-center pt-1" v-if="bisyorjoniba.namudi_shartnoma_id==5 || formValues.namud==5">
                                 <input
                                     id="default-checkbox"
                                     :disabled="formValues.namud==4"
