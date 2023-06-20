@@ -187,13 +187,13 @@ class DujonibaController extends Controller
 
         // ====================Upload new files for part six===================
         if ($request->hasFile('files_scan')){
-            $files=$request->file('files_scan');
-            foreach ($files as $qarorfile){
+            $filesqaror=$request->file('files_scan');
+            foreach ($filesqaror as $qarorfile){
                 $filename = time(). '_'.$qarorfile->getClientOriginalName();
                 $qarorfile->move(\public_path('uploads/files'), $filename);
                 File::create([
                     'name'=>$filename,
-                    'bisyorjoniba_id'=>$dujoniba->id,
+                    'dujoniba_id'=>$dujoniba->id,
                 ]);
             }
         }
@@ -206,7 +206,7 @@ class DujonibaController extends Controller
                 $vakolat->move(\public_path('uploads/vakolat'), $filename);
                 File::create([
                     'name'=>$filename,
-                    'bisyorjoniba_id'=>$dujoniba->id,
+                    'dujoniba_id'=>$dujoniba->id,
                 ]);
             }
         }

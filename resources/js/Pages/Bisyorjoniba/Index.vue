@@ -58,7 +58,6 @@
             <tr
                 v-for="item in bisyorjoniba.data"
                 :key="item.id"
-                :class="item.sanai_etibor==null && 'text-red-600'"
                 class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600">
                 <th scope="row" class="px-2 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     {{item.nomer_b.id}}
@@ -67,7 +66,8 @@
                     {{formated(item.created_at)}}
                 </td>
                 <td class="px-2 py-4">
-                    <span v-if="item.sanai_etibor==null" class="text-red-700 font-bold cursor-help">
+                    <span v-if="item.sanai_etibor==null" class="cursor-help inline-flex items-center bg-gray-200 text-red-700 text-xs font-medium mr-2 pl-2 pr-3 pb-0.5 rounded-full">
+                        <span class="animate-ping w-2 h-2 mr-1.5 mt-0.5 bg-red-700 rounded-full"></span>
                         қатъи дасти
                     </span>
                     <span v-else>{{formated(item.sanai_etibor)}}</span>

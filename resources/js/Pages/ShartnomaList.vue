@@ -56,10 +56,10 @@
                         <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
                     </div>
                 </td>
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                     <a
                         class="hover:text-blue-500"
-                        :href="'uploads/shartnoma/'+file.file_shartnoma.name" target="_blank">
+                        :href="'uploads/shartnoma/'+file.name" target="_blank">
                         {{file.name}}
                     </a>
 
@@ -69,7 +69,7 @@
                 </td>
                 <td class="px-6 py-4">
                     <a
-                        :href="route('file.download', file.file_shartnoma.id)"
+                        :href="route('file.download', file.id)"
                         class=" font-medium text-blue-600 hover:underline">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -119,7 +119,7 @@ export default {
     props:{
         files: Object,
     },
-    setup(){
+    /*setup(){
         const formValues = useForm ({
             zipfile: [],
         });
@@ -131,6 +131,6 @@ export default {
                 preserveState: true
             });
         }
-    }
+    }*/
 }
 </script>

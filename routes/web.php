@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Bisyorjoniba\BisyorjonibaConroller;
+use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dujoniba\DujonibaController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ShartnomaListController;
@@ -25,9 +26,8 @@ Route::post('logoute', [LoginController::class, 'logoute'])->name('logoute');
 Route::middleware('auth')->group(function(){
 
            //All Routes which needs user to be logged in
-    Route::middleware('is_admin')->group(function(){
 
-        // Dujoniba CRUD
+        // ===================Dujoniba CRUD==================
         Route::controller(DujonibaController::class)->group(function(){
             Route::get('/duinput','create')->name('duinput.create');
             Route::post('/dostore', 'store')->name('du.store');
@@ -42,12 +42,11 @@ Route::middleware('auth')->group(function(){
             Route::delete('/filevakolat/{id}', 'deletevakolat')->name('del.vakolat');
         });
 
+        // =====================Dashboard items========================
+        Route::controller(DashboardController::class)->group(function(){
+            Route::get('/dashboard', 'index')->name('dash.index');
+        });
 
-        // Dashboard route
-        Route::get('/dash', function (){
-            return Inertia::render('Dashboard');
-        })->name('index');
-    });
 
 
     // Bisyorjoniba CRUD

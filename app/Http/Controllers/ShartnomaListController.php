@@ -13,11 +13,15 @@ class ShartnomaListController extends Controller
 {
     public function index(Request $request)
     {
-        $files = Dujoniba::query()->when($request->search, function ($query, $search){
+        /*$files = Dujoniba::query()->when($request->search, function ($query, $search){
                 $query->where('name', 'LIKE', "%{$search}%");
             })
         ->select('id', 'name', 'file_shartnoma_id','created_at')
-        ->with('fileShartnoma:id,name')->paginate(2);
+        ->with('fileShartnoma:id,name')->paginate(2);*/
+        $files = FileShartnoma::select('id','name','created_at')
+            ->with('bisyorjonibafile', 'dujonibaF')
+            ->paginate(2);
+        //dd($files);
         return Inertia::render('ShartnomaList', [
             'files'=>$files
         ]);

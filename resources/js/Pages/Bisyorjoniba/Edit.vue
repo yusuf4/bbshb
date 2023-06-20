@@ -415,6 +415,7 @@ export default {
             }else{
                 formValues.davlatho.splice(1);
                 this.mintaqavi=false;
+                formValues.davlatho=[{davlat: ''}];
             }
         }
         function submit(){

@@ -13,7 +13,10 @@
             <div class="flex flex-col justify-between h-full px-[20px] space-y-[10px] ">
                 <div class=" flex flex-col justify-between space-y-[10px]">
                     <div class="inline-flex relative items-center py-[10px] px-[10px] w-full text-sm font-medium rounded-md border-gray-200 hover:bg-gray-200 hover:text-blue-800  transition duration-400 ease-in-out">
-                        <Link href="/dash" class="flex justify-center  ">
+                        <Link
+                            :class="$page.component==='Dash/DashItems' && 'text-green-400'"
+                            :href="route('dash.index')"
+                            class="flex justify-center">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none" viewBox="0 0 24 24"
@@ -23,7 +26,7 @@
                                 aria-hidden="true"
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" />
                             </svg>
-                            Home
+                            Асоси
                         </Link>
                     </div>
 
@@ -95,7 +98,7 @@
                                     class="w-5 h-5">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" />
                                 </svg>
-                                <span class="text-sm font-medium" :class="$page.component==='Dujoniba/Index' && 'text-green-400'"> Шартномаҳо </span>
+                                <span class="text-sm font-medium" :class="$page.component==='Dujoniba/Index' || $page.component==='Dujoniba/Edit' ? 'text-green-400' : ''"> Шартномаҳо </span>
                             </Link>
                         </nav>
                     </details>
@@ -160,7 +163,7 @@
                                     class="w-5 h-5">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" />
                                 </svg>
-                                <span class="text-sm font-medium" :class="$page.component==='Bisyorjoniba/Index' && 'text-green-400'"> Шартномаҳо </span>
+                                <span class="text-sm font-medium" :class="$page.component==='Bisyorjoniba/Index' || $page.component==='Bisyorjoniba/Edit' ? 'text-green-400' : ''"> Шартномаҳо </span>
                             </Link>
                         </nav>
                     </details>
