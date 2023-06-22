@@ -211,12 +211,17 @@
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full" placeholder="Вориди матн">
                     </div>
                     <div class="calendar mt-2 ml-2.5">
-                        <label for="sanai-qabul" class="block mb-2 text-sm font-medium text-gray-900 truncate">Санаи пайдо кардани эътибор</label>
-                        <input
-                            type="date"
-                            id="sanai-qabul"
+                        <p class="block mb-2 text-sm font-medium text-gray-900 truncate">Санаи пайдо кардани эътибор</p>
+                        <vue-tailwind-datepicker
+                            as-single
+                            weekdays-size="min"
+                            :formatter="formatter"
+                            placeholder="Санаи қабул"
+                            i18n="ru"
                             v-model="formValues.sanai_etibor"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full" placeholder="">
+                            input-classes="block text-sm"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full"
+                        />
                     </div>
 
                 </div>
@@ -232,7 +237,7 @@
                                 <div class="flex items-center pl-3">
                                     <input
                                         id="horizontal-list-radio-muhlat"
-                                        @click="disabled = false" type="radio"
+                                        @click="disabled = false; vshowEnd=true" type="radio"
                                         value="1"
                                         name="list-radio"
                                         v-model="formValues.muhlat"
@@ -257,12 +262,19 @@
                         <div v-if="errors.muhlat" class="ml-1 text-red-600">{{errors.muhlat}}</div>
                     </div>
                     <div class="w-full">
-                        <label for="etibor" class="block mb-2 text-sm font-medium text-gray-900">Санаи қатъи эътибор</label>
-                        <input type="date"
-                               :disabled="disableField && disabled"
-                               id="etibor"
-                               v-model="formValues.muhlatEnd"
-                               class="disabled:opacity-75 disabled:bg-gray-300 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full">
+                        <label class="block mb-2 text-sm font-medium text-gray-900">Санаи қатъи эътибор</label>
+                        <vue-tailwind-datepicker
+                            as-single
+                            v-show="vshowEnd"
+                            :disabled="disableField && disabled"
+                            weekdays-size="min"
+                            :formatter="formatter"
+                            placeholder="қатъи эътибор"
+                            i18n="ru"
+                            v-model="formValues.muhlatEnd"
+                            input-classes="block text-sm"
+                            class="disabled:opacity-75 disabled:bg-gray-300 bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full"
+                        />
                     </div>
                 </div>
             </div>
@@ -323,6 +335,7 @@ import Dashboard from "../Dashboard";
 import {Link, Head, useForm} from "@inertiajs/inertia-vue3";
 import {computed, ref} from "vue";
 import {Inertia} from "@inertiajs/inertia";
+import moment from "moment";
 export default {
     name: "Edit",
     layout: Dashboard,
@@ -332,6 +345,11 @@ export default {
             disabled: false,
             showPartSix: false,
             PartSixDigar: false,
+            vshowEnd: true,
+            formatter: ref({
+                date:'DD.MM.YYYY',
+                month: 'MMM',
+            })
         }
     },
     props:{
@@ -341,7 +359,8 @@ export default {
     methods:{
         disableInput(){
             this.disabled = true;
-            this.formValues.muhlatEnd = "";
+            this.vshowEnd =false;
+            this.formValues.muhlatEnd = ref("");
         },
         PartSix(event){
             this.selected = event.target.value;
@@ -378,13 +397,13 @@ export default {
             name: props.bisyorjoniba.name,
             shartnoma_file: null,
             namud: props.bisyorjoniba.namudi_shartnoma_id,
-            sanai_etibor: props.bisyorjoniba.sanai_etibor,
+            sanai_etibor: props.bisyorjoniba.sanai_etibor!=null ? formated(props.bisyorjoniba.sanai_etibor) : '',
             etibor_digar:props.bisyorjoniba.etibor_digar,
             files_scan: [],
             davlatho:[{davlat: ''}],
             tartib: props.bisyorjoniba.tartibi_etibor_id,
             muhlat: props.bisyorjoniba.muhlati_etibor_id,
-            muhlatEnd: props.bisyorjoniba.qati_etibor,
+            muhlatEnd: props.bisyorjoniba.qati_etibor!=null ? formated(props.bisyorjoniba.qati_etibor) : '',
             maqomot: props.bisyorjoniba.maqomot,
             ezoh: props.bisyorjoniba.ezoh,
             _method: "PUT"
@@ -417,12 +436,15 @@ export default {
                 this.mintaqavi=false;
                 formValues.davlatho=[{davlat: ''}];
             }
+        };
+        function formated(value) {
+            return  moment(value).format('DD.MM.YYYY');
         }
         function submit(){
             Inertia.post(route('bi.update', props.bisyorjoniba.id), formValues, {
                 forceFormData: true
             });
-        }
+        };
         function selectFile($event) {
             formValues.image = $event.target.files[0];
         }

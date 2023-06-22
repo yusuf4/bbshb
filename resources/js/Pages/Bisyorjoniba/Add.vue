@@ -139,12 +139,17 @@
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full" placeholder="Вориди матн">
                     </div>
                     <div class="calendar mt-2">
-                        <label for="sanai-qabul" class="block mb-2 text-sm font-medium text-gray-900 truncate">Санаи пайдо кардани эътибор</label>
-                        <input
-                            type="date"
-                            id="sanai-qabul"
+                        <p class="block mb-2 text-sm font-medium text-gray-900 truncate">Санаи пайдо кардани эътибор</p>
+                        <vue-tailwind-datepicker
+                            as-single
+                            weekdays-size="min"
+                            :formatter="formatter"
+                            placeholder="Санаи қабул"
+                            i18n="ru"
                             v-model="formValues.sanai_etibor"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full" placeholder="">
+                            input-classes="block text-sm"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full"
+                        />
                     </div>
 
                 </div>
@@ -185,12 +190,18 @@
                         <div v-if="errors.muhlat" class="ml-1 text-red-600">{{errors.muhlat}}</div>
                     </div>
                     <div class="w-full">
-                        <label for="etibor" class="block mb-2 text-sm font-medium text-gray-900">Санаи қатъи эътибор</label>
-                        <input type="date"
-                               :disabled="disabled"
-                               id="etibor"
-                               v-model="formValues.muhlatEnd"
-                               class="disabled:opacity-75 disabled:bg-gray-300 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full">
+                        <p class="block mb-2 text-sm font-medium text-gray-900">Санаи қатъи эътибор</p>
+                        <vue-tailwind-datepicker
+                            as-single
+                            :disabled="disabled"
+                            weekdays-size="min"
+                            :formatter="formatter"
+                            placeholder="қатъи эътибор"
+                            i18n="ru"
+                            v-model="formValues.muhlatEnd"
+                            input-classes="block text-sm"
+                            class="disabled:opacity-75 disabled:bg-gray-300 bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full"
+                        />
                     </div>
                 </div>
             </div>
@@ -256,6 +267,14 @@ export default {
     components:{Link},
     props:{
         errors: Object,
+    },
+    data(){
+        return{
+            formatter: ref({
+                date:'DD.MM.YYYY',
+                month: 'MMM',
+            })
+        }
     },
     setup(){
         const formValues= useForm({

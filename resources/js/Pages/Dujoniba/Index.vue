@@ -63,7 +63,7 @@
                     {{item.nomer_d.id}}
                 </th>
                 <td class="px-2 py-4">
-                    {{item.created_at}}
+                    {{formated(item.created_at)}}
                 </td>
                 <td class="px-2 py-4">
                     <span v-if="item.sanai_etibor==null" class="cursor-help inline-flex items-center bg-gray-200 text-red-700 text-xs font-medium mr-2 pl-2 pr-3 pb-0.5 rounded-full">
@@ -174,7 +174,7 @@
      },
      methods: {
          formated(value) {
-             return  moment(value).format('DD-MM-YYYY');
+             return  moment(value).format('DD.MM.YYYY');
          }
      },
      watch:{

@@ -54,15 +54,15 @@
                     <div class="namudi-shartnoma ">
                         <h3 class="mb-2 text-sm font-medium text-gray-900 dark:text-white">Намуди шартнома</h3>
                         <ul class="items-center w-full text-sm font-medium text-gray-900  border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                            <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
+                            <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r">
                                 <div class="flex items-center pl-3">
                                     <input id="horizontal-list-radio-davlati"
                                            type="radio"
                                            value= 1
                                            name="list-radio"
                                            v-model="formValues.namud"
-                                           class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                    <label for="horizontal-list-radio-davlati" class="w-full py-2 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Байнидавлатӣ </label>
+                                           class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2 ">
+                                    <label for="horizontal-list-radio-davlati" class="w-full py-2 ml-2 text-sm font-medium text-gray-900">Байнидавлатӣ </label>
                                 </div>
                             </li>
                             <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
@@ -73,11 +73,11 @@
                                            value= 2
                                            name="list-radio"
                                            v-model="formValues.namud"
-                                           class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                    <label for="horizontal-list-radio-hukumati" class="w-full py-2 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Байниҳукуматӣ</label>
+                                           class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2 ">
+                                    <label for="horizontal-list-radio-hukumati" class="w-full py-2 ml-2 text-sm font-medium text-gray-900 ">Байниҳукуматӣ</label>
                                 </div>
                             </li>
-                            <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
+                            <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r">
                                 <div class="flex items-center pl-3">
                                     <input
                                         id="horizontal-list-radio-idoravi"
@@ -85,15 +85,15 @@
                                         value= 3
                                         name="list-radio"
                                         v-model="formValues.namud"
-                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                    <label for="horizontal-list-radio-idoravi" class="w-full py-2 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Байниидоравӣ</label>
+                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                                    <label for="horizontal-list-radio-idoravi" class="w-full py-2 ml-2 text-sm font-medium text-gray-900">Байниидоравӣ</label>
                                 </div>
                             </li>
                         </ul>
                         <div v-if="errors.namud" class="text-red-600">{{errors.namud}}</div>
                     </div>
                     <div class="tartibi-etibor mt-4 ">
-                        <label for="qarorho" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Тартиби пайдо намудани эътибор</label>
+                        <label for="qarorho" class="block mb-2 text-sm font-medium text-gray-900">Тартиби пайдо намудани эътибор</label>
                         <select
                             id="qarorho"
                             @change="PartSix($event)"
@@ -111,32 +111,37 @@
                 </div>
                 <!-- Bandi 6 Calendar default is hide -->
                 <div class="">
-                    <label for="sanai_qabul" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white truncate">Санаи пайдо кардани эътибор</label>
-                    <input type="date"
-                           id="sanai_qabul"
-                           name="sanai_etibor"
-                           v-model="formValues.sanai_etibor"
-                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="">
+                    <p class="block mb-2 text-sm font-medium text-gray-900 dark:text-white truncate">Санаи пайдо кардани эътибор</p>
+                    <vue-tailwind-datepicker
+                        as-single
+                        weekdays-size="min"
+                        :formatter="formatter"
+                        placeholder="Санаи қабул"
+                        i18n="ru"
+                        v-model="formValues.sanai_etibor"
+                        input-classes="block text-sm"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full"
+                    />
                 </div>
                 <!-- Banhoi 1 2 3 az bandi 6 default is hide -->
                 <div class="w-full truncate" v-show="showPartSix">
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white truncate" for="files_scan">Файли сканшудаи марбут ба расмиёти дохилидавлатӣ</label>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 truncate" for="files_scan">Файли сканшудаи марбут ба расмиёти дохилидавлатӣ</label>
                     <input
                         id="files_scan"
                         type="file"
                         multiple
                         @input="formValues.files_scan = $event.target.files"
-                        class="block w-full text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
+                        class="block w-full text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none">
                     <div v-if="errors.files_scan" class="text-red-600">{{errors.files_scan}}</div>
                 </div>
                 <!-- Bandi 5 default is hide -->
                 <div class="w-full" v-show="PartSixDigar">
-                    <label for="bandi-shash" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Дигар</label>
+                    <label for="bandi-shash" class="block mb-2 text-sm font-medium text-gray-900">Дигар</label>
                     <input type="text"
                            id="bandi-shash"
                            name="etibor_digar"
                            v-model.trim.lazy="formValues.etibor_digar"
-                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Вориди матн">
+                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full" placeholder="Вориди матн">
                 </div>
             </div>
             <!-- Muhlati Etibor -->
@@ -144,8 +149,8 @@
                 <h1 class="text-base text-blue-600 text-sm font-medium text-start mt-4">Муҳлати эътибор</h1>
                 <div class="flex justify-between justify-items-center items-center	space-x-4">
                     <div class="w-full mt-7">
-                        <ul class="items-center w-full text-sm font-medium text-gray-900  border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                            <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
+                        <ul class="items-center w-full text-sm font-medium text-gray-900  border border-gray-200 rounded-lg sm:flex">
+                            <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r">
                                 <div class="flex items-center pl-3">
                                     <input
                                         id="horizontal-list-radio-muhlat"
@@ -153,11 +158,11 @@
                                         type="radio" value="1"
                                         name="list-radio-muhlat"
                                         v-model="formValues.muhlat"
-                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                    <label for="horizontal-list-radio-muhlat" class="w-full py-2 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Муҳлатнок</label>
+                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                                    <label for="horizontal-list-radio-muhlat" class="w-full py-2 ml-2 text-sm font-medium text-gray-900">Муҳлатнок</label>
                                 </div>
                             </li>
-                            <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
+                            <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r">
                                 <div class="flex items-center pl-3">
                                     <input
                                         id="horizontal-list-radio-bemuhlat"
@@ -166,22 +171,26 @@
                                         type="radio"
                                         value="2"
                                         name="list-radio-muhlat"
-                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                    <label for="horizontal-list-radio-bemuhlat" class="w-full py-2 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Бемуҳлат</label>
+                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                                    <label for="horizontal-list-radio-bemuhlat" class="w-full py-2 ml-2 text-sm font-medium text-gray-900">Бемуҳлат</label>
                                 </div>
                             </li>
                         </ul>
                         <div v-if="errors.muhlat" class="text-red-600">{{errors.muhlat}}</div>
                     </div>
                     <div class="w-full">
-                        <label for="etibor" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Санаи қатъи эътибор</label>
-                        <input
-                            type="date"
-                            :disabled="disabled"
-                            id="etibor"
-                            name="qati_etibor"
-                            v-model="formValues.muhlatEnd"
-                            class="disabled:opacity-75 disabled:bg-gray-300 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="">
+                        <p class="block mb-2 text-sm font-medium text-gray-900">Санаи қатъи эътибор</p>
+                        <vue-tailwind-datepicker
+                             as-single
+                             :disabled="disabled"
+                             weekdays-size="min"
+                             :formatter="formatter"
+                             placeholder="қатъи эътибор"
+                             i18n="ru"
+                             v-model="formValues.muhlatEnd"
+                             input-classes="block text-sm"
+                             class="disabled:opacity-75 disabled:bg-gray-300 bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full"
+                         />
                     </div>
 
                 </div>
@@ -229,7 +238,7 @@
 
             <!-- Save buttons -->
             <div class="flex justify-end items-center text-center mt-[40px]">
-                <div class="back-buuton  mt-1">
+                <div class="back-buuton mt-1">
                     <Link
                         class="inline-block rounded-full border border-indigo-600 bg-indigo-600 p-3 text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
                         :href="route('do.index')"
@@ -253,13 +262,14 @@
                     :disabled="formValues.processing"
                     class=" ml-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Сабт</button>
             </div>
-
         </form>
     </div>
 </template>
 <script>
 import Dashboard from "../Dashboard";
 import {Link, Head, useForm} from "@inertiajs/inertia-vue3";
+import { ref } from 'vue'
+
 export default {
     name: "Add",
     layout: Dashboard,
@@ -270,6 +280,10 @@ export default {
             PartSixDigar: false,
             selected: '',
             disabled: false,
+            formatter: ref({
+                date:'DD.MM.YYYY',
+                month: 'MMM',
+            })
         };
     },
     props:{
@@ -281,13 +295,13 @@ export default {
             shartnoma_file: null,
             jonibi_tj: null,
             jonibi_digar: null,
-            sanai_etibor: null,
+            sanai_etibor: '',
             files_scan: [],
             etibor_digar:null,
             namud: null,
             tartib:'',
             muhlat: null,
-            muhlatEnd: null,
+            muhlatEnd: '',
             imzo_tj: null,
             imzo_digar: null,
             vakolat: [],
@@ -311,7 +325,7 @@ export default {
         },
         disableInput(){
             this.disabled = true;
-            this.formValues.muhlatEnd = "";
+            this.formValues.muhlatEnd = '';
         },
     }
 }

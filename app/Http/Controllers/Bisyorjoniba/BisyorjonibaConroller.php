@@ -12,6 +12,7 @@ use App\Models\FileShartnoma;
 use App\Models\Mintaqaho;
 use App\Models\NomeriShartnoma;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\File as FileDel;
 
@@ -65,8 +66,8 @@ class BisyorjonibaConroller extends Controller
         $bisyorjoniba->bisyorjonibafile()->create([
             'name' => $request->name,
             'etibor_digar' => $request->etibor_digar,
-            'sanai_etibor' => $request->sanai_etibor,
-            'qati_etibor' => $request->muhlatEnd,
+            'sanai_etibor' => (isset($request->sanai_etibor)) ? Carbon::createFromFormat('d.m.Y', $request->sanai_etibor)->format('Y-m-d') : null,
+            'qati_etibor' => (isset($request->muhlatEnd)) ? Carbon::createFromFormat('d.m.Y', $request->muhlatEnd)->format('Y-m-d') : null,
             'maqomot' => $request->maqomot,
             'ezoh' => $request->ezoh,
             'namudi_shartnoma_id'=> intval($request->namud),
@@ -141,8 +142,8 @@ class BisyorjonibaConroller extends Controller
      */
     public function update(BisyorjonibaUpdateRequest $request, $id)
     {
+        //dd($request);
         $bisyorjoniba = Bisyorjoniba::with('mintaqaho')->findOrFail($id);
-        //dd($bisyorjoniba->mintaqaho);
         $request->validated();
 
         // ====================Delete old file if uploaded new file Shartnoma===================
@@ -177,8 +178,8 @@ class BisyorjonibaConroller extends Controller
         $bisyorjoniba->update([
             'name' => $request->name,
             'etibor_digar' => $request->etibor_digar,
-            'sanai_etibor' => $request->sanai_etibor,
-            'qati_etibor' => $request->muhlatEnd,
+            'sanai_etibor' => (isset($request->sanai_etibor)) ? Carbon::createFromFormat('d.m.Y', $request->sanai_etibor)->format('Y-m-d') : null,
+            'qati_etibor' => (isset($request->muhlatEnd)) ? Carbon::createFromFormat('d.m.Y', $request->muhlatEnd)->format('Y-m-d') : null,
             'maqomot' => $request->maqomot,
             'ezoh' => $request->ezoh,
             'namudi_shartnoma_id'=> intval($request->namud),

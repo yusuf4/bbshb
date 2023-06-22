@@ -9,6 +9,7 @@ use App\Models\File;
 use App\Models\FileShartnoma;
 use App\Models\NomeriShartnoma;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\File as FileDel;
@@ -64,7 +65,7 @@ class DujonibaController extends Controller
     {
 
         $request->validated();
-
+        //dd($request->sanai_etibor);
         /*$request->validate([
             'files_scan.*' => 'file|mimes:xlx,xls,pdf,doc,docx,mimes:jpg,jpeg,csv,txt',
         ],['files_scan.mimes' => 'Файл :attribute бояд фармати зерин бошад: jpg,jpeg,csv,txt,xlx,xls,pdf,doc,docx']);*/
@@ -80,8 +81,8 @@ class DujonibaController extends Controller
             'jonibi_tj' => $request->jonibi_tj,
             'jonibi_digar' => $request->jonibi_digar,
             'etibor_digar' => $request->etibor_digar,
-            'sanai_etibor' => $request->sanai_etibor,
-            'qati_etibor' => $request->muhlatEnd,
+            'sanai_etibor' =>  (isset($request->sanai_etibor)) ? Carbon::createFromFormat('d.m.Y', $request->sanai_etibor)->format('Y-m-d') : null,
+            'qati_etibor' => (isset($request->muhlatEnd)) ? Carbon::createFromFormat('d.m.Y', $request->muhlatEnd)->format('Y-m-d') : null,
             'imzo_tj' => $request->imzo_tj,
             'imzo_digar' => $request->imzo_digar,
             'ezoh' => $request->ezoh,
@@ -157,7 +158,7 @@ class DujonibaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //dd($request);
+        //dd($request->sanai_etibor);
         $dujoniba = Dujoniba::findOrFail($id);
         if ($request->hasFile("shartnoma_file")){
             if (FileDel::exists('uploads/shartnoma/'.$dujoniba->fileShartnoma->name)){
@@ -175,8 +176,8 @@ class DujonibaController extends Controller
             'jonibi_tj' => $request->jonibi_tj,
             'jonibi_digar' => $request->jonibi_digar,
             'etibor_digar' => $request->etibor_digar,
-            'sanai_etibor' => $request->sanai_etibor,
-            'qati_etibor' => $request->muhlatEnd,
+            'sanai_etibor' => (isset($request->sanai_etibor)) ? Carbon::createFromFormat('d.m.Y', $request->sanai_etibor)->format('Y-m-d') : null,
+            'qati_etibor' => (isset($request->muhlatEnd)) ? Carbon::createFromFormat('d.m.Y', $request->muhlatEnd)->format('Y-m-d') : null,
             'imzo_tj' => $request->imzo_tj,
             'imzo_digar' => $request->imzo_digar,
             'ezoh' => $request->ezoh,

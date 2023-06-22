@@ -28,7 +28,7 @@ class LoginController extends Controller
             $request->session()->regenerate();
             //return redirect()->route('do.index');
             if (auth()->user()->is_admin==1){
-                return redirect()->route('do.index');
+                return redirect()->route('dash.index');
             }else{
                 return redirect()->route('guest.index');
             }

@@ -119,17 +119,21 @@
                 </div>
                 <!-- Bandi 6 Calendar default is hide -->
                 <div class="">
-                    <label for="sanai_qabul" class="block mb-2 text-sm font-medium text-gray-900 truncate">Санаи пайдо кардани эътибор</label>
-                    <input
-                        type="date"
-                        id="sanai_qabul"
-                        name="sanai_etibor"
+                    <p class="block mb-2 text-sm font-medium text-gray-900 truncate">Санаи пайдо кардани эътибор</p>
+                    <vue-tailwind-datepicker
+                        as-single
+                        weekdays-size="min"
+                        :formatter="formatter"
+                        placeholder="Санаи қабул"
+                        i18n="ru"
                         v-model="formValues.sanai_etibor"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full" placeholder="">
+                        input-classes="block text-sm"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full"
+                    />
                 </div>
                 <!-- Banhoi 1 2 3 az bandi 6 default is hide -->
                 <div class="w-full truncate" v-show="sixShow && showPartSix">
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white truncate" for="files_scan">Файли сканшудаи марбут ба расмиёти дохилидавлатӣ</label>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 truncate" for="files_scan">Файли сканшудаи марбут ба расмиёти дохилидавлатӣ</label>
                     <input
                         id="files_scan"
                         type="file"
@@ -176,20 +180,20 @@
                 <h1 class="text-base text-blue-600 text-sm font-medium text-start mt-4">Муҳлати эътибор</h1>
                 <div class="flex justify-between justify-items-center items-center	space-x-4">
                     <div class="w-full mt-7">
-                        <ul class="items-center w-full text-sm font-medium text-gray-900  border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                            <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
+                        <ul class="items-center w-full text-sm font-medium text-gray-900  border border-gray-200 rounded-lg sm:flex">
+                            <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r">
                                 <div class="flex items-center pl-3">
                                     <input
                                         id="horizontal-list-radio-muhlat"
-                                        @click="disabled = false"
+                                        @click="disabled =false; vshowEnd=true"
                                         type="radio" value="1"
                                         name="list-radio-muhlat"
                                         v-model="formValues.muhlat"
-                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                    <label for="horizontal-list-radio-muhlat" class="w-full py-2 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Муҳлатнок</label>
+                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                                    <label for="horizontal-list-radio-muhlat" class="w-full py-2 ml-2 text-sm font-medium text-gray-900">Муҳлатнок</label>
                                 </div>
                             </li>
-                            <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
+                            <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r">
                                 <div class="flex items-center pl-3">
                                     <input
                                         id="horizontal-list-radio-bemuhlat"
@@ -198,22 +202,28 @@
                                         type="radio"
                                         value="2"
                                         name="list-radio-muhlat"
-                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                    <label for="horizontal-list-radio-bemuhlat" class="w-full py-2 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Бемуҳлат</label>
+                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                                    <label for="horizontal-list-radio-bemuhlat" class="w-full py-2 ml-2 text-sm font-medium text-gray-900">Бемуҳлат</label>
                                 </div>
                             </li>
                         </ul>
                         <div v-if="errors.muhlat" class="text-red-600">{{errors.muhlat}}</div>
                     </div>
                     <div class="w-full">
-                        <label for="etibor" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Санаи қатъи эътибор</label>
-                        <input
-                            type="date"
+                        <p class="block mb-2 text-sm font-medium text-gray-900">Санаи қатъи эътибор</p>
+                        <vue-tailwind-datepicker
+                            as-single
+                            v-show="vshowEnd"
                             :disabled="disableField && disabled"
-                            id="etibor"
-                            name="qati_etibor"
+                            weekdays-size="min"
+                            :formatter="formatter"
+                            placeholder="қатъи эътибор"
+                            i18n="ru"
                             v-model="formValues.muhlatEnd"
-                            class="disabled:opacity-75 disabled:bg-gray-300 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="">
+                            input-classes="block text-sm"
+                            :class="disabled ? 'text-white' : '' "
+                            class="disabled:opacity-75 disabled:bg-gray-300 bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full"
+                        />
                     </div>
                 </div>
             </div>
@@ -221,21 +231,21 @@
             <h1 class="text-base text-blue-600 font-medium text-start mt-2">Имзокунандагон</h1>
             <div class="flex justify-between items-start flex-wrap md:flex-nowrap mt-2 space-x-4 py-4">
                 <div class="w-full">
-                    <label for="tj-imzo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ҷониби ҶТ</label>
+                    <label for="tj-imzo" class="block mb-2 text-sm font-medium text-gray-900">Ҷониби ҶТ</label>
                     <input
                         type="text"
                         id="tj-imzo"
                         name="imzo_tj"
                         v-model="formValues.imzo_tj"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Номи ва вазифаи имзокунанда">
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Номи ва вазифаи имзокунанда">
                 </div>
                 <div class="w-full">
-                    <label for="digar-imzo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ҷониби дигар</label>
+                    <label for="digar-imzo" class="block mb-2 text-sm font-medium text-gray-900">Ҷониби дигар</label>
                     <input type="text"
                            id="digar-imzo"
                            name="imzo_digar"
                            v-model="formValues.imzo_digar"
-                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Номи ва вазифаи имзокунанда">
+                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Номи ва вазифаи имзокунанда">
                 </div>
                 <div class="w-full">
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white truncate" for="vakolad_file">Файли сканшудаи қарори Ҳукумати ҶТ ё Ваколатнома</label>
@@ -246,7 +256,7 @@
                         @change="selectFile"
                         @input="formValues.vakolat = $event.target.files"
                         multiple
-                        class="block w-full  text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
+                        class="block w-full  text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none">
                     <!-- Lists of files vakolat -->
                     <div
                         v-for="files in dujoniba.file_dujoniba"
@@ -271,7 +281,7 @@
                     </div>
                 </div>
                 <div class="w-full">
-                    <label for="ezoh" class="block mb-2 ml-2 text-sm font-medium text-gray-900 dark:text-white">Эзоҳ</label>
+                    <label for="ezoh" class="block mb-2 ml-2 text-sm font-medium text-gray-900">Эзоҳ</label>
                     <input type="text"
                            id="ezoh"
                            name="ezoh"
@@ -315,6 +325,8 @@
 import Dashboard from "../Dashboard";
 import {Link, Head, useForm} from "@inertiajs/inertia-vue3";
 import {Inertia} from "@inertiajs/inertia";
+import {ref} from "vue";
+import moment from "moment";
 export default {
     name: "Edit",
     layout: Dashboard,
@@ -325,6 +337,11 @@ export default {
             PartSixDigar: false,
             selected: '',
             disabled: false,
+            vshowEnd: true,
+            formatter: ref({
+                date:'DD.MM.YYYY',
+                month: 'MMM',
+            })
         };
     },
     props:{
@@ -338,13 +355,13 @@ export default {
             shartnoma_file: null,
             jonibi_tj: props.dujoniba.jonibi_tj,
             jonibi_digar: props.dujoniba.jonibi_digar,
-            sanai_etibor: props.dujoniba.sanai_etibor,
+            sanai_etibor: props.dujoniba.sanai_etibor!=null ? formated(props.dujoniba.sanai_etibor) : '',
             files_scan: [],
             etibor_digar: props.dujoniba.etibor_digar,
             namud: props.dujoniba.namudi_shartnoma_id,
             tartib: props.dujoniba.tartibi_etibor_id,
             muhlat: props.dujoniba.muhlati_etibor_id,
-            muhlatEnd: props.dujoniba.qati_etibor,
+            muhlatEnd: props.dujoniba.qati_etibor!=null ? formated(props.dujoniba.qati_etibor) : '',
             imzo_tj: props.dujoniba.imzo_tj,
             imzo_digar: props.dujoniba.imzo_digar,
             vakolat: [],
@@ -360,7 +377,11 @@ export default {
         function selectFile($event) {
             form.image = $event.target.files[0];
         }
-        return {formValues, submit, selectFile};
+        function formated(value) {
+            return  moment(value).format('DD.MM.YYYY');
+        }
+
+        return {formValues, submit, selectFile,formated};
     },
     methods:{
         PartSix(event){
