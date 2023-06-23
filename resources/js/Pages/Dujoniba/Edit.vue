@@ -213,7 +213,6 @@
                         <p class="block mb-2 text-sm font-medium text-gray-900">Санаи қатъи эътибор</p>
                         <vue-tailwind-datepicker
                             as-single
-                            v-show="vshowEnd"
                             :disabled="disableField && disabled"
                             weekdays-size="min"
                             :formatter="formatter"
@@ -224,6 +223,7 @@
                             :class="disabled ? 'text-white' : '' "
                             class="disabled:opacity-75 disabled:bg-gray-300 bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full"
                         />
+                        <span v-if="formValues.muhlat==1 && formValues.muhlatEnd==''" class="text-sm text-red-600">Санаро аз нав интихоб намоед</span>
                     </div>
                 </div>
             </div>
@@ -337,7 +337,6 @@ export default {
             PartSixDigar: false,
             selected: '',
             disabled: false,
-            vshowEnd: true,
             formatter: ref({
                 date:'DD.MM.YYYY',
                 month: 'MMM',

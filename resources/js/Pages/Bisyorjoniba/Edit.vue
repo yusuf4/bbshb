@@ -230,7 +230,7 @@
             <div class="mb-4 border-t-4 border-blue-300 border-b-4 pb-6">
                 <h1 class="text-base text-blue-600 text-sm font-medium text-start mt-4">Муҳлати эътибор</h1>
 
-                <div class="flex justify-between justify-items-center items-center	space-x-4">
+                <div class="flex justify-between justify-items-center items-start space-x-4">
                     <div class="w-full mt-7">
                         <ul class="items-center w-full text-sm font-medium text-gray-900  border border-gray-200 rounded-lg sm:flex">
                             <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r">
@@ -265,7 +265,6 @@
                         <label class="block mb-2 text-sm font-medium text-gray-900">Санаи қатъи эътибор</label>
                         <vue-tailwind-datepicker
                             as-single
-                            v-show="vshowEnd"
                             :disabled="disableField && disabled"
                             weekdays-size="min"
                             :formatter="formatter"
@@ -275,6 +274,7 @@
                             input-classes="block text-sm"
                             class="disabled:opacity-75 disabled:bg-gray-300 bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full"
                         />
+                        <span v-if="formValues.muhlat==1 && formValues.muhlatEnd==''" class="text-sm text-red-600">Санаро аз нав интихоб намоед</span>
                     </div>
                 </div>
             </div>
@@ -359,7 +359,6 @@ export default {
     methods:{
         disableInput(){
             this.disabled = true;
-            this.vshowEnd =false;
             this.formValues.muhlatEnd = ref("");
         },
         PartSix(event){
