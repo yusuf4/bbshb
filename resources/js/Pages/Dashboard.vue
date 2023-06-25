@@ -6,6 +6,7 @@
         <div class="logo-nane h-[50px] bg-gray-900 flex justify-center items-center">
             <div class="px-[20px] cursor-default">
                 <h3 class="font-bold text-xl">ББШБ+</h3>
+
             </div>
         </div>
           <!-- MENU -->
@@ -30,7 +31,7 @@
                         </Link>
                     </div>
 
-                    <details class="group [&_summary::-webkit-details-marker]:hidden" :open="$page.component==='Dujoniba/Add' || $page.component==='Dujoniba/Index' || $page.component==='Dujoniba/Edit'">
+                    <details class="group [&_summary::-webkit-details-marker]:hidden" :open="$page.component==='Dujoniba/Add'||$page.component==='Dujoniba/Index'||$page.component==='Dujoniba/Edit'||$page.component==='Dujoniba/Card'">
                         <summary
                             class="flex cursor-pointer hover:text-gray-800 items-center justify-between rounded-lg px-2 py-2 text-white hover:bg-gray-100 hover:text-gray-700"
                         >
@@ -98,12 +99,12 @@
                                     class="w-5 h-5">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" />
                                 </svg>
-                                <span class="text-sm font-medium" :class="$page.component==='Dujoniba/Index' || $page.component==='Dujoniba/Edit' ? 'text-green-400' : ''"> Шартномаҳо </span>
+                                <span class="text-sm font-medium" :class="$page.component==='Dujoniba/Index' || $page.component==='Dujoniba/Edit' || $page.component==='Dujoniba/Card' ? 'text-green-400' : ''"> Шартномаҳо </span>
                             </Link>
                         </nav>
                     </details>
 
-                    <details class="group [&_summary::-webkit-details-marker]:hidden" :open="$page.component==='Bisyorjoniba/Add' || $page.component==='Bisyorjoniba/Index' || $page.component==='Bisyorjoniba/Edit'">
+                    <details class="group [&_summary::-webkit-details-marker]:hidden" :open="$page.component==='Bisyorjoniba/Add'||$page.component==='Bisyorjoniba/Index'||$page.component==='Bisyorjoniba/Edit' || $page.component==='Bisyorjoniba/Card'">
                         <summary
                             class="flex cursor-pointer hover:text-gray-800 items-center justify-between rounded-lg px-2 py-2 text-white hover:bg-gray-100 hover:text-gray-700"
                         >
@@ -163,7 +164,7 @@
                                     class="w-5 h-5">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" />
                                 </svg>
-                                <span class="text-sm font-medium" :class="$page.component==='Bisyorjoniba/Index' || $page.component==='Bisyorjoniba/Edit' ? 'text-green-400' : ''"> Шартномаҳо </span>
+                                <span class="text-sm font-medium" :class="$page.component==='Bisyorjoniba/Index' || $page.component==='Bisyorjoniba/Edit' || $page.component==='Bisyorjoniba/Card' ? 'text-green-400' : ''"> Шартномаҳо </span>
                             </Link>
                         </nav>
                     </details>
@@ -235,29 +236,26 @@
                       <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
                   </svg>
               </div>
-              <div class="w-[calc(100%-30px)] flex">
+              <div class="w-[calc(100%-30px)] flex pb-2">
                   <!-- Search section -->
-                  <div class="header-search w-[calc(100%-200px)] flex justify-center ">
-                      <!-- Search bar -->
-                      <form class="flex items-center w-[500px]">
-                          <label for="voice-search" class="sr-only">Search</label>
-                          <div class="relative w-full">
-                              <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-                                  <svg aria-hidden="true" class="w-5 h-auto text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                      <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
-                                  </svg>
-                              </div>
-                              <input type="text" id="voice-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search..." required>
-                              <a href="#" class="flex absolute inset-y-0 right-0 items-center pr-3">
-                                  <svg aria-hidden="true" class="w-4 h-4 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                      <path fill-rule="evenodd" d="M7 4a3 3 0 016 0v4a3 3 0 11-6 0V4zm4 10.93A7.001 7.001 0 0017 8a1 1 0 10-2 0A5 5 0 015 8a1 1 0 00-2 0 7.001 7.001 0 006 6.93V17H6a1 1 0 100 2h8a1 1 0 100-2h-3v-2.07z" clip-rule="evenodd"></path>
-                                  </svg>
-                              </a>
-                          </div>
-                      </form>
+                  <div class="header-search w-[calc(100%-200px)] flex justify-center items-center">
+                      <img src="../img/corona.png" class="h-8 w-10 mr-4 rounded-full" v-if="$page.component==='Dash/DashItems'">
+                      <div class="flex flex-col text-center" v-show="$page.component==='Dash/DashItems'">
+                          <span class="pt-1 text-lg text-blue-700 font-medium">Вазорати корҳои хориҷии Ҷумҳурии Тоҷикистон</span>
+                          <span class="text-sm text-blue-700 font-medium">Барномаи бақайдгирии шартномаҳои байналмилалӣ</span>
+                      </div>
+                      <div class="flex text-center" v-show="$page.component==='Dujoniba/Index'">
+                          <span class="pt-1 text-lg text-blue-700 font-medium">Шартномаҳои дуҷониба</span>
+                      </div>
+                      <div class="flex text-center" v-show="$page.component==='Bisyorjoniba/Index'">
+                          <span class="pt-1 text-lg text-blue-700 font-medium">Шартномаҳои бисёрҷониба</span>
+                      </div>
+                      <div class="flex text-center" v-show="$page.component==='Users/Index'">
+                          <span class="pt-1 text-lg text-blue-700 font-medium">Истифодабарандаҳо</span>
+                      </div>
                   </div>
                   <!-- User login -->
-                  <div class="cursor-pointer w-[200px] ">
+                  <div class="cursor-pointer w-[200px] mt-2">
                       <div class="flex items-center  justify-start space-x-4" @click="toggleDrop">
                           <img class="w-10 h-10 rounded-full border-2 border-gray-50" src="../img/25.jpg" alt="">
                           <div class="font-semibold dark:text-white text-left">

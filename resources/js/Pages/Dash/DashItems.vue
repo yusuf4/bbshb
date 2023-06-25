@@ -3,12 +3,6 @@
         <title>Dashboard</title>
     </Head>
     <div class="p-4 sm:p-8 space-y-6">
-            <div class="flex flex-col space-y-6 md:space-y-0 md:flex-row justify-between">
-                <div class="mr-6">
-                    <h1 class="text-2xl font-semibold mb-2 text-blue-600 ">Барномаи Шартномаҳои Байналмилали</h1>
-                    <h2 class="text-gray-900 ml-0.5">Вазорати корҳои хориҷии Ҷумҳурии Тоҷикистон</h2>
-                </div>
-            </div>
             <section class="grid md:grid-cols-2 xl:grid-cols-4 gap-6 truncate text-ellipsis">
                 <div class="flex items-center p-6 bg-white shadow rounded-lg">
                     <div class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-blue-600 bg-blue-100 rounded-full mr-6">

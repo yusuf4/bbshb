@@ -32,6 +32,7 @@ Route::middleware('auth')->group(function(){
             Route::get('/duinput','create')->name('duinput.create');
             Route::post('/dostore', 'store')->name('du.store');
             Route::get('/doindex', 'index')->name('do.index');
+            Route::get('/ducard/{id}', 'show')->name('do.card');
             Route::put('/dujoniba/{item}','update')->name('du.update');
             Route::get('/dujoniba/{item}/edit', 'edit')->name('du.edit');
             Route::delete('/delete/{item}', 'destroy')->name('du.delete');
@@ -54,6 +55,7 @@ Route::middleware('auth')->group(function(){
         Route::get('/indexb', 'index')->name('bi.index');
         Route::get('/createb', 'create')->name('bi.create');
         Route::post('/storeb', 'store')->name('bi.store');
+        Route::get('/cardb/{id}', 'show')->name('bi.card');
         Route::get('/editb/{id}', 'edit')->name('bi.edit');
         Route::put('/updateb/{id}', 'update')->name('bi.update');
         Route::delete('/deleteb/{id}', 'destroy')->name('bi.delete');

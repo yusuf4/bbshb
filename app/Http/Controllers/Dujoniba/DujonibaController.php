@@ -128,11 +128,17 @@ class DujonibaController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
     public function show($id)
     {
-        //
+       $card = Dujoniba::with('nomerD:dujoniba_id,id', 'namudiShartnoma:id,name', 'muhlatiEtibor:id,name', 'tartibiEtibor:id,name', 'fileShartnoma:id,name')->findOrFail($id);
+       $files = File::where('dujoniba_id', '=', $id)->select('name','id')->get();
+
+       return Inertia::render('Dujoniba/Card', [
+          'card'=>$card,
+           'files'=>$files
+       ]);
     }
 
     /**

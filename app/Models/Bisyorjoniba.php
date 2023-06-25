@@ -33,7 +33,7 @@ class Bisyorjoniba extends Model
     }
 
     public function muhlatiEtiborB(){
-        return $this->hasOne(MuhlatiEtibor::class);
+        return $this->hasOne(MuhlatiEtibor::class, 'id', 'muhlati_etibor_id');
     }
 
     public function mintaqaho(){

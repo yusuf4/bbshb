@@ -82,7 +82,9 @@
                     {{item.tartibi_etibor_b.name}}
                 </td>
                 <td class="text-right flex justify-end py-4 px-2">
-                    <a href="#" class="mr-2 font-medium text-blue-600 dark:text-blue-500 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">
+                    <Link
+                        :href="route('bi.card', item.id)"
+                        class="mr-2 font-medium text-blue-600 dark:text-blue-500 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">
                         <svg xmlns="http://www.w3.org/2000/svg"
                              fill="none"
                              viewBox="0 0 24 24"
@@ -93,7 +95,7 @@
                             <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                         </svg>
 
-                    </a>
+                    </Link>
                     <Link
                         :href="route('bi.edit', item.id)"
                         class="mr-2 font-medium text-cyan-700 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">

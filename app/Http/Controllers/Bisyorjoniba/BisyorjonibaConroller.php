@@ -113,11 +113,16 @@ class BisyorjonibaConroller extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
     public function show($id)
     {
-        //
+        $card = Bisyorjoniba::with('tartibiEtiborB:id,name', 'muhlatiEtiborB:id,name','namudB:id,name','fileshartnomaB:id,name','nomerB:bisyorjoniba_id,id','fileBisyor:bisyorjoniba_id,id,name', 'mintaqaho')
+            ->findOrFail($id);
+
+        return Inertia::render('Bisyorjoniba/Card', [
+           'card'=>$card
+        ]);
     }
 
     /**

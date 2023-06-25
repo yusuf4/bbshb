@@ -46,7 +46,7 @@ class Dujoniba extends Model
     }
 
     public function muhlatiEtibor(){
-        return $this->hasOne(MuhlatiEtibor::class);
+        return $this->hasOne(MuhlatiEtibor::class, 'id', 'muhlati_etibor_id');
     }
 
     public function fileDujoniba(){
