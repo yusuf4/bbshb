@@ -237,30 +237,57 @@
             </div>
 
             <!-- Save buttons -->
-            <div class="flex justify-end items-center text-center mt-[40px]">
-                <div class="back-buuton mt-1">
+            <div class="flex justify-end items-center text-center mt-[30px]">
+                <!-- Button back -->
+                <div class="mr-6">
                     <Link
-                        class="inline-block rounded-full border border-indigo-600 bg-indigo-600 p-3 text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
+                        class="group relative inline-flex items-center overflow-hidden rounded border border-current px-6 py-2 text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
                         :href="route('do.index')"
                     >
-                        <span class="sr-only">HOME</span>
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            class="w-4 h-4">
-                            <path
-                                stroke-linecap="round"
-                                stroke-width="2"
-                                stroke-linejoin="round"
-                                d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
-                        </svg>
+                              <span class="absolute -start-full transition-all group-hover:start-4">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke-width="2"
+                                        stroke="currentColor"
+                                        class="w-6 h-6">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18" />
+                                    </svg>
+                                </span>
+                        <span class="text-sm font-medium transition-all group-hover:ms-4">
+                                    Ба ақиб
+                                </span>
                     </Link>
                 </div>
-                <button
-                    type="submit"
-                    :disabled="formValues.processing"
-                    class=" ml-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Сабт</button>
+                <div>
+                    <button
+                        type="submit"
+                        :disabled="formValues.processing"
+                        class="group relative inline-flex items-center overflow-hidden rounded border border-current px-6 py-2 text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
+                    >
+                      <span class="absolute -end-full transition-all group-hover:end-4">
+                        <svg
+                            class="h-5 w-5 rtl:rotate-180"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+                          <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M17 8l4 4m0 0l-4 4m4-4H3"
+                          />
+                        </svg>
+                      </span>
+
+                        <span class="text-sm font-medium transition-all group-hover:me-4">
+                            Сабт
+                        </span>
+                    </button>
+                </div>
             </div>
         </form>
     </div>

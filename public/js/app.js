@@ -23322,27 +23322,47 @@ var _hoisted_64 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
   "class": "block mb-2 text-sm font-medium text-gray-900"
 }, "Эзоҳ", -1 /* HOISTED */);
 var _hoisted_65 = {
-  "class": "flex justify-end items-center text-center mt-[60px]"
+  "class": "flex justify-end items-center text-center mt-[40px]"
 };
 var _hoisted_66 = {
-  "class": "back-buuton mt-1"
+  "class": "mr-6"
 };
 var _hoisted_67 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "sr-only"
-}, " Download ", -1 /* HOISTED */);
-var _hoisted_68 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+  "class": "absolute -start-full transition-all group-hover:start-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
   xmlns: "http://www.w3.org/2000/svg",
   fill: "none",
   viewBox: "0 0 24 24",
+  "stroke-width": "2",
   stroke: "currentColor",
-  "class": "w-4 h-4"
+  "class": "w-6 h-6"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
+  strokeLinecap: "round",
+  strokeLinejoin: "round",
+  d: "M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18"
+})])], -1 /* HOISTED */);
+var _hoisted_68 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "text-sm font-medium transition-all group-hover:ms-4"
+}, " Ба ақиб ", -1 /* HOISTED */);
+var _hoisted_69 = ["disabled"];
+var _hoisted_70 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "absolute -end-full transition-all group-hover:end-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+  "class": "h-5 w-5 rtl:rotate-180",
+  xmlns: "http://www.w3.org/2000/svg",
+  fill: "none",
+  viewBox: "0 0 24 24",
+  stroke: "currentColor"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
   "stroke-linecap": "round",
-  "stroke-width": "2",
   "stroke-linejoin": "round",
-  d: "M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
-})], -1 /* HOISTED */);
-var _hoisted_69 = ["disabled"];
+  "stroke-width": "2",
+  d: "M17 8l4 4m0 0l-4 4m4-4H3"
+})])], -1 /* HOISTED */);
+var _hoisted_71 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "text-sm font-medium transition-all group-hover:me-4"
+}, " Сабт ", -1 /* HOISTED */);
+var _hoisted_72 = [_hoisted_70, _hoisted_71];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Head = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Head");
   var _component_vue_tailwind_datepicker = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("vue-tailwind-datepicker");
@@ -23521,19 +23541,19 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.formValues.ezoh, void 0, {
     trim: true,
     lazy: true
-  }]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Save buttons "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_65, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_66, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
-    "class": "inline-block rounded-full border border-indigo-600 bg-indigo-600 p-3 text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500",
+  }]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Save buttons "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_65, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Button back "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_66, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
+    "class": "group relative inline-flex items-center overflow-hidden rounded border border-current px-6 py-2 text-indigo-600 focus:outline-none focus:ring active:text-indigo-500",
     href: _ctx.route('bi.index')
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [_hoisted_67, _hoisted_68];
     }),
     _: 1 /* STABLE */
-  }, 8 /* PROPS */, ["href"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, 8 /* PROPS */, ["href"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     type: "submit",
     disabled: $setup.formValues.processing,
-    "class": "ml-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
-  }, "Сабт", 8 /* PROPS */, _hoisted_69)])], 32 /* HYDRATE_EVENTS */)])], 64 /* STABLE_FRAGMENT */);
+    "class": "group relative inline-flex items-center overflow-hidden rounded border border-current px-6 py-2 text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
+  }, _hoisted_72, 8 /* PROPS */, _hoisted_69)])])], 32 /* HYDRATE_EVENTS */)])], 64 /* STABLE_FRAGMENT */);
 }
 
 /***/ }),
@@ -23953,27 +23973,47 @@ var _hoisted_79 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
   "class": "block mb-2 text-sm font-medium text-gray-900"
 }, "Эзоҳ", -1 /* HOISTED */);
 var _hoisted_80 = {
-  "class": "flex justify-end items-center text-center mt-[60px]"
+  "class": "flex justify-end items-center text-center mt-[40px]"
 };
 var _hoisted_81 = {
-  "class": "back-buuton mt-1"
+  "class": "mr-6"
 };
 var _hoisted_82 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "sr-only"
-}, " Download ", -1 /* HOISTED */);
-var _hoisted_83 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+  "class": "absolute -start-full transition-all group-hover:start-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
   xmlns: "http://www.w3.org/2000/svg",
   fill: "none",
   viewBox: "0 0 24 24",
+  "stroke-width": "2",
   stroke: "currentColor",
-  "class": "w-4 h-4"
+  "class": "w-6 h-6"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
+  strokeLinecap: "round",
+  strokeLinejoin: "round",
+  d: "M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18"
+})])], -1 /* HOISTED */);
+var _hoisted_83 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "text-sm font-medium transition-all group-hover:ms-4"
+}, " Ба ақиб ", -1 /* HOISTED */);
+var _hoisted_84 = ["disabled"];
+var _hoisted_85 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "absolute -end-full transition-all group-hover:end-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+  "class": "h-5 w-5 rtl:rotate-180",
+  xmlns: "http://www.w3.org/2000/svg",
+  fill: "none",
+  viewBox: "0 0 24 24",
+  stroke: "currentColor"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
   "stroke-linecap": "round",
-  "stroke-width": "2",
   "stroke-linejoin": "round",
-  d: "M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
-})], -1 /* HOISTED */);
-var _hoisted_84 = ["disabled"];
+  "stroke-width": "2",
+  d: "M17 8l4 4m0 0l-4 4m4-4H3"
+})])], -1 /* HOISTED */);
+var _hoisted_86 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "text-sm font-medium transition-all group-hover:me-4"
+}, " Сабт ", -1 /* HOISTED */);
+var _hoisted_87 = [_hoisted_85, _hoisted_86];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Head = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Head");
   var _component_Link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Link");
@@ -24193,19 +24233,19 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     "class": "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5",
     placeholder: "матн эзоҳ"
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.formValues.ezoh]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Save buttons "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_80, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_81, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
-    "class": "inline-block rounded-full border border-indigo-600 bg-indigo-600 p-3 text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500",
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.formValues.ezoh]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Save buttons "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_80, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Button back "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_81, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
+    "class": "group relative inline-flex items-center overflow-hidden rounded border border-current px-6 py-2 text-indigo-600 focus:outline-none focus:ring active:text-indigo-500",
     href: _ctx.route('bi.index')
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [_hoisted_82, _hoisted_83];
     }),
     _: 1 /* STABLE */
-  }, 8 /* PROPS */, ["href"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, 8 /* PROPS */, ["href"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     type: "submit",
     disabled: $setup.formValues.processing,
-    "class": "ml-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
-  }, "Сабт", 8 /* PROPS */, _hoisted_84)])], 32 /* HYDRATE_EVENTS */)])], 64 /* STABLE_FRAGMENT */);
+    "class": "group relative inline-flex items-center overflow-hidden rounded border border-current px-6 py-2 text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
+  }, _hoisted_87, 8 /* PROPS */, _hoisted_84)])])], 32 /* HYDRATE_EVENTS */)])], 64 /* STABLE_FRAGMENT */);
 }
 
 /***/ }),
@@ -25165,27 +25205,47 @@ var _hoisted_72 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
   "class": "block mb-2 ml-2 text-sm font-medium text-gray-900 dark:text-white"
 }, "Эзоҳ", -1 /* HOISTED */);
 var _hoisted_73 = {
-  "class": "flex justify-end items-center text-center mt-[40px]"
+  "class": "flex justify-end items-center text-center mt-[30px]"
 };
 var _hoisted_74 = {
-  "class": "back-buuton mt-1"
+  "class": "mr-6"
 };
 var _hoisted_75 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "sr-only"
-}, "HOME", -1 /* HOISTED */);
-var _hoisted_76 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+  "class": "absolute -start-full transition-all group-hover:start-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
   xmlns: "http://www.w3.org/2000/svg",
   fill: "none",
   viewBox: "0 0 24 24",
+  "stroke-width": "2",
   stroke: "currentColor",
-  "class": "w-4 h-4"
+  "class": "w-6 h-6"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
+  strokeLinecap: "round",
+  strokeLinejoin: "round",
+  d: "M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18"
+})])], -1 /* HOISTED */);
+var _hoisted_76 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "text-sm font-medium transition-all group-hover:ms-4"
+}, " Ба ақиб ", -1 /* HOISTED */);
+var _hoisted_77 = ["disabled"];
+var _hoisted_78 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "absolute -end-full transition-all group-hover:end-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+  "class": "h-5 w-5 rtl:rotate-180",
+  xmlns: "http://www.w3.org/2000/svg",
+  fill: "none",
+  viewBox: "0 0 24 24",
+  stroke: "currentColor"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
   "stroke-linecap": "round",
-  "stroke-width": "2",
   "stroke-linejoin": "round",
-  d: "M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
-})], -1 /* HOISTED */);
-var _hoisted_77 = ["disabled"];
+  "stroke-width": "2",
+  d: "M17 8l4 4m0 0l-4 4m4-4H3"
+})])], -1 /* HOISTED */);
+var _hoisted_79 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "text-sm font-medium transition-all group-hover:me-4"
+}, " Сабт ", -1 /* HOISTED */);
+var _hoisted_80 = [_hoisted_78, _hoisted_79];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Head = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Head");
   var _component_vue_tailwind_datepicker = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("vue-tailwind-datepicker");
@@ -25394,19 +25454,19 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.formValues.ezoh, void 0, {
     trim: true,
     lazy: true
-  }]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Save buttons "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_73, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_74, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
-    "class": "inline-block rounded-full border border-indigo-600 bg-indigo-600 p-3 text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500",
+  }]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Save buttons "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_73, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Button back "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_74, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
+    "class": "group relative inline-flex items-center overflow-hidden rounded border border-current px-6 py-2 text-indigo-600 focus:outline-none focus:ring active:text-indigo-500",
     href: _ctx.route('do.index')
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [_hoisted_75, _hoisted_76];
     }),
     _: 1 /* STABLE */
-  }, 8 /* PROPS */, ["href"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, 8 /* PROPS */, ["href"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     type: "submit",
     disabled: $setup.formValues.processing,
-    "class": "ml-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-  }, "Сабт", 8 /* PROPS */, _hoisted_77)])], 32 /* HYDRATE_EVENTS */)])], 64 /* STABLE_FRAGMENT */);
+    "class": "group relative inline-flex items-center overflow-hidden rounded border border-current px-6 py-2 text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
+  }, _hoisted_80, 8 /* PROPS */, _hoisted_77)])])], 32 /* HYDRATE_EVENTS */)])], 64 /* STABLE_FRAGMENT */);
 }
 
 /***/ }),
@@ -25817,27 +25877,47 @@ var _hoisted_79 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
   "class": "block mb-2 ml-2 text-sm font-medium text-gray-900"
 }, "Эзоҳ", -1 /* HOISTED */);
 var _hoisted_80 = {
-  "class": "flex justify-end items-center text-center mt-[40px]"
+  "class": "flex justify-end items-center text-center mt-[30px]"
 };
 var _hoisted_81 = {
-  "class": "back-buuton mt-1"
+  "class": "mr-6"
 };
 var _hoisted_82 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "sr-only"
-}, "HOME", -1 /* HOISTED */);
-var _hoisted_83 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+  "class": "absolute -start-full transition-all group-hover:start-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
   xmlns: "http://www.w3.org/2000/svg",
   fill: "none",
   viewBox: "0 0 24 24",
+  "stroke-width": "2",
   stroke: "currentColor",
-  "class": "w-4 h-4"
+  "class": "w-6 h-6"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
+  strokeLinecap: "round",
+  strokeLinejoin: "round",
+  d: "M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18"
+})])], -1 /* HOISTED */);
+var _hoisted_83 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "text-sm font-medium transition-all group-hover:ms-4"
+}, " Ба ақиб ", -1 /* HOISTED */);
+var _hoisted_84 = ["disabled"];
+var _hoisted_85 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "absolute -end-full transition-all group-hover:end-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+  "class": "h-5 w-5 rtl:rotate-180",
+  xmlns: "http://www.w3.org/2000/svg",
+  fill: "none",
+  viewBox: "0 0 24 24",
+  stroke: "currentColor"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
   "stroke-linecap": "round",
-  "stroke-width": "2",
   "stroke-linejoin": "round",
-  d: "M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
-})], -1 /* HOISTED */);
-var _hoisted_84 = ["disabled"];
+  "stroke-width": "2",
+  d: "M17 8l4 4m0 0l-4 4m4-4H3"
+})])], -1 /* HOISTED */);
+var _hoisted_86 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "text-sm font-medium transition-all group-hover:me-4"
+}, " Сабт ", -1 /* HOISTED */);
+var _hoisted_87 = [_hoisted_85, _hoisted_86];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Head = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Head");
   var _component_vue_tailwind_datepicker = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("vue-tailwind-datepicker");
@@ -26077,19 +26157,19 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     "class": "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
     placeholder: "Матн"
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.formValues.ezoh]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Save buttons "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_80, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_81, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
-    "class": "inline-block rounded-full border border-indigo-600 bg-indigo-600 p-3 text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500",
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.formValues.ezoh]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Save buttons "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_80, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Button back "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_81, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
+    "class": "group relative inline-flex items-center overflow-hidden rounded border border-current px-6 py-2 text-indigo-600 focus:outline-none focus:ring active:text-indigo-500",
     href: _ctx.route('do.index')
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [_hoisted_82, _hoisted_83];
     }),
     _: 1 /* STABLE */
-  }, 8 /* PROPS */, ["href"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, 8 /* PROPS */, ["href"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     type: "submit",
     disabled: $setup.formValues.processing,
-    "class": "ml-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
-  }, "Сабт", 8 /* PROPS */, _hoisted_84)])], 32 /* HYDRATE_EVENTS */)])], 64 /* STABLE_FRAGMENT */);
+    "class": "group relative inline-flex items-center overflow-hidden rounded border border-current px-6 py-2 text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
+  }, _hoisted_87, 8 /* PROPS */, _hoisted_84)])])], 32 /* HYDRATE_EVENTS */)])], 64 /* STABLE_FRAGMENT */);
 }
 
 /***/ }),
