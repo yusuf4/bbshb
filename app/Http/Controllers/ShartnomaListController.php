@@ -18,12 +18,20 @@ class ShartnomaListController extends Controller
             })
         ->select('id', 'name', 'file_shartnoma_id','created_at')
         ->with('fileShartnoma:id,name')->paginate(2);*/
-        $files = FileShartnoma::select('id','name','created_at')
-            ->with('bisyorjonibafile', 'dujonibaF')
-            ->paginate(2);
+        $files = FileShartnoma::whereHas('bisyorjonibafile', function ($query) use ($request) {
+            $query->where('name', 'like', "%{$request->search}%");
+        })->orWhereHas('dujonibaF', function ($query) use ($request) {
+            $query->where('name', 'like', "%{$request->search}%");
+        })
+            ->select('id','name','created_at')
+            ->with('bisyorjonibafile:file_shartnoma_id,id,name', 'dujonibaF:file_shartnoma_id,id,name')
+            ->paginate(2)
+            ->withQueryString();
         //dd($files);
+        $searchlist = $request->only(['search']);
         return Inertia::render('ShartnomaList', [
-            'files'=>$files
+            'files'=>$files,
+            'searchlist'=> $searchlist
         ]);
     }
 

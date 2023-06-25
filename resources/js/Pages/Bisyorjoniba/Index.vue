@@ -165,11 +165,12 @@ export default {
     data(){
         return {
             showMenu: false,
-            search: ref(''),
+            search: ref(this.searchlist.search),
         }
     },
     props:{
         bisyorjoniba: Object,
+        searchlist: Object,
     },
     methods: {
         formated(value) {

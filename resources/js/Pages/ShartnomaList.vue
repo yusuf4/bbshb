@@ -15,20 +15,20 @@
                     id="table-search"
                     class="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500" placeholder="Ҷустуҷуи шартнома...">
             </div>
-            <Link
+            <!--<Link
                 :href="route('file.zip', zip)" method="post" as="button" type="button"
 
-                class="mt-1 text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-2">Download selected</Link>
+                class="mt-1 text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-2">Download selected</Link>-->
         </div>
         <table class="w-full text-sm text-left text-gray-500">
             <thead class="text-sm text-gray-700  bg-blue-200">
             <tr>
-                <th scope="col" class="p-4">
+                <!--<th scope="col" class="p-4">
                     <div class="flex items-center">
                         <input id="checkbox-one-search" disabled type="checkbox" class="w-4 h-4 text-blue-600 bg-blue-100 border-gray-100 rounded focus:ring-blue-500  focus:ring-2">
                         <label for="checkbox-one-search" class="sr-only">checkbox</label>
                     </div>
-                </th>
+                </th>-->
                 <th scope="col" class="px-6 py-3">
                     Номи шартнома
                 </th>
@@ -45,7 +45,7 @@
                 v-for="file in files.data"
                 :key="file.id"
                 class="bg-white border-b hover:bg-gray-50">
-                <td class="w-4 p-4">
+                <!--<td class="w-4 p-4">
                     <div class="flex items-center">
                         <input
                             v-model="zip"
@@ -55,17 +55,18 @@
                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
                     </div>
-                </td>
+                </td> -->
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                     <a
                         class="hover:text-blue-500"
                         :href="'uploads/shartnoma/'+file.name" target="_blank">
-                        {{file.name}}
+                        <span v-if="file.bisyorjonibafile!=null">{{file.bisyorjonibafile.name}}</span>
+                        <span v-else-if="file.dujoniba_f!=null">{{file.dujoniba_f.name}}</span>
                     </a>
 
                 </th>
                 <td class="px-6 py-4">
-                    {{file.created_at}}
+                    {{formated(file.created_at)}}
                 </td>
                 <td class="px-6 py-4">
                     <a
@@ -105,6 +106,7 @@ import {Link, Head} from "@inertiajs/inertia-vue3";
 import {ref} from "vue";
 import {Inertia} from "@inertiajs/inertia";
 import {useForm} from "@inertiajs/vue3";
+import moment from "moment";
 
 export default {
     name: "ShartnomaList",
@@ -112,25 +114,31 @@ export default {
     components:{Link, Head},
     data(){
         return{
-            search: ref(''),
+            search: ref(this.searchlist.search),
             zip: [],
         }
     },
     props:{
         files: Object,
+        searchlist: Object,
+    },
+    methods:{
+        formated(value) {
+            return  moment(value).format('DD.MM.YYYY');
+        }
     },
     /*setup(){
         const formValues = useForm ({
             zipfile: [],
         });
         return {formValues};
-    },
+    },*/
     watch:{
         search(value){
             Inertia.get('/files', {search: value}, {
                 preserveState: true
             });
         }
-    }*/
+    }
 }
 </script>

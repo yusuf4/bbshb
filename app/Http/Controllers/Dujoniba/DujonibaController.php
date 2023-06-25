@@ -34,9 +34,11 @@ class DujonibaController extends Controller
            // ->get()
             ->paginate(3);
         $userName= Auth::user()->name;
+        $searchlist = $request->only(['search']);
         return Inertia::render('Dujoniba/Index',[
             'dujoniba'=>$dujoniba,
-            'userName'=> $userName
+            'userName'=> $userName,
+            'searchlist'=> $searchlist,
 
         ]);
     }

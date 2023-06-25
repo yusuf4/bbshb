@@ -1,0 +1,63 @@
+<script setup>
+import Dashboard from "../Dashboard";
+import {Link, Head} from "@inertiajs/inertia-vue3";
+import { useForm } from '@inertiajs/vue3'
+export default {
+    name: "Edit",
+    layout: Dashboard,
+    components:{Link,Head},
+    data(){
+        return{
+            showPartSix: false,
+            PartSixDigar: false,
+            selected: '',
+            disabled: false
+        };
+    },
+    props:{
+        errors: Object,
+        dujoniba: Object
+    },
+    setup(props){
+        const formValues= useForm({
+            forceFormData: true,
+            id: props.dujoniba.id,
+            name: props.dujoniba.name,
+            shartnoma_file: null,
+            jonibi_tj: props.dujoniba.jonibi_tj,
+            jonibi_digar: props.dujoniba.jonibi_digar,
+            sanai_etibor: props.dujoniba.sanai_etibor,
+            files_scan: [],
+            etibor_digar:null,
+            namud: props.dujoniba.namudi_shartnoma_id,
+            tartib: props.dujoniba.tartibi_etibor_id,
+            muhlat: props.dujoniba.muhlati_etibor_id,
+            muhlatEnd: props.dujoniba.qati_etibor,
+            imzo_tj: props.dujoniba.imzo_tj,
+            imzo_digar: props.dujoniba.imzo_digar,
+            vakolat: [],
+            ezoh: props.dujoniba.ezoh
+        });
+        return {formValues};
+    },
+    methods:{
+        PartSix(event){
+            this.selected = event.target.value;
+            if(this.selected==="1" || this.selected==="2" || this.selected==="3" ){
+                this.showPartSix = true;
+                this.PartSixDigar=false;
+            }else if(this.selected==="5"){
+                this.PartSixDigar=true;
+                this.showPartSix=false;
+            }else {
+                this.showPartSix=false;
+                this.PartSixDigar=false;
+            }
+        },
+        disableInput(){
+            this.disabled = true;
+            this.formValues.muhlatEnd = "";
+        },
+    }
+}
+</script>

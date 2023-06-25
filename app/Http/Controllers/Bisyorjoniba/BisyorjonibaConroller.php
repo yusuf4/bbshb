@@ -32,8 +32,10 @@ class BisyorjonibaConroller extends Controller
             ->with('namudB:id,name', 'tartibiEtiborB:id,name', 'nomerB:id,bisyorjoniba_id')
             ->latest()
             ->paginate('3');
+        $searchlist = $request->only(['search']);
         return Inertia::render('Bisyorjoniba/Index', [
-            'bisyorjoniba' => $bisyorjoniba
+            'bisyorjoniba' => $bisyorjoniba,
+            'searchlist'=> $searchlist,
         ]);
     }
 

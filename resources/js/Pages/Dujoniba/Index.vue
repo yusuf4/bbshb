@@ -166,11 +166,12 @@
      data(){
          return {
              showMenu: false,
-             search: ref(''),
+             search: ref(this.searchlist.search),
          }
      },
      props:{
          dujoniba:Object,
+         searchlist: Object,
      },
      methods: {
          formated(value) {
