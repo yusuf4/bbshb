@@ -8,7 +8,7 @@
         </div>
         <div class="flex items-center justify-between pb-1">
             <div>
-                <button type="button" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">
+                <button type="button" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2">
                     <Link :href="route('bi.create')"
                     >
                         Иловаи шартнома
@@ -18,26 +18,26 @@
             <label for="table-search" class="sr-only">Search</label>
             <div class="relative">
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                    <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
+                    <svg class="w-5 h-5 text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
                 </div>
                 <input
                     type="text"
                     v-model="search"
                     name="search"
                     id="table-search"
-                    class="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ҷӯстуҷӯи шартномаҳо">
+                    class="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500" placeholder="Ҷӯстуҷӯи шартномаҳо">
             </div>
         </div>
-        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-700 bg-blue-300 dark:bg-gray-700 dark:text-gray-400">
+        <table class="w-full text-sm text-left text-gray-500">
+            <thead class="text-xs text-gray-700 bg-blue-300">
             <tr>
                 <th scope="col" class="px-2 py-3">
                     №
                 </th>
-                <th scope="col" class="px-2 py-3">
+                <th scope="col" class="px-2 py-3 whitespace-nowrap">
                     Санаи қайд
                 </th>
-                <th scope="col" class="px-2 py-3">
+                <th scope="col" class="px-2 py-3 whitespace-nowrap">
                     Санаи эътибор
                 </th>
                 <th scope="col" class="px-6 py-3">
@@ -58,19 +58,20 @@
             <tr
                 v-for="item in bisyorjoniba.data"
                 :key="item.id"
-                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600">
-                <th scope="row" class="px-2 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                :class="item.sanai_etibor!=null && 'text-blue-600'"
+                class="bg-white border-b hover:bg-gray-100 align-top">
+                <th scope="row" class="px-2 py-4 font-medium text-gray-900">
                     {{item.nomer_b.id}}
                 </th>
-                <td class="px-2 py-4">
+                <td class="px-2 py-4 whitespace-nowrap">
                     {{formated(item.created_at)}}
                 </td>
-                <td class="px-2 py-4">
+                <td class="px-2 py-4 whitespace-nowrap">
                     <span v-if="item.sanai_etibor==null" class="cursor-help inline-flex items-center bg-gray-200 text-red-700 text-xs font-medium mr-2 pl-2 pr-3 pb-0.5 rounded-full">
                         <span class="animate-ping w-2 h-2 mr-1.5 mt-0.5 bg-red-700 rounded-full"></span>
                         қатъи дасти
                     </span>
-                    <span v-else>{{formated(item.sanai_etibor)}}</span>
+                    <span v-else class="whitespace-nowrap">{{formated(item.sanai_etibor)}}</span>
                 </td>
                 <td class="px-5 py-4">
                     {{item.name}}
@@ -78,8 +79,15 @@
                 <td class="px-3 py-4">
                     {{item.namud_b.name}}
                 </td>
-                <td class="px-5 py-4">
-                    {{item.tartibi_etibor_b.name}}
+                <td
+                    v-show="item.muhlati_etibor_b.id===1"
+                    class="px-5 py-4">
+                    {{formated(item.qati_etibor)}}
+                </td>
+                <td
+                    v-show="item.muhlati_etibor_b.id===2"
+                    class="px-5 py-4">
+                    {{item.muhlati_etibor_b.name}}
                 </td>
                 <td class="text-right flex justify-end py-4 px-2">
                     <Link

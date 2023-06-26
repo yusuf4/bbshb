@@ -146,22 +146,26 @@
                         v-for="files in dujoniba.file_dujoniba"
                         :key="files.id"
                         class="flex">
-                        <Link
-                            method="delete" as="button" type="button"
-                            :href="route('del.qaror', files.id)">
-                            <svg
-                                class="w-5 h-5 mr-1.5 text-red-500"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
-                            </svg>
-                        </Link>
-                        <a
-                            class="hover:text-green-400 text-blue-500 text-sm"
-                            :href="'/uploads/files/'+files.name" target="_blank">
-                            {{files.name}}
-                        </a>
-
+                        <div
+                            v-show="files.namud===1"
+                            class="flex">
+                            <Link
+                                onclick="return confirm('Шумо дар ҳақиқат мехоҳед файли зеринро нест намоед?')"
+                                method="delete" as="button" type="button"
+                                :href="route('del.qaror', files.id)">
+                                <svg
+                                    class="w-5 h-5 mr-1.5 text-red-500"
+                                    fill="currentColor"
+                                    viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+                                </svg>
+                            </Link>
+                            <a
+                                class="hover:text-green-400 text-blue-500 text-sm"
+                                :href="'/uploads/files/'+files.name" target="_blank">
+                                {{files.name}}
+                            </a>
+                        </div>
                     </div>
                     <div v-if="errors.files_scan" class="text-red-600">{{errors.files_scan}}</div>
                 </div>
@@ -178,7 +182,7 @@
             <!-- Muhlati Etibor -->
             <div class="mb-4 border-t-4 border-blue-300 border-b-4 pb-6">
                 <h1 class="text-base text-blue-600 text-sm font-medium text-start mt-4">Муҳлати эътибор</h1>
-                <div class="flex justify-between justify-items-center items-center	space-x-4">
+                <div class="flex justify-between justify-items-center items-start space-x-4">
                     <div class="w-full mt-7">
                         <ul class="items-center w-full text-sm font-medium text-gray-900  border border-gray-200 rounded-lg sm:flex">
                             <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r">
@@ -223,7 +227,7 @@
                             :class="disabled ? 'text-white' : '' "
                             class="disabled:opacity-75 disabled:bg-gray-300 bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full"
                         />
-                        <span v-if="formValues.muhlat==1 && formValues.muhlatEnd==''" class="text-sm text-red-600">Санаро аз нав интихоб намоед</span>
+                        <span v-if="formValues.muhlat==1 && formValues.muhlatEnd==''" class="text-sm text-red-600">Санаро аз нав тасдиқ намоед</span>
                     </div>
                 </div>
             </div>
@@ -262,22 +266,26 @@
                         v-for="files in dujoniba.file_dujoniba"
                         :key="files.id"
                         class="flex">
-                        <Link
-                            method="delete" as="button" type="button"
-                            :href="route('del.vakolat', files.id)">
-                            <svg
-                                class="w-5 h-5 mr-1.5 text-red-500"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
-                            </svg>
-                        </Link>
-                        <a
-                            class="hover:text-green-400 text-blue-500 text-sm"
-                            :href="'/uploads/vakolat/'+files.name" target="_blank">
-                            {{files.name}}
-                        </a>
-
+                        <div
+                            v-show="files.namud===0"
+                            class="flex">
+                            <Link
+                                onclick="return confirm('Шумо дар ҳақиқат мехоҳед файли зеринро нест намоед?')"
+                                method="delete" as="button" type="button"
+                                :href="route('del.vakolat', files.id)">
+                                <svg
+                                    class="w-5 h-5 mr-1.5 text-red-500"
+                                    fill="currentColor"
+                                    viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+                                </svg>
+                            </Link>
+                            <a
+                                class="hover:text-green-400 text-blue-500 text-sm"
+                                :href="'/uploads/vakolat/'+files.name" target="_blank">
+                                {{files.name}}
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div class="w-full">

@@ -11,7 +11,7 @@ class File extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'path', 'dujoniba_id','bisyorjoniba_id'];
+    protected $fillable = ['name', 'namud', 'dujoniba_id','bisyorjoniba_id'];
 
     public function dujonibafile(){
         return $this->hasMany(Dujoniba::class, 'id', 'dujoniba_id');

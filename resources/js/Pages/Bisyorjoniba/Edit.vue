@@ -110,6 +110,7 @@
                             :key="mintaqa.id"
                             class="inline-flex items-center">
                             <Link
+                                onclick="return confirm('Шумо дар ҳақиқат мехоҳед минтақаи зеринро нест намоед?')"
                                 :href="route('del.mintaqa', mintaqa.id)"
                                 method="delete"
                                 as="button"
@@ -184,6 +185,7 @@
                             :key="files.id"
                             class="flex">
                             <Link
+                                onclick="return confirm('Шумо дар ҳақиқат мехоҳед файли зеринро нест намоед?')"
                                 method="delete" as="button" type="button"
                                 :href="route('del.files', files.id)">
                                 <svg
@@ -274,7 +276,7 @@
                             input-classes="block text-sm"
                             class="disabled:opacity-75 disabled:bg-gray-300 bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full"
                         />
-                        <span v-if="formValues.muhlat==1 && formValues.muhlatEnd==''" class="text-sm text-red-600">Санаро аз нав интихоб намоед</span>
+                        <span v-if="formValues.muhlat==1 && formValues.muhlatEnd==''" class="text-sm text-red-600">Санаро аз нав тасдиқ намоед</span>
                     </div>
                 </div>
             </div>

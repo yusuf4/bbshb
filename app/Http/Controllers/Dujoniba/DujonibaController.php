@@ -29,7 +29,7 @@ class DujonibaController extends Controller
             ->when($request->search, function ($query, $search){
                 $query->where('name', 'LIKE', "%{$search}%");
             })
-            ->with('namudiShartnoma:id,name', 'tartibiEtibor', 'nomerD:id,dujoniba_id')
+            ->with('namudiShartnoma:id,name', 'tartibiEtibor:id,name','muhlatiEtibor:id,name', 'nomerD:id,dujoniba_id')
             ->latest()
            // ->get()
             ->paginate(3);
@@ -102,6 +102,7 @@ class DujonibaController extends Controller
                 File::create([
                     'name'=>$filename,
                     'dujoniba_id'=>$dujoniba->dujonibaF->id,
+                    'namud'=>1,
                 ]);
             }
         }
@@ -113,6 +114,7 @@ class DujonibaController extends Controller
                 File::create([
                     'name'=>$filevName,
                     'dujoniba_id'=>$dujoniba->dujonibaF->id,
+                    'namud'=>0,
                 ]);
             }
         }
@@ -133,7 +135,7 @@ class DujonibaController extends Controller
     public function show($id)
     {
        $card = Dujoniba::with('nomerD:dujoniba_id,id', 'namudiShartnoma:id,name', 'muhlatiEtibor:id,name', 'tartibiEtibor:id,name', 'fileShartnoma:id,name')->findOrFail($id);
-       $files = File::where('dujoniba_id', '=', $id)->select('name','id')->get();
+       $files = File::where('dujoniba_id', '=', $id)->select('name','id','namud')->get();
 
        return Inertia::render('Dujoniba/Card', [
           'card'=>$card,
@@ -149,7 +151,7 @@ class DujonibaController extends Controller
      */
     public function edit($id)
     {
-        $dujoniba = Dujoniba::with('fileDujoniba:dujoniba_id,id,name', 'fileShartnoma:id,name')->findOrFail($id);
+        $dujoniba = Dujoniba::with('fileDujoniba:dujoniba_id,id,name,namud', 'fileShartnoma:id,name')->findOrFail($id);
 
        // dd($dujoniba->created_at->format('d-m-Y'));
         return Inertia::render('Dujoniba/Edit', [
@@ -203,6 +205,7 @@ class DujonibaController extends Controller
                 File::create([
                     'name'=>$filename,
                     'dujoniba_id'=>$dujoniba->id,
+                    'namud'=>1
                 ]);
             }
         }
@@ -216,6 +219,7 @@ class DujonibaController extends Controller
                 File::create([
                     'name'=>$filename,
                     'dujoniba_id'=>$dujoniba->id,
+                    'namud'=>0
                 ]);
             }
         }
@@ -238,6 +242,9 @@ class DujonibaController extends Controller
         foreach ( $files as $item) {
             if (FileDel::exists('uploads/files/'.$item->name)){
                 FileDel::delete('uploads/files/'.$item->name);
+            }
+            if (FileDel::exists('uploads/vakolat/'.$item->name)){
+                FileDel::delete('uploads/vakolat/'.$item->name);
             }
         }
         $dujoniba->fileShartnoma->delete();

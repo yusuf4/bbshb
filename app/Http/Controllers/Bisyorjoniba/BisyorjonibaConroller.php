@@ -29,7 +29,7 @@ class BisyorjonibaConroller extends Controller
             ->when($request->search, function ($query, $search){
                 $query->where('name', 'LIKE', "%{$search}%");
             })
-            ->with('namudB:id,name', 'tartibiEtiborB:id,name', 'nomerB:id,bisyorjoniba_id')
+            ->with('namudB:id,name', 'tartibiEtiborB:id,name', 'nomerB:id,bisyorjoniba_id', 'muhlatiEtiborB:id,name')
             ->latest()
             ->paginate('3');
         $searchlist = $request->only(['search']);
@@ -85,6 +85,7 @@ class BisyorjonibaConroller extends Controller
                 File::create([
                     'name'=>$filename,
                     'bisyorjoniba_id'=>$bisyorjoniba->bisyorjonibafile->id,
+                    'namud'=>1,
                 ]);
             }
         }
@@ -117,7 +118,7 @@ class BisyorjonibaConroller extends Controller
      */
     public function show($id)
     {
-        $card = Bisyorjoniba::with('tartibiEtiborB:id,name', 'muhlatiEtiborB:id,name','namudB:id,name','fileshartnomaB:id,name','nomerB:bisyorjoniba_id,id','fileBisyor:bisyorjoniba_id,id,name', 'mintaqaho')
+        $card = Bisyorjoniba::with('tartibiEtiborB:id,name', 'muhlatiEtiborB:id,name','namudB:id,name','fileshartnomaB:id,name','nomerB:bisyorjoniba_id,id','fileBisyor:bisyorjoniba_id,id,name,namud', 'mintaqaho:bisyorjoniba_id,id,name')
             ->findOrFail($id);
 
         return Inertia::render('Bisyorjoniba/Card', [
@@ -133,7 +134,7 @@ class BisyorjonibaConroller extends Controller
      */
     public function edit($id)
     {
-        $bisyorjoniba = Bisyorjoniba::with('mintaqaho:bisyorjoniba_id,id,name', 'fileshartnomaB:id,name', 'fileBisyor:bisyorjoniba_id,id,name')->findOrFail($id);
+        $bisyorjoniba = Bisyorjoniba::with('mintaqaho:bisyorjoniba_id,id,name', 'fileshartnomaB:id,name', 'fileBisyor:bisyorjoniba_id,id,name,namud')->findOrFail($id);
         //dd($bisyorjoniba);
         return Inertia::render('Bisyorjoniba/Edit',[
             'bisyorjoniba'=>$bisyorjoniba
@@ -204,6 +205,7 @@ class BisyorjonibaConroller extends Controller
                 File::create([
                     'name'=>$filename,
                     'bisyorjoniba_id'=>$bisyorjoniba->id,
+                    'namud'=>1,
                 ]);
             }
         }

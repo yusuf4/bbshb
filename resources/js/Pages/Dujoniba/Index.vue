@@ -28,13 +28,13 @@
                     class="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ҷӯстуҷӯи шартномаҳо">
             </div>
         </div>
-        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-700 bg-blue-300 dark:bg-gray-700 dark:text-gray-400">
+        <table class="w-full text-sm text-left text-gray-500">
+            <thead class="text-xs text-gray-700 bg-blue-300">
             <tr>
-                <th scope="col" class="px-2 py-3">
+                <th scope="row" class="px-2 py-3 font-medium text-gray-900">
                     №
                 </th>
-                <th scope="col" class="px-2 py-3">
+                <th scope="col" class="px-2 py-3 whitespace-nowrap">
                     Санаи қайд
                 </th>
                 <th scope="col" class="px-2 py-3">
@@ -46,7 +46,7 @@
                 <th scope="col" class="px-3 py-3">
                     Намуди шартнома
                 </th>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" class="px-5 py-3">
                     Муҳлати шартнома
                 </th>
                 <th scope="col" class="py-3 px-2">
@@ -58,28 +58,36 @@
             <tr
                 v-for="item in dujoniba.data"
                 :key="item.id"
-                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600">
-                <th scope="row" class="px-2 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                :class="item.sanai_etibor!=null && 'text-blue-600'"
+                class="bg-white border-b hover:bg-gray-100 align-top">
+                <th scope="row" class="px-2 py-4 font-medium text-gray-900">
                     {{item.nomer_d.id}}
                 </th>
-                <td class="px-2 py-4">
+                <td class="px-2 py-4 place-content-start">
                     {{formated(item.created_at)}}
                 </td>
-                <td class="px-2 py-4">
+                <td class="px-2 py-4 whitespace-nowrap">
                     <span v-if="item.sanai_etibor==null" class="cursor-help inline-flex items-center bg-gray-200 text-red-700 text-xs font-medium mr-2 pl-2 pr-3 pb-0.5 rounded-full">
                         <span class="animate-ping w-2 h-2 mr-1.5 mt-0.5 bg-red-700 rounded-full"></span>
                         қатъи дасти
                     </span>
                     <span v-else>{{formated(item.sanai_etibor)}}</span>
                 </td>
-                <td class="px-5 py-4">
+                <td class="flex-wrap px-5 py-4">
                     {{item.name}}
                 </td>
                 <td class="px-3 py-4">
                     {{item.namudi_shartnoma.name}}
                 </td>
-                <td class="px-5 py-4">
-                    {{item.tartibi_etibor.name}}
+                <td
+                    v-show="item.muhlati_etibor.id===1"
+                    class="px-5 py-4">
+                    {{formated(item.qati_etibor)}}
+                </td>
+                <td
+                    v-show="item.muhlati_etibor.id===2"
+                    class="px-5 py-4">
+                    {{item.muhlati_etibor.name}}
                 </td>
                 <td class="text-right flex justify-end py-4 px-2">
                     <Link

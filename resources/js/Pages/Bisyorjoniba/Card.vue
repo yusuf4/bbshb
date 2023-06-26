@@ -29,14 +29,19 @@
                             <span class="text-sm text-gray-700 pb-2">{{card.nomer_b.id}}</span>
                             <span class="text-sm text-blue-600 pb-2"><a :href="'/uploads/shartnoma/'+card.fileshartnoma_b.name" target="_blank">{{card.fileshartnoma_b.name}}</a></span>
                             <span class="text-sm text-gray-700 pb-2">{{card.namud_b.name}}</span>
-                            <div class="flex">
+                            <div
+                                v-if="card.mintaqaho.length>0"
+                                class="flex">
                                     <span
                                         v-for="mintaqa in card.mintaqaho"
                                         :key="mintaqa.id"
-                                        class="text-sm text-gray-700 pb-2.5 pr-2"
+                                        class="text-sm text-gray-700 pb-2 pr-2"
                                     >{{mintaqa.name}},</span>
                             </div>
-                            <span class="text-sm text-gray-700 pb-2" v-if="card.sanai_etibor!=null">{{formated(card.sanai_etibor)}}</span>
+                            <div v-else>
+                                <span class="text-sm text-gray-700 pb-2">----</span>
+                            </div>
+                            <span class="text-sm text-gray-700 pb-1.5" v-if="card.sanai_etibor!=null">{{formated(card.sanai_etibor)}}</span>
                             <span class="text-sm text-gray-700 pb-1.5" v-else>-----</span>
                             <span class="text-sm text-gray-700 pb-2">{{card.tartibi_etibor_b.name}}</span>
                             <div class="flex">

@@ -9,7 +9,7 @@
                             <span class="block text-lg font-medium">{{card.name}}</span>
                         </div>
 
-                        <div class="flex justify-start items-center mt-8">
+                        <div class="flex justify-start items-start mt-8">
                             <div class="flex flex-col mb-2 mr-20">
                                 <span class="text-sm font-medium pb-2">Таърих</span>
                                 <span class="text-sm font-medium pb-2">№ қайд</span>
@@ -32,24 +32,33 @@
                                 <span class="text-sm text-gray-700 pb-2">{{card.namudi_shartnoma.name}}</span>
                                 <span class="text-sm text-gray-700 pb-2">{{card.jonibi_tj}}, {{card.jonibi_digar}}</span>
                                 <span class="text-sm text-gray-700 pb-2" v-if="card.sanai_etibor!=null">{{formated(card.sanai_etibor)}}</span>
-                                <span class="text-sm text-gray-700 pb-2" v-else>----</span>
+                                <span class="text-sm text-gray-700 p-1.5" v-else>----</span>
                                 <span class="text-sm text-gray-700 pb-2">{{card.tartibi_etibor.name}}</span>
                                 <div class="flex">
                                     <span
                                         v-for="file in files"
                                         :key="file.id"
-                                        class="text-sm text-blue-600 pb-2.5 pr-2"
-                                    ><a :href="'/uploads/files/'+file.name" target="_blank">{{file.name}},</a></span>
+                                        class="text-sm text-blue-600 pb-2 pr-2"
+                                    ><a
+                                        v-show="file.namud===1"
+                                        :href="'/uploads/files/'+file.name" target="_blank">{{file.name}},</a></span>
                                 </div>
                                 <span class="text-sm text-gray-700 pb-2">{{card.muhlati_etibor.name}}</span>
                                 <span class="text-sm text-gray-700 pb-1.5" v-if="card.qati_etibor!=null">{{formated(card.qati_etibor)}}</span>
-                                <span class="text-sm text-gray-700 pb-1.5" v-else>----</span>
+                                <span class="text-sm text-gray-700 p-1.5" v-else>----</span>
                                 <span class="text-sm text-gray-700 pb-2">{{card.imzo_tj}}, {{card.imzo_digar}}</span>
-                                <span class="text-sm text-gray-700 pb-2">{{card.imzo_tj}}, {{card.imzo_digar}}</span>
+                                <div class="flex">
+                                    <span
+                                        v-for="file in files"
+                                        :key="file.id"
+                                        class="text-sm text-blue-600 pb-2 pr-2"
+                                    ><a
+                                        v-if="file.namud===0"
+                                        :href="'/uploads/files/'+file.name" target="_blank">{{file.name}},</a></span>
+                                </div>
                                 <span class="text-sm text-gray-700 pb-2">{{card.ezoh}}</span>
                             </div>
                         </div>
-
                         <div class="mt-4 flex flex-wrap gap-1">
                             <span
                                 class="whitespace-nowrap rounded-full bg-purple-100 px-2.5 py-0.5 text-xs text-purple-600"

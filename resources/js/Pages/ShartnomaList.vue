@@ -3,7 +3,7 @@
         <title>Файл</title>
     </Head>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-        <div class="flex justify-between ml-0.5 pb-4 bg-white">
+        <div class="flex justify-end mr-0.5 pb-4 bg-white">
             <label for="table-search" class="sr-only">Search</label>
             <div class="relative mt-1">
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
