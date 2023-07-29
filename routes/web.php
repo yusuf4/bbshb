@@ -37,6 +37,7 @@ Route::middleware('auth')->group(function(){
             Route::get('/dujoniba/{item}/edit', 'edit')->name('du.edit');
             Route::delete('/delete/{item}', 'destroy')->name('du.delete');
             Route::get('/dujoniba/file/{id}', 'downloadD')->name('du.download');
+            Route::post('/card/{id}', 'qatiDasti')->name('du.qatdast');
             // =============Delete files of part six inputs========================
             Route::delete('/fileqaror/{id}', 'deleteqaror')->name('del.qaror');
             // ==================Delete files of vakolat inputs=====================
@@ -57,6 +58,7 @@ Route::middleware('auth')->group(function(){
         Route::post('/storeb', 'store')->name('bi.store');
         Route::get('/cardb/{id}', 'show')->name('bi.card');
         Route::get('/editb/{id}', 'edit')->name('bi.edit');
+        Route::post('/cardbq/{id}', 'qatiDastiB')->name('bi.qatidast');
         Route::put('/updateb/{id}', 'update')->name('bi.update');
         Route::delete('/deleteb/{id}', 'destroy')->name('bi.delete');
         Route::get('/downloadb/file/{id}', 'downloadB')->name('bi.download');

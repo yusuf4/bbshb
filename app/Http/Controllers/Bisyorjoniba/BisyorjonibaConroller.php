@@ -263,4 +263,13 @@ class BisyorjonibaConroller extends Controller
         $filePath = public_path("uploads/shartnoma/".$file->name);
         return response()->download($filePath);
     }
+
+    public function qatiDastiB(Request $request, $id)
+    {
+        $shartnoma = Bisyorjoniba::findOrFail($id);
+        $shartnoma->update([
+            'sanai_etibor' => (isset($request->sanai_etibor)) ? Carbon::createFromFormat('d.m.Y', $request->sanai_etibor)->format('Y-m-d') : null,
+        ]);
+        return redirect()->back();
+    }
 }
