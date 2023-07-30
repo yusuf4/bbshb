@@ -2,7 +2,7 @@
     <Head>
         <title>Шартномаҳо</title>
     </Head>
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <div class="relative shadow-md sm:rounded-lg">
         <div v-if="$page.props.flash.message" class="text-blue-500 text-center bg-blue-50">
             {{$page.props.flash.message}}
         </div>
@@ -16,7 +16,7 @@
                 </button>
             </div>
             <label for="table-search" class="sr-only">Search</label>
-            <div class="relative">
+            <div class="relative flex items-center">
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                     <svg class="w-5 h-5 text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
                 </div>
@@ -25,8 +25,71 @@
                     v-model="search"
                     name="search"
                     id="table-search"
-                    class="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500" placeholder="Ҷӯстуҷӯи шартномаҳо">
+                    class="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="Ҷӯстуҷӯи шартномаҳо">
+                <div
+                    @click="FilterToggle"
+                    class="mx-2">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         fill="none"
+                         viewBox="0 0 24 24"
+                         stroke-width="2"
+                         stroke="currentColor"
+                         class="w-6 h-6 text-blue-600">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" />
+                    </svg>
+                </div>
             </div>
+        </div>
+        <div class="my-2" v-show="datefilter">
+            <form class="flex justify-end items-center">
+                <div class="w-1/6 mx-2">
+                    <select
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2">
+                        <option selected>Намуди шартнома</option>
+                        <option value="US">Байнидавлатӣ</option>
+                        <option value="CA">Байниҳукуматӣ</option>
+                        <option value="FR">Байниидоравӣ</option>
+                    </select>
+                </div>
+                <div class="w-1/6">
+                    <vue-tailwind-datepicker
+                        as-single
+                        weekdays-size="min"
+                        :formatter="formatter"
+                        placeholder="Ҷустуҷу аз санаи"
+                        i18n="ru"
+                        v-model="fromdate"
+                        input-classes="block text-sm "
+                        class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full"
+                    />
+                </div>
+                <div class="w-1/6 mx-2 ">
+                    <vue-tailwind-datepicker
+                        as-single
+                        weekdays-size="min"
+                        :formatter="formatter"
+                        placeholder="То санаи"
+                        i18n="ru"
+                        v-model="todate"
+                        input-classes="block text-sm"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full"
+                    />
+                </div>
+                <div class="mr-2">
+                    <Link
+                        method="post" as="button" type="button"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             fill="none" viewBox="0 0 24 24"
+                             stroke-width="2" stroke="currentColor"
+                             class="w-6 h-6 text-blue-600">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                        </svg>
+                    </Link>
+                </div>
+
+            </form>
         </div>
         <table class="w-full text-sm text-left text-gray-500">
             <thead class="text-xs text-gray-700 bg-blue-300">
@@ -174,8 +237,15 @@ export default {
     components: {Link, Head},
     data(){
         return {
+            formatter: ref({
+                date:'DD.MM.YYYY',
+                month: 'MMM',
+            }),
             showMenu: false,
             search: ref(this.searchlist.search),
+            datefilter: false,
+            fromdate: '',
+            todate: '',
         }
     },
     props:{
@@ -185,6 +255,9 @@ export default {
     methods: {
         formated(value) {
             return  moment(value).format('DD-MM-YYYY');
+        },
+        FilterToggle(){
+            this.datefilter=!this.datefilter;
         }
     },
 

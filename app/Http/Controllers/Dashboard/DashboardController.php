@@ -16,11 +16,15 @@ class DashboardController extends Controller
         $users = User::count();
         $dujonibaCount = Dujoniba::count();
         $bisyorCount = Bisyorjoniba::count();
+        $ijronashudaD = Dujoniba::where('sanai_etibor', '=', null)->count();
+        $ijronashudaB = Bisyorjoniba::where('sanai_etibor', '=', null)->count();
+        $ijronashuda = $ijronashudaD+$ijronashudaB;
         //dd($users);
         return Inertia::render('Dash/DashItems',[
           'users'=>$users,
             'dujonibaCount'=>$dujonibaCount,
             'bisyorCount'=>$bisyorCount,
+            'ijronashuda'=>$ijronashuda,
         ]);
     }
 }

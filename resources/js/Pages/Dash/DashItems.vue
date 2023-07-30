@@ -41,9 +41,8 @@
                         </svg>
                     </div>
                     <div class="text-ellipsis overflow-hidden ...">
-                        <span class="inline-block text-2xl font-bold">3m 45s</span>
-                        <span class="inline-block text-xl text-gray-500 font-semibold">(-32%)</span>
-                        <span class="block text-gray-500">Average Engagement Time</span>
+                        <span class="inline-block text-2xl font-bold">{{ijronashuda}}</span>
+                        <span class="block text-gray-500">Шартномаҳои иҷронашуда</span>
                     </div>
                 </div>
                 <div class="flex items-center p-8 bg-white shadow rounded-lg">
@@ -184,6 +183,7 @@ export default {
         users: String,
         dujonibaCount: String,
         bisyorCount: String,
+        ijronashuda: String,
     }
 }
 </script>
