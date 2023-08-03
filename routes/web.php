@@ -42,6 +42,7 @@ Route::middleware('auth')->group(function(){
             Route::delete('/fileqaror/{id}', 'deleteqaror')->name('del.qaror');
             // ==================Delete files of vakolat inputs=====================
             Route::delete('/filevakolat/{id}', 'deletevakolat')->name('del.vakolat');
+            Route::get('/searchn','seracN')->name('do.serch');
         });
 
         // =====================Dashboard items========================

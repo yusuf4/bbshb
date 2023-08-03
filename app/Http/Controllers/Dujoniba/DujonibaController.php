@@ -25,14 +25,21 @@ class DujonibaController extends Controller
 
     public function index(Request $request)
     {
+
         $dujoniba = Dujoniba::query()
             ->when($request->search, function ($query, $search){
                 $query->where('name', 'LIKE', "%{$search}%");
+            })
+            ->when($request->searchnamud, function ($query, $searchnamud){
+                $query->where('namudi_shartnoma_id', '=', "{$searchnamud}");
             })
             ->with('namudiShartnoma:id,name', 'tartibiEtibor:id,name','muhlatiEtibor:id,name', 'nomerD:id,dujoniba_id')
             ->latest()
            // ->get()
             ->paginate(3);
+//        if($request->formValues['datefrom']!=null && $request->formValues['dateto']!=null ){
+//            $dujoniba->whereBetween('created_at', [Carbon::createFromFormat('d.m.Y',$request->formValues['datefrom'])->format('Y-m-d'), Carbon::createFromFormat('d.m.Y',$request->formValues['dateto'])->format('Y-m-d')])->paginate(3);
+//        };
         $userName= Auth::user()->name;
         $searchlist = $request->only(['search']);
         return Inertia::render('Dujoniba/Index',[
@@ -43,6 +50,18 @@ class DujonibaController extends Controller
         ]);
     }
 
+
+    public function seracN(Request $request){
+
+       $dujonibaFf = Dujoniba::query();
+        //dd($request->formValues['datefrom']!=null && $request->formValues['dateto']!=null );
+       if($request->formValues['datefrom']!=null && $request->formValues['dateto']!=null ){
+           dd($dujonibaFf->whereBetween('created_at', [Carbon::createFromFormat('d.m.Y',$request->formValues['datefrom'])->format('Y-m-d'), Carbon::createFromFormat('d.m.Y',$request->formValues['dateto'])->format('Y-m-d')])->get());
+       };
+//        return Inertia::render('Dujoniba/Index',[
+//            'dujonibaFf'=>$dujonibaFf
+//        ]);
+    }
     public function guestIndex(){
         return Inertia::render('NavGuest');
     }
