@@ -33,13 +33,15 @@ class DujonibaController extends Controller
             ->when($request->searchnamud, function ($query, $searchnamud){
                 $query->where('namudi_shartnoma_id', '=', "{$searchnamud}");
             })
+           ->when($request->formValues, function ($query, $formValues) use ($request) {
+               if($request->formValues['datefrom']!=null && $request->formValues['dateto']!=null){
+                   $query->whereBetween('created_at', [Carbon::createFromFormat('d.m.Y',$formValues['datefrom'])->format('Y-m-d'), Carbon::createFromFormat('d.m.Y',$formValues['dateto'])->format('Y-m-d')]);
+               }
+           })
             ->with('namudiShartnoma:id,name', 'tartibiEtibor:id,name','muhlatiEtibor:id,name', 'nomerD:id,dujoniba_id')
             ->latest()
-           // ->get()
             ->paginate(3);
-//        if($request->formValues['datefrom']!=null && $request->formValues['dateto']!=null ){
-//            $dujoniba->whereBetween('created_at', [Carbon::createFromFormat('d.m.Y',$request->formValues['datefrom'])->format('Y-m-d'), Carbon::createFromFormat('d.m.Y',$request->formValues['dateto'])->format('Y-m-d')])->paginate(3);
-//        };
+
         $userName= Auth::user()->name;
         $searchlist = $request->only(['search']);
         return Inertia::render('Dujoniba/Index',[
@@ -53,6 +55,7 @@ class DujonibaController extends Controller
 
     public function seracN(Request $request){
 
+        dd($request->formValues['datefrom']);
        $dujonibaFf = Dujoniba::query();
         //dd($request->formValues['datefrom']!=null && $request->formValues['dateto']!=null );
        if($request->formValues['datefrom']!=null && $request->formValues['dateto']!=null ){

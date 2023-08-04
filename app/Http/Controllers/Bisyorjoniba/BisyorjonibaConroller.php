@@ -29,6 +29,14 @@ class BisyorjonibaConroller extends Controller
             ->when($request->search, function ($query, $search){
                 $query->where('name', 'LIKE', "%{$search}%");
             })
+            ->when($request->searchnamud, function ($query, $searchnamud){
+                $query->where('namudi_shartnoma_id', '=', "{$searchnamud}");
+            })
+            ->when($request->formValues, function ($query, $formValues) use ($request) {
+                if($request->formValues['datefrom']!=null && $request->formValues['dateto']!=null){
+                    $query->whereBetween('created_at', [Carbon::createFromFormat('d.m.Y',$formValues['datefrom'])->format('Y-m-d'), Carbon::createFromFormat('d.m.Y',$formValues['dateto'])->format('Y-m-d')]);
+                }
+            })
             ->with('namudB:id,name', 'tartibiEtiborB:id,name', 'nomerB:id,bisyorjoniba_id', 'muhlatiEtiborB:id,name')
             ->latest()
             ->paginate('3');

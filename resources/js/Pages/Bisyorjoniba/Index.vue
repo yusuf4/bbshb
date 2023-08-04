@@ -42,14 +42,14 @@
             </div>
         </div>
         <div class="my-2" v-show="datefilter">
-            <form class="flex justify-end items-center">
+            <div class="flex justify-end items-center">
                 <div class="w-1/6 mx-2">
                     <select
+                        v-model="searchnamud"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2">
-                        <option selected>Намуди шартнома</option>
-                        <option value="US">Байнидавлатӣ</option>
-                        <option value="CA">Байниҳукуматӣ</option>
-                        <option value="FR">Байниидоравӣ</option>
+                        <option value="">Намуди шартнома</option>
+                        <option value="4">Универсалӣ</option>
+                        <option value="5">Минтақавӣ</option>
                     </select>
                 </div>
                 <div class="w-1/6">
@@ -59,9 +59,9 @@
                         :formatter="formatter"
                         placeholder="Ҷустуҷу аз санаи"
                         i18n="ru"
-                        v-model="fromdate"
-                        input-classes="block text-sm "
-                        class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full"
+                        v-model="formValues.datefrom"
+                        input-classes="block text-sm bg-gray-50 border border-gray-300"
+                        class="text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full"
                     />
                 </div>
                 <div class="w-1/6 mx-2 ">
@@ -71,25 +71,24 @@
                         :formatter="formatter"
                         placeholder="То санаи"
                         i18n="ru"
-                        v-model="todate"
-                        input-classes="block text-sm"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full"
+                        v-model="formValues.dateto"
+                        input-classes="block text-sm bg-gray-50 border border-gray-300"
+                        class="text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full"
                     />
                 </div>
                 <div class="mr-2">
                     <Link
-                        method="post" as="button" type="button"
+                        :href="route('bi.index')"
                     >
                         <svg xmlns="http://www.w3.org/2000/svg"
                              fill="none" viewBox="0 0 24 24"
                              stroke-width="2" stroke="currentColor"
-                             class="w-6 h-6 text-blue-600">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                             class="w-6 h-6 text-red-600">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
                         </svg>
                     </Link>
                 </div>
-
-            </form>
+            </div>
         </div>
         <table class="w-full text-sm text-left text-gray-500">
             <thead class="text-xs text-gray-700 bg-blue-300">
@@ -244,8 +243,11 @@ export default {
             showMenu: false,
             search: ref(this.searchlist.search),
             datefilter: false,
-            fromdate: '',
-            todate: '',
+            searchnamud: '',
+            formValues:{
+                datefrom: '',
+                dateto: ''
+            }
         }
     },
     props:{
@@ -266,6 +268,19 @@ export default {
             Inertia.get('/indexb', {search: value}, {
                 preserveState: true
             });
+        },
+        searchnamud(value){
+            Inertia.get('/indexb',{searchnamud:value},{
+                preserveState: true
+            });
+        },
+        formValues: {
+            handler(newvalue){
+                Inertia.get('/indexb',{formValues:newvalue},{
+                    preserveState: true
+                });
+            },
+            deep:true
         }
     },
 }

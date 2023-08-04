@@ -43,17 +43,18 @@
         </div>
         <div class="my-2" v-show="datefilter">
             <div class="flex justify-end items-center" >
-                <div class="w-1/6 mx-2">
-                    <select
-                        v-model="searchnamud"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2">
-                        <option value="">Намуди шартнома</option>
-                        <option value="1">Байнидавлатӣ</option>
-                        <option value="2">Байниҳукуматӣ</option>
-                        <option value="3">Байниидоравӣ</option>
-                    </select>
-                </div>
-                <form class="flex justify-end w-full">
+
+                <div class="flex justify-end w-full">
+                    <div class="w-1/6 mr-2">
+                        <select
+                            v-model="searchnamud"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2">
+                            <option value="">Намуди шартнома</option>
+                            <option value="1">Байнидавлатӣ</option>
+                            <option value="2">Байниҳукуматӣ</option>
+                            <option value="3">Байниидоравӣ</option>
+                        </select>
+                    </div>
                     <div class="w-1/6">
                         <vue-tailwind-datepicker
                             as-single
@@ -62,8 +63,8 @@
                             placeholder="Ҷустуҷу аз санаи"
                             i18n="ru"
                             v-model="formValues.datefrom"
-                            input-classes="block text-sm "
-                            class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full"
+                            input-classes="block text-sm bg-gray-50 border border-gray-300"
+                            class=" text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full"
                         />
                     </div>
                     <div class="w-1/6 mx-2 ">
@@ -74,21 +75,11 @@
                             placeholder="То санаи"
                             i18n="ru"
                             v-model="formValues.dateto"
-                            input-classes="block text-sm"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full"
+                            input-classes="block text-sm bg-gray-50 border border-gray-300"
+                            class="text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full"
                         />
                     </div>
-                    <button type="submit">
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                             fill="none" viewBox="0 0 24 24"
-                             stroke-width="2"
-                             stroke="currentColor"
-                             class="w-6 h-6 text-blue-600 mx-2">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-                        </svg>
-                    </button>
-
-                </form>
+                </div>
                 <div class="mr-2">
                     <Link
                         :href="route('do.index')"
@@ -101,7 +92,6 @@
                         </svg>
                     </Link>
                 </div>
-
             </div>
         </div>
         <table class="w-full text-sm text-left text-gray-500">
@@ -293,7 +283,7 @@
                  //const formatSD = moment(newvalue.datefrom).format('YYYY-MM-DD')
                  //const formatED = moment(newvalue.dateto).format('YYYY-MM-DD')
                  //const sddd = moment(newdatef).format('YYYY-MM-DD')
-                 Inertia.get('/searchn',{formValues:newvalue},{
+                 Inertia.get('/doindex',{formValues:newvalue},{
                      preserveState: true
                  });
                  console.log(`Calling API with ${newvalue.datefrom} and ${newvalue.dateto}`)
