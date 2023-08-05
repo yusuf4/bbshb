@@ -43,6 +43,14 @@
         </div>
         <div class="my-2" v-show="datefilter">
             <div class="flex justify-end items-center">
+                <div class="flex items-center mr-4">
+                    <input
+                        v-model="ijronashuda"
+                        checked id="red-checkbox"
+                        type="checkbox" value=""
+                        class="w-4 h-4 text-red-600 bg-gray-100 border-gray-300 rounded focus:ring-red-500 focus:ring-2">
+                    <label for="red-checkbox" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Шартномаҳои иҷронашуда</label>
+                </div>
                 <div class="w-1/6 mx-2">
                     <select
                         v-model="searchnamud"
@@ -244,6 +252,7 @@ export default {
             search: ref(this.searchlist.search),
             datefilter: false,
             searchnamud: '',
+            ijronashuda: false,
             formValues:{
                 datefrom: '',
                 dateto: ''
@@ -281,6 +290,11 @@ export default {
                 });
             },
             deep:true
+        },
+        ijronashuda(value){
+            Inertia.get('/indexb', {ijronashuda: value}, {
+                preserveState: true
+            });
         }
     },
 }

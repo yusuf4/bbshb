@@ -32,6 +32,9 @@ class BisyorjonibaConroller extends Controller
             ->when($request->searchnamud, function ($query, $searchnamud){
                 $query->where('namudi_shartnoma_id', '=', "{$searchnamud}");
             })
+            ->when($request->ijronashuda == 'true', function ($query){
+                $query->where('sanai_etibor', NULL);
+            })
             ->when($request->formValues, function ($query, $formValues) use ($request) {
                 if($request->formValues['datefrom']!=null && $request->formValues['dateto']!=null){
                     $query->whereBetween('created_at', [Carbon::createFromFormat('d.m.Y',$formValues['datefrom'])->format('Y-m-d'), Carbon::createFromFormat('d.m.Y',$formValues['dateto'])->format('Y-m-d')]);

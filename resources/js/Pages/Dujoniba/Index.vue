@@ -45,6 +45,14 @@
             <div class="flex justify-end items-center" >
 
                 <div class="flex justify-end w-full">
+                    <div class="flex items-center mr-4">
+                        <input
+                            v-model="ijronashuda"
+                            checked id="red-checkbox"
+                            type="checkbox" value=""
+                            class="w-4 h-4 text-red-600 bg-gray-100 border-gray-300 rounded focus:ring-red-500 focus:ring-2">
+                        <label for="red-checkbox" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Шартномаҳои иҷронашуда</label>
+                    </div>
                     <div class="w-1/6 mr-2">
                         <select
                             v-model="searchnamud"
@@ -248,6 +256,7 @@
              showMenu: false,
              search: ref(this.searchlist.search),
              searchnamud: '',
+             ijronashuda: false,
              datefilter: false,
              formValues:{
                  datefrom: '',
@@ -289,14 +298,12 @@
                  console.log(`Calling API with ${newvalue.datefrom} and ${newvalue.dateto}`)
              },
              deep:true
+         },
+         ijronashuda(value){
+             Inertia.get('/doindex', {ijronashuda: value}, {
+                 preserveState: true
+             });
          }
      },
-     // setup(){
-     //     const formValues= useForm({
-     //         datefrom: '',
-     //         dateto: '',
-     //     });
-     //     return {formValues};
-     // },
  }
  </script>
