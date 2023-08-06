@@ -62,9 +62,64 @@
             </section>
             <section class="grid md:grid-cols-2 xl:grid-cols-4 xl:grid-rows-3 xl:grid-flow-col gap-6">
                 <div class="flex flex-col md:col-span-2 md:row-span-2 bg-white shadow rounded-lg">
-                    <div class="px-6 py-5 font-semibold border-b border-gray-100">Your insights will appear here soon.</div>
+                    <div class="px-6 py-5 font-semibold border-b border-gray-100">Шумораи шартномаҳо вобаста ба санаи ворид гардида.</div>
                     <div class="p-4 flex-grow">
-                        <div class="flex items-center justify-center h-full px-4 py-16 text-gray-400 text-3xl font-semibold bg-gray-100 border-2 border-gray-200 border-dashed rounded-md">Chart</div>
+
+                        <div class="flex flex-col sm:justify-start h-full p-4  text-gray-400 text-3xl font-semibold bg-gray-100 border-2 border-gray-200 border-dashed rounded-md">
+                            <div class="mb-4">
+                                <h3 class="mb-2 font-semibold text-sm text-gray-900">Намуди шартнома</h3>
+                                <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex">
+                                    <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r">
+                                        <div class="flex items-center pl-3">
+                                            <input
+                                                v-model="formValues.namud"
+                                                id="horizontal-list-radio-millitary" type="radio" value="1" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                                            <label for="horizontal-list-radio-millitary" class="w-full py-2 ml-2 text-sm font-medium text-gray-900">Дуҷониба</label>
+                                        </div>
+                                    </li>
+                                    <li class="w-full dark:border-gray-600">
+                                        <div class="flex items-center pl-3">
+                                            <input
+                                                v-model="formValues.namud"
+                                                id="horizontal-list-radio-passport" type="radio" value="2" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2 dark:bg-gray-600">
+                                            <label for="horizontal-list-radio-passport" class="w-full py-2 ml-2 text-sm font-medium text-gray-900">Бисёрҷониба</label>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="flex">
+                               <div class="w-full">
+                                   <vue-tailwind-datepicker
+                                       as-single
+                                       weekdays-size="min"
+                                       :formatter="formatter"
+                                       placeholder="Ҷустуҷу аз санаи"
+                                       i18n="ru"
+                                       v-model="formValues.datefrom"
+                                       input-classes="block text-sm bg-gray-50 border border-gray-300"
+                                       class="text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full"
+                                   />
+                               </div>
+                               <div class="w-full mx-2 ">
+                                   <vue-tailwind-datepicker
+                                       as-single
+                                       weekdays-size="min"
+                                       :formatter="formatter"
+                                       placeholder="То санаи"
+                                       i18n="ru"
+                                       v-model="formValues.dateto"
+                                       input-classes="block text-sm bg-gray-50 border border-gray-300"
+                                       class="text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full"
+                                   />
+                               </div>
+                           </div>
+                            <div v-if="shumoraD>0">
+                                <p class="text-blue-500 text-sm mt-2">Миқдори шартномаҳои дуҷониба дар давраи мазкур: <span class="text-base text-red-500 font-semibold">{{shumoraD}}</span> адад</p>
+                            </div>
+                            <div v-if="shumoraB>0">
+                                <p class="text-blue-500 text-sm mt-2">Миқдори шартномаҳои бисёрҷониба дар давраи мазкур: <span class="text-base text-red-500 font-semibold">{{shumoraB}}</span> адад</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="flex items-center p-8 bg-white shadow rounded-lg">
@@ -77,7 +132,7 @@
                     </div>
                     <div>
                         <span class="block text-2xl font-bold">25</span>
-                        <span class="block text-gray-500">Lections left</span>
+                        <span class="block text-gray-500">МАТН</span>
                     </div>
                 </div>
                 <div class="flex items-center p-8 bg-white shadow rounded-lg">
@@ -88,83 +143,41 @@
                     </div>
                     <div>
                         <span class="block text-2xl font-bold">139</span>
-                        <span class="block text-gray-500">Hours spent on lections</span>
+                        <span class="block text-gray-500">Иловаи матн</span>
                     </div>
                 </div>
                 <div class="row-span-3 bg-white shadow rounded-lg">
                     <div class="flex items-center justify-between px-6 py-5 font-semibold border-b border-gray-100">
-                        <span>Шартнома бо давлаҳо</span>
+                        <span>Шартномаҳо</span>
                         <button type="button" class="inline-flex justify-center rounded-md px-1 -mr-1 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-600" id="options-menu" aria-haspopup="true" aria-expanded="true">
-                            Давлатҳо
+                            Миқдор
                             <svg class="-mr-1 ml-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                             </svg>
                         </button>
                         <!-- Refer here for full dropdown menu code: https://tailwindui.com/components/application-ui/elements/dropdowns -->
                     </div>
-                    <div class="overflow-y-auto" style="max-height: 24rem;">
-                        <ul class="p-6 space-y-6">
+                    <div class="overflow-y-auto">
+                        <ul
+                            class="p-6 space-y-6">
                             <li class="flex items-center">
-                                <div class="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
-                                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="Annette Watson profile picture">
+                                <div class="h-8 w-8 mr-3 bg-gray-100 rounded-full overflow-hidden">
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                         fill="none" viewBox="0 0 24 24"
+                                         stroke-width="2"
+                                         stroke="currentColor"
+                                         class="w-8 h-8 text-blue-500">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
+                                    </svg>
                                 </div>
-                                <span class="text-gray-600">United States</span>
-                                <span class="ml-auto font-semibold">9.3</span>
-                            </li>
-                            <li class="flex items-center">
-                                <div class="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
-                                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="Calvin Steward profile picture">
-                                </div>
-                                <span class="text-gray-600">Spain</span>
-                                <span class="ml-auto font-semibold">8.9</span>
-                            </li>
-                            <li class="flex items-center">
-                                <div class="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
-                                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="Ralph Richards profile picture">
-                                </div>
-                                <span class="text-gray-600">United Kingdom</span>
-                                <span class="ml-auto font-semibold">8.7</span>
-                            </li>
-                            <li class="flex items-center">
-                                <div class="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
-                                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="Bernard Murphy profile picture">
-                                </div>
-                                <span class="text-gray-600">Malaysia</span>
-                                <span class="ml-auto font-semibold">8.2</span>
-                            </li>
-                            <li class="flex items-center">
-                                <div class="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
-                                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="Arlene Robertson profile picture">
-                                </div>
-                                <span class="text-gray-600">Russia</span>
-                                <span class="ml-auto font-semibold">8.2</span>
-                            </li>
-                            <li class="flex items-center">
-                                <div class="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
-                                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="Jane Lane profile picture">
-                                </div>
-                                <span class="text-gray-600">Canada</span>
-                                <span class="ml-auto font-semibold">8.1</span>
-                            </li>
-                            <li class="flex items-center">
-                                <div class="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
-                                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="Pat Mckinney profile picture">
-                                </div>
-                                <span class="text-gray-600">India</span>
-                                <span class="ml-auto font-semibold">7.9</span>
-                            </li>
-                            <li class="flex items-center">
-                                <div class="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
-                                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="Norman Walters profile picture">
-                                </div>
-                                <span class="text-gray-600">Australia</span>
-                                <span class="ml-auto font-semibold">7.7</span>
+                                <span class="text-gray-600"></span>
+                                <span class="ml-auto font-semibold">9</span>
                             </li>
                         </ul>
                     </div>
                 </div>
                 <div class="flex flex-col row-span-3 bg-white shadow rounded-lg">
-                    <div class="px-6 py-5 font-semibold border-b border-gray-100">WHAT ARE YOUR TOP CAMPAIGNS?</div>
+                    <div class="px-6 py-5 font-semibold border-b border-gray-100">МАТН</div>
                     <div class="p-4 flex-grow">
                         <div class="flex items-center justify-center h-full px-4 py-24 text-gray-400 text-3xl font-semibold bg-gray-100 border-2 border-gray-200 border-dashed rounded-md">Chart</div>
                     </div>
@@ -175,15 +188,43 @@
 <script>
 import Dashboard from "../Dashboard";
 import {Link, Head} from "@inertiajs/inertia-vue3";
+import {ref} from "vue";
+import {Inertia} from "@inertiajs/inertia";
 export default {
     name: "DashItems",
     layout: Dashboard,
     components:{Link, Head},
+    data(){
+      return{
+          formatter: ref({
+              date:'DD.MM.YYYY',
+              month: 'MMM',
+          }),
+          formValues:{
+              datefrom: '',
+              dateto: '',
+              namud: '',
+          }
+      }
+    },
     props:{
         users: String,
         dujonibaCount: String,
         bisyorCount: String,
         ijronashuda: String,
-    }
+        shumoraD: String,
+        shumoraB: String,
+
+    },
+    watch:{
+        formValues: {
+            handler(newvalue){
+                Inertia.get('/dashboard',{formValues:newvalue},{
+                    preserveState: true
+                });
+            },
+            deep:true
+        },
+    },
 }
 </script>

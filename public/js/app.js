@@ -22540,6 +22540,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Dashboard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Dashboard */ "./resources/js/Pages/Dashboard.vue");
 /* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
+
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -22549,11 +22553,38 @@ __webpack_require__.r(__webpack_exports__);
     Link: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.Link,
     Head: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.Head
   },
+  data: function data() {
+    return {
+      formatter: (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)({
+        date: 'DD.MM.YYYY',
+        month: 'MMM'
+      }),
+      formValues: {
+        datefrom: '',
+        dateto: '',
+        namud: ''
+      }
+    };
+  },
   props: {
     users: String,
     dujonibaCount: String,
     bisyorCount: String,
-    ijronashuda: String
+    ijronashuda: String,
+    shumoraD: String,
+    shumoraB: String
+  },
+  watch: {
+    formValues: {
+      handler: function handler(newvalue) {
+        _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_3__.Inertia.get('/dashboard', {
+          formValues: newvalue
+        }, {
+          preserveState: true
+        });
+      },
+      deep: true
+    }
   }
 });
 
@@ -24952,10 +24983,82 @@ var _hoisted_19 = {
 var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "inline-flex text-gray-500 hover:text-blue-700"
 }, "Истифодабарандаҳо", -1 /* HOISTED */);
-var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<section class=\"grid md:grid-cols-2 xl:grid-cols-4 xl:grid-rows-3 xl:grid-flow-col gap-6\"><div class=\"flex flex-col md:col-span-2 md:row-span-2 bg-white shadow rounded-lg\"><div class=\"px-6 py-5 font-semibold border-b border-gray-100\">Your insights will appear here soon.</div><div class=\"p-4 flex-grow\"><div class=\"flex items-center justify-center h-full px-4 py-16 text-gray-400 text-3xl font-semibold bg-gray-100 border-2 border-gray-200 border-dashed rounded-md\">Chart</div></div></div><div class=\"flex items-center p-8 bg-white shadow rounded-lg\"><div class=\"inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-yellow-600 bg-yellow-100 rounded-full mr-6\"><svg aria-hidden=\"true\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\" class=\"h-6 w-6\"><path fill=\"#fff\" d=\"M12 14l9-5-9-5-9 5 9 5z\"></path><path fill=\"#fff\" d=\"M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z\"></path><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222\"></path></svg></div><div><span class=\"block text-2xl font-bold\">25</span><span class=\"block text-gray-500\">Lections left</span></div></div><div class=\"flex items-center p-8 bg-white shadow rounded-lg\"><div class=\"inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-teal-600 bg-teal-100 rounded-full mr-6\"><svg aria-hidden=\"true\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\" class=\"h-6 w-6\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z\"></path></svg></div><div><span class=\"block text-2xl font-bold\">139</span><span class=\"block text-gray-500\">Hours spent on lections</span></div></div><div class=\"row-span-3 bg-white shadow rounded-lg\"><div class=\"flex items-center justify-between px-6 py-5 font-semibold border-b border-gray-100\"><span>Шартнома бо давлаҳо</span><button type=\"button\" class=\"inline-flex justify-center rounded-md px-1 -mr-1 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-600\" id=\"options-menu\" aria-haspopup=\"true\" aria-expanded=\"true\"> Давлатҳо <svg class=\"-mr-1 ml-1 h-5 w-5\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\"><path fill-rule=\"evenodd\" d=\"M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z\" clip-rule=\"evenodd\"></path></svg></button><!-- Refer here for full dropdown menu code: https://tailwindui.com/components/application-ui/elements/dropdowns --></div><div class=\"overflow-y-auto\" style=\"max-height:24rem;\"><ul class=\"p-6 space-y-6\"><li class=\"flex items-center\"><div class=\"h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden\"><img src=\"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png\" alt=\"Annette Watson profile picture\"></div><span class=\"text-gray-600\">United States</span><span class=\"ml-auto font-semibold\">9.3</span></li><li class=\"flex items-center\"><div class=\"h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden\"><img src=\"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png\" alt=\"Calvin Steward profile picture\"></div><span class=\"text-gray-600\">Spain</span><span class=\"ml-auto font-semibold\">8.9</span></li><li class=\"flex items-center\"><div class=\"h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden\"><img src=\"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png\" alt=\"Ralph Richards profile picture\"></div><span class=\"text-gray-600\">United Kingdom</span><span class=\"ml-auto font-semibold\">8.7</span></li><li class=\"flex items-center\"><div class=\"h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden\"><img src=\"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png\" alt=\"Bernard Murphy profile picture\"></div><span class=\"text-gray-600\">Malaysia</span><span class=\"ml-auto font-semibold\">8.2</span></li><li class=\"flex items-center\"><div class=\"h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden\"><img src=\"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png\" alt=\"Arlene Robertson profile picture\"></div><span class=\"text-gray-600\">Russia</span><span class=\"ml-auto font-semibold\">8.2</span></li><li class=\"flex items-center\"><div class=\"h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden\"><img src=\"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png\" alt=\"Jane Lane profile picture\"></div><span class=\"text-gray-600\">Canada</span><span class=\"ml-auto font-semibold\">8.1</span></li><li class=\"flex items-center\"><div class=\"h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden\"><img src=\"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png\" alt=\"Pat Mckinney profile picture\"></div><span class=\"text-gray-600\">India</span><span class=\"ml-auto font-semibold\">7.9</span></li><li class=\"flex items-center\"><div class=\"h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden\"><img src=\"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png\" alt=\"Norman Walters profile picture\"></div><span class=\"text-gray-600\">Australia</span><span class=\"ml-auto font-semibold\">7.7</span></li></ul></div></div><div class=\"flex flex-col row-span-3 bg-white shadow rounded-lg\"><div class=\"px-6 py-5 font-semibold border-b border-gray-100\">WHAT ARE YOUR TOP CAMPAIGNS?</div><div class=\"p-4 flex-grow\"><div class=\"flex items-center justify-center h-full px-4 py-24 text-gray-400 text-3xl font-semibold bg-gray-100 border-2 border-gray-200 border-dashed rounded-md\">Chart</div></div></div></section>", 1);
+var _hoisted_21 = {
+  "class": "grid md:grid-cols-2 xl:grid-cols-4 xl:grid-rows-3 xl:grid-flow-col gap-6"
+};
+var _hoisted_22 = {
+  "class": "flex flex-col md:col-span-2 md:row-span-2 bg-white shadow rounded-lg"
+};
+var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "px-6 py-5 font-semibold border-b border-gray-100"
+}, "Шумораи шартномаҳо вобаста ба санаи ворид гардида.", -1 /* HOISTED */);
+var _hoisted_24 = {
+  "class": "p-4 flex-grow"
+};
+var _hoisted_25 = {
+  "class": "flex flex-col sm:justify-start h-full p-4 text-gray-400 text-3xl font-semibold bg-gray-100 border-2 border-gray-200 border-dashed rounded-md"
+};
+var _hoisted_26 = {
+  "class": "mb-4"
+};
+var _hoisted_27 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", {
+  "class": "mb-2 font-semibold text-sm text-gray-900"
+}, "Намуди шартнома", -1 /* HOISTED */);
+var _hoisted_28 = {
+  "class": "items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex"
+};
+var _hoisted_29 = {
+  "class": "w-full border-b border-gray-200 sm:border-b-0 sm:border-r"
+};
+var _hoisted_30 = {
+  "class": "flex items-center pl-3"
+};
+var _hoisted_31 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "horizontal-list-radio-millitary",
+  "class": "w-full py-2 ml-2 text-sm font-medium text-gray-900"
+}, "Дуҷониба", -1 /* HOISTED */);
+var _hoisted_32 = {
+  "class": "w-full dark:border-gray-600"
+};
+var _hoisted_33 = {
+  "class": "flex items-center pl-3"
+};
+var _hoisted_34 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "horizontal-list-radio-passport",
+  "class": "w-full py-2 ml-2 text-sm font-medium text-gray-900"
+}, "Бисёрҷониба", -1 /* HOISTED */);
+var _hoisted_35 = {
+  "class": "flex"
+};
+var _hoisted_36 = {
+  "class": "w-full"
+};
+var _hoisted_37 = {
+  "class": "w-full mx-2"
+};
+var _hoisted_38 = {
+  key: 0
+};
+var _hoisted_39 = {
+  "class": "text-blue-500 text-sm mt-2"
+};
+var _hoisted_40 = {
+  "class": "text-base text-red-500 font-semibold"
+};
+var _hoisted_41 = {
+  key: 1
+};
+var _hoisted_42 = {
+  "class": "text-blue-500 text-sm mt-2"
+};
+var _hoisted_43 = {
+  "class": "text-base text-red-500 font-semibold"
+};
+var _hoisted_44 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"flex items-center p-8 bg-white shadow rounded-lg\"><div class=\"inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-yellow-600 bg-yellow-100 rounded-full mr-6\"><svg aria-hidden=\"true\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\" class=\"h-6 w-6\"><path fill=\"#fff\" d=\"M12 14l9-5-9-5-9 5 9 5z\"></path><path fill=\"#fff\" d=\"M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z\"></path><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222\"></path></svg></div><div><span class=\"block text-2xl font-bold\">25</span><span class=\"block text-gray-500\">МАТН</span></div></div><div class=\"flex items-center p-8 bg-white shadow rounded-lg\"><div class=\"inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-teal-600 bg-teal-100 rounded-full mr-6\"><svg aria-hidden=\"true\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\" class=\"h-6 w-6\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z\"></path></svg></div><div><span class=\"block text-2xl font-bold\">139</span><span class=\"block text-gray-500\">Иловаи матн</span></div></div><div class=\"row-span-3 bg-white shadow rounded-lg\"><div class=\"flex items-center justify-between px-6 py-5 font-semibold border-b border-gray-100\"><span>Шартномаҳо</span><button type=\"button\" class=\"inline-flex justify-center rounded-md px-1 -mr-1 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-600\" id=\"options-menu\" aria-haspopup=\"true\" aria-expanded=\"true\"> Миқдор <svg class=\"-mr-1 ml-1 h-5 w-5\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\"><path fill-rule=\"evenodd\" d=\"M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z\" clip-rule=\"evenodd\"></path></svg></button><!-- Refer here for full dropdown menu code: https://tailwindui.com/components/application-ui/elements/dropdowns --></div><div class=\"overflow-y-auto\"><ul class=\"p-6 space-y-6\"><li class=\"flex items-center\"><div class=\"h-8 w-8 mr-3 bg-gray-100 rounded-full overflow-hidden\"><svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke-width=\"2\" stroke=\"currentColor\" class=\"w-8 h-8 text-blue-500\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418\"></path></svg></div><span class=\"text-gray-600\"></span><span class=\"ml-auto font-semibold\">9</span></li></ul></div></div><div class=\"flex flex-col row-span-3 bg-white shadow rounded-lg\"><div class=\"px-6 py-5 font-semibold border-b border-gray-100\">МАТН</div><div class=\"p-4 flex-grow\"><div class=\"flex items-center justify-center h-full px-4 py-24 text-gray-400 text-3xl font-semibold bg-gray-100 border-2 border-gray-200 border-dashed rounded-md\">Chart</div></div></div>", 4);
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Head = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Head");
   var _component_Link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Link");
+  var _component_vue_tailwind_datepicker = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("vue-tailwind-datepicker");
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Head, null, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [_hoisted_1];
@@ -24982,7 +25085,49 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return [_hoisted_20];
     }),
     _: 1 /* STABLE */
-  }, 8 /* PROPS */, ["href"])])])]), _hoisted_21])], 64 /* STABLE_FRAGMENT */);
+  }, 8 /* PROPS */, ["href"])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("section", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [_hoisted_23, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_26, [_hoisted_27, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_28, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
+      return $data.formValues.namud = $event;
+    }),
+    id: "horizontal-list-radio-millitary",
+    type: "radio",
+    value: "1",
+    name: "list-radio",
+    "class": "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.formValues.namud]]), _hoisted_31])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_32, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_33, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+      return $data.formValues.namud = $event;
+    }),
+    id: "horizontal-list-radio-passport",
+    type: "radio",
+    value: "2",
+    name: "list-radio",
+    "class": "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2 dark:bg-gray-600"
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.formValues.namud]]), _hoisted_34])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_35, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_36, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_vue_tailwind_datepicker, {
+    "as-single": "",
+    "weekdays-size": "min",
+    formatter: $data.formatter,
+    placeholder: "Ҷустуҷу аз санаи",
+    i18n: "ru",
+    modelValue: $data.formValues.datefrom,
+    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+      return $data.formValues.datefrom = $event;
+    }),
+    "input-classes": "block text-sm bg-gray-50 border border-gray-300",
+    "class": "text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full"
+  }, null, 8 /* PROPS */, ["formatter", "modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_37, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_vue_tailwind_datepicker, {
+    "as-single": "",
+    "weekdays-size": "min",
+    formatter: $data.formatter,
+    placeholder: "То санаи",
+    i18n: "ru",
+    modelValue: $data.formValues.dateto,
+    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+      return $data.formValues.dateto = $event;
+    }),
+    "input-classes": "block text-sm bg-gray-50 border border-gray-300",
+    "class": "text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full"
+  }, null, 8 /* PROPS */, ["formatter", "modelValue"])])]), $props.shumoraD > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_38, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_39, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Миқдори шартномаҳои дуҷониба дар давраи мазкур: "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_40, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.shumoraD), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" адад")])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.shumoraB > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_41, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_42, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Миқдори шартномаҳои бисёрҷониба дар давраи мазкур: "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_43, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.shumoraB), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" адад")])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])]), _hoisted_44])])], 64 /* STABLE_FRAGMENT */);
 }
 
 /***/ }),
@@ -27049,7 +27194,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $setup.form.email = $event;
     }),
     "class": "bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
-    placeholder: "name@company.com"
+    placeholder: "name@mfa.tj"
   }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.form.email]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "password",
     name: "password",

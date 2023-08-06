@@ -57,14 +57,22 @@ class DujonibaController extends Controller
 
 
     public function seracN(Request $request){
+        //dd($request->formValues);
+        $shumoraD = Dujoniba::query()
+            ->when($request->formValues['datefrom']!=null && $request->formValues['dateto']!=null, function ($query) use ($request) {
+                //if($formValues['datefrom']!=null && $formValues['dateto']!=null && $formValues['namud']=='1'){
+                    $query->whereBetween('created_at', [Carbon::createFromFormat('d.m.Y',$request->formValues['datefrom'])->format('Y-m-d'), Carbon::createFromFormat('d.m.Y',$request->formValues['dateto'])->format('Y-m-d')])->get();
+                //}
+            });
+        dd($shumoraD);
 
-        // filter by ijronashuda
-        //dd($request->ijronashuda);
-        $dujonibaFf = Dujoniba::query()
-        ->when($request->ijronashuda == 'true', function ($query){
-            $query->where('sanai_etibor', NULL);
-        })->get();
-        dd($dujonibaFf);
+//        // filter by ijronashuda
+//        //dd($request->ijronashuda);
+//        $dujonibaFf = Dujoniba::query()
+//        ->when($request->ijronashuda == 'true', function ($query){
+//            $query->where('sanai_etibor', NULL);
+//        })->get();
+//        dd($dujonibaFf);
 
 
 
