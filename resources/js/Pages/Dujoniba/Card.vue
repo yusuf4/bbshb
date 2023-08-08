@@ -19,11 +19,11 @@
                             </svg>
 
                         </div>
+                        <!-- Card info -->
                         <div ref="pdfContent">
                             <div class="pb-2 border-b">
                                 <span class="block text-lg font-medium">{{card.name}}</span>
                             </div>
-
                             <div class="flex justify-start items-start mt-8">
                                 <div class="flex flex-col mb-2 mr-20">
                                     <span class="text-sm font-medium pb-2">Таърих</span>
@@ -58,6 +58,7 @@
                                             v-show="file.namud===1"
                                             :href="'/uploads/files/'+file.name" target="_blank">{{file.name}},</a></span>
                                     </div>
+                                    <span class="text-sm text-gray-700 pb-2" v-if="cardFileCount<=0">----</span>
                                     <span class="text-sm text-gray-700 pb-2">{{card.muhlati_etibor.name}}</span>
                                     <span class="text-sm text-gray-700 pb-1.5" v-if="card.qati_etibor!=null">{{formated(card.qati_etibor)}}</span>
                                     <span class="text-sm text-gray-700 p-1.5" v-else>----</span>
@@ -75,6 +76,7 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- conditional block for qati dasti -->
                         <div class="mt-4 flex flex-wrap gap-1" v-if="card.sanai_etibor==null">
                             <form @submit.prevent="formValues.post(route('du.qatdast', card.id))">
                                 <div>
@@ -112,7 +114,6 @@
                                                   />
                                                 </svg>
                                               </span>
-
                                                             <span class="text-sm font-medium transition-all group-hover:me-4">
                                                     Сабт
                                                 </span>
@@ -170,9 +171,11 @@ export default {
             formatter: ref({
                 date:'DD.MM.YYYY',
                 month: 'MMM',
-            })
+            }),
+            cardFileCount: this.files.length,
         }
     },
+
     props: {
         card: Object,
         files: Array,

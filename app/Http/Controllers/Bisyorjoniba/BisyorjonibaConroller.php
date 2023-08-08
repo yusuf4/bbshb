@@ -32,6 +32,9 @@ class BisyorjonibaConroller extends Controller
             ->when($request->searchnamud, function ($query, $searchnamud){
                 $query->where('namudi_shartnoma_id', '=', "{$searchnamud}");
             })
+            ->when($request->searchetibor, function ($query, $searchetibor){
+                $query->where('muhlati_etibor_id', '=', "{$searchetibor}");
+            })
             ->when($request->ijronashuda == 'true', function ($query){
                 $query->where('sanai_etibor', NULL);
             })
@@ -42,11 +45,14 @@ class BisyorjonibaConroller extends Controller
             })
             ->with('namudB:id,name', 'tartibiEtiborB:id,name', 'nomerB:id,bisyorjoniba_id', 'muhlatiEtiborB:id,name')
             ->latest()
-            ->paginate('3');
+            ->paginate('3')
+            ->withQueryString();
         $searchlist = $request->only(['search']);
+        $bisyorjonibaCount = $bisyorjoniba->total();
         return Inertia::render('Bisyorjoniba/Index', [
             'bisyorjoniba' => $bisyorjoniba,
             'searchlist'=> $searchlist,
+            'bisyorjonibaCount'=>$bisyorjonibaCount,
         ]);
     }
 

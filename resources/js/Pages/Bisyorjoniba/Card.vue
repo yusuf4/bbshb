@@ -66,6 +66,7 @@
                                         class="text-sm text-blue-600 pb-2.5 pr-2"
                                     ><a :href="'/uploads/files/'+file.name" target="_blank">{{file.name}},</a></span>
                                 </div>
+                                <span class="text-sm text-gray-700 pb-2" v-if="card.file_bisyor<=0">----</span>
                                 <span class="text-sm text-gray-700 pb-2">{{card.muhlati_etibor_b.name}}</span>
                                 <span class="text-sm text-gray-700 pb-1.5" v-if="card.qati_etibor!=null">{{formated(card.qati_etibor)}}</span>
                                 <span class="text-sm text-gray-700 pb-1.5" v-else>-----</span>
@@ -90,6 +91,7 @@
                                         input-classes="block text-sm"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full"
                                     />
+
                                     <div class="ml-4">
                                         <button
                                             type="submit"

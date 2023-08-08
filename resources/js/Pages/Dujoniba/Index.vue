@@ -41,17 +41,36 @@
                     </div>
             </div>
         </div>
-        <div class="my-2" v-show="datefilter">
+        <div class="my-2" v-show="datefilter" >
             <div class="flex justify-end items-center" >
 
                 <div class="flex justify-end w-full">
+                    <div id="toast-simple" class="flex items-center max-w-xs px-4 pr-4 mr-4 space-x-2 text-gray-500 bg-white divide-x divide-gray-200 rounded-lg shadow" role="alert">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 text-blue-500">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+                        </svg>
+
+                        <div class="pl-2 text-sm font-normal" v-show="dujonibaCount>0">
+                            <span class="font-semibold text-gray-600">{{dujonibaCount}}</span>
+                                адад
+                        </div>
+                    </div>
                     <div class="flex items-center mr-4">
                         <input
                             v-model="ijronashuda"
                             checked id="red-checkbox"
                             type="checkbox" value=""
                             class="w-4 h-4 text-red-600 bg-gray-100 border-gray-300 rounded focus:ring-red-500 focus:ring-2">
-                        <label for="red-checkbox" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Шартномаҳои иҷронашуда</label>
+                        <label for="red-checkbox" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Иҷронашуда</label>
+                    </div>
+                    <div class="w-1/6 mr-2">
+                        <select
+                            v-model="searchetibor"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2">
+                            <option value="">Муҳлати эътибор</option>
+                            <option value="1">Муҳлатнок</option>
+                            <option value="2">Бемуҳлат</option>
+                        </select>
                     </div>
                     <div class="w-1/6 mr-2">
                         <select
@@ -256,8 +275,9 @@
              showMenu: false,
              search: ref(this.searchlist.search),
              searchnamud: '',
+             searchetibor: '',
              ijronashuda: false,
-             datefilter: false,
+             datefilter: ref(localStorage.datefilter == "true" ? true : false),
              formValues:{
                  datefrom: '',
                  dateto: ''
@@ -267,6 +287,8 @@
      props:{
          dujoniba:Object,
          searchlist: Object,
+         dujonibaCount: String,
+         etiborlist: Object,
      },
      methods: {
          formated(value) {
@@ -274,7 +296,9 @@
          },
          FilterToggle(){
              this.datefilter=!this.datefilter;
-         }
+             localStorage.setItem('datefilter',JSON.parse(this.datefilter));
+
+         },
      },
      watch:{
          search(value){
@@ -284,6 +308,11 @@
          },
          searchnamud(value){
              Inertia.get('/doindex',{searchnamud:value},{
+                 preserveState: true
+             });
+         },
+         searchetibor(value){
+             Inertia.get('/doindex',{searchetibor:value},{
                  preserveState: true
              });
          },
@@ -303,7 +332,7 @@
              Inertia.get('/doindex', {ijronashuda: value}, {
                  preserveState: true
              });
-         }
+         },
      },
  }
  </script>

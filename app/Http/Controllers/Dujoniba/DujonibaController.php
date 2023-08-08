@@ -33,6 +33,9 @@ class DujonibaController extends Controller
             ->when($request->searchnamud, function ($query, $searchnamud){
                 $query->where('namudi_shartnoma_id', '=', "{$searchnamud}");
             })
+            ->when($request->searchetibor, function ($query, $searchetibor){
+                $query->where('muhlati_etibor_id', '=', "{$searchetibor}");
+            })
             ->when($request->ijronashuda == 'true', function ($query){
                 $query->where('sanai_etibor', NULL);
             })
@@ -43,15 +46,20 @@ class DujonibaController extends Controller
            })
             ->with('namudiShartnoma:id,name', 'tartibiEtibor:id,name','muhlatiEtibor:id,name', 'nomerD:id,dujoniba_id')
             ->latest()
-            ->paginate(3);
+            ->paginate(2)
+            ->withQueryString();
 
         $userName= Auth::user()->name;
         $searchlist = $request->only(['search']);
+        $etiborlist = $request->only('searchetibor');
+        $dujonibaCount= $dujoniba->total();
+        //dd($dujoniba);
         return Inertia::render('Dujoniba/Index',[
             'dujoniba'=>$dujoniba,
             'userName'=> $userName,
             'searchlist'=> $searchlist,
-
+            'dujonibaCount'=>$dujonibaCount,
+            'etiborlist'=>$etiborlist
         ]);
     }
 

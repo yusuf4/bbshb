@@ -42,7 +42,7 @@
                     </div>
                     <div class="text-ellipsis overflow-hidden ...">
                         <span class="inline-block text-2xl font-bold">{{ijronashuda}}</span>
-                        <span class="block text-gray-500">Шартномаҳои иҷронашуда</span>
+                        <span class="block text-gray-500">Иҷронашуда</span>
                     </div>
                 </div>
                 <div class="flex items-center p-8 bg-white shadow rounded-lg">
@@ -204,7 +204,7 @@ export default {
               datefrom: '',
               dateto: '',
               namud: '',
-          }
+          },
       }
     },
     props:{

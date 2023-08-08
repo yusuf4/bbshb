@@ -30,8 +30,11 @@ class DashboardController extends Controller
                     return $query->whereBetween('created_at', [Carbon::createFromFormat('d.m.Y',$formValues['datefrom'])->format('Y-m-d'), Carbon::createFromFormat('d.m.Y',$formValues['dateto'])->format('Y-m-d')])->count();
                 }
             });
-//        $namud = Dujoniba::withCount('namudiShartnoma')->get();
-//       // dd($namud);
+//        $namud = Dujoniba::query()
+//            ->where('namudi_shartnoma_id', '1')
+//
+//            ->count();
+//        dd($namud);
         $bisyorCount = Bisyorjoniba::count();
         $ijronashudaD = Dujoniba::where('sanai_etibor', '=', null)->count();
         $ijronashudaB = Bisyorjoniba::where('sanai_etibor', '=', null)->count();
