@@ -82,16 +82,13 @@
                     </select>
                     <div v-if="errors.tartib" class="ml-1 mt-0.5 text-red-600">{{errors.tartib}}</div>
                 </div>
-            </div>
-            <!-- Denamyc inputs and bahdhoi 6 -->
-            <div class="flex justify-between items-start w-full pb-4">
                 <!-- Denamyc inputs lists -->
-                <div class="dynamic-input w-2/4">
+                <div class="dynamic-input border-2 rounded-lg p-2 ">
                     <div>
-                        <div class="flex  items-center my-2">
+                        <div class="flex  items-center mb-2">
                             <h2 class="pr-6 text-lg font-semibold text-gray-900">Минтақаҳо:</h2>
                             <!-- Add mintaqa checkbox button -->
-                            <div class="flex items-center pt-1" v-if="bisyorjoniba.namudi_shartnoma_id==5 || formValues.namud==5">
+                            <div class="flex items-center pt-1" v-show="bisyorjoniba.namudi_shartnoma_id==5 || formValues.namud==5">
                                 <input
                                     id="default-checkbox"
                                     :disabled="formValues.namud==4"
@@ -103,15 +100,15 @@
                                 <label for="default-checkbox" class="ml-1 text-sm font-medium text-gray-900">Иловаи минтақа</label>
                             </div>
                         </div>
-
+                        <!-- List of countries -->
                         <div
-                            v-if="bisyorjoniba.mintaqaho.length>0"
-                            v-for="(mintaqa, item) in bisyorjoniba.mintaqaho"
+                            v-if="bisyorjoniba.countries_b.length>0"
+                            v-for="(mintaqa, item) in bisyorjoniba.countries_b"
                             :key="mintaqa.id"
-                            class="inline-flex items-center">
+                            class="inline-flex items-center mb-2">
                             <Link
                                 onclick="return confirm('Шумо дар ҳақиқат мехоҳед минтақаи зеринро нест намоед?')"
-                                :href="route('del.mintaqa', mintaqa.id)"
+                                :href="route('del.mintaqa', {id: bisyorjoniba.id, country:mintaqa.id})"
                                 method="delete"
                                 as="button"
                                 type="button">
@@ -125,14 +122,105 @@
                             <span class="mr-4 text-lg font-normal text-gray-900">{{ mintaqa.name }}</span>
                         </div>
                     </div>
+                </div>
+                <!-- Banhoi 1 2 3 az bandi 6 default is hide -->
+                <div class="sm:truncate" v-show="bandSix && showPartSix">
+                    <label class="block mb-2 text-sm font-medium text-gray-900 truncate" for="small_size">Файли сканшудаи марбут ба расмиёти дохилидавлатӣ</label>
+                    <input
+                        id="small_size"
+                        type="file"
+                        multiple
+                        @input="formValues.files_scan = $event.target.files"
+                        class="block w-full text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none">
+                    <div
+                        v-for="files in bisyorjoniba.file_bisyor"
+                        :key="files.id"
+                        class="flex">
+                        <Link
+                            onclick="return confirm('Шумо дар ҳақиқат мехоҳед файли зеринро нест намоед?')"
+                            method="delete" as="button" type="button"
+                            :href="route('del.files', files.id)">
+                            <svg
+                                class="w-5 h-5 mr-1.5 text-red-500"
+                                fill="currentColor"
+                                viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+                            </svg>
+                        </Link>
+                        <a
+                            class="hover:text-green-400 text-blue-500 text-sm"
+                            :href="'/uploads/files/'+files.name" target="_blank">
+                            {{files.name}}
+                        </a>
 
+                    </div>
+                </div>
+                <!-- Bandi 5 default is hide -->
+                <div v-show="bandSix && PartSixDigar">
+                    <label for="bandi-shash" class="block mb-2 text-sm font-medium text-gray-900">Дигар</label>
+                    <input
+                        type="text"
+                        id="bandi-shash"
+                        v-model="formValues.etibor_digar"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full" placeholder="Вориди матн">
+                </div>
+            </div>
+            <!-- Denamyc inputs and bahdhoi 6 -->
+            <div class="flex w-full mb-2">
+                <!-- Bandi 6 -->
+                <div class="w-1/2 mr-4">
+                    <div class="calendar">
+                        <p class="block mb-2 text-sm font-medium text-gray-900 truncate">Санаи пайдо кардани эътибор</p>
+                        <vue-tailwind-datepicker
+                            as-single
+                            weekdays-size="min"
+                            :formatter="formatter"
+                            placeholder="Санаи қабул"
+                            i18n="ru"
+                            v-model="formValues.sanai_etibor"
+                            input-classes="block text-sm"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full"
+                        />
+                    </div>
+                </div>
+                <!-- Denamyc inputs -->
+                <div class="dynamic-input flex items-start w-1/2" v-show="mintaqavi">
+                    <div class="w-1/2 mr-4">
+                        <div class="flex justify-between items-center">
+                            <label for="country_id">Минтақаҳо</label>
+                            <div class="flex items-center">
+                                <input
+                                    checked id="green-checkbox"
+                                    type="checkbox"
+                                    value=""
+                                    v-model="addCountry"
+                                    @click="countrySelector"
+                                    class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 focus:ring-2">
+                                <label for="green-checkbox" class="ml-2 text-sm font-medium text-gray-900">Иловаи дасти</label>
+                            </div>
+                        </div>
+                        <VueMultiselect
+                            id="country_id"
+                            v-model="formValues.intixobB"
+                            :options="countries"
+                            label="name"
+                            track-by="id"
+                            :close-on-select="false"
+                            :clear-on-select="false"
+                            :multiple="true"
+                            placeholder="Интихоби давлатҳо">
+                            <template slot="selection" slot-scope="{ values, search, isOpen }">
+                                <span class="multiselect__input"><span class="text-lg font-semibold">options selected</span></span>
+                            </template>
+                        </VueMultiselect>
+                    </div>
                     <!-- Denamyc inputs -->
-                    <div class="dynamic-input">
-                        <div v-show="mintaqavi"
-                             v-for="(country, index) in formValues.davlatho"
-                             :key="index"
-                             class="flex items-center">
-                            <div class="input w-3/4 mr-8 mt-2">
+                    <div class="flex flex-col w-1/2" v-show="countryBlock">
+                        <div
+                            v-for="(country, index) in formValues.davlatho"
+                            :key="index"
+                            class="flex">
+                            <div class="input mr-4 w-full">
                                 <label for="mintaqaho" class="block mb-2 text-sm font-medium text-gray-900">Минтақаҳо {{index+1}}</label>
                                 <input
                                     v-model.trim.lazy="country.davlat"
@@ -141,7 +229,7 @@
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full" placeholder="Номи давлаҳо...">
                             </div>
                             <!-- Add input field -->
-                            <div @click="addField" class="add-button mt-6">
+                            <div @click="addField" class="add-button mt-7">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
@@ -155,7 +243,7 @@
                                 </svg>
                             </div>
                             <!-- Remove input field -->
-                            <div @click="removeField" class="remove-button mt-6">
+                            <div @click="removeField" class="remove-button mt-7">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none" viewBox="0 0 24 24"
@@ -169,64 +257,6 @@
                     </div>
                 </div>
 
-                <!-- Bandi 6 -->
-                <div class="w-2/4">
-                    <!-- Banhoi 1 2 3 az bandi 6 default is hide -->
-                    <div class="sm:truncate ml-2.5" v-show="bandSix && showPartSix">
-                        <label class="block mb-2 text-sm font-medium text-gray-900 truncate" for="small_size">Файли сканшудаи марбут ба расмиёти дохилидавлатӣ</label>
-                        <input
-                            id="small_size"
-                            type="file"
-                            multiple
-                            @input="formValues.files_scan = $event.target.files"
-                            class="block w-full text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none">
-                        <div
-                            v-for="files in bisyorjoniba.file_bisyor"
-                            :key="files.id"
-                            class="flex">
-                            <Link
-                                onclick="return confirm('Шумо дар ҳақиқат мехоҳед файли зеринро нест намоед?')"
-                                method="delete" as="button" type="button"
-                                :href="route('del.files', files.id)">
-                                <svg
-                                    class="w-5 h-5 mr-1.5 text-red-500"
-                                    fill="currentColor"
-                                    viewBox="0 0 20 20"
-                                    xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
-                                </svg>
-                            </Link>
-                            <a
-                                class="hover:text-green-400 text-blue-500 text-sm"
-                                :href="'/uploads/files/'+files.name" target="_blank">
-                                {{files.name}}
-                            </a>
-
-                        </div>
-                    </div>
-                    <!-- Bandi 5 default is hide -->
-                    <div v-show="bandSix && PartSixDigar" class="ml-2.5">
-                        <label for="bandi-shash" class="block mb-2 text-sm font-medium text-gray-900">Дигар</label>
-                        <input
-                            type="text"
-                            id="bandi-shash"
-                            v-model="formValues.etibor_digar"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full" placeholder="Вориди матн">
-                    </div>
-                    <div class="calendar mt-2 ml-2.5">
-                        <p class="block mb-2 text-sm font-medium text-gray-900 truncate">Санаи пайдо кардани эътибор</p>
-                        <vue-tailwind-datepicker
-                            as-single
-                            weekdays-size="min"
-                            :formatter="formatter"
-                            placeholder="Санаи қабул"
-                            i18n="ru"
-                            v-model="formValues.sanai_etibor"
-                            input-classes="block text-sm"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full"
-                        />
-                    </div>
-
-                </div>
             </div>
             <!-- Muhlati Etibor -->
             <div class="mb-4 border-t-4 border-blue-300 border-b-4 pb-6">
@@ -364,11 +394,12 @@ import Dashboard from "../Dashboard";
 import {Link, Head, useForm} from "@inertiajs/inertia-vue3";
 import {computed, ref} from "vue";
 import {Inertia} from "@inertiajs/inertia";
+import VueMultiselect from 'vue-multiselect';
 import moment from "moment";
 export default {
     name: "Edit",
     layout: Dashboard,
-    components:{Link,Head},
+    components:{Link,Head,VueMultiselect},
     data(){
         return{
             disabled: false,
@@ -383,7 +414,11 @@ export default {
     },
     props:{
         bisyorjoniba: Object,
-        errors: Object
+        errors: Object,
+        countries: {
+            type: Array,
+            default: () => []
+        }
     },
     methods:{
         disableInput(){
@@ -425,6 +460,7 @@ export default {
             name: props.bisyorjoniba.name,
             shartnoma_file: null,
             namud: props.bisyorjoniba.namudi_shartnoma_id,
+            intixobB: null,
             sanai_etibor: props.bisyorjoniba.sanai_etibor!=null ? formated(props.bisyorjoniba.sanai_etibor) : '',
             etibor_digar:props.bisyorjoniba.etibor_digar,
             files_scan: [],
@@ -439,6 +475,8 @@ export default {
         const selected = ref ('');
         const mintaqavi = ref(false);
         const checkbox = ref(false);
+        const addCountry = ref(false);
+        const countryBlock= ref(false);
         const davlatho = [{davlat:''},];
         function MintaqaviOf(){
             this.mintaqavi=false;
@@ -454,6 +492,15 @@ export default {
         function removeField(index){
             if(formValues.davlatho.length > 1){
                 formValues.davlatho.splice(index,1)
+            }
+        };
+        function countrySelector(){
+            if (this.addCountry===false){
+                this.countryBlock=true;
+            }else{
+                formValues.davlatho.splice(1);
+                this.countryBlock=false;
+                formValues.davlatho=[{davlat: ''}];
             }
         };
         function mintaqaCheck(){
@@ -482,6 +529,9 @@ export default {
             selected,
             mintaqavi,
             davlatho,
+            addCountry,
+            countryBlock,
+            countrySelector,
             MintaqaviOf,
             MintaqaviOn,
             addField,
@@ -493,3 +543,4 @@ export default {
     },
 }
 </script>
+<style src="vue-multiselect/dist/vue-multiselect.css"></style>

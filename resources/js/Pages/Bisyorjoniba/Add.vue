@@ -6,7 +6,7 @@
         <h1 class="font-bold text-2xl text-blue-400 text-blue-700 text-center pb-4 pt-1">Иловаи шартномаи бисёрҷониба</h1>
         <form class="p-4"  @submit.prevent="formValues.post(route('bi.store'))">
             <!-- Section One -->
-            <div class="grid gap-6 mb-6 md:grid-cols-2 items-center">
+            <div class="grid gap-6 mb-4 md:grid-cols-2 items-center">
                 <div class="nomi-shartnoma">
                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Номи пурраи шартнома</label>
                     <input type="text"
@@ -66,7 +66,7 @@
                         id="qarorho"
                         @change="PartSix($event)"
                         v-model="formValues.tartib"
-                        class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full">
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full">
                         <option value="">Интихоб</option>
                         <option value="1" >Қарори Ҳукумати ҶТ</option>
                         <option value="2" >Фармони Президенти ҶТ</option>
@@ -76,68 +76,9 @@
                     </select>
                     <div v-if="errors.tartib" class="ml-1 mt-0.5 text-red-600">{{errors.tartib}}</div>
                 </div>
-                <!-- Denamyc inputs -->
-                <div class="dynamic-input">
-                    <div v-show="mintaqavi"
-                         v-for="(country, index) in formValues.davlatho"
-                         :key="index"
-                         class="flex items-center">
-                        <div class="input w-3/4 mr-8 mt-2">
-                            <label for="mintaqaho" class="block mb-2 text-sm font-medium text-gray-900">Минтақаҳо {{index+1}}</label>
-                            <input
-                                v-model="country.davlat"
-                                type="text"
-                                id="mintaqaho"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full" placeholder="Номи давлаҳо...">
-                        </div>
-                        <!-- Add input field -->
-                        <div @click="addField" class="add-button mt-6">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                strokeWidth={1.5}
-                                stroke="currentColor"
-                                class="w-8 h-8 text-green-600">
-                                <path strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                      d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                        </div>
-                        <!-- Remove input field -->
-                        <div @click="removeField" class="remove-button mt-6">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none" viewBox="0 0 24 24"
-                                strokeWidth={1.5}
-                                stroke="currentColor"
-                                class="w-8 h-8 text-red-700">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                        </div>
-                    </div>
-                </div>
+
                 <!-- Bandi 6 Calendar default is hide -->
                 <div class="">
-                    <!-- Banhoi 1 2 3 az bandi 6 default is hide -->
-                    <div class="sm:truncate " v-show="showPartSix">
-                        <label class="block mb-2 text-sm font-medium text-gray-900 truncate" for="small_size">Файли сканшудаи марбут ба расмиёти дохилидавлатӣ</label>
-                        <input
-                            id="small_size"
-                            type="file"
-                            multiple
-                            @input="formValues.files_scan = $event.target.files"
-                            class="block w-full text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none">
-                    </div>
-                    <!-- Bandi 5 default is hide -->
-                    <div v-show="PartSixDigar">
-                        <label for="bandi-shash" class="block mb-2 text-sm font-medium text-gray-900">Дигар</label>
-                        <input
-                            type="text"
-                            id="bandi-shash"
-                            v-model.trim.lazy="formValues.etibor_digar"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full" placeholder="Вориди матн">
-                    </div>
                     <div class="calendar mt-2">
                         <p class="block mb-2 text-sm font-medium text-gray-900 truncate">Санаи пайдо кардани эътибор</p>
                         <vue-tailwind-datepicker
@@ -151,9 +92,108 @@
                             class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full"
                         />
                     </div>
-
+                </div>
+                <!-- Banhoi 1 2 3 az bandi 6 default is hide -->
+                <div class="sm:truncate " v-show="showPartSix">
+                    <label class="block mb-2 text-sm font-medium text-gray-900 truncate" for="small_size">Файли сканшудаи марбут ба расмиёти дохилидавлатӣ</label>
+                    <input
+                        id="small_size"
+                        type="file"
+                        multiple
+                        @input="formValues.files_scan = $event.target.files"
+                        class="block w-full text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none">
+                </div>
+                <!-- Bandi 5 default is hide -->
+                <div v-show="PartSixDigar">
+                    <label for="bandi-shash" class="block mb-2 text-sm font-medium text-gray-900">Дигар</label>
+                    <input
+                        type="text"
+                        id="bandi-shash"
+                        v-model.trim.lazy="formValues.etibor_digar"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full" placeholder="Вориди матн">
                 </div>
             </div>
+            <!-- Multiselect inputs -->
+            <div v-show="mintaqavi" class="flex mb-2 text-sm font-medium text-gray-900">
+                <div class="w-1/2 mr-4">
+                    <div class="flex items-center mb-2">
+                        <label for="country_id">Минтақаҳо</label>
+                        <div class="flex items-center ml-2">
+                            <input
+                                checked id="green-checkbox"
+                                type="checkbox"
+                                value=""
+                                v-model="checkbox"
+                                @click="mintaqaCheck"
+                                class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 focus:ring-2">
+                            <label for="green-checkbox" class="ml-2 text-sm font-medium text-gray-900">Иловаи дасти</label>
+                        </div>
+                    </div>
+                    <VueMultiselect
+                        id="country_id"
+                        v-model="formValues.intixobB"
+                        :options="countries"
+                        label="name"
+                        track-by="id"
+                        :close-on-select="false"
+                        :clear-on-select="false"
+                        :multiple="true"
+                        placeholder="Интихоби давлатҳо">
+                        <template slot="selection" slot-scope="{ values, search, isOpen }">
+                            <span class="multiselect__input"><span class="text-lg font-semibold">options selected</span></span>
+                        </template>
+                    </VueMultiselect>
+                </div>
+                <!-- Input for multiple select
+                <div class="nomi-davlat w-1/2" v-show="mintaqaInput">
+                    <label for="davlat" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Номи минтақа</label>
+                    <input type="text"
+                           id="davlat"
+                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full" placeholder="Иловаи номи давлат...">
+                </div> -->
+                <!-- Dynamyc input for multiple select -->
+                <div class="w-1/2" v-if="dynamychide">
+                    <div
+                            v-for="(country, index) in formValues.davlatho"
+                            :key="index"
+                            class="flex items-center">
+                            <div class="input w-full mr-2.5">
+                                <label for="mintaqahoD" class="block mb-2 text-sm font-medium text-gray-900">Минтақаҳо {{index+1}}</label>
+                                <input
+                                    v-model="country.davlat"
+                                    type="text"
+                                    id="mintaqahoD"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full" placeholder="Номи давлаҳо...">
+                            </div>
+                            <!-- Add input field -->
+                            <div @click="addField" class="add-button mt-6">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke-width="1.5"
+                                    stroke="currentColor"
+                                    class="w-8 h-8 text-green-600">
+                                    <path strokeLinecap="round"
+                                          strokeLinejoin="round"
+                                          d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                            <!-- Remove input field -->
+                            <div @click="removeField" class="remove-button mt-6">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5"
+                                    stroke="currentColor"
+                                    class="w-8 h-8 text-red-700">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                        </div>
+                </div>
+            </div>
+
             <!-- Muhlati Etibor -->
             <div class="mb-4 border-t-4 border-blue-300 border-b-4 pb-6">
                 <h1 class="text-base text-blue-600 text-sm font-medium text-start mt-4">Муҳлати эътибор</h1>
@@ -288,27 +328,36 @@
 import Dashboard from "../Dashboard";
 import {Link, Head, useForm} from "@inertiajs/inertia-vue3";
 import {ref} from "vue";
+import VueMultiselect from 'vue-multiselect';
+
 export default {
     name: "Add",
     layout: Dashboard,
-    components:{Link},
-    props:{
-        errors: Object,
-    },
+    components:{Link,VueMultiselect},
     data(){
         return{
             formatter: ref({
                 date:'DD.MM.YYYY',
                 month: 'MMM',
-            })
+            }),
+
         }
     },
+    props:{
+        errors: Object,
+        countries: {
+            type: Array,
+            default: () => []
+        }
+    },
+
     setup(){
         const formValues= useForm({
             name: null,
             shartnoma_file: null,
             namud: null,
-            sanai_etibor: null,
+            intixobB: null,
+            sanai_etibor: '',
             etibor_digar:null,
             files_scan: [],
             davlatho:[{davlat: ''}],
@@ -323,6 +372,8 @@ export default {
         const selected = ref ('');
         const disabled = false;
         const mintaqavi = false;
+        const checkbox = ref(false);
+        const dynamychide=false;
         const davlatho = ref([{davlat:''},]);
         function PartSix(event){
             this.selected = event.target.value;
@@ -344,6 +395,15 @@ export default {
             this.mintaqavi=false;
             formValues.davlatho=[{davlat:''},];
         };
+        function mintaqaCheck(){
+            if (this.checkbox===false){
+                this.dynamychide=true;
+            }else{
+                formValues.davlatho.splice(1);
+                this.dynamychide=false;
+                formValues.davlatho=[{davlat: ''}];
+            }
+        }
         function addField(){
             formValues.davlatho.push({davlat: ''});
         };
@@ -363,14 +423,17 @@ export default {
             selected,
             disabled,
             mintaqavi,
+            checkbox,
+            dynamychide,
             davlatho,
             PartSix,
             MintaqaviOn,
             MintaqaviOf,
             addField,
             removeField,
-            disableInput
+            disableInput,mintaqaCheck
         };
     },
 }
 </script>
+<style src="vue-multiselect/dist/vue-multiselect.css"></style>

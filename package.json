@@ -30,6 +30,7 @@
         "moment": "^2.29.4",
         "tailwind-scrollbar-hide": "^1.1.7",
         "vue": "^3.2.36",
+        "vue-multiselect": "^3.0.0-beta.2",
         "vue-tailwind-datepicker": "^1.4.5"
     }
 }

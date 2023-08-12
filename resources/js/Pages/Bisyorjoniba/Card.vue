@@ -45,10 +45,10 @@
                                 <span class="text-sm text-blue-600 pb-2"><a :href="'/uploads/shartnoma/'+card.fileshartnoma_b.name" target="_blank">{{card.fileshartnoma_b.name}}</a></span>
                                 <span class="text-sm text-gray-700 pb-2">{{card.namud_b.name}}</span>
                                 <div
-                                    v-if="card.mintaqaho.length>0"
+                                    v-if="card.countries_b.length>0"
                                     class="flex">
                                     <span
-                                        v-for="mintaqa in card.mintaqaho"
+                                        v-for="mintaqa in card.countries_b"
                                         :key="mintaqa.id"
                                         class="text-sm text-gray-700 pb-2 pr-2"
                                     >{{mintaqa.name}},</span>

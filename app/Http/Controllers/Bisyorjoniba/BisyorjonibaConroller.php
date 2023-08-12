@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\BisyorjonibaRequest;
 use App\Http\Requests\BisyorjonibaUpdateRequest;
 use App\Models\Bisyorjoniba;
+use App\Models\Country;
 use App\Models\Dujoniba;
 use App\Models\File;
 use App\Models\FileShartnoma;
@@ -63,7 +64,10 @@ class BisyorjonibaConroller extends Controller
      */
     public function create()
     {
-        return Inertia::render('Bisyorjoniba/Add');
+        $countries = Country::select('id','name')->get();
+        return Inertia::render('Bisyorjoniba/Add', [
+           'countries'=>$countries,
+        ]);
     }
 
     /**
@@ -74,7 +78,12 @@ class BisyorjonibaConroller extends Controller
      */
     public function store(BisyorjonibaRequest $request)
     {
-        //dd($request->davlatho);
+        $countriesB = $request->intixobB;
+        $countriesList=[];
+        for ($i=0; $i<count($countriesB); $i++){
+            $countriesList[]=$countriesB[$i]['id'];
+        }
+        //dd($countriesList);
         $file = $request->file('shartnoma_file');
         $fileName =  time().'-'. $file->getClientOriginalName();
         $file->move(public_path('uploads/shartnoma'), $fileName);
@@ -93,6 +102,7 @@ class BisyorjonibaConroller extends Controller
             'tartibi_etibor_id'=> intval($request->tartib),
             'muhlati_etibor_id' => intval($request->muhlat),
         ]);
+
         // ==================Add files==============
         if ($request->hasFile('files_scan')){
             $files=$request->file('files_scan');
@@ -114,15 +124,16 @@ class BisyorjonibaConroller extends Controller
         foreach ($mintaqaho as $davlat) {
             foreach ($davlat as $item){
                 if ($item!=null){
-                    Mintaqaho::create([
+                    $countryItem=Country::create([
                         'name'=>$item,
-                        'bisyorjoniba_id'=>$bisyorjoniba->bisyorjonibafile->id,
+                        //'bisyorjoniba_id'=>$bisyorjoniba->bisyorjonibafile->id,
                     ]);
+                    $countryAdd=array_push($countriesList, $countryItem->id);
                 }
             }
 
         }
-
+        $bisyorjoniba->bisyorjonibafile->countriesB()->attach($countriesList);
         return redirect()->route('bi.index')
             ->with('message', 'Шартнома илова шуд!');
     }
@@ -135,9 +146,10 @@ class BisyorjonibaConroller extends Controller
      */
     public function show($id)
     {
-        $card = Bisyorjoniba::with('tartibiEtiborB:id,name', 'muhlatiEtiborB:id,name','namudB:id,name','fileshartnomaB:id,name','nomerB:bisyorjoniba_id,id','fileBisyor:bisyorjoniba_id,id,name,namud', 'mintaqaho:bisyorjoniba_id,id,name')
+        $card = Bisyorjoniba::with('tartibiEtiborB:id,name', 'muhlatiEtiborB:id,name','namudB:id,name','fileshartnomaB:id,name','nomerB:bisyorjoniba_id,id','fileBisyor:bisyorjoniba_id,id,name,namud', 'countriesB')
             ->findOrFail($id);
 
+        //dd($card);
         return Inertia::render('Bisyorjoniba/Card', [
            'card'=>$card
         ]);
@@ -151,10 +163,12 @@ class BisyorjonibaConroller extends Controller
      */
     public function edit($id)
     {
-        $bisyorjoniba = Bisyorjoniba::with('mintaqaho:bisyorjoniba_id,id,name', 'fileshartnomaB:id,name', 'fileBisyor:bisyorjoniba_id,id,name,namud')->findOrFail($id);
+        $bisyorjoniba = Bisyorjoniba::with('countriesB', 'fileshartnomaB:id,name', 'fileBisyor:bisyorjoniba_id,id,name,namud')->findOrFail($id);
+        $countries = Country::select('id', 'name')->get();
         //dd($bisyorjoniba);
         return Inertia::render('Bisyorjoniba/Edit',[
-            'bisyorjoniba'=>$bisyorjoniba
+            'bisyorjoniba'=>$bisyorjoniba,
+            'countries'=>$countries
         ]);
     }
 
@@ -255,12 +269,18 @@ class BisyorjonibaConroller extends Controller
 
         return redirect()->back();
     }
-    // =================Delete mintaqaho by id
-    public function deleteMintaqa($id)
+    // =================Delete mintaqaho by Shartnoma ID and Country ID =====================
+
+    public function deleteMintaqa(Request $request)
     {
-        $mintaqa = Mintaqaho::findOrFail($id);
-        //dd($mintaqa);
-        $mintaqa->delete();
+        $shartnomaID = intval($request->id);
+        $countryID = intval($request->country);
+        $mintaqa = Bisyorjoniba::findOrFail($shartnomaID);
+
+       $mintaqa->countriesB()->newPivotStatement()
+            ->where('bisyorjonibas_id', '=', $shartnomaID)
+            ->where('countries_id', '=', $countryID)
+            ->delete();
         return redirect()->back();
     }
     // ====================Delete aditional files ====================

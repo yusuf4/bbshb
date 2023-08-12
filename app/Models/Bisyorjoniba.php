@@ -16,15 +16,22 @@ class Bisyorjoniba extends Model
 {
     protected $fillable = ['name', 'etibor_digar', 'sanai_etibor', 'qati_etibor', 'maqomot', 'ezoh', 'file_shartnoma_id','namudi_shartnoma_id', 'tartibi_etibor_id', 'muhlati_etibor_id'];
 
-    public function fileshartnomaB(){
+    public function countriesB()
+    {
+        return $this->belongsToMany(Country::class, 'bisyorjonibas_countries', 'bisyorjonibas_id', 'countries_id')->withTimestamps();
+    }
+    public function fileshartnomaB()
+    {
         return $this->belongsTo(FileShartnoma::class, 'file_shartnoma_id', 'id');
     }
 
-    public function namudB(){
+    public function namudB()
+    {
         return $this->hasOne(NamudiShartnoma::class, 'id', 'namudi_shartnoma_id');
     }
 
-    public function tartibiEtiborB(){
+    public function tartibiEtiborB()
+    {
         return $this->hasOne(TartibiEtibor::class, 'id', 'tartibi_etibor_id');
     }
     public function nomerB()

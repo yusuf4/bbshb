@@ -29,6 +29,10 @@ class Dujoniba extends Model
     {
         return Carbon::createFromFormat('Y-m-d', $this->attributes['qati_etibor'])->locale('is_IS')->format('d.m.Y');
     }*/
+    public function countriesD()
+    {
+        return $this->belongsToMany(Country::class, 'dujonibas_countries', 'dujonibas_id', 'countries_id')->withTimestamps();
+    }
     public function fileShartnoma(){
         return $this->belongsTo(FileShartnoma::class);
     }

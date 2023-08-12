@@ -283,7 +283,7 @@ export default {
     props:{
         bisyorjoniba: Object,
         searchlist: Object,
-        bisyorjonibaCount: String,
+        bisyorjonibaCount: Number,
     },
     methods: {
         formated(value) {
