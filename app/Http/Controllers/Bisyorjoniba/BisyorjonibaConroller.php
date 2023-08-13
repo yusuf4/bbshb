@@ -8,6 +8,7 @@ use App\Http\Requests\BisyorjonibaUpdateRequest;
 use App\Models\Bisyorjoniba;
 use App\Models\Country;
 use App\Models\Dujoniba;
+use App\Models\Ezoh;
 use App\Models\File;
 use App\Models\FileShartnoma;
 use App\Models\Mintaqaho;
@@ -65,8 +66,10 @@ class BisyorjonibaConroller extends Controller
     public function create()
     {
         $countries = Country::select('id','name')->get();
+        $ezohs = Ezoh::select('id', 'name')->get();
         return Inertia::render('Bisyorjoniba/Add', [
            'countries'=>$countries,
+            'ezohs'=>$ezohs,
         ]);
     }
 
@@ -78,7 +81,7 @@ class BisyorjonibaConroller extends Controller
      */
     public function store(BisyorjonibaRequest $request)
     {
-        //dd($countriesList);
+        //dd($request->ezohintixob);
         $file = $request->file('shartnoma_file');
         $fileName =  time().'-'. $file->getClientOriginalName();
         $file->move(public_path('uploads/shartnoma'), $fileName);
@@ -137,6 +140,28 @@ class BisyorjonibaConroller extends Controller
 
         }
         $bisyorjoniba->bisyorjonibafile->countriesB()->attach($countriesList);
+
+        // ======================Dynamyc inputs for Ezoh=======================
+        $ezohFront = $request->ezohintixob;
+        $ezhos = $request->ezohlist;
+        $ezohList=[];
+        if (!empty($request->input('ezohintixob'))){
+            for ($i=0; $i<count($ezohFront); $i++){
+                $ezohList[]=$ezohFront[$i]['id'];
+            }
+        }
+        foreach ($ezhos as $ezho) {
+            foreach ($ezho as $item){
+                if ($item!=null){
+                    $ezohItem=Ezoh::create([
+                        'name'=>$item,
+                    ]);
+                    $ezohList[] = $ezohItem->id;
+                }
+            }
+
+        }
+        $bisyorjoniba->bisyorjonibafile->ezohB()->attach($ezohList);
         return redirect()->route('bi.index')
             ->with('message', 'Шартнома илова шуд!');
     }
@@ -149,7 +174,7 @@ class BisyorjonibaConroller extends Controller
      */
     public function show($id)
     {
-        $card = Bisyorjoniba::with('tartibiEtiborB:id,name', 'muhlatiEtiborB:id,name','namudB:id,name','fileshartnomaB:id,name','nomerB:bisyorjoniba_id,id','fileBisyor:bisyorjoniba_id,id,name,namud', 'countriesB')
+        $card = Bisyorjoniba::with('tartibiEtiborB:id,name', 'muhlatiEtiborB:id,name','namudB:id,name','fileshartnomaB:id,name','nomerB:bisyorjoniba_id,id','fileBisyor:bisyorjoniba_id,id,name,namud', 'countriesB', 'ezohB:id,name')
             ->findOrFail($id);
 
         //dd($card);
@@ -166,12 +191,14 @@ class BisyorjonibaConroller extends Controller
      */
     public function edit($id)
     {
-        $bisyorjoniba = Bisyorjoniba::with('countriesB', 'fileshartnomaB:id,name', 'fileBisyor:bisyorjoniba_id,id,name,namud')->findOrFail($id);
+        $bisyorjoniba = Bisyorjoniba::with('countriesB','ezohB:id,name', 'fileshartnomaB:id,name', 'fileBisyor:bisyorjoniba_id,id,name,namud')->findOrFail($id);
         $countries = Country::select('id', 'name')->get();
+        $ezohs = Ezoh::select('id', 'name')->get();
         //dd($bisyorjoniba);
         return Inertia::render('Bisyorjoniba/Edit',[
             'bisyorjoniba'=>$bisyorjoniba,
-            'countries'=>$countries
+            'countries'=>$countries,
+            'ezohs'=>$ezohs
         ]);
     }
 
@@ -216,7 +243,7 @@ class BisyorjonibaConroller extends Controller
         ]);
 
 
-        // ====================Update dynamic input fields==================
+        // ====================Update dynamic input fields and multiselect Contries==================
         $country = $request->davlatho;
         $countriesFront = $request->intixobB;
         $countriesList=[];
@@ -233,7 +260,7 @@ class BisyorjonibaConroller extends Controller
             }
             // Get Countries ID from FrontEnd form
             for ($h=0; $h<count($countriesFront); $h++){
-                echo($countriesFront[$h]['id']);
+                //echo($countriesFront[$h]['id']);
                 $countryListID[]=$countriesFront[$h]['id'];
             }
 
@@ -254,6 +281,45 @@ class BisyorjonibaConroller extends Controller
         }
         if (count($countriesList)>0){
             $bisyorjoniba->countriesB()->attach($countriesList);
+        }
+
+        // ====================Update dynamic input fields and multiselect Ezohs==================
+        $ezohSelect = $request->ezohintixob;
+        $ezohFrontInput = $request->ezohlist;
+        $ezohList=[];
+        $ezohBackID=[];
+        $ezohListID=[];
+        $ezohGet=$bisyorjoniba->ezohB()->newPivotStatement()
+            ->where('bisyorjonibas_id', '=', $id)
+            ->get();
+        if (!empty($request->input('ezohintixob'))){
+            // Get Countries ID of this Shartnoma from DB
+            for ($i=0; $i<count($ezohGet); $i++){
+                $ezohBackID[]=$ezohGet[$i]->ezohs_id;
+            }
+            // Get Countries ID from FrontEnd form
+            for ($h=0; $h<count($ezohSelect); $h++){
+                $ezohListID[]=$ezohSelect[$h]['id'];
+            }
+
+            $ezohList = array_diff($ezohListID, $ezohBackID);
+            //dd($ezohList);
+        }
+        foreach ($ezohFrontInput as $ezoh) {
+            foreach ($ezoh as $key=>$item){
+                if ($item!=null){
+                    $ezohItem=Ezoh::create([
+                        'name'=>$item,
+                        //'bisyorjoniba_id'=>$bisyorjoniba->id,
+                    ]);
+                    $ezohList[] = $ezohItem->id;
+                }
+            }
+
+        }
+
+        if (count($ezohList)>0){
+            $bisyorjoniba->ezohB()->attach($ezohList);
         }
 
         // ====================Upload new aditional files===================
@@ -310,6 +376,19 @@ class BisyorjonibaConroller extends Controller
        $mintaqa->countriesB()->newPivotStatement()
             ->where('bisyorjonibas_id', '=', $shartnomaID)
             ->where('countries_id', '=', $countryID)
+            ->delete();
+        return redirect()->back();
+    }
+
+    // =================Delete ezoh by Shartnoma ID and Ezoh ID =====================
+    public function deleteEzoh(Request $request)
+    {
+        $shartnomaID = intval($request->id);
+        $ezohID = intval($request->ezoh);
+        $ezoh = Bisyorjoniba::findOrFail($shartnomaID);
+        $ezoh->ezohB()->newPivotStatement()
+            ->where('bisyorjonibas_id', '=', $shartnomaID)
+            ->where('ezohs_id', '=', $ezohID)
             ->delete();
         return redirect()->back();
     }

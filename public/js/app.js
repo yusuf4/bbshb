@@ -22108,6 +22108,12 @@ __webpack_require__.r(__webpack_exports__);
       "default": function _default() {
         return [];
       }
+    },
+    ezohs: {
+      type: Array,
+      "default": function _default() {
+        return [];
+      }
     }
   },
   setup: function setup() {
@@ -22122,11 +22128,14 @@ __webpack_require__.r(__webpack_exports__);
       davlatho: [{
         davlat: ''
       }],
+      ezohlist: [{
+        ezohs: ''
+      }],
       tartib: '',
       muhlat: null,
       muhlatEnd: null,
       maqomot: null,
-      ezoh: null
+      ezohintixob: null
     });
     var showPartSix = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)(false);
     var PartSixDigar = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)(false);
@@ -22134,9 +22143,14 @@ __webpack_require__.r(__webpack_exports__);
     var disabled = false;
     var mintaqavi = false;
     var checkbox = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)(false);
+    var checkezoh = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)(false);
     var dynamychide = false;
+    var ezohblock = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)(false);
     var davlatho = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)([{
       davlat: ''
+    }]);
+    var ezohlist = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)([{
+      ezohs: ''
     }]);
     function PartSix(event) {
       this.selected = event.target.value;
@@ -22174,6 +22188,18 @@ __webpack_require__.r(__webpack_exports__);
         }];
       }
     }
+    function ezohCheck() {
+      if (this.checkezoh === false) {
+        this.ezohblock = true;
+      } else {
+        formValues.ezohlist.splice(1);
+        this.ezohblock = false;
+        formValues.ezohlist = [{
+          ezohs: ''
+        }];
+      }
+    }
+    ;
     function addField() {
       formValues.davlatho.push({
         davlat: ''
@@ -22183,6 +22209,18 @@ __webpack_require__.r(__webpack_exports__);
     function removeField(index) {
       if (formValues.davlatho.length > 1) {
         formValues.davlatho.splice(index, 1);
+      }
+    }
+    ;
+    function addFieldEzoh() {
+      formValues.ezohlist.push({
+        ezohs: ''
+      });
+    }
+    ;
+    function removeFieldEzoh(index) {
+      if (formValues.ezohlist.length > 1) {
+        formValues.ezohlist.splice(index, 1);
       }
     }
     ;
@@ -22201,6 +22239,12 @@ __webpack_require__.r(__webpack_exports__);
       checkbox: checkbox,
       dynamychide: dynamychide,
       davlatho: davlatho,
+      checkezoh: checkezoh,
+      ezohblock: ezohblock,
+      ezohlist: ezohlist,
+      ezohCheck: ezohCheck,
+      addFieldEzoh: addFieldEzoh,
+      removeFieldEzoh: removeFieldEzoh,
       PartSix: PartSix,
       MintaqaviOn: MintaqaviOn,
       MintaqaviOf: MintaqaviOf,
@@ -22342,6 +22386,12 @@ __webpack_require__.r(__webpack_exports__);
       "default": function _default() {
         return [];
       }
+    },
+    ezohs: {
+      type: Array,
+      "default": function _default() {
+        return [];
+      }
     }
   },
   methods: {
@@ -22390,11 +22440,14 @@ __webpack_require__.r(__webpack_exports__);
       davlatho: [{
         davlat: ''
       }],
+      ezohlist: [{
+        ezohs: ''
+      }],
       tartib: props.bisyorjoniba.tartibi_etibor_id,
       muhlat: props.bisyorjoniba.muhlati_etibor_id,
       muhlatEnd: props.bisyorjoniba.qati_etibor != null ? formated(props.bisyorjoniba.qati_etibor) : '',
       maqomot: props.bisyorjoniba.maqomot,
-      ezoh: props.bisyorjoniba.ezoh,
+      ezohintixob: null,
       _method: "PUT"
     });
     var selected = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)('');
@@ -22402,6 +22455,11 @@ __webpack_require__.r(__webpack_exports__);
     var checkbox = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)(false);
     var addCountry = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)(false);
     var countryBlock = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)(false);
+    var checkezoh = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)(false);
+    var ezohblock = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)(false);
+    var ezohlist = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)([{
+      ezohs: ''
+    }]);
     var davlatho = [{
       davlat: ''
     }];
@@ -22451,6 +22509,30 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
     ;
+    function ezohCheck() {
+      if (this.checkezoh === false) {
+        this.ezohblock = true;
+      } else {
+        formValues.ezohlist.splice(1);
+        this.ezohblock = false;
+        formValues.ezohlist = [{
+          ezohs: ''
+        }];
+      }
+    }
+    ;
+    function addFieldEzoh() {
+      formValues.ezohlist.push({
+        ezohs: ''
+      });
+    }
+    ;
+    function removeFieldEzoh(index) {
+      if (formValues.ezohlist.length > 1) {
+        formValues.ezohlist.splice(index, 1);
+      }
+    }
+    ;
     function formated(value) {
       return moment__WEBPACK_IMPORTED_MODULE_5___default()(value).format('DD.MM.YYYY');
     }
@@ -22471,6 +22553,12 @@ __webpack_require__.r(__webpack_exports__);
       davlatho: davlatho,
       addCountry: addCountry,
       countryBlock: countryBlock,
+      checkezoh: checkezoh,
+      ezohblock: ezohblock,
+      ezohlist: ezohlist,
+      ezohCheck: ezohCheck,
+      addFieldEzoh: addFieldEzoh,
+      removeFieldEzoh: removeFieldEzoh,
       countrySelector: countrySelector,
       MintaqaviOf: MintaqaviOf,
       MintaqaviOn: MintaqaviOn,
@@ -23598,7 +23686,7 @@ var _hoisted_66 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
   "class": "text-base text-blue-600 font-medium text-start mt-2"
 }, "Мақомоти масъул вобаста ба расмиёти дохилидавлатӣ ва татбиқи шартнома", -1 /* HOISTED */);
 var _hoisted_67 = {
-  "class": "flex justify-between items-center mt-2 space-x-4"
+  "class": "flex justify-between items-start mt-2 space-x-4"
 };
 var _hoisted_68 = {
   "class": "w-full mt-4"
@@ -23608,19 +23696,77 @@ var _hoisted_69 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
   "class": "block mb-2 text-sm font-medium text-gray-900"
 }, "Номи мақомот", -1 /* HOISTED */);
 var _hoisted_70 = {
-  "class": "w-full mt-4"
+  "class": "flex w-full mt-4"
 };
-var _hoisted_71 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-  "for": "ezoh",
-  "class": "block mb-2 text-sm font-medium text-gray-900"
-}, "Эзоҳ", -1 /* HOISTED */);
+var _hoisted_71 = {
+  "class": "w-1/2 mr-4"
+};
 var _hoisted_72 = {
+  "class": "flex justify-between items-center mb-1"
+};
+var _hoisted_73 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "ezoh_id"
+}, "Эзоҳ", -1 /* HOISTED */);
+var _hoisted_74 = {
+  "class": "flex items-center ml-2"
+};
+var _hoisted_75 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "green-checkboxB",
+  "class": "ml-2 text-sm font-medium text-gray-900"
+}, "Иловаи дасти", -1 /* HOISTED */);
+var _hoisted_76 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("template", {
+  slot: "selection",
+  "slot-scope": "{ values, search, isOpen }"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "multiselect__input"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "text-lg font-semibold"
+}, "options selected")])], -1 /* HOISTED */);
+var _hoisted_77 = {
+  key: 0,
+  "class": "w-1/2"
+};
+var _hoisted_78 = {
+  "class": "input w-full mr-2.5"
+};
+var _hoisted_79 = {
+  "for": "ezohB",
+  "class": "block mb-2 text-sm font-medium text-gray-900"
+};
+var _hoisted_80 = ["onUpdate:modelValue"];
+var _hoisted_81 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+  xmlns: "http://www.w3.org/2000/svg",
+  fill: "none",
+  viewBox: "0 0 24 24",
+  "stroke-width": "1.5",
+  stroke: "currentColor",
+  "class": "w-8 h-8 text-green-600"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
+  strokeLinecap: "round",
+  strokeLinejoin: "round",
+  d: "M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+})], -1 /* HOISTED */);
+var _hoisted_82 = [_hoisted_81];
+var _hoisted_83 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+  xmlns: "http://www.w3.org/2000/svg",
+  fill: "none",
+  viewBox: "0 0 24 24",
+  "stroke-width": "1.5",
+  stroke: "currentColor",
+  "class": "w-8 h-8 text-red-700"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
+  strokeLinecap: "round",
+  strokeLinejoin: "round",
+  d: "M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+})], -1 /* HOISTED */);
+var _hoisted_84 = [_hoisted_83];
+var _hoisted_85 = {
   "class": "flex justify-end items-center text-center mt-[40px]"
 };
-var _hoisted_73 = {
+var _hoisted_86 = {
   "class": "mr-6"
 };
-var _hoisted_74 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+var _hoisted_87 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "absolute -start-full transition-all group-hover:start-4"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
   xmlns: "http://www.w3.org/2000/svg",
@@ -23634,11 +23780,11 @@ var _hoisted_74 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
   strokeLinejoin: "round",
   d: "M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18"
 })])], -1 /* HOISTED */);
-var _hoisted_75 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+var _hoisted_88 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "text-sm font-medium transition-all group-hover:ms-4"
 }, " Ба ақиб ", -1 /* HOISTED */);
-var _hoisted_76 = ["disabled"];
-var _hoisted_77 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+var _hoisted_89 = ["disabled"];
+var _hoisted_90 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "absolute -end-full transition-all group-hover:end-4"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
   "class": "h-5 w-5 rtl:rotate-180",
@@ -23652,10 +23798,10 @@ var _hoisted_77 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
   "stroke-width": "2",
   d: "M17 8l4 4m0 0l-4 4m4-4H3"
 })])], -1 /* HOISTED */);
-var _hoisted_78 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+var _hoisted_91 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "text-sm font-medium transition-all group-hover:me-4"
 }, " Сабт ", -1 /* HOISTED */);
-var _hoisted_79 = [_hoisted_77, _hoisted_78];
+var _hoisted_92 = [_hoisted_90, _hoisted_91];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Head = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Head");
   var _component_vue_tailwind_datepicker = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("vue-tailwind-datepicker");
@@ -23668,7 +23814,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1 /* STABLE */
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
     "class": "p-4",
-    onSubmit: _cache[23] || (_cache[23] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
+    onSubmit: _cache[27] || (_cache[27] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
       return $setup.formValues.post(_ctx.route('bi.store'));
     }, ["prevent"]))
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Section One "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
@@ -23854,30 +24000,72 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.formValues.maqomot, void 0, {
     trim: true,
     lazy: true
-  }]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_70, [_hoisted_71, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    type: "text",
-    id: "ezoh",
+  }]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Ezoh block with dynamic inpits "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_70, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_71, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_72, [_hoisted_73, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_74, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    checked: "",
+    id: "green-checkboxB",
+    type: "checkbox",
+    value: "",
     "onUpdate:modelValue": _cache[22] || (_cache[22] = function ($event) {
-      return $setup.formValues.ezoh = $event;
+      return $setup.checkezoh = $event;
     }),
-    "class": "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5",
-    placeholder: "матн эзоҳ"
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.formValues.ezoh, void 0, {
-    trim: true,
-    lazy: true
-  }]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Save buttons "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_72, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Button back "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_73, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
+    onClick: _cache[23] || (_cache[23] = function () {
+      return $setup.ezohCheck && $setup.ezohCheck.apply($setup, arguments);
+    }),
+    "class": "w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 focus:ring-2"
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, $setup.checkezoh]]), _hoisted_75])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_VueMultiselect, {
+    id: "ezoh_id",
+    modelValue: $setup.formValues.ezohintixob,
+    "onUpdate:modelValue": _cache[24] || (_cache[24] = function ($event) {
+      return $setup.formValues.ezohintixob = $event;
+    }),
+    options: $props.ezohs,
+    label: "name",
+    "track-by": "id",
+    "close-on-select": false,
+    "clear-on-select": false,
+    multiple: true,
+    placeholder: "Интихоб..."
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [_hoisted_76];
+    }),
+    _: 1 /* STABLE */
+  }, 8 /* PROPS */, ["modelValue", "options"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Dynamyc input for multiple select "), $setup.ezohblock ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_77, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.formValues.ezohlist, function (country, index) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+      key: index,
+      "class": "flex items-center"
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_78, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_79, "Эзоҳ " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(index + 1), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      "onUpdate:modelValue": function onUpdateModelValue($event) {
+        return country.ezohs = $event;
+      },
+      type: "text",
+      id: "ezohB",
+      "class": "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full",
+      placeholder: "Номи давлаҳо..."
+    }, null, 8 /* PROPS */, _hoisted_80), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, country.ezohs]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Add input field "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+      onClick: _cache[25] || (_cache[25] = function () {
+        return $setup.addFieldEzoh && $setup.addFieldEzoh.apply($setup, arguments);
+      }),
+      "class": "add-button mt-6"
+    }, _hoisted_82), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Remove input field "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+      onClick: _cache[26] || (_cache[26] = function () {
+        return $setup.removeFieldEzoh && $setup.removeFieldEzoh.apply($setup, arguments);
+      }),
+      "class": "remove-button mt-6"
+    }, _hoisted_84)]);
+  }), 128 /* KEYED_FRAGMENT */))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Save buttons "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_85, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Button back "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_86, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
     "class": "group relative inline-flex items-center overflow-hidden rounded border border-current px-6 py-2 text-indigo-600 focus:outline-none focus:ring active:text-indigo-500",
     href: _ctx.route('bi.index')
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_74, _hoisted_75];
+      return [_hoisted_87, _hoisted_88];
     }),
     _: 1 /* STABLE */
   }, 8 /* PROPS */, ["href"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     type: "submit",
     disabled: $setup.formValues.processing,
     "class": "group relative inline-flex items-center overflow-hidden rounded border border-current px-6 py-2 text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
-  }, _hoisted_79, 8 /* PROPS */, _hoisted_76)])])], 32 /* HYDRATE_EVENTS */)])], 64 /* STABLE_FRAGMENT */);
+  }, _hoisted_92, 8 /* PROPS */, _hoisted_89)])])], 32 /* HYDRATE_EVENTS */)])], 64 /* STABLE_FRAGMENT */);
 }
 
 /***/ }),
@@ -23993,20 +24181,24 @@ var _hoisted_33 = {
   "class": "text-sm text-gray-700 pb-2"
 };
 var _hoisted_34 = {
+  key: 7,
+  "class": "flex"
+};
+var _hoisted_35 = {
   key: 0,
   "class": "mt-4 flex flex-wrap gap-1"
 };
-var _hoisted_35 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+var _hoisted_36 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
   "class": "block mb-2 text-sm font-medium text-gray-900 dark:text-white truncate"
 }, "Санаи пайдо кардани эътибор", -1 /* HOISTED */);
-var _hoisted_36 = {
+var _hoisted_37 = {
   "class": "flex justify-between"
 };
-var _hoisted_37 = {
+var _hoisted_38 = {
   "class": "ml-4"
 };
-var _hoisted_38 = ["disabled"];
-var _hoisted_39 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+var _hoisted_39 = ["disabled"];
+var _hoisted_40 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "absolute -end-full transition-all group-hover:end-4"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
   "class": "h-5 w-5 rtl:rotate-180",
@@ -24020,14 +24212,14 @@ var _hoisted_39 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
   "stroke-width": "2",
   d: "M17 8l4 4m0 0l-4 4m4-4H3"
 })])], -1 /* HOISTED */);
-var _hoisted_40 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+var _hoisted_41 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "text-sm font-medium transition-all group-hover:me-4"
 }, " Сабт ", -1 /* HOISTED */);
-var _hoisted_41 = [_hoisted_39, _hoisted_40];
-var _hoisted_42 = {
+var _hoisted_42 = [_hoisted_40, _hoisted_41];
+var _hoisted_43 = {
   "class": "flex justify-end"
 };
-var _hoisted_43 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+var _hoisted_44 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "absolute -start-full transition-all group-hover:start-4"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
   xmlns: "http://www.w3.org/2000/svg",
@@ -24041,7 +24233,7 @@ var _hoisted_43 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
   strokeLinejoin: "round",
   d: "M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18"
 })])], -1 /* HOISTED */);
-var _hoisted_44 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+var _hoisted_45 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "text-sm font-medium transition-all group-hover:ms-4"
 }, " Ба ақиб ", -1 /* HOISTED */);
 
@@ -24074,11 +24266,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       href: '/uploads/files/' + file.name,
       target: "_blank"
     }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(file.name) + ",", 9 /* TEXT, PROPS */, _hoisted_27)]);
-  }), 128 /* KEYED_FRAGMENT */))]), $props.card.file_bisyor <= 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_28, "----")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_29, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.card.muhlati_etibor_b.name), 1 /* TEXT */), $props.card.qati_etibor != null ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_30, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.formated($props.card.qati_etibor)), 1 /* TEXT */)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_31, "-----")), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_32, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.card.maqomot), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_33, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.card.ezoh), 1 /* TEXT */)])])], 512 /* NEED_PATCH */), $props.card.sanai_etibor == null ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_34, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+  }), 128 /* KEYED_FRAGMENT */))]), $props.card.file_bisyor <= 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_28, "----")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_29, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.card.muhlati_etibor_b.name), 1 /* TEXT */), $props.card.qati_etibor != null ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_30, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.formated($props.card.qati_etibor)), 1 /* TEXT */)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_31, "-----")), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_32, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.card.maqomot), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_33, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.card.ezoh), 1 /* TEXT */), $props.card.ezoh_b.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_34, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.card.ezoh_b, function (ezoh) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", {
+      key: ezoh.id,
+      "class": "text-sm text-gray-700 pb-2 pr-2"
+    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(ezoh.name) + ",", 1 /* TEXT */);
+  }), 128 /* KEYED_FRAGMENT */))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])], 512 /* NEED_PATCH */), $props.card.sanai_etibor == null ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_35, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
     onSubmit: _cache[2] || (_cache[2] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
       return $setup.formValues.post(_ctx.route('bi.qatidast', $props.card.id));
     }, ["prevent"]))
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_35, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_36, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_vue_tailwind_datepicker, {
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_36, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_37, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_vue_tailwind_datepicker, {
     "as-single": "",
     "weekdays-size": "min",
     formatter: $data.formatter,
@@ -24090,16 +24287,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     "input-classes": "block text-sm",
     "class": "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full"
-  }, null, 8 /* PROPS */, ["formatter", "modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_37, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, null, 8 /* PROPS */, ["formatter", "modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_38, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     type: "submit",
     disabled: $setup.formValues.processing,
     "class": "group relative inline-flex items-center overflow-hidden rounded border border-current px-6 py-2 text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
-  }, _hoisted_41, 8 /* PROPS */, _hoisted_38)])])])], 32 /* HYDRATE_EVENTS */)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Button back "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_42, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
+  }, _hoisted_42, 8 /* PROPS */, _hoisted_39)])])])], 32 /* HYDRATE_EVENTS */)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Button back "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_43, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
     "class": "group relative inline-flex items-center overflow-hidden rounded border border-current px-6 py-2 text-indigo-600 focus:outline-none focus:ring active:text-indigo-500",
     href: _ctx.route('bi.index')
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_43, _hoisted_44];
+      return [_hoisted_44, _hoisted_45];
     }),
     _: 1 /* STABLE */
   }, 8 /* PROPS */, ["href"])])])])])])]);
@@ -24383,7 +24580,7 @@ var _hoisted_80 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
   "class": "text-base text-blue-600 font-medium text-start mt-2"
 }, "Мақомоти масъул вобаста ба расмиёти дохилидавлатӣ ва татбиқи шартнома", -1 /* HOISTED */);
 var _hoisted_81 = {
-  "class": "flex justify-between items-center mt-2 space-x-4"
+  "class": "flex justify-between items-start mt-2 space-x-4"
 };
 var _hoisted_82 = {
   "class": "w-full mt-4"
@@ -24393,19 +24590,89 @@ var _hoisted_83 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
   "class": "block mb-2 text-sm font-medium text-gray-900"
 }, "Номи мақомот", -1 /* HOISTED */);
 var _hoisted_84 = {
-  "class": "w-full mt-4"
+  "class": "flex w-full mt-4"
 };
-var _hoisted_85 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-  "for": "ezoh",
-  "class": "block mb-2 text-sm font-medium text-gray-900"
-}, "Эзоҳ", -1 /* HOISTED */);
+var _hoisted_85 = {
+  "class": "w-1/2 mr-4"
+};
 var _hoisted_86 = {
+  "class": "flex justify-between items-center mb-1"
+};
+var _hoisted_87 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "ezoh_id"
+}, "Эзоҳ", -1 /* HOISTED */);
+var _hoisted_88 = {
+  "class": "flex items-center ml-2"
+};
+var _hoisted_89 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "green-checkboxB",
+  "class": "ml-2 text-sm font-medium text-gray-900"
+}, "Иловаи дасти", -1 /* HOISTED */);
+var _hoisted_90 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("template", {
+  slot: "selection",
+  "slot-scope": "{ values, search, isOpen }"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "multiselect__input"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "text-lg font-semibold"
+}, "options selected")])], -1 /* HOISTED */);
+var _hoisted_91 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+  "class": "w-5 h-5 mr-1.5 text-red-500",
+  fill: "currentColor",
+  viewBox: "0 0 20 20",
+  xmlns: "http://www.w3.org/2000/svg"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
+  "fill-rule": "evenodd",
+  d: "M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z",
+  "clip-rule": "evenodd"
+})], -1 /* HOISTED */);
+var _hoisted_92 = {
+  "class": "mr-4 text-sm font-normal text-gray-900"
+};
+var _hoisted_93 = {
+  "class": "w-1/2"
+};
+var _hoisted_94 = {
+  "class": "input w-full mr-2.5"
+};
+var _hoisted_95 = {
+  "for": "ezohB",
+  "class": "block mb-2 text-sm font-medium text-gray-900"
+};
+var _hoisted_96 = ["onUpdate:modelValue"];
+var _hoisted_97 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+  xmlns: "http://www.w3.org/2000/svg",
+  fill: "none",
+  viewBox: "0 0 24 24",
+  "stroke-width": "1.5",
+  stroke: "currentColor",
+  "class": "w-8 h-8 text-green-600"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
+  strokeLinecap: "round",
+  strokeLinejoin: "round",
+  d: "M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+})], -1 /* HOISTED */);
+var _hoisted_98 = [_hoisted_97];
+var _hoisted_99 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+  xmlns: "http://www.w3.org/2000/svg",
+  fill: "none",
+  viewBox: "0 0 24 24",
+  "stroke-width": "1.5",
+  stroke: "currentColor",
+  "class": "w-8 h-8 text-red-700"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
+  strokeLinecap: "round",
+  strokeLinejoin: "round",
+  d: "M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+})], -1 /* HOISTED */);
+var _hoisted_100 = [_hoisted_99];
+var _hoisted_101 = {
   "class": "flex justify-end items-center text-center mt-[40px]"
 };
-var _hoisted_87 = {
+var _hoisted_102 = {
   "class": "mr-6"
 };
-var _hoisted_88 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+var _hoisted_103 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "absolute -start-full transition-all group-hover:start-4"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
   xmlns: "http://www.w3.org/2000/svg",
@@ -24419,11 +24686,11 @@ var _hoisted_88 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
   strokeLinejoin: "round",
   d: "M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18"
 })])], -1 /* HOISTED */);
-var _hoisted_89 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+var _hoisted_104 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "text-sm font-medium transition-all group-hover:ms-4"
 }, " Ба ақиб ", -1 /* HOISTED */);
-var _hoisted_90 = ["disabled"];
-var _hoisted_91 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+var _hoisted_105 = ["disabled"];
+var _hoisted_106 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "absolute -end-full transition-all group-hover:end-4"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
   "class": "h-5 w-5 rtl:rotate-180",
@@ -24437,10 +24704,10 @@ var _hoisted_91 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
   "stroke-width": "2",
   d: "M17 8l4 4m0 0l-4 4m4-4H3"
 })])], -1 /* HOISTED */);
-var _hoisted_92 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+var _hoisted_107 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "text-sm font-medium transition-all group-hover:me-4"
 }, " Сабт ", -1 /* HOISTED */);
-var _hoisted_93 = [_hoisted_91, _hoisted_92];
+var _hoisted_108 = [_hoisted_106, _hoisted_107];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Head = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Head");
   var _component_Link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Link");
@@ -24453,7 +24720,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1 /* STABLE */
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
     "class": "p-4",
-    onSubmit: _cache[24] || (_cache[24] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+    onSubmit: _cache[28] || (_cache[28] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $setup.submit && $setup.submit.apply($setup, arguments);
     }, ["prevent"]))
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Section One "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
@@ -24688,27 +24955,93 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     "class": "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5",
     placeholder: "матн"
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.formValues.maqomot]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_84, [_hoisted_85, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    type: "text",
-    id: "ezoh",
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.formValues.maqomot]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_84, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_85, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_86, [_hoisted_87, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_88, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    checked: "",
+    id: "green-checkboxB",
+    type: "checkbox",
+    value: "",
     "onUpdate:modelValue": _cache[23] || (_cache[23] = function ($event) {
-      return $setup.formValues.ezoh = $event;
+      return $setup.checkezoh = $event;
     }),
-    "class": "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5",
-    placeholder: "матн эзоҳ"
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.formValues.ezoh]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Save buttons "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_86, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Button back "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_87, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
+    onClick: _cache[24] || (_cache[24] = function () {
+      return $setup.ezohCheck && $setup.ezohCheck.apply($setup, arguments);
+    }),
+    "class": "w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 focus:ring-2"
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, $setup.checkezoh]]), _hoisted_89])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_VueMultiselect, {
+    id: "ezoh_id",
+    modelValue: $setup.formValues.ezohintixob,
+    "onUpdate:modelValue": _cache[25] || (_cache[25] = function ($event) {
+      return $setup.formValues.ezohintixob = $event;
+    }),
+    options: $props.ezohs,
+    label: "name",
+    "track-by": "id",
+    "close-on-select": false,
+    "clear-on-select": false,
+    multiple: true,
+    placeholder: "Интихоб..."
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [_hoisted_90];
+    }),
+    _: 1 /* STABLE */
+  }, 8 /* PROPS */, ["modelValue", "options"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" List of countries "), $props.bisyorjoniba.ezoh_b.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+    key: 0
+  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.bisyorjoniba.ezoh_b, function (ezoh, item) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+      key: ezoh.id,
+      "class": "inline-flex items-center mt-1.5"
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
+      onclick: "return confirm('Шумо дар ҳақиқат мехоҳед калимаи зеринро нест намоед?')",
+      href: _ctx.route('del.ezoh', {
+        id: $props.bisyorjoniba.id,
+        ezoh: ezoh.id
+      }),
+      method: "delete",
+      as: "button",
+      type: "button"
+    }, {
+      "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+        return [_hoisted_91];
+      }),
+      _: 2 /* DYNAMIC */
+    }, 1032 /* PROPS, DYNAMIC_SLOTS */, ["href"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_92, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(ezoh.name), 1 /* TEXT */)]);
+  }), 128 /* KEYED_FRAGMENT */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Dynamyc input for multiple select "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_93, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.formValues.ezohlist, function (country, index) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+      key: index,
+      "class": "flex items-center"
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_94, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_95, "Эзоҳ " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(index + 1), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      "onUpdate:modelValue": function onUpdateModelValue($event) {
+        return country.ezohs = $event;
+      },
+      type: "text",
+      id: "ezohB",
+      "class": "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full",
+      placeholder: "Номи давлаҳо..."
+    }, null, 8 /* PROPS */, _hoisted_96), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, country.ezohs]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Add input field "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+      onClick: _cache[26] || (_cache[26] = function () {
+        return $setup.addFieldEzoh && $setup.addFieldEzoh.apply($setup, arguments);
+      }),
+      "class": "add-button mt-6"
+    }, _hoisted_98), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Remove input field "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+      onClick: _cache[27] || (_cache[27] = function () {
+        return $setup.removeFieldEzoh && $setup.removeFieldEzoh.apply($setup, arguments);
+      }),
+      "class": "remove-button mt-6"
+    }, _hoisted_100)]);
+  }), 128 /* KEYED_FRAGMENT */))], 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $setup.ezohblock]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Save buttons "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_101, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Button back "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_102, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
     "class": "group relative inline-flex items-center overflow-hidden rounded border border-current px-6 py-2 text-indigo-600 focus:outline-none focus:ring active:text-indigo-500",
     href: _ctx.route('bi.index')
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_88, _hoisted_89];
+      return [_hoisted_103, _hoisted_104];
     }),
     _: 1 /* STABLE */
   }, 8 /* PROPS */, ["href"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     type: "submit",
     disabled: $setup.formValues.processing,
     "class": "group relative inline-flex items-center overflow-hidden rounded border border-current px-6 py-2 text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
-  }, _hoisted_93, 8 /* PROPS */, _hoisted_90)])])], 32 /* HYDRATE_EVENTS */)])], 64 /* STABLE_FRAGMENT */);
+  }, _hoisted_108, 8 /* PROPS */, _hoisted_105)])])], 32 /* HYDRATE_EVENTS */)])], 64 /* STABLE_FRAGMENT */);
 }
 
 /***/ }),

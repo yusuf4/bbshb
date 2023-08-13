@@ -33,6 +33,11 @@ class Dujoniba extends Model
     {
         return $this->belongsToMany(Country::class, 'dujonibas_countries', 'dujonibas_id', 'countries_id')->withTimestamps();
     }
+    public function ezohD()
+    {
+        return $this->belongsToMany(Ezoh::class, 'ezohs_dujonibas', 'dujonibas_id', 'ezohs_id')->withTimestamps();
+    }
+
     public function fileShartnoma(){
         return $this->belongsTo(FileShartnoma::class);
     }

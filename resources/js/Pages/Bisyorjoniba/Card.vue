@@ -72,6 +72,15 @@
                                 <span class="text-sm text-gray-700 pb-1.5" v-else>-----</span>
                                 <span class="text-sm text-gray-700 pb-2">{{card.maqomot}}</span>
                                 <span class="text-sm text-gray-700 pb-2">{{card.ezoh}}</span>
+                                <div
+                                    v-if="card.ezoh_b.length>0"
+                                    class="flex">
+                                    <span
+                                        v-for="ezoh in card.ezoh_b"
+                                        :key="ezoh.id"
+                                        class="text-sm text-gray-700 pb-2 pr-2"
+                                    >{{ezoh.name}},</span>
+                                </div>
                             </div>
                         </div>
                     </div>

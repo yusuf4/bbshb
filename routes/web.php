@@ -65,6 +65,8 @@ Route::middleware('auth')->group(function(){
         Route::get('/downloadb/file/{id}', 'downloadB')->name('bi.download');
         // =============Delete mintaqa in edit form=========================
         Route::delete('/mintaqa/{id}/country/{country}', 'deleteMintaqa')->name('del.mintaqa');
+        // =============Delete ezoh in edit form=========================
+        Route::delete('/shartnoma/{id}/ezoh/{ezoh}', 'deleteEzoh')->name('del.ezoh');
         // ================= File shartnoma delete on update======================
         Route::delete('/delfile/{id}', 'deleteFiles')->name('del.files');
     });

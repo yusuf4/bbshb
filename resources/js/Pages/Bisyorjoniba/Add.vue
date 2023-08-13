@@ -248,7 +248,7 @@
 
             <!-- Maqomoti masul -->
             <h1 class="text-base text-blue-600 font-medium text-start mt-2">Мақомоти масъул вобаста ба расмиёти дохилидавлатӣ ва татбиқи шартнома</h1>
-            <div class="flex justify-between items-center mt-2 space-x-4 ">
+            <div class="flex justify-between items-start mt-2 space-x-4 ">
                 <div class="w-full mt-4">
                     <label for="nomi_maqomot" class="block mb-2 text-sm font-medium text-gray-900">Номи мақомот</label>
                     <input
@@ -257,13 +257,78 @@
                         v-model.trim.lazy="formValues.maqomot"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="матн">
                 </div>
-                <div class="w-full mt-4">
-                    <label for="ezoh" class="block mb-2 text-sm font-medium text-gray-900">Эзоҳ</label>
-                    <input
-                        type="text"
-                        id="ezoh"
-                        v-model.trim.lazy="formValues.ezoh"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="матн эзоҳ">
+                <!-- Ezoh block with dynamic inpits -->
+                <div class=" flex w-full mt-4">
+                    <div class="w-1/2 mr-4">
+                        <div class="flex justify-between items-center mb-1">
+                            <label for="ezoh_id">Эзоҳ</label>
+                            <div class="flex items-center ml-2">
+                                <input
+                                    checked id="green-checkboxB"
+                                    type="checkbox"
+                                    value=""
+                                    v-model="checkezoh"
+                                    @click="ezohCheck"
+                                    class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 focus:ring-2">
+                                <label for="green-checkboxB" class="ml-2 text-sm font-medium text-gray-900">Иловаи дасти</label>
+                            </div>
+                        </div>
+                        <VueMultiselect
+                            id="ezoh_id"
+                            v-model="formValues.ezohintixob"
+                            :options="ezohs"
+                            label="name"
+                            track-by="id"
+                            :close-on-select="false"
+                            :clear-on-select="false"
+                            :multiple="true"
+                            placeholder="Интихоб...">
+                            <template slot="selection" slot-scope="{ values, search, isOpen }">
+                                <span class="multiselect__input"><span class="text-lg font-semibold">options selected</span></span>
+                            </template>
+                        </VueMultiselect>
+                    </div>
+                    <!-- Dynamyc input for multiple select -->
+                    <div class="w-1/2" v-if="ezohblock">
+                        <div
+                            v-for="(country, index) in formValues.ezohlist"
+                            :key="index"
+                            class="flex items-center">
+                            <div class="input w-full mr-2.5">
+                                <label for="ezohB" class="block mb-2 text-sm font-medium text-gray-900">Эзоҳ {{index+1}}</label>
+                                <input
+                                    v-model="country.ezohs"
+                                    type="text"
+                                    id="ezohB"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full" placeholder="Номи давлаҳо...">
+                            </div>
+                            <!-- Add input field -->
+                            <div @click="addFieldEzoh" class="add-button mt-6">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke-width="1.5"
+                                    stroke="currentColor"
+                                    class="w-8 h-8 text-green-600">
+                                    <path strokeLinecap="round"
+                                          strokeLinejoin="round"
+                                          d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                            <!-- Remove input field -->
+                            <div @click="removeFieldEzoh" class="remove-button mt-6">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5"
+                                    stroke="currentColor"
+                                    class="w-8 h-8 text-red-700">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -348,7 +413,11 @@ export default {
         countries: {
             type: Array,
             default: () => []
-        }
+        },
+        ezohs: {
+            type: Array,
+            default: () => []
+        },
     },
 
     setup(){
@@ -361,11 +430,12 @@ export default {
             etibor_digar:null,
             files_scan: [],
             davlatho:[{davlat: ''}],
+            ezohlist:[{ezohs: ''}],
             tartib:'',
             muhlat: null,
             muhlatEnd: null,
             maqomot: null,
-            ezoh: null
+            ezohintixob: null
         });
         const showPartSix = ref(false);
         const PartSixDigar =ref (false);
@@ -373,8 +443,11 @@ export default {
         const disabled = false;
         const mintaqavi = false;
         const checkbox = ref(false);
+        const checkezoh = ref(false);
         const dynamychide=false;
+        const ezohblock = ref(false);
         const davlatho = ref([{davlat:''},]);
+        const ezohlist = ref([{ezohs: ''},]);
         function PartSix(event){
             this.selected = event.target.value;
             if(this.selected==="1" || this.selected==="2" || this.selected==="3" ){
@@ -404,12 +477,29 @@ export default {
                 formValues.davlatho=[{davlat: ''}];
             }
         }
+        function ezohCheck(){
+            if (this.checkezoh===false){
+                this.ezohblock=true;
+            }else{
+                formValues.ezohlist.splice(1);
+                this.ezohblock=false;
+                formValues.ezohlist=[{ezohs: ''}];
+            }
+        };
         function addField(){
             formValues.davlatho.push({davlat: ''});
         };
         function removeField(index){
             if(formValues.davlatho.length > 1){
                 formValues.davlatho.splice(index,1)
+            }
+        };
+        function addFieldEzoh(){
+            formValues.ezohlist.push({ezohs: ''});
+        };
+        function removeFieldEzoh(index){
+            if(formValues.ezohlist.length > 1){
+                formValues.ezohlist.splice(index,1)
             }
         };
         function disableInput(){
@@ -426,6 +516,12 @@ export default {
             checkbox,
             dynamychide,
             davlatho,
+            checkezoh,
+            ezohblock,
+            ezohlist,
+            ezohCheck,
+            addFieldEzoh,
+            removeFieldEzoh,
             PartSix,
             MintaqaviOn,
             MintaqaviOf,

@@ -20,6 +20,11 @@ class Bisyorjoniba extends Model
     {
         return $this->belongsToMany(Country::class, 'bisyorjonibas_countries', 'bisyorjonibas_id', 'countries_id')->withTimestamps();
     }
+    public function ezohB()
+    {
+        return $this->belongsToMany(Ezoh::class, 'ezohs_bisyorjonibas', 'bisyorjonibas_id', 'ezohs_id')->withTimestamps();
+    }
+
     public function fileshartnomaB()
     {
         return $this->belongsTo(FileShartnoma::class, 'file_shartnoma_id', 'id');
