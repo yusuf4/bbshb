@@ -78,11 +78,6 @@ class BisyorjonibaConroller extends Controller
      */
     public function store(BisyorjonibaRequest $request)
     {
-        $countriesB = $request->intixobB;
-        $countriesList=[];
-        for ($i=0; $i<count($countriesB); $i++){
-            $countriesList[]=$countriesB[$i]['id'];
-        }
         //dd($countriesList);
         $file = $request->file('shartnoma_file');
         $fileName =  time().'-'. $file->getClientOriginalName();
@@ -120,6 +115,14 @@ class BisyorjonibaConroller extends Controller
             'bisyorjoniba_id' =>$bisyorjoniba->bisyorjonibafile->id,
         ]);
         // ======================Dynamyc inputs for Davlatho=======================
+        $countriesB = $request->intixobB;
+        $countriesList=[];
+        if (!empty($request->input('intixobB'))){
+            for ($i=0; $i<count($countriesB); $i++){
+                $countriesList[]=$countriesB[$i]['id'];
+            }
+        }
+
         $mintaqaho = $request->davlatho;
         foreach ($mintaqaho as $davlat) {
             foreach ($davlat as $item){
@@ -181,8 +184,7 @@ class BisyorjonibaConroller extends Controller
      */
     public function update(BisyorjonibaUpdateRequest $request, $id)
     {
-        //dd($request);
-        $bisyorjoniba = Bisyorjoniba::with('mintaqaho')->findOrFail($id);
+        $bisyorjoniba = Bisyorjoniba::with('countriesB')->findOrFail($id);
         $request->validated();
 
         // ====================Delete old file if uploaded new file Shartnoma===================
@@ -198,19 +200,6 @@ class BisyorjonibaConroller extends Controller
             ]);
         }
 
-        // ====================Update dynamic input fields==================
-        $country = $request->davlatho;
-        foreach ($country as $davlat) {
-            foreach ($davlat as $key=>$item){
-                if ($item!=null){
-                    Mintaqaho::create([
-                        'name'=>$item,
-                        'bisyorjoniba_id'=>$bisyorjoniba->id,
-                    ]);
-                }
-            }
-
-        }
 
         // ==========================Update Shartnoma contents===================
 
@@ -225,6 +214,47 @@ class BisyorjonibaConroller extends Controller
             'tartibi_etibor_id'=> intval($request->tartib),
             'muhlati_etibor_id' => intval($request->muhlat),
         ]);
+
+
+        // ====================Update dynamic input fields==================
+        $country = $request->davlatho;
+        $countriesFront = $request->intixobB;
+        $countriesList=[];
+        $countryBackID=[];
+        $countryListID=[];
+        $css=$bisyorjoniba->countriesB()->newPivotStatement()
+            ->where('bisyorjonibas_id', '=', $id)
+            ->get();
+
+        if (!empty($request->input('intixobB'))){
+            // Get Countries ID of this Shartnoma from DB
+            for ($i=0; $i<count($css); $i++){
+                $countryBackID[]=$css[$i]->countries_id;
+            }
+            // Get Countries ID from FrontEnd form
+            for ($h=0; $h<count($countriesFront); $h++){
+                echo($countriesFront[$h]['id']);
+                $countryListID[]=$countriesFront[$h]['id'];
+            }
+
+            $countriesList = array_diff($countryListID, $countryBackID);
+            //dd($countriesList);
+        }
+        foreach ($country as $davlat) {
+            foreach ($davlat as $key=>$item){
+                if ($item!=null){
+                    $countryItem=Country::create([
+                        'name'=>$item,
+                        //'bisyorjoniba_id'=>$bisyorjoniba->id,
+                    ]);
+                    $countryAdd=array_push($countriesList, $countryItem->id);
+                }
+            }
+
+        }
+        if (count($countriesList)>0){
+            $bisyorjoniba->countriesB()->attach($countriesList);
+        }
 
         // ====================Upload new aditional files===================
 
