@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dujoniba;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DujonibaRequest;
 use App\Models\Dujoniba;
+use App\Models\Ezoh;
 use App\Models\File;
 use App\Models\FileShartnoma;
 use App\Models\NomeriShartnoma;
@@ -106,7 +107,10 @@ class DujonibaController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Dujoniba/Add');
+        $ezohs = Ezoh::select('id', 'name')->get();
+        return Inertia::render('Dujoniba/Add',[
+           'ezohs'=>$ezohs,
+        ]);
     }
 
     /**
@@ -173,6 +177,27 @@ class DujonibaController extends Controller
         NomeriShartnoma::create([
            'dujoniba_id'=> $dujoniba->dujonibaF->id,
         ]);
+        // ======================Dynamyc inputs and multiselect input for Ezoh=======================
+        $ezohFrontD = $request->ezohintixob;
+        $ezhosD = $request->ezohlist;
+        $ezohListD=[];
+        if (!empty($request->input('ezohintixob'))){
+            for ($i=0; $i<count($ezohFrontD); $i++){
+                $ezohListD[]=$ezohFrontD[$i]['id'];
+            }
+        }
+        foreach ($ezhosD as $ezhoD) {
+            foreach ($ezhoD as $item){
+                if ($item!=null){
+                    $ezohItemD=Ezoh::create([
+                        'name'=>$item,
+                    ]);
+                    $ezohListD[] = $ezohItemD->id;
+                }
+            }
+
+        }
+        $dujoniba->dujonibaF->ezohD()->attach($ezohListD);
 
         return redirect()->route('do.index')
             ->with('message', 'Шартнома илова шуд!');
@@ -186,7 +211,7 @@ class DujonibaController extends Controller
      */
     public function show($id)
     {
-       $card = Dujoniba::with('nomerD:dujoniba_id,id', 'namudiShartnoma:id,name', 'muhlatiEtibor:id,name', 'tartibiEtibor:id,name', 'fileShartnoma:id,name')->findOrFail($id);
+       $card = Dujoniba::with('nomerD:dujoniba_id,id', 'namudiShartnoma:id,name', 'muhlatiEtibor:id,name', 'tartibiEtibor:id,name', 'fileShartnoma:id,name','ezohD:id,name')->findOrFail($id);
        $files = File::where('dujoniba_id', '=', $id)->select('name','id','namud')->get();
 
        return Inertia::render('Dujoniba/Card', [
@@ -203,11 +228,13 @@ class DujonibaController extends Controller
      */
     public function edit($id)
     {
-        $dujoniba = Dujoniba::with('fileDujoniba:dujoniba_id,id,name,namud', 'fileShartnoma:id,name')->findOrFail($id);
+        $dujoniba = Dujoniba::with('fileDujoniba:dujoniba_id,id,name,namud', 'ezohD:id,name','fileShartnoma:id,name')->findOrFail($id);
 
        // dd($dujoniba->created_at->format('d-m-Y'));
+        $ezohs = Ezoh::select('id', 'name')->get();
         return Inertia::render('Dujoniba/Edit', [
-            'dujoniba'=>$dujoniba
+            'dujoniba'=>$dujoniba,
+            'ezohs'=>$ezohs,
         ]);
     }
 
@@ -247,6 +274,43 @@ class DujonibaController extends Controller
             'tartibi_etibor_id'=> intval($request->tartib),
             'muhlati_etibor_id' => intval($request->muhlat)
         ]);
+
+        // ====================Update dynamic input fields and multiselect Ezohs==================
+        $ezohSelectD = $request->ezohintixob;
+        $ezohFrontInputD = $request->ezohlist;
+        $ezohListD=[];
+        $ezohDuBackID=[];
+        $ezohDuListID=[];
+
+        $ezohGetD=$dujoniba->ezohD()->newPivotStatement()
+            ->where('dujonibas_id', '=', $id)
+            ->get();
+        if (!empty($request->input('ezohintixob'))){
+            // Get Countries ID of this Shartnoma from DB
+            for ($i=0; $i<count($ezohGetD); $i++){
+                $ezohDuBackID[]=$ezohGetD[$i]->ezohs_id;
+            }
+            // Get Countries ID from FrontEnd form
+            for ($h=0; $h<count($ezohSelectD); $h++){
+                $ezohDuListID[]=$ezohSelectD[$h]['id'];
+            }
+
+            $ezohListD = array_diff($ezohDuListID, $ezohDuBackID);
+
+        }
+        foreach ($ezohFrontInputD as $ezohD) {
+            foreach ($ezohD as $key=>$item){
+                if ($item!=null){
+                    $ezohItemD=Ezoh::create([
+                        'name'=>$item,
+                    ]);
+                    $ezohListD[] = $ezohItemD->id;
+                }
+            }
+        }
+        if (count($ezohListD)>0){
+            $dujoniba->ezohD()->attach($ezohListD);
+        }
 
         // ====================Upload new files for part six===================
         if ($request->hasFile('files_scan')){
@@ -332,7 +396,18 @@ class DujonibaController extends Controller
         $filePath = public_path("uploads/shartnoma/".$file->name);
         return response()->download($filePath);
     }
-
+    // =================Delete ezoh by Shartnoma ID and Ezoh ID =====================
+    public function deleteEzohD(Request $request)
+    {
+        $shartnomaID = intval($request->id);
+        $ezohID = intval($request->ezoh);
+        $ezoh = Dujoniba::findOrFail($shartnomaID);
+        $ezoh->ezohD()->newPivotStatement()
+            ->where('dujonibas_id', '=', $shartnomaID)
+            ->where('ezohs_id', '=', $ezohID)
+            ->delete();
+        return redirect()->back();
+    }
     public function qatiDasti(Request $request, $id)
     {
         $dujoniba=Dujoniba::findOrFail($id);

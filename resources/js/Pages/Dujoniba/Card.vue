@@ -72,7 +72,15 @@
                                             v-if="file.namud===0"
                                             :href="'/uploads/files/'+file.name" target="_blank">{{file.name}},</a></span>
                                     </div>
-                                    <span class="text-sm text-gray-700 pb-2">{{card.ezoh}}</span>
+                                    <div
+                                        v-if="card.ezoh_d.length>0"
+                                        class="flex">
+                                    <span
+                                        v-for="ezoh in card.ezoh_d"
+                                        :key="ezoh.id"
+                                        class="text-sm text-gray-700 pb-2 pr-2"
+                                    >{{ezoh.name}},</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>

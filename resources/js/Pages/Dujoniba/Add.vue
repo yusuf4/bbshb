@@ -6,7 +6,7 @@
         <h1 class="font-bold text-2xl text-blue-400 text-blue-700 text-center pb-4 pt-1">Иловаи шартномаи дуҷониба</h1>
         <form class="p-4" @submit.prevent="formValues.post(route('du.store'))">
             <!-- Section One -->
-            <div class="grid gap-6 mb-6 md:grid-cols-2 items-center">
+            <div class="grid gap-6 mb-2.5 md:grid-cols-2 items-center">
                 <div class="nomi-shartnoma">
                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Номи пурраи шартнома</label>
                     <input type="text"
@@ -145,7 +145,7 @@
                 </div>
             </div>
             <!-- Muhlati Etibor -->
-            <div class="mb-4 border-t-4 border-blue-300 border-b-4 pb-6">
+            <div class="mb-4 border-t-4 border-blue-300 border-b-4 pb-4">
                 <h1 class="text-base text-blue-600 text-sm font-medium text-start mt-4">Муҳлати эътибор</h1>
                 <div class="flex justify-between justify-items-center items-center	space-x-4">
                     <div class="w-full mt-7">
@@ -196,8 +196,8 @@
                 </div>
             </div>
             <!-- Imzokunandagon -->
-            <h1 class="text-base text-blue-600 font-medium text-start mt-2">Имзокунандагон</h1>
-            <div class="flex justify-between flex-wrap md:flex-nowrap items-center mt-2 space-x-4 py-4">
+            <h1 class="text-base text-blue-600 font-medium text-start mt-1">Имзокунандагон</h1>
+            <div class="flex justify-between flex-wrap md:flex-nowrap items-center space-x-4 py-2">
                 <div class="w-full">
                     <label for="tj-imzo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ҷониби ҶТ</label>
                     <input
@@ -225,18 +225,80 @@
                         multiple
                         class="block w-full  text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
                 </div>
-                <div class="w-full">
-                    <label for="ezoh" class="block mb-2 ml-2 text-sm font-medium text-gray-900 dark:text-white">Эзоҳ</label>
-                    <input type="text"
-                           id="ezoh"
-                           name="ezoh"
-                           v-model.trim.lazy="formValues.ezoh"
-                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Матн">
-                </div>
-
             </div>
-
-
+            <!-- Ezoh section -->
+            <div class=" flex w-full">
+                <div class="w-1/2 mr-4">
+                    <div class="flex justify-between items-center mb-1">
+                        <label for="ezohD_id">Эзоҳ</label>
+                        <div class="flex items-center ml-2">
+                            <input
+                                checked id="green-checkboxB"
+                                type="checkbox"
+                                value=""
+                                v-model="checkezoh"
+                                @click="ezohCheck"
+                                class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 focus:ring-2">
+                            <label for="green-checkboxB" class="ml-2 text-sm font-medium text-gray-900">Иловаи дасти</label>
+                        </div>
+                    </div>
+                    <VueMultiselect
+                        id="ezohD_id"
+                        v-model="formValues.ezohintixob"
+                        :options="ezohs"
+                        label="name"
+                        track-by="id"
+                        :close-on-select="false"
+                        :clear-on-select="false"
+                        :multiple="true"
+                        placeholder="Интихоб...">
+                        <template slot="selection" slot-scope="{ values, search, isOpen }">
+                            <span class="multiselect__input"><span class="text-lg font-semibold">options selected</span></span>
+                        </template>
+                    </VueMultiselect>
+                </div>
+                <!-- Dynamyc input for multiple select -->
+                <div class="w-1/2" v-if="ezohblock">
+                    <div
+                        v-for="(country, index) in formValues.ezohlist"
+                        :key="index"
+                        class="flex items-center">
+                        <div class="input w-full mr-2.5">
+                            <label for="ezohB" class="block mb-2 text-sm font-medium text-gray-900">Эзоҳ {{index+1}}</label>
+                            <input
+                                v-model="country.ezohs"
+                                type="text"
+                                id="ezohB"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full" placeholder="Номи давлаҳо...">
+                        </div>
+                        <!-- Add input field -->
+                        <div @click="addFieldEzoh" class="add-button mt-6">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="1.5"
+                                stroke="currentColor"
+                                class="w-8 h-8 text-green-600">
+                                <path strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                      d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <!-- Remove input field -->
+                        <div @click="removeFieldEzoh" class="remove-button mt-6">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5"
+                                stroke="currentColor"
+                                class="w-8 h-8 text-red-700">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <!-- Save buttons -->
             <div class="flex justify-end items-center text-center mt-[30px]">
                 <!-- Button back -->
@@ -297,11 +359,12 @@
 import Dashboard from "../Dashboard";
 import {Link, Head, useForm} from "@inertiajs/inertia-vue3";
 import { ref } from 'vue'
+import VueMultiselect from 'vue-multiselect';
 
 export default {
     name: "Add",
     layout: Dashboard,
-    components:{Link, Head},
+    components:{Link, Head, VueMultiselect},
     data(){
         return{
             showPartSix: false,
@@ -316,6 +379,10 @@ export default {
     },
     props:{
       errors: Object,
+        ezohs: {
+            type: Array,
+            default: () => []
+        },
     },
     setup(){
         const formValues= useForm({
@@ -326,6 +393,7 @@ export default {
             sanai_etibor: '',
             files_scan: [],
             etibor_digar:null,
+            ezohlist:[{ezohs: ''}],
             namud: null,
             tartib:'',
             muhlat: null,
@@ -333,9 +401,37 @@ export default {
             imzo_tj: null,
             imzo_digar: null,
             vakolat: [],
-            ezoh: null
+            ezohintixob: null
         });
-        return {formValues};
+        const checkezoh = ref(false);
+        const ezohblock = ref(false);
+        const ezohlist = ref([{ezohs: ''},]);
+        function ezohCheck(){
+            if (this.checkezoh===false){
+                this.ezohblock=true;
+            }else{
+                formValues.ezohlist.splice(1);
+                this.ezohblock=false;
+                formValues.ezohlist=[{ezohs: ''}];
+            }
+        };
+        function addFieldEzoh(){
+            formValues.ezohlist.push({ezohs: ''});
+        };
+        function removeFieldEzoh(index){
+            if(formValues.ezohlist.length > 1){
+                formValues.ezohlist.splice(index,1)
+            }
+        };
+        return{
+            formValues,
+            checkezoh,
+            ezohblock,
+            ezohlist,
+            ezohCheck,
+            addFieldEzoh,
+            removeFieldEzoh,
+        };
     },
     methods:{
         PartSix(event){
@@ -358,3 +454,4 @@ export default {
     }
 }
 </script>
+<style src="vue-multiselect/dist/vue-multiselect.css"></style>

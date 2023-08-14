@@ -142,31 +142,34 @@
                         @input="formValues.files_scan = $event.target.files"
                         class="block w-full text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none">
                     <!-- Lists of files bandi 6 -->
-                    <div
-                        v-for="files in dujoniba.file_dujoniba"
-                        :key="files.id"
-                        class="flex">
+                    <div class="flex flex-wrap">
                         <div
-                            v-show="files.namud===1"
+                            v-for="files in dujoniba.file_dujoniba"
+                            :key="files.id"
                             class="flex">
-                            <Link
-                                onclick="return confirm('Шумо дар ҳақиқат мехоҳед файли зеринро нест намоед?')"
-                                method="delete" as="button" type="button"
-                                :href="route('del.qaror', files.id)">
-                                <svg
-                                    class="w-5 h-5 mr-1.5 text-red-500"
-                                    fill="currentColor"
-                                    viewBox="0 0 20 20"
-                                    xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
-                                </svg>
-                            </Link>
-                            <a
-                                class="hover:text-green-400 text-blue-500 text-sm"
-                                :href="'/uploads/files/'+files.name" target="_blank">
-                                {{files.name}}
-                            </a>
+                            <div
+                                v-show="files.namud===1"
+                                class="flex mr-2">
+                                <Link
+                                    onclick="return confirm('Шумо дар ҳақиқат мехоҳед файли зеринро нест намоед?')"
+                                    method="delete" as="button" type="button"
+                                    :href="route('del.qaror', files.id)">
+                                    <svg
+                                        class="w-5 h-5 mr-1 text-red-500"
+                                        fill="currentColor"
+                                        viewBox="0 0 20 20"
+                                        xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </Link>
+                                <a
+                                    class="hover:text-green-400 text-blue-500 text-sm"
+                                    :href="'/uploads/files/'+files.name" target="_blank">
+                                    {{files.name}}
+                                </a>
+                            </div>
                         </div>
                     </div>
+
                     <div v-if="errors.files_scan" class="text-red-600">{{errors.files_scan}}</div>
                 </div>
                 <!-- Bandi 5 default is hide -->
@@ -180,8 +183,8 @@
                 </div>
             </div>
             <!-- Muhlati Etibor -->
-            <div class="mb-4 border-t-4 border-blue-300 border-b-4 pb-6">
-                <h1 class="text-base text-blue-600 text-sm font-medium text-start mt-4">Муҳлати эътибор</h1>
+            <div class="mb-4 border-t-4 border-blue-300 border-b-4 pb-4">
+                <h1 class="text-base text-blue-600 text-sm font-medium text-start mt-2">Муҳлати эътибор</h1>
                 <div class="flex justify-between justify-items-center items-start space-x-4">
                     <div class="w-full mt-7">
                         <ul class="items-center w-full text-sm font-medium text-gray-900  border border-gray-200 rounded-lg sm:flex">
@@ -233,7 +236,7 @@
             </div>
             <!-- Imzokunandagon -->
             <h1 class="text-base text-blue-600 font-medium text-start mt-2">Имзокунандагон</h1>
-            <div class="flex justify-between items-start flex-wrap md:flex-nowrap mt-2 space-x-4 py-4">
+            <div class="flex justify-between items-start flex-wrap md:flex-nowrap mt-2 space-x-4 pt-2">
                 <div class="w-full">
                     <label for="tj-imzo" class="block mb-2 text-sm font-medium text-gray-900">Ҷониби ҶТ</label>
                     <input
@@ -288,13 +291,99 @@
                         </div>
                     </div>
                 </div>
-                <div class="w-full">
-                    <label for="ezoh" class="block mb-2 ml-2 text-sm font-medium text-gray-900">Эзоҳ</label>
-                    <input type="text"
-                           id="ezoh"
-                           name="ezoh"
-                           v-model="formValues.ezoh"
-                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Матн">
+            </div>
+            <!-- Ezoh section -->
+            <div class=" flex w-full">
+                <div class="w-1/2 mr-4">
+                    <div class="flex justify-between items-center mb-1">
+                        <label for="ezohD_id">Эзоҳ</label>
+                        <div class="flex items-center ml-2">
+                            <input
+                                checked id="green-checkboxB"
+                                type="checkbox"
+                                value=""
+                                v-model="checkezoh"
+                                @click="ezohCheck"
+                                class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 focus:ring-2">
+                            <label for="green-checkboxB" class="ml-2 text-sm font-medium text-gray-900">Иловаи дасти</label>
+                        </div>
+                    </div>
+                    <VueMultiselect
+                        id="ezohD_id"
+                        v-model="formValues.ezohintixob"
+                        :options="ezohs"
+                        label="name"
+                        track-by="id"
+                        :close-on-select="false"
+                        :clear-on-select="false"
+                        :multiple="true"
+                        placeholder="Интихоб...">
+                        <template slot="selection" slot-scope="{ values, search, isOpen }">
+                            <span class="multiselect__input"><span class="text-lg font-semibold">options selected</span></span>
+                        </template>
+                    </VueMultiselect>
+                    <!-- List of ezohs -->
+                    <div
+                        v-if="dujoniba.ezoh_d.length>0"
+                        v-for="(ezohD, item) in dujoniba.ezoh_d"
+                        :key="ezohD.id"
+                        class="inline-flex items-center mt-1.5">
+                        <Link
+                            onclick="return confirm('Шумо дар ҳақиқат мехоҳед калимаи зеринро нест намоед?')"
+                            :href="route('delD.ezoh', {id: dujoniba.id, ezoh:ezohD.id})"
+                            method="delete"
+                            as="button"
+                            type="button">
+                            <svg
+                                class="w-5 h-5 mr-1.5 text-red-500"
+                                fill="currentColor"
+                                viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+                            </svg>
+                        </Link>
+                        <span class="mr-4 text-sm font-normal text-gray-900">{{ezohD.name}}</span>
+                    </div>
+                </div>
+                <!-- Dynamyc input for multiple select -->
+                <div class="w-1/2" v-show="ezohblock">
+                    <div
+                        v-for="(country, index) in formValues.ezohlist"
+                        :key="index"
+                        class="flex items-center">
+                        <div class="input w-full mr-2.5">
+                            <label for="ezohD" class="block mb-2 text-sm font-medium text-gray-900">Эзоҳ {{index+1}}</label>
+                            <input
+                                v-model="country.ezohs"
+                                type="text"
+                                id="ezohD"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full" placeholder="Номи давлаҳо...">
+                        </div>
+                        <!-- Add input field -->
+                        <div @click="addFieldEzoh" class="add-button mt-6">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="1.5"
+                                stroke="currentColor"
+                                class="w-8 h-8 text-green-600">
+                                <path strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                      d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <!-- Remove input field -->
+                        <div @click="removeFieldEzoh" class="remove-button mt-6">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5"
+                                stroke="currentColor"
+                                class="w-8 h-8 text-red-700">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -361,11 +450,12 @@ import Dashboard from "../Dashboard";
 import {Link, Head, useForm} from "@inertiajs/inertia-vue3";
 import {Inertia} from "@inertiajs/inertia";
 import {ref} from "vue";
+import VueMultiselect from 'vue-multiselect';
 import moment from "moment";
 export default {
     name: "Edit",
     layout: Dashboard,
-    components: {Link, Head},
+    components: {Link, Head, VueMultiselect},
     data(){
         return{
             showPartSix: false,
@@ -381,6 +471,10 @@ export default {
     props:{
         dujoniba: Object,
         errors: Object,
+        ezohs: {
+            type: Array,
+            default: () => []
+        },
     },
     setup(props){
         const formValues= useForm({
@@ -391,6 +485,7 @@ export default {
             jonibi_digar: props.dujoniba.jonibi_digar,
             sanai_etibor: props.dujoniba.sanai_etibor!=null ? formated(props.dujoniba.sanai_etibor) : '',
             files_scan: [],
+            ezohlist:[{ezohs: ''}],
             etibor_digar: props.dujoniba.etibor_digar,
             namud: props.dujoniba.namudi_shartnoma_id,
             tartib: props.dujoniba.tartibi_etibor_id,
@@ -399,15 +494,34 @@ export default {
             imzo_tj: props.dujoniba.imzo_tj,
             imzo_digar: props.dujoniba.imzo_digar,
             vakolat: [],
-            ezoh: props.dujoniba.ezoh,
+            ezohintixob: null,
             _method: "PUT"
         });
+        const checkezoh = ref(false);
+        const ezohblock = ref(false);
+        const ezohlist = ref([{ezohs: ''},]);
+        function ezohCheck(){
+            if (this.checkezoh===false){
+                this.ezohblock=true;
+            }else{
+                formValues.ezohlist.splice(1);
+                this.ezohblock=false;
+                formValues.ezohlist=[{ezohs: ''}];
+            }
+        };
+        function addFieldEzoh(){
+            formValues.ezohlist.push({ezohs: ''});
+        };
+        function removeFieldEzoh(index){
+            if(formValues.ezohlist.length>1){
+                formValues.ezohlist.splice(index,1)
+            }
+        };
         function submit(){
             Inertia.post(route('du.update', props.dujoniba.id), formValues, {
                 forceFormData: true
             });
         }
-
         function selectFile($event) {
             form.image = $event.target.files[0];
         }
@@ -415,7 +529,17 @@ export default {
             return  moment(value).format('DD.MM.YYYY');
         }
 
-        return {formValues, submit, selectFile,formated};
+        return {
+            formValues,
+            checkezoh,
+            ezohblock,
+            ezohlist,
+            ezohCheck,
+            addFieldEzoh,
+            removeFieldEzoh,
+            submit,
+            selectFile,
+            formated};
     },
     methods:{
         PartSix(event){
@@ -452,3 +576,4 @@ export default {
     }
 }
 </script>
+<style src="vue-multiselect/dist/vue-multiselect.css"></style>

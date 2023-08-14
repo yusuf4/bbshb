@@ -236,9 +236,9 @@
                       <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
                   </svg>
               </div>
-              <div class="w-[calc(100%-30px)] flex pb-2">
-                  <!-- Search section -->
-                  <div class="header-search w-[calc(100%-200px)] flex justify-center items-center">
+              <div class="w-[calc(100%-30px)] flex pb-2 justify-between ">
+                  <!-- Logo section -->
+                  <div class="header-search w-[calc(100%-200px)] flex justify-center items-center ">
                       <img src="../img/corona.png" class="h-8 w-10 mr-4 rounded-full" v-if="$page.component==='Dash/DashItems'">
                       <div class="flex flex-col text-center" v-show="$page.component==='Dash/DashItems'">
                           <span class="pt-1 text-lg text-blue-700 font-medium">Вазорати корҳои хориҷии Ҷумҳурии Тоҷикистон</span>
@@ -255,8 +255,8 @@
                       </div>
                   </div>
                   <!-- User login -->
-                  <div class="cursor-pointer w-[200px] mt-2">
-                      <div class="flex items-center  justify-start space-x-4" @click="toggleDrop">
+                  <div class="w-[200px] mt-2 pl-20">
+                      <div class="flex items-center  justify-start space-x-4 cursor-pointer" @click="toggleDrop">
                           <img class="w-10 h-10 rounded-full border-2 border-gray-50" src="../img/25.jpg" alt="">
                           <div class="font-semibold dark:text-white text-left">
                               <div class="text-black">{{$page.props.userName}}</div>
@@ -264,7 +264,7 @@
                           </div>
                       </div>
                       <!-- Drop down -->
-                      <div v-show="showDropDown" class="absolute right-[10px] z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg  ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+                      <div v-show="showDropDown" class="absolute right-[10px] z-10 mt-2 w-44 origin-top-right rounded-md bg-white shadow-lg  ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
                           <div class="py-1 text-left " role="none">
                               <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
                               <form method="POST" @submit.prevent="submit" role="none">

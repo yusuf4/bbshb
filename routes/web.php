@@ -43,6 +43,8 @@ Route::middleware('auth')->group(function(){
             // ==================Delete files of vakolat inputs=====================
             Route::delete('/filevakolat/{id}', 'deletevakolat')->name('del.vakolat');
             Route::get('/searchn','seracN')->name('do.serch');
+            // =============Delete ezoh in edit form=========================
+            Route::delete('/dujonibash/{id}/ezoh/{ezoh}', 'deleteEzohD')->name('delD.ezoh');
         });
 
         // =====================Dashboard items========================

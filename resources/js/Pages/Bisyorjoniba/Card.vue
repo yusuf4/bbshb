@@ -71,7 +71,6 @@
                                 <span class="text-sm text-gray-700 pb-1.5" v-if="card.qati_etibor!=null">{{formated(card.qati_etibor)}}</span>
                                 <span class="text-sm text-gray-700 pb-1.5" v-else>-----</span>
                                 <span class="text-sm text-gray-700 pb-2">{{card.maqomot}}</span>
-                                <span class="text-sm text-gray-700 pb-2">{{card.ezoh}}</span>
                                 <div
                                     v-if="card.ezoh_b.length>0"
                                     class="flex">

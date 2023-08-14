@@ -1369,6 +1369,12 @@ select {
 .mt-\[40px\] {
   margin-top: 40px;
 }
+.mb-2\.5 {
+  margin-bottom: 0.625rem;
+}
+.ml-20 {
+  margin-left: 5rem;
+}
 .block {
   display: block;
 }
@@ -1518,6 +1524,9 @@ select {
 }
 .w-screen {
   width: 100vw;
+}
+.w-44 {
+  width: 11rem;
 }
 .max-w-6xl {
   max-width: 72rem;
@@ -2235,6 +2244,15 @@ select {
 }
 .pt-8 {
   padding-top: 2rem;
+}
+.pl-6 {
+  padding-left: 1.5rem;
+}
+.pl-20 {
+  padding-left: 5rem;
+}
+.pr-20 {
+  padding-right: 5rem;
 }
 .text-left {
   text-align: left;
