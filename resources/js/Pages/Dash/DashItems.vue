@@ -146,11 +146,11 @@
                         <span class="block text-gray-500">Иловаи матн</span>
                     </div>
                 </div>
-                <div class="row-span-3 bg-white shadow rounded-lg">
+                <div class="row-span-3 bg-white shadow rounded-lg ">
                     <div class="flex items-center justify-between px-6 py-5 font-semibold border-b border-gray-100">
-                        <span>Шартномаҳо</span>
+                        <span>Шумораи шартномаҳо </span>
                         <button type="button" class="inline-flex justify-center rounded-md px-1 -mr-1 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-600" id="options-menu" aria-haspopup="true" aria-expanded="true">
-                            Миқдор
+                            Давлатҳо
                             <svg class="-mr-1 ml-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                             </svg>
@@ -159,6 +159,8 @@
                     </div>
                     <div class="overflow-y-auto">
                         <ul
+                            v-for="country in countryFilter"
+                            :key="country.id"
                             class="p-6 space-y-6">
                             <li class="flex items-center">
                                 <div class="h-8 w-8 mr-3 bg-gray-100 rounded-full overflow-hidden">
@@ -170,8 +172,8 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
                                     </svg>
                                 </div>
-                                <span class="text-gray-600"></span>
-                                <span class="ml-auto font-semibold">9</span>
+                                <span class="text-gray-600">{{country.name}}</span>
+                                <span class="ml-auto font-semibold">{{country.bisyorjonibas_count}}</span>
                             </li>
                         </ul>
                     </div>
@@ -214,7 +216,15 @@ export default {
         ijronashuda: String,
         shumoraD: String,
         shumoraB: String,
+        countries: Array,
 
+    },
+    computed:{
+        countryFilter(){
+            return this.countries.filter(function (item){
+                return item.bisyorjonibas_count>=1;
+            })
+        }
     },
     watch:{
         formValues: {

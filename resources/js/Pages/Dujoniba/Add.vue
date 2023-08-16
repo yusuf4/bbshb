@@ -300,7 +300,7 @@
                 </div>
             </div>
             <!-- Save buttons -->
-            <div class="flex justify-end items-center text-center mt-[30px]">
+            <div class="flex justify-end items-center text-center mt-[15px]">
                 <!-- Button back -->
                 <div class="mr-6">
                     <Link

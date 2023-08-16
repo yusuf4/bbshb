@@ -4,11 +4,14 @@ namespace App\Http\Controllers\Dujoniba;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DujonibaRequest;
+use App\Models\Bisyorjoniba;
+use App\Models\Country;
 use App\Models\Dujoniba;
 use App\Models\Ezoh;
 use App\Models\File;
 use App\Models\FileShartnoma;
 use App\Models\NomeriShartnoma;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -40,6 +43,11 @@ class DujonibaController extends Controller
             ->when($request->ijronashuda == 'true', function ($query){
                 $query->where('sanai_etibor', NULL);
             })
+            ->when($request->ezohintixob, function ($query) use ($request) {
+                $query->whereHas('ezohD', function ($query) use ($request) {
+                    $query->where('ezohs_id', '=', intval($request->ezohintixob['id']));
+                });
+            })
            ->when($request->formValues, function ($query, $formValues) use ($request) {
                if($request->formValues['datefrom']!=null && $request->formValues['dateto']!=null){
                    $query->whereBetween('created_at', [Carbon::createFromFormat('d.m.Y',$formValues['datefrom'])->format('Y-m-d'), Carbon::createFromFormat('d.m.Y',$formValues['dateto'])->format('Y-m-d')]);
@@ -54,26 +62,46 @@ class DujonibaController extends Controller
         $searchlist = $request->only(['search']);
         $etiborlist = $request->only('searchetibor');
         $dujonibaCount= $dujoniba->total();
-        //dd($dujoniba);
+        $ezohs=Ezoh::select('id','name')->get();
+        $countries = Country::select('id','name')->get();
         return Inertia::render('Dujoniba/Index',[
             'dujoniba'=>$dujoniba,
             'userName'=> $userName,
             'searchlist'=> $searchlist,
             'dujonibaCount'=>$dujonibaCount,
-            'etiborlist'=>$etiborlist
+            'etiborlist'=>$etiborlist,
+            'ezohs'=>$ezohs,
+            'countries'=>$countries,
         ]);
     }
 
 
     public function seracN(Request $request){
-        //dd($request->formValues);
-        $shumoraD = Dujoniba::query()
-            ->when($request->formValues['datefrom']!=null && $request->formValues['dateto']!=null, function ($query) use ($request) {
-                //if($formValues['datefrom']!=null && $formValues['dateto']!=null && $formValues['namud']=='1'){
-                    $query->whereBetween('created_at', [Carbon::createFromFormat('d.m.Y',$request->formValues['datefrom'])->format('Y-m-d'), Carbon::createFromFormat('d.m.Y',$request->formValues['dateto'])->format('Y-m-d')])->get();
-                //}
-            });
-        dd($shumoraD);
+        //dd($request->intixobD['name']);
+        $bisyor = Bisyorjoniba::query()
+            ->when($request->intixobD, function ($query) use ($request) {
+                $query->whereHas('countriesB', function ($query) use ($request) {
+                    $query->where('countries_id', '=', intval($request->intixobD['id']));
+                });
+            })
+
+//            ->whereHas('countriesB', function (Builder $query) use ($request) {
+//                $query->where('countries_id', $request->intixobD['id']);
+//            })
+            ->get();
+        dd($bisyor);
+
+
+
+
+
+//        $shumoraD = Dujoniba::query()
+//            ->when($request->formValues['datefrom']!=null && $request->formValues['dateto']!=null, function ($query) use ($request) {
+//                //if($formValues['datefrom']!=null && $formValues['dateto']!=null && $formValues['namud']=='1'){
+//                    $query->whereBetween('created_at', [Carbon::createFromFormat('d.m.Y',$request->formValues['datefrom'])->format('Y-m-d'), Carbon::createFromFormat('d.m.Y',$request->formValues['dateto'])->format('Y-m-d')])->get();
+//                //}
+//            });
+//        dd($shumoraD);
 
 //        // filter by ijronashuda
 //        //dd($request->ijronashuda);

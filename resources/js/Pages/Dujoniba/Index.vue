@@ -25,7 +25,7 @@
                         v-model="search"
                         name="search"
                         id="table-search"
-                        class="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
                         placeholder="Ҷӯстуҷӯи шартномаҳо">
                     <div
                         @click="FilterToggle"
@@ -43,15 +43,42 @@
         </div>
         <div class="my-2" v-show="datefilter" >
             <div class="flex justify-end items-center" >
-
+                <!-- Advanced filter open button -->
                 <div class="flex justify-end w-full">
+                    <div
+                        class="mr-6 mt-1.5 cursor-pointer"
+                        v-show="filterButtonOpen"
+                        @click="filterOpen"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             fill="none" viewBox="0 0 24 24"
+                             stroke-width="1.5"
+                             stroke="currentColor"
+                             class="w-5 h-5 text-blue-500">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 5.25l-7.5 7.5-7.5-7.5m15 6l-7.5 7.5-7.5-7.5" />
+                        </svg>
+                    </div>
+                    <!-- Advanced filter close button-->
+                    <div
+                        v-show="filterButtonClose"
+                        class="mr-6 mt-1.5 cursor-pointer"
+                        @click="filterOpen"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             fill="none" viewBox="0 0 24 24"
+                             stroke-width="1.5" stroke="currentColor"
+                             class="w-5 h-5 text-blue-500">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l7.5-7.5 7.5 7.5m-15 6l7.5-7.5 7.5 7.5" />
+                        </svg>
+
+                    </div>
                     <div id="toast-simple" class="flex items-center max-w-xs px-4 pr-4 mr-4 space-x-2 text-gray-500 bg-white divide-x divide-gray-200 rounded-lg shadow" role="alert">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 text-blue-500">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
                         </svg>
 
-                        <div class="pl-2 text-sm font-normal" v-show="dujonibaCount>0">
-                            <span class="font-semibold text-gray-600">{{dujonibaCount}}</span>
+                        <div class="flex pl-2 text-sm font-normal" v-show="dujonibaCount>0">
+                            <span class="mr-1.5 font-semibold text-gray-600">{{dujonibaCount}}</span>
                                 адад
                         </div>
                     </div>
@@ -119,6 +146,28 @@
                         </svg>
                     </Link>
                 </div>
+            </div>
+        </div>
+        <!-- Advance filter Ezoh and Country-->
+        <div v-show="advanceFilterBlock"
+            class="flex justify-end my-2 px-10"
+        >
+            <!-- Advance filter Ezoh-->
+            <div class="w-1/6 mr-2 border border-gray-300 rounded-lg">
+                <VueMultiselect
+                    id="ezohD_id"
+                    v-model="ezohintixob"
+                    :options="ezohs"
+                    label="name"
+                    track-by="id"
+                    :close-on-select="true"
+                    :clear-on-select="false"
+                    :multiple="false"
+                    placeholder="Интихоб эзоҳ...">
+                    <template slot="selection" slot-scope="{ values, search, isOpen }">
+                        <span class="multiselect__input"><span class="text-lg font-semibold">options selected</span></span>
+                    </template>
+                </VueMultiselect>
             </div>
         </div>
         <table class="w-full text-sm text-left text-gray-500">
@@ -261,11 +310,12 @@
  import {ref} from "vue";
  import {Inertia} from "@inertiajs/inertia";
  import Pagination from "../Pagination";
+ import VueMultiselect from 'vue-multiselect';
  import moment from "moment";
  export default {
      name: "Index",
      layout: Dashboard,
-     components:{Pagination, Link, Head},
+     components:{Pagination, Link, Head,VueMultiselect},
      data(){
          return {
              formatter: ref({
@@ -273,6 +323,11 @@
                  month: 'MMM',
              }),
              showMenu: false,
+             ezohintixob: null,
+             intixobD: null,
+             advanceFilterBlock: false,
+             filterButtonOpen: true,
+             filterButtonClose: false,
              search: ref(this.searchlist.search),
              searchnamud: '',
              searchetibor: '',
@@ -289,6 +344,14 @@
          searchlist: Object,
          dujonibaCount: String,
          etiborlist: Object,
+         ezohs: {
+             type: Array,
+             default: () => []
+         },
+         countries: {
+             type: Array,
+             default: () => []
+         },
      },
      methods: {
          formated(value) {
@@ -299,6 +362,13 @@
              localStorage.setItem('datefilter',JSON.parse(this.datefilter));
 
          },
+         filterOpen()
+         {
+            this.filterButtonClose=!this.filterButtonClose;
+            this.advanceFilterBlock=!this.advanceFilterBlock;
+            this.filterButtonOpen=!this.filterButtonOpen;
+         },
+
      },
      watch:{
          search(value){
@@ -333,6 +403,12 @@
                  preserveState: true
              });
          },
+         ezohintixob(value){
+             Inertia.get('/doindex', {ezohintixob: value}, {
+                 preserveState: true
+             });
+         },
      },
  }
  </script>
+<style src="vue-multiselect/dist/vue-multiselect.css"></style>

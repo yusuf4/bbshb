@@ -40,21 +40,35 @@ class BisyorjonibaConroller extends Controller
             ->when($request->ijronashuda == 'true', function ($query){
                 $query->where('sanai_etibor', NULL);
             })
+            ->when($request->intixobB, function ($query) use ($request) {
+                $query->whereHas('countriesB', function ($query) use ($request) {
+                    $query->where('countries_id', '=', intval($request->intixobB['id']));
+                });
+            })
+            ->when($request->ezohintixob, function ($query) use ($request) {
+                $query->whereHas('ezohB', function ($query) use ($request) {
+                    $query->where('ezohs_id', '=', intval($request->ezohintixob['id']));
+                });
+            })
             ->when($request->formValues, function ($query, $formValues) use ($request) {
                 if($request->formValues['datefrom']!=null && $request->formValues['dateto']!=null){
                     $query->whereBetween('created_at', [Carbon::createFromFormat('d.m.Y',$formValues['datefrom'])->format('Y-m-d'), Carbon::createFromFormat('d.m.Y',$formValues['dateto'])->format('Y-m-d')]);
                 }
             })
-            ->with('namudB:id,name', 'tartibiEtiborB:id,name', 'nomerB:id,bisyorjoniba_id', 'muhlatiEtiborB:id,name')
+            ->with('namudB:id,name', 'ezohB', 'tartibiEtiborB:id,name', 'nomerB:id,bisyorjoniba_id', 'muhlatiEtiborB:id,name')
             ->latest()
             ->paginate('3')
             ->withQueryString();
+        $ezohs = Ezoh::select('id', 'name')->get();
+        $countries = Country::select('id','name')->get();
         $searchlist = $request->only(['search']);
         $bisyorjonibaCount = $bisyorjoniba->total();
         return Inertia::render('Bisyorjoniba/Index', [
             'bisyorjoniba' => $bisyorjoniba,
             'searchlist'=> $searchlist,
             'bisyorjonibaCount'=>$bisyorjonibaCount,
+            'ezohs' => $ezohs,
+            'countries'=>$countries,
         ]);
     }
 

@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Bisyorjoniba;
+use App\Models\Country;
 use App\Models\Dujoniba;
 use App\Models\NamudiShartnoma;
 use App\Models\NomeriShartnoma;
 use App\Models\User;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Inertia\Inertia;
@@ -30,11 +32,11 @@ class DashboardController extends Controller
                     return $query->whereBetween('created_at', [Carbon::createFromFormat('d.m.Y',$formValues['datefrom'])->format('Y-m-d'), Carbon::createFromFormat('d.m.Y',$formValues['dateto'])->format('Y-m-d')])->count();
                 }
             });
-//        $namud = Dujoniba::query()
-//            ->where('namudi_shartnoma_id', '1')
-//
-//            ->count();
-//        dd($namud);
+        $countries=Country::select('id', 'name')
+            ->withCount('bisyorjonibas')
+            ->orderBy('bisyorjonibas_count', 'DESC')
+            ->get();
+        //dd($country);
         $bisyorCount = Bisyorjoniba::count();
         $ijronashudaD = Dujoniba::where('sanai_etibor', '=', null)->count();
         $ijronashudaB = Bisyorjoniba::where('sanai_etibor', '=', null)->count();
@@ -46,7 +48,7 @@ class DashboardController extends Controller
             'ijronashuda'=>$ijronashuda,
             'shumoraD'=>$shumoraD,
             'shumoraB'=>$shumoraB,
-            //'namud'=>$namud
+            'countries'=>$countries
         ]);
     }
 }
