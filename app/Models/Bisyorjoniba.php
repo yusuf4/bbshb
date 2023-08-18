@@ -27,7 +27,7 @@ class Bisyorjoniba extends Model
 
     public function fileshartnomaB()
     {
-        return $this->belongsTo(FileShartnoma::class, 'file_shartnoma_id', 'id');
+        return $this->hasMany(FileShartnoma::class, 'bisyorjoniba_id', 'id');
     }
 
     public function namudB()

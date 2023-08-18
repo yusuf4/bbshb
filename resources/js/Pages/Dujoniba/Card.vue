@@ -43,7 +43,14 @@
                                 <div class="flex flex-col  mb-2">
                                     <span class="text-sm text-gray-700 pb-2">{{formated(card.created_at)}}</span>
                                     <span class="text-sm text-gray-700 pb-2">{{card.nomer_d.id}}</span>
-                                    <span class="text-sm text-blue-600 pb-2"><a :href="'/uploads/shartnoma/'+card.file_shartnoma.name" target="_blank">{{card.file_shartnoma.name}}</a></span>
+                                    <div class="flex">
+                                        <span
+                                            v-for="fileS in card.shartnoma_file"
+                                            :key="fileS.id"
+                                            class="text-sm text-blue-600 pb-2 pr-2"
+                                        ><a
+                                            :href="'/uploads/shartnoma/'+fileS.name" target="_blank">{{fileS.name}},</a></span>
+                                    </div>
                                     <span class="text-sm text-gray-700 pb-2">{{card.namudi_shartnoma.name}}</span>
                                     <span class="text-sm text-gray-700 pb-2">{{card.jonibi_tj}}, {{card.jonibi_digar}}</span>
                                     <span class="text-sm text-gray-700 pb-2" v-if="card.sanai_etibor!=null">{{formated(card.sanai_etibor)}}</span>

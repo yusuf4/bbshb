@@ -87,6 +87,7 @@ export default {
     components:{Dashboard,Link,Head},
     props:{
         users: Array,
+        userName: String
     },
     computed:{
 

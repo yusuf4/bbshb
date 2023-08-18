@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Dujoniba;
 use App\Models\FileShartnoma;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Storage;
@@ -28,10 +29,12 @@ class ShartnomaListController extends Controller
             ->paginate(2)
             ->withQueryString();
         //dd($files);
+        $userName= Auth::user()->name;
         $searchlist = $request->only(['search']);
         return Inertia::render('ShartnomaList', [
             'files'=>$files,
-            'searchlist'=> $searchlist
+            'searchlist'=> $searchlist,
+            'userName'=>$userName
         ]);
     }
 

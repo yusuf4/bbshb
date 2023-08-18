@@ -38,8 +38,11 @@ class Dujoniba extends Model
         return $this->belongsToMany(Ezoh::class, 'ezohs_dujonibas', 'dujonibas_id', 'ezohs_id')->withTimestamps();
     }
 
-    public function fileShartnoma(){
-        return $this->belongsTo(FileShartnoma::class);
+    public function ShartnomaFile(){
+        return $this->hasMany(FileShartnoma::class, 'dujoniba_id', 'id');
+    }
+    public function fileDujoniba(){
+        return $this->hasMany(File::class, 'dujoniba_id', 'id');
     }
 
     public function namudiShartnoma(){
@@ -56,10 +59,6 @@ class Dujoniba extends Model
 
     public function muhlatiEtibor(){
         return $this->hasOne(MuhlatiEtibor::class, 'id', 'muhlati_etibor_id');
-    }
-
-    public function fileDujoniba(){
-        return $this->hasMany(File::class, 'dujoniba_id', 'id');
     }
 
 

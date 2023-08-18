@@ -6,12 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Models\Bisyorjoniba;
 use App\Models\Country;
 use App\Models\Dujoniba;
+use App\Models\Ezoh;
 use App\Models\NamudiShartnoma;
 use App\Models\NomeriShartnoma;
 use App\Models\User;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class DashboardController extends Controller
@@ -36,19 +38,33 @@ class DashboardController extends Controller
             ->withCount('bisyorjonibas')
             ->orderBy('bisyorjonibas_count', 'DESC')
             ->get();
-        //dd($country);
+        $userName= Auth::user()->name;
         $bisyorCount = Bisyorjoniba::count();
         $ijronashudaD = Dujoniba::where('sanai_etibor', '=', null)->count();
         $ijronashudaB = Bisyorjoniba::where('sanai_etibor', '=', null)->count();
         $ijronashuda = $ijronashudaD+$ijronashudaB;
+        $maorif = Ezoh::query()
+            ->select('id', 'name')
+            ->where('id',1)
+            ->withCount('dujonibaE', 'bisyorjonibaE')
+            ->get();
+        $iqtisod = Ezoh::query()
+            ->select('id', 'name')
+            ->where('id',2)
+            ->withCount('dujonibaE', 'bisyorjonibaE')
+            ->get();
+        //dd($maorif);
         return Inertia::render('Dash/DashItems',[
           'users'=>$users,
+            'userName'=> $userName,
             'dujonibaCount'=>$dujonibaCount,
             'bisyorCount'=>$bisyorCount,
             'ijronashuda'=>$ijronashuda,
             'shumoraD'=>$shumoraD,
             'shumoraB'=>$shumoraB,
-            'countries'=>$countries
+            'countries'=>$countries,
+            'maorif'=>$maorif,
+            'iqtisod'=>$iqtisod
         ]);
     }
 }

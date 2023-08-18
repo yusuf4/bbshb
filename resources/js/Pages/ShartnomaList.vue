@@ -121,6 +121,7 @@ export default {
     props:{
         files: Object,
         searchlist: Object,
+        userName: String
     },
     methods:{
         formated(value) {

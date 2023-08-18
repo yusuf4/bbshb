@@ -115,6 +115,7 @@ export default {
     components:{Dashboard, Link, Head},
     props:{
         errors:Object,
+        userName: String
     },
     setup(){
         const form = useForm({

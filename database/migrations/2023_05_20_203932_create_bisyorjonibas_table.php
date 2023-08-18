@@ -21,9 +21,6 @@ class CreateBisyorjonibasTable extends Migration
             $table->date('qati_etibor')->nullable();
             $table->string('maqomot')->nullable();
             $table->string('ezoh')->nullable();
-            $table->foreignId('file_shartnoma_id')->constrained('file_shartnomas')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
             $table->foreignId('namudi_shartnoma_id')->constrained('namudi_shartnomas')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');

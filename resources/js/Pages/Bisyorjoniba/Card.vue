@@ -42,7 +42,14 @@
                             <div class="flex flex-col  mb-2">
                                 <span class="text-sm text-gray-700 pb-2">{{formated(card.created_at)}}</span>
                                 <span class="text-sm text-gray-700 pb-2">{{card.nomer_b.id}}</span>
-                                <span class="text-sm text-blue-600 pb-2"><a :href="'/uploads/shartnoma/'+card.fileshartnoma_b.name" target="_blank">{{card.fileshartnoma_b.name}}</a></span>
+                                <div class="flex">
+                                        <span
+                                            v-for="fileS in card.fileshartnoma_b"
+                                            :key="fileS.id"
+                                            class="text-sm text-blue-600 pb-2 pr-2"
+                                        ><a
+                                            :href="'/uploads/shartnoma/'+fileS.name" target="_blank">{{fileS.name}},</a></span>
+                                </div>
                                 <span class="text-sm text-gray-700 pb-2">{{card.namud_b.name}}</span>
                                 <div
                                     v-if="card.countries_b.length>0"

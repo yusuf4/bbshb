@@ -5,17 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Dujoniba;
 use App\Models\Bisyorjoniba;
-use Illuminate\Support\Carbon;
 
 class FileShartnoma extends Model
 {
-    protected $fillable = ['name'];
+    protected $fillable = ['id','name','dujoniba_id', 'bisyorjoniba_id'];
 
     public function dujonibaF(){
-        return $this->hasOne(Dujoniba::class, 'file_shartnoma_id', 'id');
+        return $this->belongsTo(Dujoniba::class, 'dujoniba_id', 'id');
     }
 
     public function bisyorjonibafile(){
-        return $this->hasOne(Bisyorjoniba::class, 'file_shartnoma_id', 'id');
+        return $this->belongsTo(Bisyorjoniba::class, 'bisyorjoniba_id', 'id');
     }
 }

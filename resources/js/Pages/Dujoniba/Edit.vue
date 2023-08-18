@@ -26,15 +26,35 @@
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full"
                         type="file"
                         name="shartnoma_file[]"
+                        multiple
                         @change="selectFile"
-                        @input="formValues.shartnoma_file = $event.target.files[0]"
+                        @input="formValues.shartnoma_file = $event.target.files"
                         id="formFile"/>
-                    <div class="flex">
-                        <a
-                            class="hover:text-green-400 text-blue-500 text-sm"
-                            :href="'/uploads/shartnoma/'+dujoniba.file_shartnoma.name" target="_blank">
-                            {{dujoniba.file_shartnoma.name}}
-                        </a>
+                    <div class="flex flex-wrap">
+                        <div
+                            v-for="filesS in dujoniba.shartnoma_file"
+                            :key="filesS.id"
+                            class="flex">
+                            <div
+                                class="flex mr-2">
+                                <Link
+                                    onclick="return confirm('Шумо дар ҳақиқат мехоҳед файли зеринро нест намоед?')"
+                                    method="delete" as="button" type="button"
+                                    :href="route('del.shartnoma', filesS.id)">
+                                    <svg
+                                        class="w-5 h-5 mr-1 text-red-500"
+                                        fill="currentColor"
+                                        viewBox="0 0 20 20"
+                                        xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </Link>
+                                <a
+                                    class="hover:text-green-400 text-blue-500 text-sm"
+                                    :href="'/uploads/shartnoma/'+filesS.name" target="_blank">
+                                    {{filesS.name}}
+                                </a>
+                            </div>
+                        </div>
                     </div>
                     <div v-if="errors.shartnoma_file" class="text-red-600">{{errors.shartnoma_file}}</div>
                 </div>
@@ -43,7 +63,6 @@
                         <label for="jonibi-tj" class="block mb-2 text-sm font-medium text-gray-900">Аз ҷониби ҶТ</label>
                         <input type="text"
                                id="jonibi-tj"
-                               name="jonibi_tj"
                                v-model="formValues.jonibi_tj"
                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full" placeholder="Тарафҳои шартнома...">
                         <div v-if="errors.jonibi_tj" class="text-red-600">{{errors.jonibi_tj}}</div>
@@ -52,7 +71,6 @@
                         <label for="jonibi_digar" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Аз ҷониби дигар</label>
                         <input type="text"
                                id="jonibi_digar"
-                               name="jonibi_digar"
                                v-model="formValues.jonibi_digar"
                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full" placeholder="Тарафҳои шартнома...">
                         <div v-if="errors.jonibi_digar" class="text-red-600">{{errors.jonibi_digar}}</div>
@@ -183,7 +201,7 @@
                 </div>
             </div>
             <!-- Muhlati Etibor -->
-            <div class="mb-4 border-t-4 border-blue-300 border-b-4 pb-4">
+            <div class="mb-2 border-t-4 border-blue-300 border-b-4 pb-4">
                 <h1 class="text-base text-blue-600 text-sm font-medium text-start mt-2">Муҳлати эътибор</h1>
                 <div class="flex justify-between justify-items-center items-start space-x-4">
                     <div class="w-full mt-7">
@@ -235,7 +253,7 @@
                 </div>
             </div>
             <!-- Imzokunandagon -->
-            <h1 class="text-base text-blue-600 font-medium text-start mt-2">Имзокунандагон</h1>
+            <h1 class="text-base text-blue-600 font-medium text-start">Имзокунандагон</h1>
             <div class="flex justify-between items-start flex-wrap md:flex-nowrap mt-2 space-x-4 pt-2">
                 <div class="w-full">
                     <label for="tj-imzo" class="block mb-2 text-sm font-medium text-gray-900">Ҷониби ҶТ</label>
@@ -293,7 +311,7 @@
                 </div>
             </div>
             <!-- Ezoh section -->
-            <div class=" flex w-full">
+            <div class=" flex w-full mt-1.5">
                 <div class="w-1/2 mr-4">
                     <div class="flex justify-between items-center mb-1">
                         <label for="ezohD_id">Эзоҳ</label>

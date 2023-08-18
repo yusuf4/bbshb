@@ -15,6 +15,12 @@ class CreateFileShartnomasTable extends Migration
     {
         Schema::create('file_shartnomas', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('bisyorjoniba_id')->nullable()->constrained('bisyorjonibas')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+            $table->foreignId('dujoniba_id')->nullable()->constrained('dujonibas')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
             $table->string('name');
             $table->timestamps();
         });

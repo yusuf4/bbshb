@@ -24,9 +24,6 @@ class CreateDujonibasTable extends Migration
             $table->string('imzo_tj')->nullable();
             $table->string('imzo_digar')->nullable();
             $table->string('ezoh')->nullable();
-            $table->foreignId('file_shartnoma_id')->constrained('file_shartnomas')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
             $table->foreignId('namudi_shartnoma_id')->constrained('namudi_shartnomas')
                 ->onUpdate('cascade');
             $table->foreignId('tartibi_etibor_id')->constrained('tartibi_etibors')

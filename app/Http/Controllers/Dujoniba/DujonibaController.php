@@ -135,9 +135,11 @@ class DujonibaController extends Controller
      */
     public function create()
     {
+        $userName= Auth::user()->name;
         $ezohs = Ezoh::select('id', 'name')->get();
         return Inertia::render('Dujoniba/Add',[
            'ezohs'=>$ezohs,
+            'userName'=>$userName
         ]);
     }
 
@@ -149,20 +151,20 @@ class DujonibaController extends Controller
      */
     public function store(DujonibaRequest $request)
     {
-
-        $request->validated();
-        //dd($request->sanai_etibor);
+        //$request->validated();
+        //dd($request->shartnoma_file);
         /*$request->validate([
             'files_scan.*' => 'file|mimes:xlx,xls,pdf,doc,docx,mimes:jpg,jpeg,csv,txt',
         ],['files_scan.mimes' => 'Файл :attribute бояд фармати зерин бошад: jpg,jpeg,csv,txt,xlx,xls,pdf,doc,docx']);*/
-        $file = $request->file('shartnoma_file');
-        $fileName =  time().'-'. $file->getClientOriginalName();
-        $file->move(public_path('uploads/shartnoma'), $fileName);
+//        $file = $request->file('shartnoma_file');
+//        $fileName =  time().'-'. $file->getClientOriginalName();
+//        $file->move(public_path('uploads/shartnoma'), $fileName);
 
-        $dujoniba = FileShartnoma::create([
-            'name'=>$fileName,
-        ]);
-        $dujoniba->dujonibaF()->create([
+//        $dujoniba = FileShartnoma::create([
+//            'name'=>$fileName,
+//        ]);
+
+        $dujoniba = Dujoniba::create([
             'name' => $request->name,
             'jonibi_tj' => $request->jonibi_tj,
             'jonibi_digar' => $request->jonibi_digar,
@@ -177,33 +179,44 @@ class DujonibaController extends Controller
             'muhlati_etibor_id' => intval($request->muhlat),
 
         ]);
+        // ======================== Upload files =========================
+            $fileShartnoma=$request->file('shartnoma_file');
+            foreach ($fileShartnoma as $item){
+                $filename = time().'.'.$item->extension();
+                $item->move(\public_path('uploads/shartnoma'), $filename);
+                FileShartnoma::create([
+                    'name'=>$filename,
+                    'dujoniba_id'=>$dujoniba->id,
+                ]);
+            }
 
         if ($request->hasFile('files_scan')){
             $files=$request->file('files_scan');
             foreach ($files as $qarorfile){
-                $filename = time(). '_'.$qarorfile->getClientOriginalName();
+                $filename = time().'.'.$qarorfile->extension();
                 $qarorfile->move(\public_path('uploads/files'), $filename);
                 File::create([
                     'name'=>$filename,
-                    'dujoniba_id'=>$dujoniba->dujonibaF->id,
+                    'dujoniba_id'=>$dujoniba->id,
                     'namud'=>1,
                 ]);
             }
         }
+
         if ($request->hasFile('vakolat')){
             $filev= $request->file('vakolat');
             foreach ($filev as $vakolat) {
-                $filevName = time().'_'.$vakolat->getClientOriginalName();
+                $filevName = time().'.'.$vakolat->extension();
                 $vakolat->move(\public_path('uploads/vakolat'),  $filevName);
                 File::create([
                     'name'=>$filevName,
-                    'dujoniba_id'=>$dujoniba->dujonibaF->id,
+                    'dujoniba_id'=>$dujoniba->id,
                     'namud'=>0,
                 ]);
             }
         }
         NomeriShartnoma::create([
-           'dujoniba_id'=> $dujoniba->dujonibaF->id,
+           'dujoniba_id'=> $dujoniba->id,
         ]);
         // ======================Dynamyc inputs and multiselect input for Ezoh=======================
         $ezohFrontD = $request->ezohintixob;
@@ -225,7 +238,7 @@ class DujonibaController extends Controller
             }
 
         }
-        $dujoniba->dujonibaF->ezohD()->attach($ezohListD);
+        $dujoniba->ezohD()->attach($ezohListD);
 
         return redirect()->route('do.index')
             ->with('message', 'Шартнома илова шуд!');
@@ -239,12 +252,14 @@ class DujonibaController extends Controller
      */
     public function show($id)
     {
-       $card = Dujoniba::with('nomerD:dujoniba_id,id', 'namudiShartnoma:id,name', 'muhlatiEtibor:id,name', 'tartibiEtibor:id,name', 'fileShartnoma:id,name','ezohD:id,name')->findOrFail($id);
+       $card = Dujoniba::with('nomerD:dujoniba_id,id','namudiShartnoma:id,name', 'muhlatiEtibor:id,name', 'tartibiEtibor:id,name', 'ShartnomaFile:dujoniba_id,id,name','ezohD:id,name')->findOrFail($id);
        $files = File::where('dujoniba_id', '=', $id)->select('name','id','namud')->get();
-
+       //dd($card);
+       $userName= Auth::user()->name;
        return Inertia::render('Dujoniba/Card', [
           'card'=>$card,
-           'files'=>$files
+           'files'=>$files,
+           'userName'=>$userName
        ]);
     }
 
@@ -256,13 +271,15 @@ class DujonibaController extends Controller
      */
     public function edit($id)
     {
-        $dujoniba = Dujoniba::with('fileDujoniba:dujoniba_id,id,name,namud', 'ezohD:id,name','fileShartnoma:id,name')->findOrFail($id);
+        $dujoniba = Dujoniba::with('fileDujoniba:dujoniba_id,id,name,namud', 'ezohD:id,name','ShartnomaFile:dujoniba_id,id,name')->findOrFail($id);
 
        // dd($dujoniba->created_at->format('d-m-Y'));
         $ezohs = Ezoh::select('id', 'name')->get();
+        $userName= Auth::user()->name;
         return Inertia::render('Dujoniba/Edit', [
             'dujoniba'=>$dujoniba,
             'ezohs'=>$ezohs,
+            'userName'=>$userName
         ]);
     }
 
@@ -277,17 +294,17 @@ class DujonibaController extends Controller
     {
         //dd($request->sanai_etibor);
         $dujoniba = Dujoniba::findOrFail($id);
-        if ($request->hasFile("shartnoma_file")){
-            if (FileDel::exists('uploads/shartnoma/'.$dujoniba->fileShartnoma->name)){
-                FileDel::delete('uploads/shartnoma/'.$dujoniba->fileShartnoma->name);
-            }
-            $file = $request->file('shartnoma_file');
-            $fileName =  time().'-'. $file->getClientOriginalName();
-            $file->move(public_path('uploads/shartnoma'), $fileName);
-            $dujoniba->fileShartnoma->update([
-                'name' => $fileName,
-                ]);
-        }
+//        if ($request->hasFile("shartnoma_file")){
+//            if (FileDel::exists('uploads/shartnoma/'.$dujoniba->fileShartnoma->name)){
+//                FileDel::delete('uploads/shartnoma/'.$dujoniba->fileShartnoma->name);
+//            }
+//            $file = $request->file('shartnoma_file');
+//            $fileName =  time().'-'. $file->getClientOriginalName();
+//            $file->move(public_path('uploads/shartnoma'), $fileName);
+//            $dujoniba->fileShartnoma->update([
+//                'name' => $fileName,
+//                ]);
+//        }
         $dujoniba->update([
             'name' => $request->name,
             'jonibi_tj' => $request->jonibi_tj,
@@ -339,12 +356,24 @@ class DujonibaController extends Controller
         if (count($ezohListD)>0){
             $dujoniba->ezohD()->attach($ezohListD);
         }
+        // ====================Upload new Shartnoma files =======================
+            if ($request->hasFile('shartnoma_file')){
+                $fileShartnoma=$request->file('shartnoma_file');
+                foreach ($fileShartnoma as $item){
+                    $filename = time().'.'.$item->extension();
+                    $item->move(\public_path('uploads/shartnoma'), $filename);
+                    FileShartnoma::create([
+                        'name'=>$filename,
+                        'dujoniba_id'=>$dujoniba->id,
+                    ]);
+                }
+            }
 
         // ====================Upload new files for part six===================
         if ($request->hasFile('files_scan')){
             $filesqaror=$request->file('files_scan');
             foreach ($filesqaror as $qarorfile){
-                $filename = time(). '_'.$qarorfile->getClientOriginalName();
+                $filename = time().'.'.$qarorfile->extension();
                 $qarorfile->move(\public_path('uploads/files'), $filename);
                 File::create([
                     'name'=>$filename,
@@ -358,7 +387,7 @@ class DujonibaController extends Controller
         if ($request->hasFile('vakolat')){
             $files=$request->file('vakolat');
             foreach ($files as $vakolat){
-                $filename = time(). '_'.$vakolat->getClientOriginalName();
+                $filename = time().'.'.$vakolat->extension();
                 $vakolat->move(\public_path('uploads/vakolat'), $filename);
                 File::create([
                     'name'=>$filename,
@@ -378,12 +407,16 @@ class DujonibaController extends Controller
      */
     public function destroy($id)
     {
-        $dujoniba = Dujoniba::findOrFail($id);
-        if (FileDel::exists('uploads/shartnoma/'.$dujoniba->fileShartnoma->name)){
-            FileDel::delete('uploads/shartnoma/'.$dujoniba->fileShartnoma->name);
+        $dujoniba = Dujoniba::with('ShartnomaFile','fileDujoniba')->findOrFail($id);
+        //dd($dujoniba);
+        foreach ($dujoniba->ShartnomaFile as $item) {
+            if (FileDel::exists('uploads/shartnoma/'.$item->name)){
+                FileDel::delete('uploads/shartnoma/'.$item->name);
+            }
         }
-        $files = File::where("dujoniba_id", $dujoniba->id)->get();
-        foreach ( $files as $item) {
+
+        // $files = File::where("dujoniba_id", $dujoniba->id)->get();
+        foreach ( $dujoniba->fileDujoniba as $item) {
             if (FileDel::exists('uploads/files/'.$item->name)){
                 FileDel::delete('uploads/files/'.$item->name);
             }
@@ -391,7 +424,7 @@ class DujonibaController extends Controller
                 FileDel::delete('uploads/vakolat/'.$item->name);
             }
         }
-        $dujoniba->fileShartnoma->delete();
+        $dujoniba->delete();
 
         return redirect()->back();
     }
@@ -415,6 +448,15 @@ class DujonibaController extends Controller
             FileDel::delete('uploads/vakolat/'.$filevakolat->name);
         }
         $filevakolat->delete();
+        return redirect()->back();
+    }
+    public function deleteShartnoma($id)
+    {
+        $shartnoma = FileShartnoma::findOrFail($id);
+        if (FileDel::exists('uploads/shartnoma/'.$shartnoma->name)){
+            FileDel::delete('uploads/shartnoma/'.$shartnoma->name);
+        }
+        $shartnoma->delete();
         return redirect()->back();
     }
 

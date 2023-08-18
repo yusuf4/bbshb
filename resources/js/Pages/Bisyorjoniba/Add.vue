@@ -24,7 +24,8 @@
                     <input
                         class="block mb-1 w-full text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
                         type="file"
-                        @input="formValues.shartnoma_file = $event.target.files[0]"
+                        multiple
+                        @input="formValues.shartnoma_file = $event.target.files"
                         id="formFile"/>
                     <div v-if="errors.shartnoma_file" class="ml-1 mt-0.5 text-red-600">{{errors.shartnoma_file}}</div>
                 </div>

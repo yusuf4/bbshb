@@ -15,6 +15,7 @@ use App\Models\Mintaqaho;
 use App\Models\NomeriShartnoma;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\File as FileDel;
 
@@ -63,12 +64,14 @@ class BisyorjonibaConroller extends Controller
         $countries = Country::select('id','name')->get();
         $searchlist = $request->only(['search']);
         $bisyorjonibaCount = $bisyorjoniba->total();
+        $userName= Auth::user()->name;
         return Inertia::render('Bisyorjoniba/Index', [
             'bisyorjoniba' => $bisyorjoniba,
             'searchlist'=> $searchlist,
             'bisyorjonibaCount'=>$bisyorjonibaCount,
             'ezohs' => $ezohs,
             'countries'=>$countries,
+            'userName'=>$userName
         ]);
     }
 
@@ -96,14 +99,14 @@ class BisyorjonibaConroller extends Controller
     public function store(BisyorjonibaRequest $request)
     {
         //dd($request->ezohintixob);
-        $file = $request->file('shartnoma_file');
-        $fileName =  time().'-'. $file->getClientOriginalName();
-        $file->move(public_path('uploads/shartnoma'), $fileName);
-        $bisyorjoniba = FileShartnoma::create([
-            'name'=>$fileName
-        ]);
+//        $file = $request->file('shartnoma_file');
+//        $fileName =  time().'-'. $file->getClientOriginalName();
+//        $file->move(public_path('uploads/shartnoma'), $fileName);
+//        $bisyorjoniba = FileShartnoma::create([
+//            'name'=>$fileName
+//        ]);
 
-        $bisyorjoniba->bisyorjonibafile()->create([
+        $bisyorjoniba = Bisyorjoniba::create([
             'name' => $request->name,
             'etibor_digar' => $request->etibor_digar,
             'sanai_etibor' => (isset($request->sanai_etibor)) ? Carbon::createFromFormat('d.m.Y', $request->sanai_etibor)->format('Y-m-d') : null,
@@ -116,20 +119,30 @@ class BisyorjonibaConroller extends Controller
         ]);
 
         // ==================Add files==============
+        $fileShartnoma=$request->file('shartnoma_file');
+        foreach ($fileShartnoma as $item){
+            $filename = time().'.'.$item->extension();
+            $item->move(\public_path('uploads/shartnoma'), $filename);
+            FileShartnoma::create([
+                'name'=>$filename,
+                'bisyorjoniba_id'=>$bisyorjoniba->id,
+            ]);
+        }
+
         if ($request->hasFile('files_scan')){
             $files=$request->file('files_scan');
             foreach ($files as $qarorfile){
-                $filename = time(). '_'.$qarorfile->getClientOriginalName();
+                $filename = time().'.'.$item->extension();
                 $qarorfile->move(\public_path('uploads/files'), $filename);
                 File::create([
                     'name'=>$filename,
-                    'bisyorjoniba_id'=>$bisyorjoniba->bisyorjonibafile->id,
+                    'bisyorjoniba_id'=>$bisyorjoniba->id,
                     'namud'=>1,
                 ]);
             }
         }
         NomeriShartnoma::create([
-            'bisyorjoniba_id' =>$bisyorjoniba->bisyorjonibafile->id,
+            'bisyorjoniba_id' =>$bisyorjoniba->id,
         ]);
         // ======================Dynamyc inputs for Davlatho=======================
         $countriesB = $request->intixobB;
@@ -153,7 +166,7 @@ class BisyorjonibaConroller extends Controller
             }
 
         }
-        $bisyorjoniba->bisyorjonibafile->countriesB()->attach($countriesList);
+        $bisyorjoniba->countriesB()->attach($countriesList);
 
         // ======================Dynamyc inputs for Ezoh=======================
         $ezohFront = $request->ezohintixob;
@@ -175,7 +188,7 @@ class BisyorjonibaConroller extends Controller
             }
 
         }
-        $bisyorjoniba->bisyorjonibafile->ezohB()->attach($ezohList);
+        $bisyorjoniba->ezohB()->attach($ezohList);
         return redirect()->route('bi.index')
             ->with('message', 'Шартнома илова шуд!');
     }
@@ -188,12 +201,12 @@ class BisyorjonibaConroller extends Controller
      */
     public function show($id)
     {
-        $card = Bisyorjoniba::with('tartibiEtiborB:id,name', 'muhlatiEtiborB:id,name','namudB:id,name','fileshartnomaB:id,name','nomerB:bisyorjoniba_id,id','fileBisyor:bisyorjoniba_id,id,name,namud', 'countriesB', 'ezohB:id,name')
+        $card = Bisyorjoniba::with('tartibiEtiborB:id,name', 'muhlatiEtiborB:id,name','namudB:id,name','fileshartnomaB:bisyorjoniba_id,id,name','nomerB:bisyorjoniba_id,id','fileBisyor:bisyorjoniba_id,id,name,namud', 'countriesB', 'ezohB:id,name')
             ->findOrFail($id);
-
-        //dd($card);
+        $userName= Auth::user()->name;
         return Inertia::render('Bisyorjoniba/Card', [
-           'card'=>$card
+           'card'=>$card,
+            'userName'=>$userName
         ]);
     }
 
@@ -205,14 +218,15 @@ class BisyorjonibaConroller extends Controller
      */
     public function edit($id)
     {
-        $bisyorjoniba = Bisyorjoniba::with('countriesB','ezohB:id,name', 'fileshartnomaB:id,name', 'fileBisyor:bisyorjoniba_id,id,name,namud')->findOrFail($id);
+        $bisyorjoniba = Bisyorjoniba::with('countriesB','ezohB:id,name', 'fileshartnomaB:bisyorjoniba_id,id,name', 'fileBisyor:bisyorjoniba_id,id,name,namud')->findOrFail($id);
         $countries = Country::select('id', 'name')->get();
         $ezohs = Ezoh::select('id', 'name')->get();
-        //dd($bisyorjoniba);
+        $userName= Auth::user()->name;
         return Inertia::render('Bisyorjoniba/Edit',[
             'bisyorjoniba'=>$bisyorjoniba,
             'countries'=>$countries,
-            'ezohs'=>$ezohs
+            'ezohs'=>$ezohs,
+            'userName'=>$userName
         ]);
     }
 
@@ -228,19 +242,12 @@ class BisyorjonibaConroller extends Controller
         $bisyorjoniba = Bisyorjoniba::with('countriesB')->findOrFail($id);
         $request->validated();
 
-        // ====================Delete old file if uploaded new file Shartnoma===================
-        if ($request->hasFile("shartnoma_file")){
-            if (FileDel::exists('uploads/shartnoma/'.$bisyorjoniba->fileshartnomaB->name)){
-                FileDel::delete('uploads/shartnoma/'.$bisyorjoniba->fileshartnomaB->name);
-            }
-            $file = $request->file('shartnoma_file');
-            $fileName =  time().'-'. $file->getClientOriginalName();
-            $file->move(public_path('uploads/shartnoma'), $fileName);
-            $bisyorjoniba->fileshartnomaB->update([
-                'name' => $fileName,
-            ]);
+        // Delete list of country if selected 'Универсали'
+        if($request->namud=='4'){
+            $bisyorjoniba->countriesB()->newPivotStatement()
+                ->where('bisyorjonibas_id', '=', $bisyorjoniba->id)
+                ->delete();
         }
-
 
         // ==========================Update Shartnoma contents===================
 
@@ -336,12 +343,22 @@ class BisyorjonibaConroller extends Controller
             $bisyorjoniba->ezohB()->attach($ezohList);
         }
 
-        // ====================Upload new aditional files===================
-
+        // ====================Upload new aditional files in update section===================
+        if ($request->hasFile('shartnoma_file')){
+            $fileShartnoma=$request->file('shartnoma_file');
+            foreach ($fileShartnoma as $item){
+                $filename = time().'.'.$item->extension();
+                $item->move(\public_path('uploads/shartnoma'), $filename);
+                FileShartnoma::create([
+                    'name'=>$filename,
+                    'bisyorjoniba_id'=>$bisyorjoniba->id,
+                ]);
+            }
+        }
         if ($request->hasFile('files_scan')){
             $files=$request->file('files_scan');
             foreach ($files as $qarorfile){
-                $filename = time(). '_'.$qarorfile->getClientOriginalName();
+                $filename = time().'.'.$qarorfile->extension();
                 $qarorfile->move(\public_path('uploads/files'), $filename);
                 File::create([
                     'name'=>$filename,
@@ -364,18 +381,23 @@ class BisyorjonibaConroller extends Controller
     public function destroy($id)
     {
 
-        $bisyorid = Bisyorjoniba::findOrFail($id);
+        $bisyorid = Bisyorjoniba::with('fileshartnomaB','fileBisyor')->findOrFail($id);
 
-        if (FileDel::exists('uploads/shartnoma/'.$bisyorid->fileshartnomaB->name)){
-            FileDel::delete('uploads/shartnoma/'.$bisyorid->fileshartnomaB->name);
+//        if (FileDel::exists('uploads/shartnoma/'.$bisyorid->fileshartnomaB->name)){
+//            FileDel::delete('uploads/shartnoma/'.$bisyorid->fileshartnomaB->name);
+//        }
+        //$files = File::where("bisyorjoniba_id", $bisyorid->id)->get();
+        foreach ( $bisyorid->fileshartnomaB as $item) {
+            if (FileDel::exists('uploads/shartnoma/'.$item->name)){
+                FileDel::delete('uploads/shartnoma/'.$item->name);
+            }
         }
-        $files = File::where("bisyorjoniba_id", $bisyorid->id)->get();
-        foreach ( $files as $item) {
+        foreach ( $bisyorid->fileBisyor as $item) {
             if (FileDel::exists('uploads/files/'.$item->name)){
                 FileDel::delete('uploads/files/'.$item->name);
             }
         }
-        $bisyorid->fileshartnomaB->delete();
+        $bisyorid->delete();
 
         return redirect()->back();
     }
@@ -406,11 +428,23 @@ class BisyorjonibaConroller extends Controller
             ->delete();
         return redirect()->back();
     }
+
+    // ====================Delete aditional files ====================
+    public function fileDelete($id)
+    {
+        $file = FileShartnoma::findOrFail($id);
+        if (FileDel::exists('uploads/shartnoma/'.$file->name)){
+            FileDel::delete('uploads/shartnoma/'.$file->name);
+        }
+        $file->delete();
+        return redirect()->back();
+
+    }
+
     // ====================Delete aditional files ====================
     public function deleteFiles($id)
     {
       $fileShartnoma = File::findOrFail($id);
-      //dd($fileShartnoma);
         if (FileDel::exists('uploads/files/'.$fileShartnoma->name)){
             FileDel::delete('uploads/files/'.$fileShartnoma->name);
         }

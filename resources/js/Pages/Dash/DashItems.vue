@@ -130,27 +130,36 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
                         </svg>
                     </div>
-                    <div>
-                        <span class="block text-2xl font-bold">25</span>
-                        <span class="block text-gray-500">МАТН</span>
+                    <div
+                        v-for="item in maorif"
+                        :key="item.id"
+                        class="text-center"
+                    >
+                        <span class="block text-2xl font-bold">{{maorifCount}}</span>
+                        <span class="block text-gray-700 font-medium">{{item.name}}</span>
                     </div>
                 </div>
                 <div class="flex items-center p-8 bg-white shadow rounded-lg">
                     <div class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-teal-600 bg-teal-100 rounded-full mr-6">
-                        <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5m.75-9l3-3 2.148 2.148A12.061 12.061 0 0116.5 7.605" />
                         </svg>
+
                     </div>
-                    <div>
-                        <span class="block text-2xl font-bold">139</span>
-                        <span class="block text-gray-500">Иловаи матн</span>
+                    <div
+                        v-for="iqtisodV in iqtisod"
+                        :key="iqtisodV.id"
+                        class="text-center"
+                    >
+                        <span class="block text-2xl font-bold">{{iqtisodCount}}</span>
+                        <span class="block text-gray-700 font-medium">{{iqtisodV.name}}</span>
                     </div>
                 </div>
                 <div class="row-span-3 bg-white shadow rounded-lg ">
                     <div class="flex items-center justify-between px-6 py-5 font-semibold border-b border-gray-100">
-                        <span>Шумораи шартномаҳо </span>
+                        <span>Давлатҳо ва созмонҳо</span>
                         <button type="button" class="inline-flex justify-center rounded-md px-1 -mr-1 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-600" id="options-menu" aria-haspopup="true" aria-expanded="true">
-                            Давлатҳо
+                            Шартнома
                             <svg class="-mr-1 ml-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                             </svg>
@@ -158,17 +167,17 @@
                         <!-- Refer here for full dropdown menu code: https://tailwindui.com/components/application-ui/elements/dropdowns -->
                     </div>
                     <div class="overflow-y-auto">
-                        <ul
-                            v-for="country in countryFilter"
-                            :key="country.id"
-                            class="p-6 space-y-6">
-                            <li class="flex items-center">
+                        <ul class="p-6 space-y-6">
+                            <li class="flex items-center"
+                                v-for="country in countryFilter"
+                                :key="country.id"
+                            >
                                 <div class="h-8 w-8 mr-3 bg-gray-100 rounded-full overflow-hidden">
                                     <svg xmlns="http://www.w3.org/2000/svg"
                                          fill="none" viewBox="0 0 24 24"
                                          stroke-width="2"
                                          stroke="currentColor"
-                                         class="w-8 h-8 text-blue-500">
+                                         class="w-7 h-7 text-blue-500">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
                                     </svg>
                                 </div>
@@ -211,12 +220,15 @@ export default {
     },
     props:{
         users: String,
+        userName: String,
         dujonibaCount: String,
         bisyorCount: String,
         ijronashuda: String,
         shumoraD: String,
         shumoraB: String,
         countries: Array,
+        maorif: Array,
+        iqtisod: Array
 
     },
     computed:{
@@ -224,6 +236,22 @@ export default {
             return this.countries.filter(function (item){
                 return item.bisyorjonibas_count>=1;
             })
+        },
+        maorifCount()
+        {
+            let sumM = 0;
+            for (let i=0; i<this.maorif.length; i++){
+                sumM = this.maorif[i].dujoniba_e_count+this.maorif[i].bisyorjoniba_e_count
+            }
+            return sumM
+        },
+        iqtisodCount()
+        {
+            let sumM = 0;
+            for (let i=0; i<this.iqtisod.length; i++){
+                sumM = this.iqtisod[i].dujoniba_e_count+this.iqtisod[i].bisyorjoniba_e_count
+            }
+            return sumM
         }
     },
     watch:{

@@ -117,6 +117,7 @@ export default {
     props:{
         userID: Object,
         errors:Object,
+        userName: String,
     },
     setup(props){
         const form = useForm({

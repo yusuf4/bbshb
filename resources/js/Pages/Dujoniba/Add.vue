@@ -25,8 +25,8 @@
                     <input
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         type="file"
-                        name="shartnoma_file[]"
-                        @input="formValues.shartnoma_file = $event.target.files[0]"
+                        multiple
+                        @input="formValues.shartnoma_file = $event.target.files"
                         id="formFile"/>
                     <div v-if="errors.shartnoma_file" class="text-red-600">{{errors.shartnoma_file}}</div>
                 </div>
@@ -387,7 +387,7 @@ export default {
     setup(){
         const formValues= useForm({
             name: null,
-            shartnoma_file: null,
+            shartnoma_file: [],
             jonibi_tj: null,
             jonibi_digar: null,
             sanai_etibor: '',

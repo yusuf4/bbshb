@@ -42,6 +42,8 @@ Route::middleware('auth')->group(function(){
             Route::delete('/fileqaror/{id}', 'deleteqaror')->name('del.qaror');
             // ==================Delete files of vakolat inputs=====================
             Route::delete('/filevakolat/{id}', 'deletevakolat')->name('del.vakolat');
+            // ==================Delete files of shartnoma =====================
+            Route::delete('/shartnoma/{id}', 'deleteShartnoma')->name('del.shartnoma');
             Route::get('/searchn','seracN')->name('do.serch');
             // =============Delete ezoh in edit form=========================
             Route::delete('/dujonibash/{id}/ezoh/{ezoh}', 'deleteEzohD')->name('delD.ezoh');
@@ -71,6 +73,8 @@ Route::middleware('auth')->group(function(){
         Route::delete('/shartnoma/{id}/ezoh/{ezoh}', 'deleteEzoh')->name('del.ezoh');
         // ================= File shartnoma delete on update======================
         Route::delete('/delfile/{id}', 'deleteFiles')->name('del.files');
+        // =================  Delete shartnoma file on update======================
+        Route::delete('/delshartnoma/{id}', 'fileDelete')->name('del.shartnomaB');
     });
 
 

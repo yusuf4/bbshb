@@ -25,7 +25,7 @@ class BisyorjonibaRequest extends FormRequest
     {
         return [
             'name' => 'required|min:5',
-            'shartnoma_file' => 'required|mimes:jpg,jpeg,csv,txt,xlx,xls,pdf,doc,docx',
+            'shartnoma_file.*' => 'required|mimes:jpg,jpeg,csv,txt,xlx,xls,pdf,doc,docx',
             'namud' => 'required',
             'tartib' => 'required',
             //'files_scan.*' => 'mimes:jpg,jpeg,csv,txt,xlx,xls,pdf,doc,docx',
@@ -38,8 +38,8 @@ class BisyorjonibaRequest extends FormRequest
         return [
             'name.required' => 'Иловаи номи шартнома ҳатмист!',
             'name.min' => 'Номи шартнома на камтар аз 5 рамз бошад!',
-            'shartnoma_file.required' => 'Шакли электронии шартномаро замима намоед!',
-            'shartnoma_file.mimes' => 'Файл бояд фармати зерин бошад: jpg,jpeg,csv,txt,xlx,xls,pdf,doc,docx',
+            'shartnoma_file.*.required' => 'Шакли электронии шартномаро замима намоед!',
+            'shartnoma_file.*.mimes' => 'Файл бояд фармати зерин бошад: jpg,jpeg,csv,txt,xlx,xls,pdf,doc,docx',
             'namud.required' => 'Намуди шартномаро интихоб намоед!',
             'tartib.required' => 'Тартиби пайдо намудани эътибор ҳатмист!',
             //'files_scan.*.mimes' => 'Файл :attribute бояд фармати зерин бошад: jpg,jpeg,csv,txt,xlx,xls,pdf,doc,docx',

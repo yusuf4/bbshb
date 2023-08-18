@@ -25,7 +25,7 @@ class DujonibaRequest extends FormRequest
     {
         return [
             'name' => 'required|min:5',
-            'shartnoma_file' => 'required|mimes:jpg,jpeg,csv,txt,xlx,xls,pdf,doc,docx',
+            'shartnoma_file.*' => 'required|mimes:jpg,jpeg,csv,txt,xlx,xls,pdf,doc,docx',
             'jonibi_tj' => 'required',
             'jonibi_digar' => 'required',
             'namud' => 'required',
@@ -41,8 +41,8 @@ class DujonibaRequest extends FormRequest
         return [
             'name.required' => 'Иловаи номи шартнома ҳатмист!',
             'name.min' => 'Номи шартнома на камтар аз 5 рамз бошад!',
-            'shartnoma_file.required' => 'Шаклии электронии шартномаро замима намоед!',
-            'shartnoma_file.mimes' => 'Файл бояд фармати зерин бошад: jpg,jpeg,csv,txt,xlx,xls,pdf,doc,docx',
+            'shartnoma_file.*.required' => 'Шаклии электронии шартномаро замима намоед: !',
+            'shartnoma_file.*.mimes' => 'Файл бояд фармати зерин бошад: jpg,jpeg,csv,txt,xlx,xls,pdf,doc,docx',
             'jonibi_tj.required' => 'Иловаи ҷонибҳо ҳатмист!',
             'jonibi_digar.required' => 'Иловаи ҷонибҳо ҳатмист!',
             'namud.required' => 'Намуди шартномаро интихоб намоед!',
