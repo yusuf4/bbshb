@@ -124,9 +124,7 @@ class DujonibaController extends Controller
 //            'dujonibaFf'=>$dujonibaFf
 //        ]);
     }
-    public function guestIndex(){
-        return Inertia::render('NavGuest');
-    }
+
 
     /**
      * Show the form for creating a new resource.

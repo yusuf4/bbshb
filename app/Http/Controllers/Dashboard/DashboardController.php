@@ -38,7 +38,9 @@ class DashboardController extends Controller
             ->withCount('bisyorjonibas')
             ->orderBy('bisyorjonibas_count', 'DESC')
             ->get();
-        $userName= Auth::user()->name;
+        if (Auth::check()){
+            $userName= Auth::user()->name;
+        };
         $bisyorCount = Bisyorjoniba::count();
         $ijronashudaD = Dujoniba::where('sanai_etibor', '=', null)->count();
         $ijronashudaB = Bisyorjoniba::where('sanai_etibor', '=', null)->count();

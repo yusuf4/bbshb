@@ -160,7 +160,7 @@
                     :close-on-select="true"
                     :clear-on-select="false"
                     :multiple="false"
-                    placeholder="Интихоб...">
+                    placeholder="Эзоҳ интихоб...">
                     <template slot="selection" slot-scope="{ values, search, isOpen }">
                         <span class="multiselect__input"><span class="text-lg font-semibold">options selected</span></span>
                     </template>

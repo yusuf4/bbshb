@@ -28,6 +28,7 @@ class UserController extends Controller
     public function create()
     {
         $userName= Auth::user()->name;
+
         return Inertia::render('Users/Add', [
             'userName'=>$userName
         ]);

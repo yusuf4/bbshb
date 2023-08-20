@@ -64,7 +64,10 @@ class BisyorjonibaConroller extends Controller
         $countries = Country::select('id','name')->get();
         $searchlist = $request->only(['search']);
         $bisyorjonibaCount = $bisyorjoniba->total();
-        $userName= Auth::user()->name;
+        if (Auth::check()){
+            $userName= Auth::user()->name;
+        };
+
         return Inertia::render('Bisyorjoniba/Index', [
             'bisyorjoniba' => $bisyorjoniba,
             'searchlist'=> $searchlist,
@@ -132,7 +135,7 @@ class BisyorjonibaConroller extends Controller
         if ($request->hasFile('files_scan')){
             $files=$request->file('files_scan');
             foreach ($files as $qarorfile){
-                $filename = time().'.'.$item->extension();
+                $filename = time().'.'.$qarorfile->extension();
                 $qarorfile->move(\public_path('uploads/files'), $filename);
                 File::create([
                     'name'=>$filename,

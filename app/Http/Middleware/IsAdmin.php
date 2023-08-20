@@ -21,28 +21,10 @@ class IsAdmin
 
     public function handle(Request $request, Closure $next)
     {
-            // admin role = 1
-            // user role = 0
-            //dd(Auth::user());
-          /*  if (auth()->check() && auth()->user()->is_admin == 1){
+            if (auth()->check() && auth()->user()->is_admin == 1){
                 return $next($request);
-            }else{
-                return redirect()->route('guest.index')->with('message', 'You hav not access');
-            }*/
-
-        /*$admin = Auth::id();
-        dd($admin);
-        if(!empty($admin)){
-            if (is_admin == 1) {
-                return $next($request);
-                //return view('adminPage');
             }
-        } else {
-
-            // do whatever you want if authentication doesn't exist
-        }; */
-        return $next($request);
-
+            return redirect()->route('guest.index')->with('message', 'Шумо ба саҳифаи Администратор дастрасӣ надоред!');
     }
 
 }
