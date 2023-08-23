@@ -25,11 +25,11 @@ class ShartnomaListController extends Controller
         })->orWhereHas('dujonibaF', function ($query) use ($request) {
             $query->where('name', 'like', "%{$request->search}%");
         })
-            ->select('id','name','created_at')
-            ->with('bisyorjonibafile:file_shartnoma_id,id,name', 'dujonibaF:file_shartnoma_id,id,name')
+            ->select('id','name','dujoniba_id', 'bisyorjoniba_id', 'created_at')
+            ->with('bisyorjonibafile', 'dujonibaF:id,name')
             ->paginate(2)
             ->withQueryString();
-        //dd($files);
+       // dd($files);
         $userName= Auth::user()->name;
         $searchlist = $request->only(['search']);
         return Inertia::render('ShartnomaList', [

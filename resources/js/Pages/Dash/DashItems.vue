@@ -166,7 +166,7 @@
                         </button>
                         <!-- Refer here for full dropdown menu code: https://tailwindui.com/components/application-ui/elements/dropdowns -->
                     </div>
-                    <div class="overflow-y-auto">
+                    <div class="overflow-y-auto" style="max-height: 24rem;">
                         <ul class="p-6 space-y-6">
                             <li class="flex items-center"
                                 v-for="country in countryFilter"

@@ -101,7 +101,9 @@ Route::middleware('auth')->group(function(){
     // For user who have permision only read and search
     Route::controller(VisitorController::class)->group(function(){
         Route::get('/guest','index')->name('guest.index');
+        Route::get('/visitors/cardD/{id}', 'showD')->name('vid.card');
         Route::get('/guest/bisyorjoniba', 'bindex')->name('bg.index');
+        Route::get('/visitors/cardB/{id}', 'showB')->name('vib.card');
     });
 
 

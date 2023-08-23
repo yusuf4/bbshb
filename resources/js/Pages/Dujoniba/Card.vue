@@ -1,4 +1,7 @@
 <template>
+    <Head>
+        <title>Шартнома</title>
+    </Head>
     <div class="flex justify-center">
         <div class="p-8 w-3/4" >
             <article
@@ -72,13 +75,13 @@
                                     <span class="text-sm text-gray-700 pb-2">{{card.imzo_tj}}, {{card.imzo_digar}}</span>
                                     <div class="flex">
                                         <span
-                                            v-for="file in files"
-                                            :key="file.id"
+                                            v-for="fileN in fileNamud"
+                                            :key="fileN.id"
                                             class="text-sm text-blue-600 pb-2 pr-2"
                                         ><a
-                                            v-if="file.namud===0"
-                                            :href="'/uploads/files/'+file.name" target="_blank">{{file.name}},</a></span>
+                                            :href="'/uploads/files/'+fileN.name" target="_blank">{{fileN.name}},</a></span>
                                     </div>
+                                    <span class="text-sm text-gray-700 pb-2" v-if="fileNamud.length<=0">----</span>
                                     <div
                                         v-if="card.ezoh_d.length>0"
                                         class="flex">
@@ -222,6 +225,13 @@ export default {
                 doc.save("dujoniba.pdf");
             })
 
+        },
+    },
+    computed:{
+        fileNamud(){
+            return this.files.filter(function(el){
+                return el.namud===0;
+            })
         },
     }
 }
