@@ -78,12 +78,14 @@ Route::middleware('auth')->group(function(){
 
         // Shartnoma files and Ijronashuda list for downloading
         Route::controller(ShartnomaListController::class)->group(function(){
-            Route::get('/files', 'index')->name('files.index');
+            Route::get('/files', 'twoSide')->name('files.index');
+            Route::get('/filesB', 'multiFileSide')->name('filesB.index');
             Route::get('/files/{id}', 'downloadOne')->name('file.download');
             Route::post('/files/download', 'selectDownload')->name('file.zip');
             // ==================Ijronashuda section========================
 
-            Route::get('/ijronashuda', 'shIjronashuda')->name('sh.ijronashuda');
+            Route::get('/ijronashudaD', 'ijronashudaD')->name('ijd.index');
+            Route::get('/ijronashudaB', 'ijronashudaB')->name('ijb.index');
         });
 
         //     User section for adding, editing and deleting

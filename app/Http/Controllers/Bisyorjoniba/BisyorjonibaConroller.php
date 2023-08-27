@@ -87,9 +87,13 @@ class BisyorjonibaConroller extends Controller
     {
         $countries = Country::select('id','name')->get();
         $ezohs = Ezoh::select('id', 'name')->get();
+        if (Auth::check()){
+            $userName= Auth::user()->name;
+        };
         return Inertia::render('Bisyorjoniba/Add', [
            'countries'=>$countries,
             'ezohs'=>$ezohs,
+            'userName'=>$userName
         ]);
     }
 
@@ -206,7 +210,9 @@ class BisyorjonibaConroller extends Controller
     {
         $card = Bisyorjoniba::with('tartibiEtiborB:id,name', 'muhlatiEtiborB:id,name','namudB:id,name','fileshartnomaB:bisyorjoniba_id,id,name','nomerB:bisyorjoniba_id,id','fileBisyor:bisyorjoniba_id,id,name,namud', 'countriesB', 'ezohB:id,name')
             ->findOrFail($id);
-        $userName= Auth::user()->name;
+        if (Auth::check()){
+            $userName= Auth::user()->name;
+        };
         return Inertia::render('Bisyorjoniba/Card', [
            'card'=>$card,
             'userName'=>$userName
@@ -224,7 +230,9 @@ class BisyorjonibaConroller extends Controller
         $bisyorjoniba = Bisyorjoniba::with('countriesB','ezohB:id,name', 'fileshartnomaB:bisyorjoniba_id,id,name', 'fileBisyor:bisyorjoniba_id,id,name,namud')->findOrFail($id);
         $countries = Country::select('id', 'name')->get();
         $ezohs = Ezoh::select('id', 'name')->get();
-        $userName= Auth::user()->name;
+        if (Auth::check()){
+            $userName= Auth::user()->name;
+        };
         return Inertia::render('Bisyorjoniba/Edit',[
             'bisyorjoniba'=>$bisyorjoniba,
             'countries'=>$countries,

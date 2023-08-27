@@ -1,6 +1,6 @@
 <template>
     <Head>
-        <title>Dashboard</title>
+        <title>ББШҲ+</title>
     </Head>
     <div class="p-4 sm:p-8 space-y-6">
             <section class="grid md:grid-cols-2 xl:grid-cols-4 gap-6 truncate text-ellipsis">
@@ -14,7 +14,7 @@
                         <span class="block text-2xl font-bold">{{dujonibaCount}}</span>
                         <Link
                             :href="route('do.index')">
-                            <span class="block text-gray-500 truncate hover:text-blue-700">Дуҷониба</span>
+                            <span class="block text-gray-700 truncate hover:text-blue-700">Дуҷониба</span>
                         </Link>
                     </div>
                 </div>
@@ -30,7 +30,7 @@
                         <span class="block text-2xl font-bold">{{bisyorCount}}</span>
                         <Link
                             :href="route('bi.index')">
-                            <span class="block text-gray-500 truncate hover:text-blue-700">Бисёрҷониба</span>
+                            <span class="block text-gray-700 truncate hover:text-blue-700">Бисёрҷониба</span>
                         </Link>
                     </div>
                 </div>
@@ -41,8 +41,11 @@
                         </svg>
                     </div>
                     <div class="text-ellipsis overflow-hidden ...">
-                        <span class="inline-block text-2xl font-bold">{{ijronashuda}}</span>
-                        <span class="block text-gray-500">Иҷронашуда</span>
+                        <span class="block text-2xl font-bold">{{ijronashuda}}</span>
+                        <Link
+                            :href="route('ijd.index')">
+                            <span class="block text-gray-700 hover:text-blue-700">Иҷронашуда</span>
+                        </Link>
                     </div>
                 </div>
                 <div class="flex items-center p-6 bg-white shadow rounded-lg">
@@ -55,7 +58,7 @@
                         <span class="block text-2xl font-bold">{{users}}</span>
                         <Link
                             :href="route('users.index')">
-                            <span class="inline-flex text-gray-500 hover:text-blue-700">Истифодабарандаҳо</span>
+                            <span class="inline-flex text-gray-700 hover:text-blue-700">Истифодабарандаҳо</span>
                         </Link>
                     </div>
                 </div>

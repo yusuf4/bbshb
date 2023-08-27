@@ -16,10 +16,21 @@ use Illuminate\Support\Facades\Request;
 class Dujoniba extends Model
 {
 
-    protected $fillable = ['name', 'jonibi_tj','jonibi_digar','etibor_digar','sanai_etibor','qati_etibor',
-        'imzo_tj','imzo_digar','ezoh','file_shartnoma_id','namudi_shartnoma_id','tartibi_etibor_id','muhlati_etibor_id'];
+    protected $fillable = [
+        'name',
+        'jonibi_tj',
+        'jonibi_digar',
+        'etibor_digar',
+        'sanai_etibor',
+        'qati_etibor',
+        'imzo_tj',
+        'imzo_digar',
+        'namudi_shartnoma_id',
+        'tartibi_etibor_id',
+        'muhlati_etibor_id'
+    ];
 
-    protected $dates = ['sanai_etibor','qati_etibor','created_at','updated_at'];
+    protected $dates = ['sanai_etibor', 'qati_etibor', 'created_at', 'updated_at'];
 
     /*public function getSanaiEtiborAttribute($date)
     {
@@ -33,31 +44,39 @@ class Dujoniba extends Model
     {
         return $this->belongsToMany(Country::class, 'dujonibas_countries', 'dujonibas_id', 'countries_id')->withTimestamps();
     }
+
     public function ezohD()
     {
         return $this->belongsToMany(Ezoh::class, 'ezohs_dujonibas', 'dujonibas_id', 'ezohs_id')->withTimestamps();
     }
 
-    public function ShartnomaFile(){
+    public function ShartnomaFile()
+    {
         return $this->hasMany(FileShartnoma::class, 'dujoniba_id', 'id');
     }
-    public function fileDujoniba(){
+
+    public function fileDujoniba()
+    {
         return $this->hasMany(File::class, 'dujoniba_id', 'id');
     }
 
-    public function namudiShartnoma(){
+    public function namudiShartnoma()
+    {
         return $this->hasOne(NamudiShartnoma::class, 'id', 'namudi_shartnoma_id');
     }
+
     public function nomerD()
     {
         return $this->hasOne(NomeriShartnoma::class, 'dujoniba_id', 'id');
     }
 
-    public function tartibiEtibor(){
+    public function tartibiEtibor()
+    {
         return $this->hasOne(TartibiEtibor::class, 'id', 'tartibi_etibor_id');
     }
 
-    public function muhlatiEtibor(){
+    public function muhlatiEtibor()
+    {
         return $this->hasOne(MuhlatiEtibor::class, 'id', 'muhlati_etibor_id');
     }
 

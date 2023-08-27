@@ -171,8 +171,8 @@
 
                     <div class="inline-flex relative items-center px-2 py-2 w-full text-sm font-medium rounded-md border-gray-200 hover:bg-gray-200 hover:text-blue-800  transition duration-400 ease-in-out">
                         <Link
-                            :href="route('sh.ijronashuda')"
-                            :class="$page.component==='Shartnoma/ShartnomaIjronashuda' && 'text-green-400'"
+                            :href="route('ijd.index')"
+                            :class="$page.component==='Shartnoma/IjronashudaD' || $page.component==='Shartnoma/IjronashudaB' ? 'text-green-400' : ''"
                             class="flex cursor-default">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -192,7 +192,7 @@
                     <div class="inline-flex relative items-center px-2 py-2 w-full text-sm font-medium rounded-md border-gray-200 hover:bg-gray-200 hover:text-blue-800  transition duration-400 ease-in-out ">
                         <Link
                             :href="route('files.index')"
-                            :class="$page.component==='ShartnomaList' && 'text-green-400'"
+                            :class="$page.component==='Shartnoma/DujonibaFile' || $page.component==='Shartnoma/BisyorjonibaFile' ? 'text-green-400' : ''"
                             class="flex cursor-default">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"

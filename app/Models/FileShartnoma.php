@@ -8,13 +8,15 @@ use App\Models\Bisyorjoniba;
 
 class FileShartnoma extends Model
 {
-    protected $fillable = ['id','name','dujoniba_id', 'bisyorjoniba_id'];
+    protected $fillable = ['id', 'name', 'dujoniba_id', 'bisyorjoniba_id'];
 
-    public function dujonibaF(){
+    public function dujonibaF()
+    {
         return $this->belongsTo(Dujoniba::class, 'dujoniba_id', 'id');
     }
 
-    public function bisyorjonibafile(){
+    public function bisyorjonibafile()
+    {
         return $this->belongsTo(Bisyorjoniba::class, 'bisyorjoniba_id', 'id');
     }
 }

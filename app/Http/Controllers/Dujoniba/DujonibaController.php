@@ -58,7 +58,9 @@ class DujonibaController extends Controller
             ->paginate(2)
             ->withQueryString();
 
-        $userName= Auth::user()->name;
+        if (Auth::check()){
+            $userName= Auth::user()->name;
+        };
         $searchlist = $request->only(['search']);
         $etiborlist = $request->only('searchetibor');
         $dujonibaCount= $dujoniba->total();
@@ -253,7 +255,9 @@ class DujonibaController extends Controller
        $card = Dujoniba::with('nomerD:dujoniba_id,id','namudiShartnoma:id,name', 'muhlatiEtibor:id,name', 'tartibiEtibor:id,name', 'ShartnomaFile:dujoniba_id,id,name','ezohD:id,name')->findOrFail($id);
        $files = File::where('dujoniba_id', '=', $id)->select('name','id','namud')->get();
        //dd($card);
-       $userName= Auth::user()->name;
+        if (Auth::check()){
+            $userName= Auth::user()->name;
+        };
        return Inertia::render('Dujoniba/Card', [
           'card'=>$card,
            'files'=>$files,
@@ -273,7 +277,9 @@ class DujonibaController extends Controller
 
        // dd($dujoniba->created_at->format('d-m-Y'));
         $ezohs = Ezoh::select('id', 'name')->get();
-        $userName= Auth::user()->name;
+        if (Auth::check()){
+            $userName= Auth::user()->name;
+        };
         return Inertia::render('Dujoniba/Edit', [
             'dujoniba'=>$dujoniba,
             'ezohs'=>$ezohs,
