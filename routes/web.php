@@ -20,9 +20,12 @@ use Inertia\Inertia;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', [LoginController::class, 'showLogin'])->name('login');
-Route::post('/login', [LoginController::class, 'login'])->name('login.auth');
-Route::post('logoute', [LoginController::class, 'logoute'])->name('logoute');
+Route::controller(LoginController::class)->group(function (){
+    Route::get('/', 'showLogin')->name('login');
+    Route::get('/testlogin', 'testLogin')->name('testlogin');
+    Route::post('/login', 'login')->name('login.auth');
+    Route::post('logoute', 'logoute')->name('logoute');
+});
 
 Route::middleware('auth')->group(function(){
 

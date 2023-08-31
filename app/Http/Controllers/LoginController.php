@@ -38,6 +38,11 @@ class LoginController extends Controller
             ->with('message','Почтаи электрони ва пароли Шумо нодуруст аст!');
     }
 
+    public function testLogin()
+    {
+        return Inertia::render('LoginPag');
+    }
+
     public function logoute(Request $request){
         Auth::logout();
         $request->session()->invalidate();
