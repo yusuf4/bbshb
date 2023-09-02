@@ -3,7 +3,6 @@
         <title>ББШБ+ Бисёрҷониба</title>
     </Head>
     <div class="content h-full">
-        <h1 class="font-bold text-2xl text-blue-400 text-blue-700 text-center pb-4 pt-1">Иловаи шартномаи бисёрҷониба</h1>
         <form class="p-4"  @submit.prevent="formValues.post(route('bi.store'))">
             <!-- Section One -->
             <div class="grid gap-6 mb-4 md:grid-cols-2 items-center">
@@ -117,7 +116,7 @@
             <!-- Multiselect inputs -->
             <div v-show="mintaqavi" class="flex mb-2 text-sm font-medium text-gray-900">
                 <div class="w-1/2 mr-4">
-                    <div class="flex items-center mb-2">
+                    <div class="flex justify-between items-center mb-2">
                         <label for="country_id">Минтақаҳо</label>
                         <div class="flex items-center ml-2">
                             <input

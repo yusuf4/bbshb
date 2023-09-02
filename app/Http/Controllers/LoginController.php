@@ -14,7 +14,7 @@ class LoginController extends Controller
     }
 
     public function showLogin(){
-        return Inertia::render('LoginPage');
+        return Inertia::render('LoginPag');
     }
 
     public function login(Request $request)
@@ -40,7 +40,7 @@ class LoginController extends Controller
 
     public function testLogin()
     {
-        return Inertia::render('LoginPag');
+        return Inertia::render('LoginPage');
     }
 
     public function logoute(Request $request){

@@ -3,14 +3,17 @@
       <!-- Side bar menu-->
       <div class="w-[380px] h-full bg-gray-200 text-white text-center relative" v-if="showSide">
           <!-- LOGO -->
-        <div class="logo-nane h-[50px] bg-gray-900 flex justify-center items-center">
-            <div class="px-[20px] cursor-default">
-                <h3 class="font-bold text-xl">ББШБ+</h3>
-
+        <div class="logo-nane h-[150px] bg-gray-900 flex justify-center items-center">
+            <div class="flex flex-col items-center px-2 cursor-default">
+                <img class="mb-2" src="../img/Vector2.png" alt="LOGO">
+                <div class="text-white text-center text-base font-normal">
+                    <p>Барномаи бақайдгирии</p>
+                    <p>шартномаҳои байналмилалӣ</p>
+                </div>
             </div>
         </div>
           <!-- MENU -->
-        <div class="h-[calc(100vh-50px)] bg-gray-800 py-[20px] ">
+        <div class="h-[calc(100vh-150px)] bg-gray-800 py-[20px] ">
             <div class="flex flex-col justify-between h-full px-[20px] space-y-[10px] ">
                 <div class=" flex flex-col justify-between space-y-[10px]">
                     <div class="inline-flex relative items-center py-[10px] px-[10px] w-full text-sm font-medium rounded-md border-gray-200 hover:bg-gray-200 hover:text-blue-800  transition duration-400 ease-in-out">
@@ -225,6 +228,13 @@
                         </Link>
                     </div>
                 </div>
+                <div class="flex items-center ">
+                    <img class="w-[48.45px] h-[40px]" src="../img/corona.png" alt="Tajikistan">
+                    <div class="text-white text-sm font-medium ml-2">
+                        <p>Вазорати корҳои хориҷии</p>
+                        <p>Ҷумҳурии Тоҷикистон</p>
+                    </div>
+                </div>
             </div>
         </div>
       </div>
@@ -233,31 +243,88 @@
       <!-- Header menu and main content -->
       <div class="w-full h-full bg-gray-400">
           <!-- Header menu -->
-          <div class="h-[50px] bg-gray-200 flex items-center shadow-sm px-[20px] w-full py-[10px] z-10 border-b text-white">
-              <div class="cursor-pointer w-[30px]" @click="toggleSideBar">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class=" w-[25px] h-[25px]">
-                      <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
-                  </svg>
-              </div>
-              <div class="w-[calc(100%-30px)] flex pb-2 justify-between ">
-                  <!-- Logo section -->
-                  <div class="header-search w-[calc(100%-200px)] flex justify-center items-center ">
-                      <img src="../img/corona.png" class="h-8 w-10 mr-4 rounded-full" v-if="$page.component==='Dash/DashItems'">
-                      <div class="flex flex-col text-center" v-show="$page.component==='Dash/DashItems'">
-                          <span class="pt-1 text-lg text-blue-700 font-medium">Вазорати корҳои хориҷии Ҷумҳурии Тоҷикистон</span>
-                          <span class="text-sm text-blue-700 font-medium">Барномаи бақайдгирии шартномаҳои байналмилалӣ</span>
-                      </div>
-                      <div class="flex text-center" v-show="$page.component==='Dujoniba/Index'">
-                          <span class="pt-1 text-lg text-blue-700 font-medium">Шартномаҳои дуҷониба</span>
-                      </div>
-                      <div class="flex text-center" v-show="$page.component==='Bisyorjoniba/Index'">
-                          <span class="pt-1 text-lg text-blue-700 font-medium">Шартномаҳои бисёрҷониба</span>
-                      </div>
-                      <div class="flex text-center" v-show="$page.component==='Users/Index'">
-                          <span class="pt-1 text-lg text-blue-700 font-medium">Истифодабарандаҳо</span>
-                      </div>
+          <div class="h-[65px] bg-gray-200 flex  justify-between items-center shadow-sm px-[20px] w-full py-2 z-10 border-b text-white">
+              <div class="cursor-pointer flex flex-col">
+                  <div class="mb-2" @click="toggleSideBar">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class=" w-[25px] h-[25px]">
+                          <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
+                      </svg>
                   </div>
-                  <!-- User login -->
+
+                  <div class="flex justify-center items-center">
+                          <nav class="flex" aria-label="Breadcrumb">
+                              <ol class="inline-flex items-center space-x-1 md:space-x-3 w-full">
+                                  <li class="inline-flex items-center"  v-show="$page.component==='Dash/DashItems' ||
+                                       $page.component==='Dujoniba/Index' || $page.component==='Dujoniba/Add' || $page.component==='Dujoniba/Edit' || $page.component==='Dujoniba/Card' ||
+                                       $page.component==='Bisyorjoniba/Index' || $page.component==='Bisyorjoniba/Add' || $page.component==='Bisyorjoniba/Edit' || $page.component==='Bisyorjoniba/Card' ||
+                                       $page.component==='Shartnoma/IjronashudaD' || $page.component==='Shartnoma/IjronashudaB'">
+                                      <Link :href="route('dash.index')" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600">
+                                          <svg class="w-3 h-3 mr-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                              <path d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z"/>
+                                          </svg>
+                                          Асоси
+                                      </Link>
+                                  </li>
+                                  <!-- Dujoniba section -->
+                                  <li class="inline-flex items-center" v-show="$page.component==='Dujoniba/Index' ||  $page.component==='Dujoniba/Add' || $page.component==='Dujoniba/Edit' || $page.component==='Dujoniba/Card'">
+                                      <Link
+                                          :href="route('do.index')"
+                                          class="flex items-center text-sm font-medium text-gray-700 hover:text-blue-600">
+                                          <svg class="w-3 h-3 mx-1 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                                          </svg>
+                                          <p>Шартномаҳои дуҷониба</p>
+                                      </Link>
+                                  </li>
+                                  <li class="inline-flex items-center" v-show="$page.component==='Dujoniba/Add'">
+                                      <Link
+                                          :href="route('duinput.create')"
+                                          class="flex items-center text-sm font-medium text-gray-700 hover:text-blue-600">
+                                          <svg class="w-3 h-3 mx-1 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                                          </svg>
+                                          <p>Иловаи шартнома</p>
+                                      </Link>
+                                  </li>
+                                  <!-- Bisyorjoniba section -->
+                                  <li class="inline-flex items-center" v-show="$page.component==='Bisyorjoniba/Index' ||  $page.component==='Bisyorjoniba/Add' || $page.component==='Bisyorjoniba/Edit' || $page.component==='Bisyorjoniba/Card'">
+                                      <Link
+                                          :href="route('bi.index')"
+                                          class="flex items-center text-sm font-medium text-gray-700 hover:text-blue-600">
+                                          <svg class="w-3 h-3 mx-1 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                                          </svg>
+                                          <p>Шартномаҳои бисёрҷониба</p>
+                                      </Link>
+                                  </li>
+                                  <li class="inline-flex items-center" v-show="$page.component==='Bisyorjoniba/Add'">
+                                      <Link
+                                          :href="route('bi.create')"
+                                          class="flex items-center text-sm font-medium text-gray-700 hover:text-blue-600">
+                                          <svg class="w-3 h-3 mx-1 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                                          </svg>
+                                          <p>Иловаи шартнома</p>
+                                      </Link>
+                                  </li>
+                                  <!-- Bisyorjoniba section -->
+                                  <li class="inline-flex items-center" v-show="$page.component==='Shartnoma/IjronashudaD' || $page.component==='Shartnoma/IjronashudaB'">
+                                      <Link
+                                          href="#"
+                                          class="flex items-center text-sm font-medium text-gray-700 hover:text-blue-600">
+                                          <svg class="w-3 h-3 mx-1 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                                          </svg>
+                                          <p>Шартномаҳои иҷронашуда</p>
+                                      </Link>
+                                  </li>
+
+                              </ol>
+                          </nav>
+                  </div>
+              </div>
+              <!-- User login -->
+              <div class="flex pb-2 justify-between mb-4">
                   <div class="w-[200px] mt-2 pl-20">
                       <div class="flex items-center  justify-start space-x-4 cursor-pointer" @click="toggleDrop">
                           <img class="w-10 h-10 rounded-full border-2 border-gray-50" src="../img/25.jpg" alt="">
@@ -280,7 +347,7 @@
           </div>
 
           <!-- Main content -->
-          <div class="h-[calc(100vh-50px)] bg-gray-50 p-2 relative overflow-auto">
+          <div class="h-[calc(100vh-70px)] bg-gray-50 p-2 relative overflow-auto">
               <div class="border border-gray-300 rounded-md p-2 ">
                   <slot></slot>
               </div>

@@ -3,7 +3,6 @@
         <title>ББШБ+ Дуҷониба</title>
     </Head>
     <div class="flex-1 h-full">
-        <h1 class="font-bold text-2xl text-blue-400 text-blue-700 text-center pb-4 pt-1">Иловаи шартномаи дуҷониба</h1>
         <form class="p-4" @submit.prevent="formValues.post(route('du.store'))">
             <!-- Section One -->
             <div class="grid gap-6 mb-2.5 md:grid-cols-2 items-center">
