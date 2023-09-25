@@ -4,13 +4,18 @@
       <div class="w-[380px] h-full bg-gray-200 text-white text-center relative" v-if="showSide">
           <!-- LOGO -->
         <div class="logo-nane h-[150px] bg-gray-900 flex justify-center items-center">
-            <div class="flex flex-col items-center px-2 cursor-default">
-                <img class="mb-2" src="../img/Vector2.png" alt="LOGO">
-                <div class="text-white text-center text-base font-normal">
-                    <p>Барномаи бақайдгирии</p>
-                    <p>шартномаҳои байналмилалӣ</p>
+            <Link
+                :href="route('dash.index')"
+                as="button" type="button"
+            >
+                <div class="flex flex-col items-center px-2 cursor-default">
+                    <img class="mb-2" src="../img/Vector2.png" alt="LOGO">
+                    <div class="text-white text-center text-base font-normal">
+                        <p>Барномаи бақайдгирии</p>
+                        <p>шартномаҳои байналмилалӣ</p>
+                    </div>
                 </div>
-            </div>
+            </Link>
         </div>
           <!-- MENU -->
         <div class="h-[calc(100vh-150px)] bg-gray-800 py-[20px] ">

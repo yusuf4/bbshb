@@ -55,7 +55,18 @@ class DashboardController extends Controller
             ->where('id',2)
             ->withCount('dujonibaE', 'bisyorjonibaE')
             ->get();
-        //dd($maorif);
+
+        $dujonibaNotify = Dujoniba::query()
+            ->where('sanai_etibor', '=', null)
+            ->where('created_at', '<', now()->subMonth())
+            ->select('id', 'name')
+            ->get();
+        $bisyorjonibaNotify = Bisyorjoniba::query()
+            ->where('sanai_etibor', '=', null)
+            ->where('created_at', '<', now()->subMonth())
+            ->select('id', 'name')
+            ->get();
+        //dd($dujonibaNotify);
         return Inertia::render('Dash/DashItems',[
           'users'=>$users,
             'userName'=> $userName,
@@ -66,7 +77,9 @@ class DashboardController extends Controller
             'shumoraB'=>$shumoraB,
             'countries'=>$countries,
             'maorif'=>$maorif,
-            'iqtisod'=>$iqtisod
+            'iqtisod'=>$iqtisod,
+            'dujonibaNotify'=>$dujonibaNotify,
+            'bisyorjonibaNotify'=>$bisyorjonibaNotify
         ]);
     }
 }

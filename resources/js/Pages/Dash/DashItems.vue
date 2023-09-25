@@ -191,9 +191,92 @@
                     </div>
                 </div>
                 <div class="flex flex-col row-span-3 bg-white shadow rounded-lg">
-                    <div class="px-6 py-5 font-semibold border-b border-gray-100">МАТН</div>
-                    <div class="p-4 flex-grow">
-                        <div class="flex items-center justify-center h-full px-4 py-24 text-gray-400 text-3xl font-semibold bg-gray-100 border-2 border-gray-200 border-dashed rounded-md">Chart</div>
+                    <div class="p-2">
+                        <div class="flex flex-wrap rounded-md shadow-sm pt-2" role="group">
+                            <button
+                                @click="btnCollorChangeD"
+                                data-popover-target="popover-dujoniba"
+                                class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 border border-gray-200 rounded-l-lg hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700"
+                                :class="btnStatusB===false && 'bg-green-200'"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 mr-2">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+                                </svg>
+
+                                Дуҷониба
+                                <span v-show="dujonibaNotify.length>0" class="inline-flex items-center justify-center w-4 h-4 ml-2 text-xs font-semibold text-white bg-green-500 rounded-full">
+                                   {{ dujonibaNotify.length }}
+                                </span>
+                            </button>
+
+                            <button
+                                @click="btnCollorChangeB"
+                                data-popover-target="popover-bisyorjoniba"
+                                class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-r-md hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 "
+                                :class="btnStatusB===true && 'bg-green-200'"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 mr-2">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M6.429 9.75L2.25 12l4.179 2.25m0-4.5l5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L21.75 12l-4.179 2.25m0 0l4.179 2.25L12 21.75 2.25 16.5l4.179-2.25m11.142 0l-5.571 3-5.571-3" />
+                                </svg>
+                                Бисёрҷониба
+                                <span v-show="bisyorjonibaNotify.length>0" class="inline-flex items-center justify-center w-4 h-4 ml-2 text-xs font-semibold text-white bg-green-500 rounded-full">
+                                   {{ bisyorjonibaNotify.length }}
+                                </span>
+                            </button>
+                        </div>
+
+                        <div data-popover id="popover-dujoniba" role="tooltip" class="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0">
+                            <div class="p-3">
+                                <p class="hover:underline text-sm font-normal">
+                                   Шартномаҳое ки расмиёти дохили давлатиро гузашта, зиёда аз <span class="font-semibold text-blue-700">як моҳ</span> мешавад ки имзо нашудаанд!
+                                </p>
+                                <div class="mt-2 text-blue-500">
+                                    <span class="font-semibold text-gray-900 pr-1">{{ dujonibaNotify.length }}</span>
+                                    <span>адад.</span>
+                                </div>
+                            </div>
+                            <div data-popper-arrow></div>
+                        </div>
+                        <div data-popover id="popover-bisyorjoniba" role="tooltip" class="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0">
+                            <div class="p-3">
+                                <p class="hover:underline text-sm font-normal">
+                                    Шартномаҳое ки расмиёти дохили давлатиро гузашта, зиёда аз <span class="font-semibold text-blue-700">як моҳ</span> мешавад ки имзо нашудаанд!
+                                </p>
+                                <div class="mt-2 text-blue-500">
+                                    <span class="font-semibold text-gray-900 pr-1">{{ bisyorjonibaNotify.length }}</span>
+                                    <span>адад.</span>
+                                </div>
+                            </div>
+                            <div data-popper-arrow></div>
+                        </div>
+                    </div>
+                    <div v-if="btnStatusB!==true" class="p-4 flex-grow">
+                        <ul class="max-w-md divide-y divide-gray-200">
+                            <li
+                                v-for="notifyD in dujonibaNotify"
+                                :key="notifyD.id"
+                                class="pt-2 sm:pb-3">
+                                <Link
+                                    class="hover:text-blue-500"
+                                    :href="route('do.card', notifyD.id)">
+                                    {{ notifyD.name }}
+                                </Link>
+                            </li>
+                        </ul>
+                    </div>
+                    <div v-if="btnStatusB" class="p-4 flex-grow">
+                        <ul class="max-w-md divide-y divide-gray-200">
+                            <li
+                                v-for="notifyB in bisyorjonibaNotify"
+                                :key="notifyB.id"
+                                class="pt-2 sm:pb-3">
+                                <Link
+                                    class="hover:text-blue-500"
+                                    :href="route('bi.card', notifyB.id)">
+                                    {{ notifyB.name }}
+                                </Link>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </section>
@@ -219,6 +302,7 @@ export default {
               dateto: '',
               namud: '',
           },
+          btnStatusB: ref(false),
       }
     },
     props:{
@@ -231,7 +315,9 @@ export default {
         shumoraB: String,
         countries: Array,
         maorif: Array,
-        iqtisod: Array
+        iqtisod: Array,
+        dujonibaNotify: Array,
+        bisyorjonibaNotify: Array
 
     },
     computed:{
@@ -256,6 +342,15 @@ export default {
             }
             return sumM
         }
+    },
+    methods:{
+        btnCollorChangeD(){
+            this.btnStatusB = false;
+
+        },
+        btnCollorChangeB(){
+            this.btnStatusB = true;
+        },
     },
     watch:{
         formValues: {
