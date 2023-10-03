@@ -11,16 +11,19 @@ use App\Models\Ezoh;
 use App\Models\File;
 use App\Models\FileShartnoma;
 use App\Models\NomeriShartnoma;
-use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+
+use Illuminate\Support\Facades\Notification;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\File as FileDel;
+use App\Notifications\ShartnomaExpired;
 
 class DujonibaController extends Controller
 {
-
+    use Notifiable;
     /**
      * Display a listing of the resource.
      *
@@ -412,7 +415,6 @@ class DujonibaController extends Controller
     public function destroy($id)
     {
         $dujoniba = Dujoniba::with('ShartnomaFile','fileDujoniba')->findOrFail($id);
-        //dd($dujoniba);
         foreach ($dujoniba->ShartnomaFile as $item) {
             if (FileDel::exists('uploads/shartnoma/'.$item->name)){
                 FileDel::delete('uploads/shartnoma/'.$item->name);
@@ -428,8 +430,14 @@ class DujonibaController extends Controller
                 FileDel::delete('uploads/vakolat/'.$item->name);
             }
         }
-        $dujoniba->delete();
+        $recipients = [
+            'ysafarov8@gmail.com' => 'Yusuf Doe',
+            'yusuf@mfa.tj'=> 'Some name'
+        ];
+        $username= auth()->user()->name;
 
+        Notification::route('mail', $recipients)->notify(new ShartnomaExpired($dujoniba, $username));
+        $dujoniba->delete();
         return redirect()->back();
     }
 

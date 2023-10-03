@@ -2,12 +2,13 @@
 
 namespace App\Notifications;
 
+use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class ShartnomaExpired extends Notification
+class ShartnomaExpired extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -16,9 +17,12 @@ class ShartnomaExpired extends Notification
      *
      * @return void
      */
-    public function __construct()
+    public $dujoniba;
+    public $username;
+    public function __construct($dujoniba, $username)
     {
-        //
+        $this->dujoniba = $dujoniba;
+        $this->username = $username;
     }
 
     /**
@@ -40,10 +44,14 @@ class ShartnomaExpired extends Notification
      */
     public function toMail($notifiable)
     {
+        $runtime = Carbon::now()->format('d-m-Y H:i:s');
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->subject('Барномаи ББШҲ+')
+                    ->greeting('Шартнома нобуд карда шуд!')
+                    ->line('Номи шартнома: '.$this->dujoniba->name)
+                    //->action('Notification Action', url('/'))
+                    ->line('Истифодабарандаи зерин нобуд гардонид: '.$this->username)
+                    ->line('Санаи: '.$runtime);
     }
 
     /**
