@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dujoniba;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DujonibaRequest;
+use App\Jobs\SendEmailDeleteJob;
 use App\Models\Bisyorjoniba;
 use App\Models\Country;
 use App\Models\Dujoniba;
@@ -15,11 +16,8 @@ use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
-
-use Illuminate\Support\Facades\Notification;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\File as FileDel;
-use App\Notifications\ShartnomaExpired;
 
 class DujonibaController extends Controller
 {
@@ -430,13 +428,10 @@ class DujonibaController extends Controller
                 FileDel::delete('uploads/vakolat/'.$item->name);
             }
         }
-        $recipients = [
-            'ysafarov8@gmail.com' => 'Yusuf Doe',
-            'yusuf@mfa.tj'=> 'Some name'
-        ];
-        $username= auth()->user()->name;
 
-        Notification::route('mail', $recipients)->notify(new ShartnomaExpired($dujoniba, $username));
+        $username= auth()->user()->name;
+        $dujonibaname = $dujoniba->name;
+        SendEmailDeleteJob::dispatch($dujonibaname,$username);
         $dujoniba->delete();
         return redirect()->back();
     }

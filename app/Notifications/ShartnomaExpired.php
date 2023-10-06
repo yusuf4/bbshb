@@ -17,11 +17,11 @@ class ShartnomaExpired extends Notification implements ShouldQueue
      *
      * @return void
      */
-    public $dujoniba;
+    public $dujonibaname;
     public $username;
-    public function __construct($dujoniba, $username)
+    public function __construct($dujonibaname, $username)
     {
-        $this->dujoniba = $dujoniba;
+        $this->dujonibaname = $dujonibaname;
         $this->username = $username;
     }
 
@@ -44,11 +44,11 @@ class ShartnomaExpired extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
-        $runtime = Carbon::now()->format('d-m-Y H:i:s');
+        $runtime = Carbon::now()->format('d.m.Y H:i:s');
         return (new MailMessage)
                     ->subject('Барномаи ББШҲ+')
                     ->greeting('Шартнома нобуд карда шуд!')
-                    ->line('Номи шартнома: '.$this->dujoniba->name)
+                    ->line('Номи шартнома: '.$this->dujonibaname)
                     //->action('Notification Action', url('/'))
                     ->line('Истифодабарандаи зерин нобуд гардонид: '.$this->username)
                     ->line('Санаи: '.$runtime);
