@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Bisyorjoniba;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BisyorjonibaRequest;
 use App\Http\Requests\BisyorjonibaUpdateRequest;
+use App\Jobs\SendEmailDeleteJob;
 use App\Models\Bisyorjoniba;
 use App\Models\Country;
 use App\Models\Dujoniba;
@@ -408,6 +409,9 @@ class BisyorjonibaConroller extends Controller
                 FileDel::delete('uploads/files/'.$item->name);
             }
         }
+        $username= auth()->user()->name;
+        $dujonibaname = $bisyorid->name;
+        SendEmailDeleteJob::dispatch($dujonibaname,$username);
         $bisyorid->delete();
 
         return redirect()->back();
