@@ -24,7 +24,7 @@ class ShartnomaListController extends Controller
             })
             ->with('ShartnomaFile:dujoniba_id,id,name')
             ->select('id', 'name', 'created_at')
-            ->paginate(2)
+            ->paginate(10)
             ->withQueryString();
         //dd($twoside);
 //        $multiside = Bisyorjoniba::with('fileshartnomaB:bisyorjoniba_id,id,name')->select('id','name')->get();
@@ -67,7 +67,7 @@ class ShartnomaListController extends Controller
             })
             ->with('fileshartnomaB:bisyorjoniba_id,id,name')
             ->select('id', 'name', 'created_at')
-            ->paginate(2)
+            ->paginate(10)
             ->withQueryString();
         $searchlist = $request->only(['search']);
         if (Auth::check()){
@@ -143,7 +143,7 @@ class ShartnomaListController extends Controller
             })
             ->with('dujonibaF', 'bisyorjonibafile')
             //->get()->toArray();
-            ->paginate(4)
+            ->paginate(10)
             ->withQueryString();
 
 

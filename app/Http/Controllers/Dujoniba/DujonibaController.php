@@ -56,7 +56,7 @@ class DujonibaController extends Controller
            })
             ->with('namudiShartnoma:id,name', 'tartibiEtibor:id,name','muhlatiEtibor:id,name', 'nomerD:id,dujoniba_id')
             ->latest()
-            ->paginate(2)
+            ->paginate(10)
             ->withQueryString();
 
         if (Auth::check()){

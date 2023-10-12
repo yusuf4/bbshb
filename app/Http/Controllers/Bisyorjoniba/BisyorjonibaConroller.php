@@ -59,7 +59,7 @@ class BisyorjonibaConroller extends Controller
             })
             ->with('namudB:id,name', 'ezohB', 'tartibiEtiborB:id,name', 'nomerB:id,bisyorjoniba_id', 'muhlatiEtiborB:id,name')
             ->latest()
-            ->paginate('3')
+            ->paginate(10)
             ->withQueryString();
         $ezohs = Ezoh::select('id', 'name')->get();
         $countries = Country::select('id','name')->get();

@@ -90,7 +90,7 @@ class VisitorController extends Controller
             ->where('sanai_etibor', '!=', null)
             ->with('namudB:id,name', 'ezohB', 'tartibiEtiborB:id,name', 'nomerB:id,bisyorjoniba_id', 'muhlatiEtiborB:id,name')
             ->latest()
-            ->paginate('3')
+            ->paginate(15)
             ->withQueryString();
         $searchlist = $request->only(['search']);
         $ezohs=Ezoh::select('id','name')->get();

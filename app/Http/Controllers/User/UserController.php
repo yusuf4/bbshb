@@ -18,7 +18,9 @@ class UserController extends Controller
     {
         $users = User::select( 'id','name', 'nasab', 'email', 'is_admin')->get();
 
-        $userName= Auth::user()->name;
+        if (Auth::check()){
+            $userName= Auth::user()->name;
+        };
         return Inertia::render('Users/Index', [
             'users'=>$users,
             'userName'=>$userName
@@ -27,7 +29,9 @@ class UserController extends Controller
 
     public function create()
     {
-        $userName= Auth::user()->name;
+        if (Auth::check()){
+            $userName= Auth::user()->name;
+        };
 
         return Inertia::render('Users/Add', [
             'userName'=>$userName
@@ -50,7 +54,9 @@ class UserController extends Controller
     public function edit($id)
     {
         $userID = User::findOrFail($id);
-        $userName= Auth::user()->name;
+        if (Auth::check()){
+            $userName= Auth::user()->name;
+        };
         return Inertia::render('Users/Edit',[
             'userID'=>$userID,
             'userName'=>$userName
