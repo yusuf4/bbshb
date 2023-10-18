@@ -1,9 +1,8 @@
 <template>
     <div class="flex justify-center">
-        <div class="p-8 w-3/4">
+        <div class="p-8 ">
             <article
-                class="animate-background rounded-xl bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-[length:400%_400%] p-0.5 shadow-xl transition [animation-duration:_6s] hover:shadow-sm"
-            >
+                class="animate-background rounded-xl bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-[length:400%_400%] p-0.5 shadow-xl transition [animation-duration:_6s] hover:shadow-sm">
                 <div class="rounded-[10px] bg-white p-4 !pt-10 sm:p-6">
                     <div class="flex justify-end">
                         <Link
@@ -49,7 +48,7 @@
                                 <span class="text-sm font-medium pb-2">Файли сканшуда марбут ба расмиёт</span>
                                 <span class="text-sm font-medium pb-2">Муҳлати эътибор</span>
                                 <span class="text-sm font-medium pb-2">Санаи қатъи эътибор</span>
-                                <span class="text-sm font-medium pb-2">Мақомоти масъул вобаста ба расмиёт</span>
+                                <span class="text-sm font-medium pb-2 whitespace-nowrap">Мақомоти масъул вобаста ба расмиёт</span>
                                 <span class="text-sm font-medium pb-2">Эзоҳ</span>
                             </div>
                             <div class="flex flex-col  mb-2">

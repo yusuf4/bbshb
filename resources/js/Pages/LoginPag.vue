@@ -55,7 +55,7 @@
 
             <div class="text-center text-gray-400 text-sm pb-2">
                 <p>&copy; {{ currYear }} ББШБ+</p>
-                <p>Все права защищены</p>
+                <p>Раёсати шартномавӣ-ҳуқуқӣ</p>
             </div>
         </div>
 

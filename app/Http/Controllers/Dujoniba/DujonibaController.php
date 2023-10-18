@@ -183,7 +183,7 @@ class DujonibaController extends Controller
         // ======================== Upload files =========================
             $fileShartnoma=$request->file('shartnoma_file');
             foreach ($fileShartnoma as $item){
-                $filename = time().'.'.$item->extension();
+                $filename = time().'-'. $item->getClientOriginalName();
                 $item->move(\public_path('uploads/shartnoma'), $filename);
                 FileShartnoma::create([
                     'name'=>$filename,
@@ -194,7 +194,7 @@ class DujonibaController extends Controller
         if ($request->hasFile('files_scan')){
             $files=$request->file('files_scan');
             foreach ($files as $qarorfile){
-                $filename = time().'.'.$qarorfile->extension();
+                $filename = time().'-'. $qarorfile->getClientOriginalName();
                 $qarorfile->move(\public_path('uploads/files'), $filename);
                 File::create([
                     'name'=>$filename,
@@ -207,7 +207,7 @@ class DujonibaController extends Controller
         if ($request->hasFile('vakolat')){
             $filev= $request->file('vakolat');
             foreach ($filev as $vakolat) {
-                $filevName = time().'.'.$vakolat->extension();
+                $filevName = time().'-'. $vakolat->getClientOriginalName();
                 $vakolat->move(\public_path('uploads/vakolat'),  $filevName);
                 File::create([
                     'name'=>$filevName,
@@ -365,7 +365,8 @@ class DujonibaController extends Controller
             if ($request->hasFile('shartnoma_file')){
                 $fileShartnoma=$request->file('shartnoma_file');
                 foreach ($fileShartnoma as $item){
-                    $filename = time().'.'.$item->extension();
+                    //$filename = time().'.'.$item->extension();
+                    $filename = time().'-'. $item->getClientOriginalName();
                     $item->move(\public_path('uploads/shartnoma'), $filename);
                     FileShartnoma::create([
                         'name'=>$filename,
@@ -378,7 +379,7 @@ class DujonibaController extends Controller
         if ($request->hasFile('files_scan')){
             $filesqaror=$request->file('files_scan');
             foreach ($filesqaror as $qarorfile){
-                $filename = time().'.'.$qarorfile->extension();
+                $filename = time().'-'. $qarorfile->getClientOriginalName();
                 $qarorfile->move(\public_path('uploads/files'), $filename);
                 File::create([
                     'name'=>$filename,
@@ -392,7 +393,7 @@ class DujonibaController extends Controller
         if ($request->hasFile('vakolat')){
             $files=$request->file('vakolat');
             foreach ($files as $vakolat){
-                $filename = time().'.'.$vakolat->extension();
+                $filename = time().'-'. $vakolat->getClientOriginalName();
                 $vakolat->move(\public_path('uploads/vakolat'), $filename);
                 File::create([
                     'name'=>$filename,

@@ -3,7 +3,7 @@
         <title>Шартнома</title>
     </Head>
     <div class="flex justify-center">
-        <div class="p-8 w-3/4" >
+        <div class="p-8 ">
             <article
                     class="animate-background rounded-xl bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-[length:400%_400%] p-0.5 shadow-xl transition [animation-duration:_6s] hover:shadow-sm"
                 >
@@ -43,7 +43,7 @@
                                 <div class="flex flex-col mb-2 mr-20">
                                     <span class="text-sm font-medium pb-2">Таърих</span>
                                     <span class="text-sm font-medium pb-2">№ қайд</span>
-                                    <span class="text-sm font-medium pb-2">Файли сканшудаи шартнома</span>
+                                    <span class="text-sm font-medium pb-2 ">Файли сканшудаи шартнома</span>
                                     <span class="text-sm font-medium pb-2">Намуди шартнома</span>
                                     <span class="text-sm font-medium pb-2">Тарафҳои шартнома</span>
                                     <span class="text-sm font-medium pb-2">Санаи пайдо намудани эътибор</span>
@@ -52,33 +52,34 @@
                                     <span class="text-sm font-medium pb-2">Муҳлати эътибор</span>
                                     <span class="text-sm font-medium pb-2">Санаи қатъи эътибор</span>
                                     <span class="text-sm font-medium pb-2">Имзокунандагон</span>
-                                    <span class="text-sm font-medium pb-2">Файли қарори Ҳукумати ҶТ ё Ваколатнома</span>
+                                    <span class="text-sm font-medium pb-2 whitespace-nowrap">Файли қарори Ҳукумат/Ваколатнома</span>
                                     <span class="text-sm font-medium pb-2">Эзоҳ</span>
                                 </div>
                                 <div class="flex flex-col  mb-2">
                                     <span class="text-sm text-gray-700 pb-2">{{formated(card.created_at)}}</span>
                                     <span class="text-sm text-gray-700 pb-2">{{card.nomer_d.id}}</span>
-                                    <div class="flex">
+                                    <div class="flex flex-wrap">
                                         <span
                                             v-for="fileS in card.shartnoma_file"
                                             :key="fileS.id"
-                                            class="text-sm text-blue-600 pb-2 pr-2"
-                                        ><a
-                                            :href="'/uploads/shartnoma/'+fileS.name" target="_blank">{{fileS.name}},</a></span>
+                                            class="text-sm text-blue-600 pb-2 pr-2 break-words">
+                                            <a
+                                            :href="'/uploads/shartnoma/'+fileS.name" target="_blank">{{fileS.name}},</a>
+                                        </span>
                                     </div>
                                     <span class="text-sm text-gray-700 pb-2">{{card.namudi_shartnoma.name}}</span>
                                     <span class="text-sm text-gray-700 pb-2">{{card.jonibi_tj}}, {{card.jonibi_digar}}</span>
                                     <span class="text-sm text-gray-700 pb-2" v-if="card.sanai_etibor!=null">{{formated(card.sanai_etibor)}}</span>
                                     <span class="text-sm text-gray-700 p-1.5" v-else>----</span>
-                                    <span class="text-sm text-gray-700 pb-2">{{card.tartibi_etibor.name}}</span>
-                                    <div class="flex">
+                                    <span class="text-sm text-gray-700 pb-2 whitespace-nowrap">{{card.tartibi_etibor.name}}</span>
+                                    <div class="flex flex-wrap">
                                         <span
                                             v-for="file in files"
                                             :key="file.id"
-                                            class="text-sm text-blue-600 pb-2 pr-2"
+                                            class="text-sm text-blue-600 pb-2 pr-2 text-ellipsis overflow-hidden"
                                         ><a
                                             v-show="file.namud===1"
-                                            :href="'/uploads/files/'+file.name" target="_blank">{{file.name}},</a></span>
+                                            :href="'/uploads/files/'+file.name" target="_blank">{{file.name}} ,</a></span>
                                     </div>
                                     <span class="text-sm text-gray-700 pb-2" v-if="cardFileCount<=0">----</span>
                                     <span class="text-sm text-gray-700 pb-2">{{card.muhlati_etibor.name}}</span>
@@ -91,7 +92,7 @@
                                             :key="fileN.id"
                                             class="text-sm text-blue-600 pb-2 pr-2"
                                         ><a
-                                            :href="'/uploads/files/'+fileN.name" target="_blank">{{fileN.name}},</a></span>
+                                            :href="'/uploads/vakolat/'+fileN.name" target="_blank">{{fileN.name}},</a></span>
                                     </div>
                                     <span class="text-sm text-gray-700 pb-2" v-if="fileNamud.length<=0">----</span>
                                     <div

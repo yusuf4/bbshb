@@ -1838,6 +1838,9 @@ select {
 .whitespace-nowrap {
   white-space: nowrap;
 }
+.break-words {
+  overflow-wrap: break-word;
+}
 .break-all {
   word-break: break-all;
 }
@@ -2115,6 +2118,12 @@ select {
 }
 .bg-\[length\:400\%_400\%\] {
   background-size: 400% 400%;
+}
+.bg-\[length\:500\%_500\%\] {
+  background-size: 500% 500%;
+}
+.bg-\[length\:200\%_400\%\] {
+  background-size: 200% 400%;
 }
 .p-0 {
   padding: 0px;

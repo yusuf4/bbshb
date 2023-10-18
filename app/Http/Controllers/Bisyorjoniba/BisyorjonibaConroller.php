@@ -129,7 +129,7 @@ class BisyorjonibaConroller extends Controller
         // ==================Add files==============
         $fileShartnoma=$request->file('shartnoma_file');
         foreach ($fileShartnoma as $item){
-            $filename = time().'.'.$item->extension();
+            $filename = time().'-'. $item->getClientOriginalName();
             $item->move(\public_path('uploads/shartnoma'), $filename);
             FileShartnoma::create([
                 'name'=>$filename,
@@ -140,7 +140,7 @@ class BisyorjonibaConroller extends Controller
         if ($request->hasFile('files_scan')){
             $files=$request->file('files_scan');
             foreach ($files as $qarorfile){
-                $filename = time().'.'.$qarorfile->extension();
+                $filename = time().'-'. $qarorfile->getClientOriginalName();
                 $qarorfile->move(\public_path('uploads/files'), $filename);
                 File::create([
                     'name'=>$filename,
@@ -359,7 +359,7 @@ class BisyorjonibaConroller extends Controller
         if ($request->hasFile('shartnoma_file')){
             $fileShartnoma=$request->file('shartnoma_file');
             foreach ($fileShartnoma as $item){
-                $filename = time().'.'.$item->extension();
+                $filename = time().'-'. $item->getClientOriginalName();
                 $item->move(\public_path('uploads/shartnoma'), $filename);
                 FileShartnoma::create([
                     'name'=>$filename,
@@ -370,7 +370,7 @@ class BisyorjonibaConroller extends Controller
         if ($request->hasFile('files_scan')){
             $files=$request->file('files_scan');
             foreach ($files as $qarorfile){
-                $filename = time().'.'.$qarorfile->extension();
+                $filename = time().'-'. $qarorfile->getClientOriginalName();
                 $qarorfile->move(\public_path('uploads/files'), $filename);
                 File::create([
                     'name'=>$filename,

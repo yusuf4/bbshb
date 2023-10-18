@@ -24933,7 +24933,7 @@ var _hoisted_1 = {
   "class": "flex justify-center"
 };
 var _hoisted_2 = {
-  "class": "p-8 w-3/4"
+  "class": "p-8"
 };
 var _hoisted_3 = {
   "class": "animate-background rounded-xl bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-[length:400%_400%] p-0.5 shadow-xl transition [animation-duration:_6s] hover:shadow-sm"
@@ -24974,7 +24974,7 @@ var _hoisted_11 = {
 var _hoisted_12 = {
   "class": "flex items-start mt-8"
 };
-var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"flex flex-col mb-2 mr-20\"><span class=\"text-sm font-medium pb-2\">Таърих</span><span class=\"text-sm font-medium pb-2\">№ қайд</span><span class=\"text-sm font-medium pb-2\">Файли сканшудаи шартнома</span><span class=\"text-sm font-medium pb-2\">Намуди шартнома</span><span class=\"text-sm font-medium pb-2\">Минтақаҳо</span><span class=\"text-sm font-medium pb-2\">Санаи пайдо намудани эътибор</span><span class=\"text-sm font-medium pb-2\">Тартиби пайдо намудани эътибор</span><span class=\"text-sm font-medium pb-2\">Файли сканшуда марбут ба расмиёт</span><span class=\"text-sm font-medium pb-2\">Муҳлати эътибор</span><span class=\"text-sm font-medium pb-2\">Санаи қатъи эътибор</span><span class=\"text-sm font-medium pb-2\">Мақомоти масъул вобаста ба расмиёт</span><span class=\"text-sm font-medium pb-2\">Эзоҳ</span></div>", 1);
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"flex flex-col mb-2 mr-20\"><span class=\"text-sm font-medium pb-2\">Таърих</span><span class=\"text-sm font-medium pb-2\">№ қайд</span><span class=\"text-sm font-medium pb-2\">Файли сканшудаи шартнома</span><span class=\"text-sm font-medium pb-2\">Намуди шартнома</span><span class=\"text-sm font-medium pb-2\">Минтақаҳо</span><span class=\"text-sm font-medium pb-2\">Санаи пайдо намудани эътибор</span><span class=\"text-sm font-medium pb-2\">Тартиби пайдо намудани эътибор</span><span class=\"text-sm font-medium pb-2\">Файли сканшуда марбут ба расмиёт</span><span class=\"text-sm font-medium pb-2\">Муҳлати эътибор</span><span class=\"text-sm font-medium pb-2\">Санаи қатъи эътибор</span><span class=\"text-sm font-medium pb-2 whitespace-nowrap\">Мақомоти масъул вобаста ба расмиёт</span><span class=\"text-sm font-medium pb-2\">Эзоҳ</span></div>", 1);
 var _hoisted_14 = {
   "class": "flex flex-col mb-2"
 };
@@ -27223,7 +27223,7 @@ var _hoisted_52 = {
   "class": "flex pb-2 justify-between mb-4"
 };
 var _hoisted_53 = {
-  "class": "w-[200px] mt-2 pl-20"
+  "class": "mt-2 pl-20"
 };
 var _hoisted_54 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
   "class": "w-10 h-10 rounded-full border-2 border-gray-50",
@@ -27231,7 +27231,7 @@ var _hoisted_54 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
   alt: ""
 }, null, -1 /* HOISTED */);
 var _hoisted_55 = {
-  "class": "font-semibold text-left"
+  "class": "flex flex-col font-semibold text-left"
 };
 var _hoisted_56 = {
   "class": "text-black"
@@ -28040,7 +28040,7 @@ var _hoisted_2 = {
   "class": "flex justify-center"
 };
 var _hoisted_3 = {
-  "class": "p-8 w-3/4"
+  "class": "p-8"
 };
 var _hoisted_4 = {
   "class": "animate-background rounded-xl bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-[length:400%_400%] p-0.5 shadow-xl transition [animation-duration:_6s] hover:shadow-sm"
@@ -28081,7 +28081,7 @@ var _hoisted_12 = {
 var _hoisted_13 = {
   "class": "flex justify-start items-start mt-8"
 };
-var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"flex flex-col mb-2 mr-20\"><span class=\"text-sm font-medium pb-2\">Таърих</span><span class=\"text-sm font-medium pb-2\">№ қайд</span><span class=\"text-sm font-medium pb-2\">Файли сканшудаи шартнома</span><span class=\"text-sm font-medium pb-2\">Намуди шартнома</span><span class=\"text-sm font-medium pb-2\">Тарафҳои шартнома</span><span class=\"text-sm font-medium pb-2\">Санаи пайдо намудани эътибор</span><span class=\"text-sm font-medium pb-2\">Тартиби пайдо намудани эътибор</span><span class=\"text-sm font-medium pb-2\">Файли сканшуда марбут ба расмиёт</span><span class=\"text-sm font-medium pb-2\">Муҳлати эътибор</span><span class=\"text-sm font-medium pb-2\">Санаи қатъи эътибор</span><span class=\"text-sm font-medium pb-2\">Имзокунандагон</span><span class=\"text-sm font-medium pb-2\">Файли қарори Ҳукумати ҶТ ё Ваколатнома</span><span class=\"text-sm font-medium pb-2\">Эзоҳ</span></div>", 1);
+var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"flex flex-col mb-2 mr-20\"><span class=\"text-sm font-medium pb-2\">Таърих</span><span class=\"text-sm font-medium pb-2\">№ қайд</span><span class=\"text-sm font-medium pb-2\">Файли сканшудаи шартнома</span><span class=\"text-sm font-medium pb-2\">Намуди шартнома</span><span class=\"text-sm font-medium pb-2\">Тарафҳои шартнома</span><span class=\"text-sm font-medium pb-2\">Санаи пайдо намудани эътибор</span><span class=\"text-sm font-medium pb-2\">Тартиби пайдо намудани эътибор</span><span class=\"text-sm font-medium pb-2\">Файли сканшуда марбут ба расмиёт</span><span class=\"text-sm font-medium pb-2\">Муҳлати эътибор</span><span class=\"text-sm font-medium pb-2\">Санаи қатъи эътибор</span><span class=\"text-sm font-medium pb-2\">Имзокунандагон</span><span class=\"text-sm font-medium pb-2 whitespace-nowrap\">Файли қарори Ҳукумат/Ваколатнома</span><span class=\"text-sm font-medium pb-2\">Эзоҳ</span></div>", 1);
 var _hoisted_15 = {
   "class": "flex flex-col mb-2"
 };
@@ -28092,7 +28092,7 @@ var _hoisted_17 = {
   "class": "text-sm text-gray-700 pb-2"
 };
 var _hoisted_18 = {
-  "class": "flex"
+  "class": "flex flex-wrap"
 };
 var _hoisted_19 = ["href"];
 var _hoisted_20 = {
@@ -28110,10 +28110,10 @@ var _hoisted_23 = {
   "class": "text-sm text-gray-700 p-1.5"
 };
 var _hoisted_24 = {
-  "class": "text-sm text-gray-700 pb-2"
+  "class": "text-sm text-gray-700 pb-2 whitespace-nowrap"
 };
 var _hoisted_25 = {
-  "class": "flex"
+  "class": "flex flex-wrap"
 };
 var _hoisted_26 = ["href"];
 var _hoisted_27 = {
@@ -28229,7 +28229,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, _hoisted_9))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Card info "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.card.name), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [_hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.formated($props.card.created_at)), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.card.nomer_d.id), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.card.shartnoma_file, function (fileS) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", {
       key: fileS.id,
-      "class": "text-sm text-blue-600 pb-2 pr-2"
+      "class": "text-sm text-blue-600 pb-2 pr-2 break-words"
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
       href: '/uploads/shartnoma/' + fileS.name,
       target: "_blank"
@@ -28237,17 +28237,17 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }), 128 /* KEYED_FRAGMENT */))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.card.namudi_shartnoma.name), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.card.jonibi_tj) + ", " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.card.jonibi_digar), 1 /* TEXT */), $props.card.sanai_etibor != null ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_22, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.formated($props.card.sanai_etibor)), 1 /* TEXT */)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_23, "----")), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_24, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.card.tartibi_etibor.name), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.files, function (file) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", {
       key: file.id,
-      "class": "text-sm text-blue-600 pb-2 pr-2"
+      "class": "text-sm text-blue-600 pb-2 pr-2 text-ellipsis overflow-hidden"
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
       href: '/uploads/files/' + file.name,
       target: "_blank"
-    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(file.name) + ",", 9 /* TEXT, PROPS */, _hoisted_26), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, file.namud === 1]])]);
+    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(file.name) + " ,", 9 /* TEXT, PROPS */, _hoisted_26), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, file.namud === 1]])]);
   }), 128 /* KEYED_FRAGMENT */))]), $data.cardFileCount <= 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_27, "----")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_28, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.card.muhlati_etibor.name), 1 /* TEXT */), $props.card.qati_etibor != null ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_29, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.formated($props.card.qati_etibor)), 1 /* TEXT */)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_30, "----")), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_31, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.card.imzo_tj) + ", " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.card.imzo_digar), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_32, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($options.fileNamud, function (fileN) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", {
       key: fileN.id,
       "class": "text-sm text-blue-600 pb-2 pr-2"
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-      href: '/uploads/files/' + fileN.name,
+      href: '/uploads/vakolat/' + fileN.name,
       target: "_blank"
     }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(fileN.name) + ",", 9 /* TEXT, PROPS */, _hoisted_33)]);
   }), 128 /* KEYED_FRAGMENT */))]), $options.fileNamud.length <= 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_34, "----")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.card.ezoh_d.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_35, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.card.ezoh_d, function (ezoh) {
@@ -29560,7 +29560,7 @@ var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 var _hoisted_14 = {
   "class": "text-center text-gray-400 text-sm pb-2"
 };
-var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "Все права защищены", -1 /* HOISTED */);
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "Раёсати шартномавӣ-ҳуқуқӣ", -1 /* HOISTED */);
 var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "image-section w-1/2"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
